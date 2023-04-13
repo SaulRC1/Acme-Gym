@@ -1,11 +1,28 @@
+
 package domain;
 
-public class Step {
-	private Integer number;
-	private String description;
-	private String tutorial;
+import javax.persistence.ManyToOne;
 
-	public Step(Integer number, String description, String tutorial) {
+public class Step {
+
+	private Integer		number;
+	private String		description;
+	private String		tutorial;
+
+	//Relaciones
+	private Training	training;
+
+
+	@ManyToOne(optional = false)
+	public Training getTraining() {
+		return this.training;
+	}
+
+	public void setTraining(final Training training) {
+		this.training = training;
+	}
+
+	public Step(final Integer number, final String description, final String tutorial) {
 		super();
 		this.number = number;
 		this.description = description;
@@ -13,26 +30,26 @@ public class Step {
 	}
 
 	public Integer getNumber() {
-		return number;
+		return this.number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(final Integer number) {
 		this.number = number;
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
 	public String getTutorial() {
-		return tutorial;
+		return this.tutorial;
 	}
 
-	public void setTutorial(String tutorial) {
+	public void setTutorial(final String tutorial) {
 		this.tutorial = tutorial;
 	}
 

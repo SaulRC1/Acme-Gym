@@ -1,70 +1,102 @@
+
 package domain;
 
-public class Client extends Actor {
-	private String cardOwner;
-	private String cardBrand;
-	private String cardNumber;
-	private Integer monthExpiration;
-	private Integer yearExpiration;
-	private Integer CVV;
+import java.util.Collection;
 
-	public Client(String cardOwner, String cardBrand, String cardNumber, Integer monthExpiration,
-			Integer yearExpiration, Integer cVV) {
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class Client extends Actor {
+
+	private String					cardOwner;
+	private String					cardBrand;
+	private String					cardNumber;
+	private Integer					monthExpiration;
+	private Integer					yearExpiration;
+	private Integer					CVV;
+
+	//Relaciones
+	private Collection<Activity>	activities;
+	private Collection<Inscription>	inscriptions;
+
+
+	@ManyToMany
+	public Collection<Activity> getActivities() {
+		return this.activities;
+	}
+
+	public void setActivities(final Collection<Activity> activities) {
+		this.activities = activities;
+	}
+
+	@OneToMany(mappedBy = "client")
+	@NotEmpty
+	public Collection<Inscription> getInscriptions() {
+		return this.inscriptions;
+	}
+
+	public void setInscriptions(final Collection<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
+	}
+
+	public Client(final String cardOwner, final String cardBrand, final String cardNumber, final Integer monthExpiration, final Integer yearExpiration, final Integer cVV) {
 		super();
 		this.cardOwner = cardOwner;
 		this.cardBrand = cardBrand;
 		this.cardNumber = cardNumber;
 		this.monthExpiration = monthExpiration;
 		this.yearExpiration = yearExpiration;
-		CVV = cVV;
+		this.CVV = cVV;
 	}
 
 	public String getCardOwner() {
-		return cardOwner;
+		return this.cardOwner;
 	}
 
-	public void setCardOwner(String cardOwner) {
+	public void setCardOwner(final String cardOwner) {
 		this.cardOwner = cardOwner;
 	}
 
 	public String getCardBrand() {
-		return cardBrand;
+		return this.cardBrand;
 	}
 
-	public void setCardBrand(String cardBrand) {
+	public void setCardBrand(final String cardBrand) {
 		this.cardBrand = cardBrand;
 	}
 
 	public String getCardNumber() {
-		return cardNumber;
+		return this.cardNumber;
 	}
 
-	public void setCardNumber(String cardNumber) {
+	public void setCardNumber(final String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 
 	public Integer getMonthExpiration() {
-		return monthExpiration;
+		return this.monthExpiration;
 	}
 
-	public void setMonthExpiration(Integer monthExpiration) {
+	public void setMonthExpiration(final Integer monthExpiration) {
 		this.monthExpiration = monthExpiration;
 	}
 
 	public Integer getYearExpiration() {
-		return yearExpiration;
+		return this.yearExpiration;
 	}
 
-	public void setYearExpiration(Integer yearExpiration) {
+	public void setYearExpiration(final Integer yearExpiration) {
 		this.yearExpiration = yearExpiration;
 	}
 
 	public Integer getCVV() {
-		return CVV;
+		return this.CVV;
 	}
 
-	public void setCVV(Integer cVV) {
-		CVV = cVV;
+	public void setCVV(final Integer cVV) {
+		this.CVV = cVV;
 	}
 
 }

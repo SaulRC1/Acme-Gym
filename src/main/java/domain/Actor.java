@@ -1,4 +1,9 @@
+
 package domain;
+
+import java.util.Collection;
+
+import javax.persistence.OneToMany;
 
 /**
  * An Actor represents any kind of user related to the domain model.
@@ -9,14 +14,27 @@ package domain;
  */
 public abstract class Actor {
 
-	private String name;
-	private String lastName;
-	private String address;
-	private String email;
-	private String phoneNumber;
-	private String postalCode;
-	private String city;
-	private String country;
+	private String					name;
+	private String					lastName;
+	private String					address;
+	private String					email;
+	private String					phoneNumber;
+	private String					postalCode;
+	private String					city;
+	private String					country;
+
+	//Relaciones
+	private Collection<Annotation>	anottatiions;
+
+
+	@OneToMany(mappedBy = "actor")
+	public Collection<Annotation> getAnottatiions() {
+		return this.anottatiions;
+	}
+
+	public void setAnottatiions(final Collection<Annotation> anottatiions) {
+		this.anottatiions = anottatiions;
+	}
 
 	public String getName() {
 		return this.name;

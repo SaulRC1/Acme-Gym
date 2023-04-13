@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.Access;
@@ -7,17 +8,19 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Admin extends Actor{
-	Gym gym;
+public class Admin extends Actor {
 
-	@ManyToOne(optional=false)
+	//Relaciones
+	private Gym gym;
+
+
+	@ManyToOne(optional = false)
 	public Gym getGym() {
-		return gym;
+		return this.gym;
 	}
 
-	public void setGym(Gym gym) {
+	public void setGym(final Gym gym) {
 		this.gym = gym;
 	}
-	
-	
+
 }

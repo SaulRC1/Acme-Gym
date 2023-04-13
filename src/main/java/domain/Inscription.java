@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.sql.Date;
@@ -10,39 +11,52 @@ import javax.persistence.ManyToOne;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Inscription {
-	private Date singUpDate;
-	private Date singOutDate;
-	
-	Gym gym;
 
-	@ManyToOne(optional=false)
+	private Date	singUpDate;
+	private Date	singOutDate;
+
+	//Relaciones
+	private Gym		gym;
+	private Client	client;
+
+
+	@ManyToOne(optional = false)
 	public Gym getGym() {
-		return gym;
+		return this.gym;
 	}
 
-	public void setGym(Gym gym) {
+	public void setGym(final Gym gym) {
 		this.gym = gym;
 	}
 
-	public Inscription(Date singUpDate, Date singOutDate) {
+	@ManyToOne(optional = false)
+	public Client getClient() {
+		return this.client;
+	}
+
+	public void setClient(final Client client) {
+		this.client = client;
+	}
+
+	public Inscription(final Date singUpDate, final Date singOutDate) {
 		super();
 		this.singUpDate = singUpDate;
 		this.singOutDate = singOutDate;
 	}
 
 	public Date getSingUpDate() {
-		return singUpDate;
+		return this.singUpDate;
 	}
 
-	public void setSingUpDate(Date singUpDate) {
+	public void setSingUpDate(final Date singUpDate) {
 		this.singUpDate = singUpDate;
 	}
 
 	public Date getSingOutDate() {
-		return singOutDate;
+		return this.singOutDate;
 	}
 
-	public void setSingOutDate(Date singOutDate) {
+	public void setSingOutDate(final Date singOutDate) {
 		this.singOutDate = singOutDate;
 	}
 

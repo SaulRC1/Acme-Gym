@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -13,90 +14,86 @@ import javax.persistence.OneToMany;
 @Access(AccessType.PROPERTY)
 public class Gym {
 
-	private String logo;
-	private String address;
-	private String name;
-	private Double fee;
-	private boolean active;
-	
-	Manager manager;
-	
-	Collection<Admin> admins;
-	
-	Collection<Trainer> trainers;
-	
-	Collection<Activity> activities;
-	
-	Collection<Inscription> inscriptions;
-	
-	Collection<Annotation> annotations;
-	
-	Collection<Training> trainings;
-		
-	@ManyToOne(optional=false)
+	private String					logo;
+	private String					address;
+	private String					name;
+	private Double					fee;
+	private boolean					active;
+
+	//Relaciones
+	private Manager					manager;
+	private Collection<Admin>		admins;
+	private Collection<Trainer>		trainers;
+	private Collection<Activity>	activities;
+	private Collection<Inscription>	inscriptions;
+	private Collection<Annotation>	annotations;
+	private Collection<Training>	trainings;
+
+
+	@ManyToOne(optional = false)
 	public Manager getManager() {
-		return manager;
+		return this.manager;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(final Manager manager) {
 		this.manager = manager;
 	}
 
-	@OneToMany(mappedBy="gym")
+	@OneToMany(mappedBy = "gym")
 	public Collection<Admin> getAdmins() {
-		return admins;
+		return this.admins;
 	}
 
-	public void setAdmins(List<Admin> admins) {
+	public void setAdmins(final List<Admin> admins) {
 		this.admins = admins;
 	}
 
-	@OneToMany(mappedBy="gym")
+	@OneToMany(mappedBy = "gym")
 	public Collection<Trainer> getTrainers() {
-		return trainers;
+		return this.trainers;
 	}
 
-	public void setTrainers(List<Trainer> trainers) {
+	public void setTrainers(final List<Trainer> trainers) {
 		this.trainers = trainers;
 	}
 
-	@OneToMany(mappedBy="gym")
+	@OneToMany(mappedBy = "gym")
 	public Collection<Activity> getActivities() {
-		return activities;
+		return this.activities;
 	}
 
-	public void setActivities(List<Activity> activities) {
+	public void setActivities(final List<Activity> activities) {
 		this.activities = activities;
 	}
 
-	@OneToMany(mappedBy="gym")
+	@OneToMany(mappedBy = "gym")
 	public Collection<Inscription> getInscriptions() {
-		return inscriptions;
+		return this.inscriptions;
 	}
 
-	public void setInscriptions(List<Inscription> inscriptions) {
+	public void setInscriptions(final List<Inscription> inscriptions) {
 		this.inscriptions = inscriptions;
 	}
 
-	@OneToMany//Revisar ahora
+	@OneToMany(mappedBy = "gym")
 	public Collection<Annotation> getAnnotations() {
-		return annotations;
+		return this.annotations;
 	}
 
-	public void setAnnotations(List<Annotation> annotations) {
+	public void setAnnotations(final List<Annotation> annotations) {
 		this.annotations = annotations;
 	}
 
-	@OneToMany(mappedBy="gym")
+	@OneToMany(mappedBy = "gym")
 	public Collection<Training> getTrainings() {
-		return trainings;
+		return this.trainings;
 	}
 
-	public void setTrainings(List<Training> trainings) {
+	public void setTrainings(final List<Training> trainings) {
 		this.trainings = trainings;
 	}
 
-	public Gym(String logo, String address, String name, Double fee, boolean active) {
+	public Gym(final String logo, final String address, final String name, final Double fee, final boolean active) {
 		super();
 		this.logo = logo;
 		this.address = address;
@@ -106,42 +103,42 @@ public class Gym {
 	}
 
 	public String getLogo() {
-		return logo;
+		return this.logo;
 	}
 
-	public void setLogo(String logo) {
+	public void setLogo(final String logo) {
 		this.logo = logo;
 	}
 
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(final String address) {
 		this.address = address;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
 	public Double getFee() {
-		return fee;
+		return this.fee;
 	}
 
-	public void setFee(Double fee) {
+	public void setFee(final Double fee) {
 		this.fee = fee;
 	}
 
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(final boolean active) {
 		this.active = active;
 	}
 

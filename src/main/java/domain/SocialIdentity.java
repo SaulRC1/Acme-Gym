@@ -1,11 +1,28 @@
+
 package domain;
 
-public class SocialIdentity {
-	private String nick;
-	private String link;
-	private String socialNetwork;
+import javax.persistence.ManyToOne;
 
-	public SocialIdentity(String nick, String link, String socialNetwork) {
+public class SocialIdentity {
+
+	private String		nick;
+	private String		link;
+	private String		socialNetwork;
+
+	//Relaciones
+	private Curriculum	curriculum;
+
+
+	@ManyToOne(optional = false)
+	public Curriculum getCurriculum() {
+		return this.curriculum;
+	}
+
+	public void setCurriculum(final Curriculum curriculum) {
+		this.curriculum = curriculum;
+	}
+
+	public SocialIdentity(final String nick, final String link, final String socialNetwork) {
 		super();
 		this.nick = nick;
 		this.link = link;
@@ -13,26 +30,26 @@ public class SocialIdentity {
 	}
 
 	public String getNick() {
-		return nick;
+		return this.nick;
 	}
 
-	public void setNick(String nick) {
+	public void setNick(final String nick) {
 		this.nick = nick;
 	}
 
 	public String getLink() {
-		return link;
+		return this.link;
 	}
 
-	public void setLink(String link) {
+	public void setLink(final String link) {
 		this.link = link;
 	}
 
 	public String getSocialNetwork() {
-		return socialNetwork;
+		return this.socialNetwork;
 	}
 
-	public void setSocialNetwork(String socialNetwork) {
+	public void setSocialNetwork(final String socialNetwork) {
 		this.socialNetwork = socialNetwork;
 	}
 
