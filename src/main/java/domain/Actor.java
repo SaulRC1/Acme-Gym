@@ -1,4 +1,3 @@
-
 package domain;
 
 /**
@@ -10,17 +9,14 @@ package domain;
  */
 public abstract class Actor {
 
-	private String		name;
-	private String		lastName;
-	private String		address;
-	private String		email;
-	private String		phoneNumber;
-	private String		postalCode;
-	private String		city;
-	private String		country;
-
-	private ActorStatus	status;
-
+	private String name;
+	private String lastName;
+	private String address;
+	private String email;
+	private String phoneNumber;
+	private String postalCode;
+	private String city;
+	private String country;
 
 	public String getName() {
 		return this.name;
@@ -85,13 +81,4 @@ public abstract class Actor {
 	public void setCountry(final String country) {
 		this.country = country;
 	}
-
-	public ActorStatus getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(final ActorStatus status) {
-		this.status = status;
-	}
-
 }
