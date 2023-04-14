@@ -1,8 +1,16 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
+@Entity
+@Access(AccessType.PROPERTY)
 public class Step {
 
 	private Integer		number;
@@ -37,6 +45,7 @@ public class Step {
 		this.number = number;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
@@ -45,6 +54,7 @@ public class Step {
 		this.description = description;
 	}
 
+	@URL
 	public String getTutorial() {
 		return this.tutorial;
 	}

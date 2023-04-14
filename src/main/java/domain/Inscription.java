@@ -7,6 +7,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -44,6 +46,7 @@ public class Inscription {
 		this.singOutDate = singOutDate;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getSingUpDate() {
 		return this.singUpDate;
 	}
@@ -52,6 +55,7 @@ public class Inscription {
 		this.singUpDate = singUpDate;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getSingOutDate() {
 		return this.singOutDate;
 	}

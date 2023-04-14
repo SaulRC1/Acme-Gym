@@ -5,10 +5,12 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -33,7 +35,7 @@ public class Training {
 		this.gym = gym;
 	}
 
-	@OneToMany(mappedBy = "training")
+	@OneToMany(cascade = CascadeType.ALL)
 	@NotEmpty
 	public Collection<Step> getSteps() {
 		return this.steps;
@@ -58,6 +60,7 @@ public class Training {
 		this.description = description;
 	}
 
+	@NotBlank
 	public String getTittle() {
 		return this.tittle;
 	}
@@ -66,6 +69,7 @@ public class Training {
 		this.tittle = tittle;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}

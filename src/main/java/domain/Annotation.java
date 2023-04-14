@@ -7,6 +7,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -66,6 +70,7 @@ public class Annotation {
 		this.mark = mark;
 	}
 
+	@Temporal(TemporalType.TIME)
 	public Date getDate() {
 		return this.date;
 	}
@@ -74,6 +79,7 @@ public class Annotation {
 		this.date = date;
 	}
 
+	@NotBlank
 	public String getText() {
 		return this.text;
 	}

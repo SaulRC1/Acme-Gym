@@ -3,11 +3,17 @@ package domain;
 
 import java.util.Collection;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class Client extends Actor {
 
 	private String					cardOwner;
@@ -51,6 +57,7 @@ public class Client extends Actor {
 		this.CVV = cVV;
 	}
 
+	@NotBlank
 	public String getCardOwner() {
 		return this.cardOwner;
 	}
@@ -59,6 +66,7 @@ public class Client extends Actor {
 		this.cardOwner = cardOwner;
 	}
 
+	@NotBlank
 	public String getCardBrand() {
 		return this.cardBrand;
 	}
@@ -67,6 +75,7 @@ public class Client extends Actor {
 		this.cardBrand = cardBrand;
 	}
 
+	@NotBlank
 	public String getCardNumber() {
 		return this.cardNumber;
 	}

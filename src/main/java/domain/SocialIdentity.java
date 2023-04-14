@@ -1,8 +1,16 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
+@Entity
+@Access(AccessType.PROPERTY)
 public class SocialIdentity {
 
 	private String		nick;
@@ -29,6 +37,7 @@ public class SocialIdentity {
 		this.socialNetwork = socialNetwork;
 	}
 
+	@NotBlank
 	public String getNick() {
 		return this.nick;
 	}
@@ -37,6 +46,7 @@ public class SocialIdentity {
 		this.nick = nick;
 	}
 
+	@URL
 	public String getLink() {
 		return this.link;
 	}
@@ -45,6 +55,7 @@ public class SocialIdentity {
 		this.link = link;
 	}
 
+	@NotBlank
 	public String getSocialNetwork() {
 		return this.socialNetwork;
 	}

@@ -5,12 +5,22 @@ import java.util.Collection;
 
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * An Actor represents any kind of user related to the domain model.
  *
  * This can include administrators, common users, etc.
  *
  *
+ */
+
+/*
+ * @Entity
+ * 
+ * @Acces(AccesType.PROPERTY)
+ * 
+ * @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
  */
 public abstract class Actor {
 
@@ -36,6 +46,7 @@ public abstract class Actor {
 		this.anottatiions = anottatiions;
 	}
 
+	@NotBlank
 	public String getName() {
 		return this.name;
 	}
@@ -44,6 +55,7 @@ public abstract class Actor {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -52,6 +64,7 @@ public abstract class Actor {
 		this.lastName = lastName;
 	}
 
+	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}

@@ -3,11 +3,17 @@ package domain;
 
 import java.util.Collection;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Access(AccessType.PROPERTY)
 public class Curriculum {
 
 	private String						name;
@@ -47,14 +53,15 @@ public class Curriculum {
 		this.workExperience = workExperience;
 	}
 
+	@NotBlank
 	public String getName() {
 		return this.name;
 	}
-
 	public void setName(final String name) {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getSpeciality() {
 		return this.speciality;
 	}
@@ -63,6 +70,7 @@ public class Curriculum {
 		this.speciality = speciality;
 	}
 
+	@NotBlank
 	public String getEducation() {
 		return this.education;
 	}
@@ -71,6 +79,7 @@ public class Curriculum {
 		this.education = education;
 	}
 
+	@NotBlank
 	public String getWorkExperience() {
 		return this.workExperience;
 	}

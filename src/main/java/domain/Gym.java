@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Gym {
@@ -102,6 +105,7 @@ public class Gym {
 		this.active = active;
 	}
 
+	@URL
 	public String getLogo() {
 		return this.logo;
 	}
@@ -110,6 +114,7 @@ public class Gym {
 		this.logo = logo;
 	}
 
+	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}
@@ -118,6 +123,7 @@ public class Gym {
 		this.address = address;
 	}
 
+	@NotBlank
 	public String getName() {
 		return this.name;
 	}

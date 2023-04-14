@@ -10,8 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -80,6 +84,7 @@ public class Activity {
 		this.availableCapacity = availableCapacity;
 	}
 
+	@NotBlank
 	public String getTittle() {
 		return this.tittle;
 	}
@@ -88,6 +93,7 @@ public class Activity {
 		this.tittle = tittle;
 	}
 
+	@URL
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -96,6 +102,7 @@ public class Activity {
 		this.photo = photo;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
@@ -112,6 +119,7 @@ public class Activity {
 		this.weekDays = weekDays;
 	}
 
+	@Temporal(TemporalType.TIME)
 	public Time getStartHour() {
 		return this.startHour;
 	}
@@ -120,6 +128,7 @@ public class Activity {
 		this.startHour = startHour;
 	}
 
+	@Temporal(TemporalType.TIME)
 	public Time getEndHour() {
 		return this.endHour;
 	}
