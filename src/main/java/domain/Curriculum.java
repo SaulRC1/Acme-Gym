@@ -16,23 +16,31 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Access(AccessType.PROPERTY)
 public class Curriculum {
 
-	private String						name;
-	private String						speciality;
-	private String						education;
-	private String						workExperience;
+	private String name;
+	private Collection<String> specialities;
+	private String education;
+	private Collection<String> workExperience;
 
-	//Relaciones
-	private Trainer						trainer;
-	private Collection<SocialIdentity>	socialIdentities;
+	// Relationships
+	private Trainer trainer;
+	private Collection<SocialIdentity> socialIdentities;
 
-
-	@OneToOne(optional = false)
-	public Trainer getTrainer() {
-		return this.trainer;
+	public Curriculum(final String name, final Collection<String> specialities, final String education, final Collection<String> workExperience) {
+		super();
+		this.name = name;
+		this.specialities = specialities;
+		this.education = education;
+		this.workExperience = workExperience;
 	}
 
-	public void setTrainer(final Trainer trainer) {
-		this.trainer = trainer;
+	@NotBlank
+	public String getEducation() {
+		return this.education;
+	}
+
+	@NotBlank
+	public String getName() {
+		return this.name;
 	}
 
 	@OneToMany(mappedBy = "curriculum")
@@ -41,50 +49,42 @@ public class Curriculum {
 		return this.socialIdentities;
 	}
 
-	public void setSocialIdentities(final Collection<SocialIdentity> socialIdentities) {
-		this.socialIdentities = socialIdentities;
+	@NotEmpty
+	public Collection<String> getSpecialities() {
+		return this.specialities;
 	}
 
-	public Curriculum(final String name, final String speciality, final String education, final String workExperience) {
-		super();
-		this.name = name;
-		this.speciality = speciality;
-		this.education = education;
-		this.workExperience = workExperience;
+	@OneToOne(optional = false)
+	public Trainer getTrainer() {
+		return this.trainer;
 	}
 
-	@NotBlank
-	public String getName() {
-		return this.name;
-	}
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	@NotBlank
-	public String getSpeciality() {
-		return this.speciality;
-	}
-
-	public void setSpeciality(final String speciality) {
-		this.speciality = speciality;
-	}
-
-	@NotBlank
-	public String getEducation() {
-		return this.education;
+	@NotEmpty
+	public Collection<String> getWorkExperience() {
+		return this.workExperience;
 	}
 
 	public void setEducation(final String education) {
 		this.education = education;
 	}
 
-	@NotBlank
-	public String getWorkExperience() {
-		return this.workExperience;
+	public void setName(final String name) {
+		this.name = name;
 	}
 
-	public void setWorkExperience(final String workExperience) {
+	public void setSocialIdentities(final Collection<SocialIdentity> socialIdentities) {
+		this.socialIdentities = socialIdentities;
+	}
+
+	public void setSpecialities(final Collection<String> specialities) {
+		this.specialities = specialities;
+	}
+
+	public void setTrainer(final Trainer trainer) {
+		this.trainer = trainer;
+	}
+
+	public void setWorkExperience(final Collection<String> workExperience) {
 		this.workExperience = workExperience;
 	}
 

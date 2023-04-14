@@ -17,22 +17,37 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Access(AccessType.PROPERTY)
 public class Training {
 
-	private String					tittle;
-	private String					description;
+	private String title;
+	private String description;
 
-	//Relaciones
-	private Gym						gym;
-	private Collection<Step>		steps;
-	private Collection<Annotation>	annotations;
+	// Relationships
+	private Gym gym;
+	private Collection<Step> steps;
+	private Collection<Annotation> annotations;
 
+	public Training(String title, String description, Gym gym, Collection<Step> steps,
+			Collection<Annotation> annotations) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.gym = gym;
+		this.steps = steps;
+		this.annotations = annotations;
+	}
+
+	@OneToMany(mappedBy = "training")
+	public Collection<Annotation> getAnotations() {
+		return this.annotations;
+	}
+
+	@NotBlank
+	public String getDescription() {
+		return this.description;
+	}
 
 	@ManyToOne(optional = false)
 	public Gym getGym() {
 		return this.gym;
-	}
-
-	public void setGym(final Gym gym) {
-		this.gym = gym;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -41,41 +56,29 @@ public class Training {
 		return this.steps;
 	}
 
-	public void setSteps(final Collection<Step> steps) {
-		this.steps = steps;
-	}
-
-	@OneToMany(mappedBy = "training")
-	public Collection<Annotation> getAnotations() {
-		return this.annotations;
+	@NotBlank
+	public String getTittle() {
+		return this.title;
 	}
 
 	public void setAnotations(final Collection<Annotation> anotations) {
 		this.annotations = anotations;
 	}
 
-	public Training(final String tittle, final String description) {
-		super();
-		this.tittle = tittle;
-		this.description = description;
-	}
-
-	@NotBlank
-	public String getTittle() {
-		return this.tittle;
-	}
-
-	public void setTittle(final String tittle) {
-		this.tittle = tittle;
-	}
-
-	@NotBlank
-	public String getDescription() {
-		return this.description;
-	}
-
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+
+	public void setGym(final Gym gym) {
+		this.gym = gym;
+	}
+
+	public void setSteps(final Collection<Step> steps) {
+		this.steps = steps;
+	}
+
+	public void setTittle(final String title) {
+		this.title = title;
 	}
 
 }

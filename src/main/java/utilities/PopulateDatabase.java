@@ -10,32 +10,19 @@
 
 package utilities;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import utilities.internal.DatabaseUtil;
 import utilities.internal.EclipseConsole;
-import utilities.internal.SchemaPrinter;
 import utilities.internal.ThrowablePrinter;
-import domain.DomainEntity;
 
 public class PopulateDatabase {
 
 	public static void main(final String[] args) {
 		DatabaseUtil databaseUtil;
-		ApplicationContext populationContext;
-		Map<String, DomainEntity> entityMap;
-		List<Entry<String, DomainEntity>> sortedEntities;
+		//ApplicationContext populationContext;
+		//Map<String, DomainEntity> entityMap;
+		//List<Entry<String, DomainEntity>> sortedEntities;
 
 		EclipseConsole.fix();
 		LogManager.getLogger("org.hibernate").setLevel(Level.OFF);
@@ -54,18 +41,18 @@ public class PopulateDatabase {
 			databaseUtil.recreateDatabase();
 
 			System.out.printf("Reading web of entities from `%s'.", DatabaseConfig.entitySpecificationFilename);
-			populationContext = new ClassPathXmlApplicationContext("classpath:PopulateDatabase.xml");
-			entityMap = populationContext.getBeansOfType(DomainEntity.class);
-			System.out.printf(" (%d entities found).%n", entityMap.size());
+			//populationContext = new ClassPathXmlApplicationContext("classpath:PopulateDatabase.xml");
+			//entityMap = populationContext.getBeansOfType(DomainEntity.class);
+			//System.out.printf(" (%d entities found).%n", entityMap.size());
 
 			System.out.printf("Computing a topological order for your entities.%n");
-			sortedEntities = PopulateDatabase.sort(databaseUtil, entityMap);
+			//sortedEntities = PopulateDatabase.sort(databaseUtil, entityMap);
 
 			System.out.printf("Trying to save the best order found.  Watch out for exceptions!%n");
-			PopulateDatabase.persist(databaseUtil, sortedEntities);
+			//PopulateDatabase.persist(databaseUtil, sortedEntities);
 
 			System.out.printf("Saving entity map to `%s'.%n", DatabaseConfig.entityMapFilename);
-			PopulateDatabase.saveEntityMap(databaseUtil, sortedEntities);
+			//PopulateDatabase.saveEntityMap(databaseUtil, sortedEntities);
 		} catch (final Throwable oops) {
 			ThrowablePrinter.print(oops);
 		} finally {
@@ -76,7 +63,7 @@ public class PopulateDatabase {
 		}
 	}
 
-	protected static List<Entry<String, DomainEntity>> sort(final DatabaseUtil databaseUtil, final Map<String, DomainEntity> entityMap) {
+	/*protected static List<Entry<String, DomainEntity>> sort(final DatabaseUtil databaseUtil, final Map<String, DomainEntity> entityMap) {
 		LinkedList<Entry<String, DomainEntity>> result;
 		LinkedList<Entry<String, DomainEntity>> cache;
 		Entry<String, DomainEntity> entry;
@@ -169,6 +156,6 @@ public class PopulateDatabase {
 			entity.setId(0);
 			entity.setVersion(0);
 		}
-	}
+	}*/
 
 }

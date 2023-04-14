@@ -13,37 +13,24 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class SocialIdentity {
 
-	private String		nick;
-	private String		link;
-	private String		socialNetwork;
+	private String nick;
+	private String link;
+	private String socialMedia;
 
-	//Relaciones
-	private Curriculum	curriculum;
+	// Relationships
+	private Curriculum curriculum;
 
+	public SocialIdentity(final String nick, final String link, final String socialMedia, final Curriculum curriculum) {
+		super();
+		this.nick = nick;
+		this.link = link;
+		this.socialMedia = socialMedia;
+		this.curriculum = curriculum;
+	}
 
 	@ManyToOne(optional = false)
 	public Curriculum getCurriculum() {
 		return this.curriculum;
-	}
-
-	public void setCurriculum(final Curriculum curriculum) {
-		this.curriculum = curriculum;
-	}
-
-	public SocialIdentity(final String nick, final String link, final String socialNetwork) {
-		super();
-		this.nick = nick;
-		this.link = link;
-		this.socialNetwork = socialNetwork;
-	}
-
-	@NotBlank
-	public String getNick() {
-		return this.nick;
-	}
-
-	public void setNick(final String nick) {
-		this.nick = nick;
 	}
 
 	@URL
@@ -51,17 +38,30 @@ public class SocialIdentity {
 		return this.link;
 	}
 
+	@NotBlank
+	public String getNick() {
+		return this.nick;
+	}
+
+	@NotBlank
+	public String getSocialMedia() {
+		return this.socialMedia;
+	}
+
+	public void setCurriculum(final Curriculum curriculum) {
+		this.curriculum = curriculum;
+	}
+
 	public void setLink(final String link) {
 		this.link = link;
 	}
 
-	@NotBlank
-	public String getSocialNetwork() {
-		return this.socialNetwork;
+	public void setNick(final String nick) {
+		this.nick = nick;
 	}
 
-	public void setSocialNetwork(final String socialNetwork) {
-		this.socialNetwork = socialNetwork;
+	public void setSocialMedia(final String socialMedia) {
+		this.socialMedia = socialMedia;
 	}
 
 }

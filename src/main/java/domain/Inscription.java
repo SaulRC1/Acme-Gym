@@ -14,31 +14,12 @@ import javax.persistence.TemporalType;
 @Access(AccessType.PROPERTY)
 public class Inscription {
 
-	private Date	singUpDate;
-	private Date	singOutDate;
+	private Date singUpDate;
+	private Date singOutDate;
 
-	//Relaciones
-	private Gym		gym;
-	private Client	client;
-
-
-	@ManyToOne(optional = false)
-	public Gym getGym() {
-		return this.gym;
-	}
-
-	public void setGym(final Gym gym) {
-		this.gym = gym;
-	}
-
-	@ManyToOne(optional = false)
-	public Client getClient() {
-		return this.client;
-	}
-
-	public void setClient(final Client client) {
-		this.client = client;
-	}
+	// Relationships
+	private Gym gym;
+	private Client client;
 
 	public Inscription(final Date singUpDate, final Date singOutDate) {
 		super();
@@ -46,13 +27,14 @@ public class Inscription {
 		this.singOutDate = singOutDate;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getSingUpDate() {
-		return this.singUpDate;
+	@ManyToOne(optional = false)
+	public Client getClient() {
+		return this.client;
 	}
 
-	public void setSingUpDate(final Date singUpDate) {
-		this.singUpDate = singUpDate;
+	@ManyToOne(optional = false)
+	public Gym getGym() {
+		return this.gym;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -60,8 +42,25 @@ public class Inscription {
 		return this.singOutDate;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getSingUpDate() {
+		return this.singUpDate;
+	}
+
+	public void setClient(final Client client) {
+		this.client = client;
+	}
+
+	public void setGym(final Gym gym) {
+		this.gym = gym;
+	}
+
 	public void setSingOutDate(final Date singOutDate) {
 		this.singOutDate = singOutDate;
+	}
+
+	public void setSingUpDate(final Date singUpDate) {
+		this.singUpDate = singUpDate;
 	}
 
 }

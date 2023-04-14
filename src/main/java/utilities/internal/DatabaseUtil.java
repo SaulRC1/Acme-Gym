@@ -39,7 +39,6 @@ import org.hibernate.jdbc.Work;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import utilities.DatabaseConfig;
-import domain.DomainEntity;
 
 public class DatabaseUtil {
 
@@ -160,9 +159,9 @@ public class DatabaseUtil {
 		this.entityTransaction.rollback();
 	}
 
-	public void persist(final DomainEntity entity) {
+	/*public void persist(final DomainEntity entity) {
 		this.entityManager.persist(entity);
-	}
+	}*/
 
 	public int executeUpdate(final String line) {
 		int result;

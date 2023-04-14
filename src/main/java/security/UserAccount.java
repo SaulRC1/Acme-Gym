@@ -26,15 +26,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import domain.DomainEntity;
-
 @Entity
 @Access(AccessType.PROPERTY)
-public class UserAccount extends DomainEntity implements UserDetails {
+public class UserAccount /*extends DomainEntity*/ implements UserDetails {
 
 	// Constructors -----------------------------------------------------------
 
-	private static final long	serialVersionUID	= 7254823034213841482L;
+	private static final long serialVersionUID	= 7254823034213841482L;
 
 
 	public UserAccount() {

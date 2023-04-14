@@ -14,11 +14,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Access(AccessType.PROPERTY)
 public class Manager extends Actor {
 
-	private boolean	estado;
+	private boolean banned;
 
-	//Relaciones
-	Collection<Gym>	gyms;
+	// Relationships
+	Collection<Gym> gyms;
 
+	public Manager(String firstName, String lastName, String address, String email, String phoneNumber,
+			String postalCode, String city, String country, Collection<Annotation> annotations, boolean banned,
+			Collection<Gym> gyms) {
+		super(firstName, lastName, address, email, phoneNumber, postalCode, city, country, annotations);
+		this.banned = banned;
+		this.gyms = gyms;
+	}
 
 	@OneToMany(mappedBy = "manager")
 	@NotEmpty
@@ -26,21 +33,16 @@ public class Manager extends Actor {
 		return this.gyms;
 	}
 
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
+	}
+
 	public void setGyms(final Collection<Gym> gyms) {
 		this.gyms = gyms;
-	}
-
-	public Manager(final boolean estado) {
-		super();
-		this.estado = estado;
-	}
-
-	public boolean isEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(final boolean estado) {
-		this.estado = estado;
 	}
 
 }
