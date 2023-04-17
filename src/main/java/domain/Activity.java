@@ -1,8 +1,10 @@
 
 package domain;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -10,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,9 +24,9 @@ import org.hibernate.validator.constraints.URL;
 public class Activity {
 
     private String title;
-    private String photo;
+    private Collection<String> photos;
     private String description;
-    private String weekDays;
+    private Set<DayOfWeek> daysOfWeek;
     private LocalTime startHour;
     private LocalTime endHour;
     private Integer availablePlaces;
@@ -33,13 +37,13 @@ public class Activity {
     private Collection<Annotation> annotations;
     private Collection<Client> clients;
 
-    public Activity(final String tittle, final String photo, final String description, final String weekDays,
+    public Activity(final String tittle, final Collection<String> photos, final String description, final Set<DayOfWeek> daysOfWeek,
 	    final LocalTime startHour, final LocalTime endHour, final Integer availablePlaces) {
 	super();
 	this.title = tittle;
-	this.photo = photo;
+	this.photos = photos;
 	this.description = description;
-	this.weekDays = weekDays;
+	this.daysOfWeek = daysOfWeek;
 	this.startHour = startHour;
 	this.endHour = endHour;
 	this.availablePlaces = availablePlaces;
@@ -50,6 +54,8 @@ public class Activity {
 	return this.annotations;
     }
 
+    @NotNull
+    @Min(0) // Comprobar
     public Integer getAvailablePlaces() {
 	return this.availablePlaces;
     }
@@ -64,6 +70,7 @@ public class Activity {
 	return this.description;
     }
 
+    @NotNull
     public LocalTime getEndHour() {
 	return this.endHour;
     }
@@ -74,10 +81,11 @@ public class Activity {
     }
 
     @URL
-    public String getPhoto() {
-	return this.photo;
+    public Collection<String> getPhotos() {
+	return this.photos;
     }
 
+    @NotNull
     public LocalTime getStartHour() {
 	return this.startHour;
     }
@@ -93,8 +101,9 @@ public class Activity {
 	return this.trainers;
     }
 
-    public String getWeekDays() {
-	return this.weekDays;
+    @NotEmpty
+    public Set<DayOfWeek> getDaysOfWeek() {
+	return this.daysOfWeek;
     }
 
     public void setAnnotations(final Collection<Annotation> annotations) {
@@ -121,8 +130,8 @@ public class Activity {
 	this.gym = gym;
     }
 
-    public void setPhoto(final String photo) {
-	this.photo = photo;
+    public void setPhotos(final Collection<String> photos) {
+	this.photos = photos;
     }
 
     public void setStartHour(final LocalTime startHour) {
@@ -137,8 +146,8 @@ public class Activity {
 	this.trainers = trainers;
     }
 
-    public void setWeekDays(final String weekDays) {
-	this.weekDays = weekDays;
+    public void setDaysOfWeek(final Set<DayOfWeek> daysOfWeek) {
+	this.daysOfWeek = daysOfWeek;
     }
 
 }
