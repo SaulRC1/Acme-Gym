@@ -25,7 +25,8 @@ public class Curriculum {
 	private Trainer trainer;
 	private Collection<SocialIdentity> socialIdentities;
 
-	public Curriculum(final String name, final Collection<String> specialities, final String education, final Collection<String> workExperience) {
+	public Curriculum(final String name, final Collection<String> specialities, final String education,
+			final Collection<String> workExperience) {
 		super();
 		this.name = name;
 		this.specialities = specialities;

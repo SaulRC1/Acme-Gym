@@ -9,6 +9,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -61,6 +63,8 @@ public class Gym {
 		return this.annotations;
 	}
 
+	@Min(0)
+	@Digits(integer = 9, fraction = 2)
 	public Double getFee() {
 		return this.fee;
 	}

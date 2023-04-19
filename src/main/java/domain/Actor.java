@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -83,6 +84,7 @@ public abstract class Actor {
 		return this.firstName;
 	}
 
+	@Pattern(regexp = "^(\\+34|0034|34)?[6,7]\\d{8}$")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

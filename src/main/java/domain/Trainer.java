@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -17,7 +18,7 @@ public class Trainer extends Actor {
 	private Curriculum curriculum;
 	private Gym gym;
 	private Activity activity;
-	
+
 	public Trainer(String firstName, String lastName, String address, String email, String phoneNumber,
 			String postalCode, String city, String country, Collection<Annotation> annotations, Curriculum curriculum,
 			Gym gym, Activity activity) {
@@ -27,7 +28,7 @@ public class Trainer extends Actor {
 		this.activity = activity;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToMany
 	public Activity getActivity() {
 		return this.activity;
 	}

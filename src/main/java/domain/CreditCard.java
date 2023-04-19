@@ -4,6 +4,7 @@ import javax.persistence.Embeddable;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 @Embeddable
 public class CreditCard {
@@ -15,8 +16,8 @@ public class CreditCard {
 	private Integer expirationYear;
 	private Integer CVV;
 
-	public CreditCard(final String owner, final String brand, final String number, final Integer expirationMonth, final Integer expirationYear,
-			final Integer cVV) {
+	public CreditCard(final String owner, final String brand, final String number, final Integer expirationMonth,
+			final Integer expirationYear, final Integer cVV) {
 		super();
 		this.owner = owner;
 		this.brand = brand;
@@ -26,14 +27,17 @@ public class CreditCard {
 		CVV = cVV;
 	}
 
+	@NotBlank
 	public String getBrand() {
 		return brand;
 	}
 
+	@Range(min = 100, max = 999)
 	public Integer getCVV() {
 		return CVV;
 	}
 
+	@Range(min = 1, max = 12)
 	public Integer getExpirationMonth() {
 		return expirationMonth;
 	}
