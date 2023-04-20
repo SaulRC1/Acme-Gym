@@ -10,10 +10,10 @@ import domain.Training;
 @Service
 public class WorkoutAdviserImpl implements WorkoutAdviser {
 
-    @Override
-    public Set<Training> deliverWorkoutRecommendations(final Client client) {
+	@Override
+	public Set<Training> deliverWorkoutRecommendations(final Client client) {
 
-	return null;
-    }
+		return null;
+	}
 
 }

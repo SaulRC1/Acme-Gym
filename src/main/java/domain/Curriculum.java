@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Curriculum {
+public class Curriculum extends DomainEntity{
 
 	private String name;
 	private Collection<String> specialities;

@@ -26,20 +26,20 @@ import domain.Training;
  */
 public interface WorkoutAdviser {
 
-    /**
-     * This method will deliver to an authenticated client a recommendation of five
-     * different workouts that the user may like taking into account certain
-     * metrics.<br>
-     * <br>
-     *
-     * The client will never receive a recommendation where a workout that the
-     * client is already doing is included. Recommendations will be different
-     * between themselves and also from the client's workouts.<br>
-     * <br>
-     *
-     * @param client The client that must receive a recommendation
-     * @return A {@link java.util.Set} with a maximum of 5 workouts inside.
-     */
-    public Set<Training> deliverWorkoutRecommendations(Client client);
+	/**
+	 * This method will deliver to an authenticated client a recommendation of five
+	 * different workouts that the user may like taking into account certain
+	 * metrics.<br>
+	 * <br>
+	 *
+	 * The client will never receive a recommendation where a workout that the
+	 * client is already doing is included. Recommendations will be different
+	 * between themselves and also from the client's workouts.<br>
+	 * <br>
+	 *
+	 * @param client The client that must receive a recommendation
+	 * @return A {@link java.util.Set} with a maximum of 5 workouts inside.
+	 */
+	public Set<Training> deliverWorkoutRecommendations(Client client);
 
 }

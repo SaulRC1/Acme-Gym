@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Inscription {
+public class Inscription extends DomainEntity{
 
 	private LocalDate singUpDate;
 	private LocalDate singOutDate;

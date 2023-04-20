@@ -68,6 +68,7 @@ public class SchemaPrinter {
 			}
 		}
 	}
+
 	protected static void printFieldsInClazz(final StringBuffer buffer, final Class<?> clazz, final Object obj) {
 		Field fields[];
 		String name;
@@ -165,7 +166,9 @@ public class SchemaPrinter {
 	protected static boolean isPrimitive(final Object obj) {
 		boolean result;
 
-		result = (obj == null || obj instanceof String || obj instanceof Number || obj instanceof Character || obj instanceof Boolean || obj instanceof java.util.Date || obj instanceof java.sql.Date || obj instanceof Timestamp);
+		result = (obj == null || obj instanceof String || obj instanceof Number || obj instanceof Character
+				|| obj instanceof Boolean || obj instanceof java.util.Date || obj instanceof java.sql.Date
+				|| obj instanceof Timestamp);
 
 		return result;
 	}

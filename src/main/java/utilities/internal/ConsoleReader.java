@@ -17,9 +17,8 @@ import org.apache.commons.lang.StringUtils;
 
 public class ConsoleReader {
 
-	private final InputStreamReader	stream;
-	private final BufferedReader	reader;
-
+	private final InputStreamReader stream;
+	private final BufferedReader reader;
 
 	public ConsoleReader() {
 		this.stream = new InputStreamReader(System.in);

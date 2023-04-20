@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Step {
+public class Step extends DomainEntity{
 
 	private Integer number;
 	private String description;

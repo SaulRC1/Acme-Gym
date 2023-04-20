@@ -36,16 +36,15 @@ public abstract class AbstractTest {
 	// Supporting services --------------------------------
 
 	@Autowired
-	private LoginService						loginService;
+	private LoginService loginService;
 	@Autowired
-	private JpaTransactionManager				transactionManager;
+	private JpaTransactionManager transactionManager;
 
 	// Internal state -------------------------------------
 
-	private final DefaultTransactionDefinition	transactionDefinition;
-	private TransactionStatus					currentTransaction;
-	private final Properties					entityMap;
-
+	private final DefaultTransactionDefinition transactionDefinition;
+	private TransactionStatus currentTransaction;
+	private final Properties entityMap;
 
 	// Constructor ----------------------------------------
 

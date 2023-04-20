@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Gym {
+public class Gym  extends DomainEntity{
 
 	private String logo;
 	private String address;
@@ -27,7 +27,6 @@ public class Gym {
 
 	// Relationships
 	private Manager manager;
-	private Collection<Admin> admins;
 	private Collection<Trainer> trainers;
 	private Collection<Activity> activities;
 	private Collection<Inscription> inscriptions;
@@ -51,11 +50,6 @@ public class Gym {
 	@NotBlank
 	public String getAddress() {
 		return this.address;
-	}
-
-	@OneToMany(mappedBy = "gym")
-	public Collection<Admin> getAdmins() {
-		return this.admins;
 	}
 
 	@OneToMany(mappedBy = "gym")
@@ -113,10 +107,6 @@ public class Gym {
 
 	public void setAddress(final String address) {
 		this.address = address;
-	}
-
-	public void setAdmins(final List<Admin> admins) {
-		this.admins = admins;
 	}
 
 	public void setAnnotations(final List<Annotation> annotations) {

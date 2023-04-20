@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Annotation {
+public class Annotation extends DomainEntity{
 
 	private LocalDate date;
 	private String text;

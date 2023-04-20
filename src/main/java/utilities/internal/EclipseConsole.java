@@ -16,8 +16,7 @@ public class EclipseConsole {
 
 	// Internal state ---------------------------------------------------------
 
-	private static boolean	isFixed	= false;
-
+	private static boolean isFixed = false;
 
 	// Business methods -------------------------------------------------------
 

@@ -47,22 +47,20 @@ public class DatabaseUtil {
 	public DatabaseUtil() {
 	}
 
-
 	// Internal state ---------------------------------------------------------
 
-	// private PersistenceProviderResolver	resolver;
-	// private List<PersistenceProvider>	providers;
-	private PersistenceProvider		persistenceProvider;
-	private EntityManagerFactory	entityManagerFactory;
-	private EntityManager			entityManager;
-	private Map<String, Object>		properties;
-	private String					databaseUrl;
-	private String					databaseName;
-	private String					databaseDialectName;
-	private Dialect					databaseDialect;
-	private Configuration			configuration;
-	private EntityTransaction		entityTransaction;
-
+	// private PersistenceProviderResolver resolver;
+	// private List<PersistenceProvider> providers;
+	private PersistenceProvider persistenceProvider;
+	private EntityManagerFactory entityManagerFactory;
+	private EntityManager entityManager;
+	private Map<String, Object> properties;
+	private String databaseUrl;
+	private String databaseName;
+	private String databaseDialectName;
+	private Dialect databaseDialect;
+	private Configuration configuration;
+	private EntityTransaction entityTransaction;
 
 	// Internal state ---------------------------------------------------------
 
@@ -77,17 +75,22 @@ public class DatabaseUtil {
 	// Business methods -------------------------------------------------------
 
 	public void initialise() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// this.resolver = PersistenceProviderResolverHolder.getPersistenceProviderResolver();
+		// this.resolver =
+		// PersistenceProviderResolverHolder.getPersistenceProviderResolver();
 		// this.providers = this.resolver.getPersistenceProviders();
 
 		this.persistenceProvider = new HibernatePersistenceProvider();
-		this.entityManagerFactory = this.persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit, null);
+		this.entityManagerFactory = this.persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit,
+				null);
 		if (this.entityManagerFactory == null)
-			throw new RuntimeException(String.format("Couldn't create an entity manager factory for persistence unit `%s'", DatabaseConfig.PersistenceUnit));
+			throw new RuntimeException(
+					String.format("Couldn't create an entity manager factory for persistence unit `%s'",
+							DatabaseConfig.PersistenceUnit));
 
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 		if (this.entityManager == null)
-			throw new RuntimeException(String.format("Couldn't create an entity manager for persistence unit `%s'", DatabaseConfig.PersistenceUnit));
+			throw new RuntimeException(String.format("Couldn't create an entity manager for persistence unit `%s'",
+					DatabaseConfig.PersistenceUnit));
 		this.entityManager.setFlushMode(FlushModeType.AUTO);
 
 		this.properties = this.entityManagerFactory.getProperties();
@@ -159,9 +162,10 @@ public class DatabaseUtil {
 		this.entityTransaction.rollback();
 	}
 
-	/*public void persist(final DomainEntity entity) {
-		this.entityManager.persist(entity);
-	}*/
+	/*
+	 * public void persist(final DomainEntity entity) {
+	 * this.entityManager.persist(entity); }
+	 */
 
 	public int executeUpdate(final String line) {
 		int result;

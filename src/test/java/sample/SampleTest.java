@@ -20,9 +20,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 
-@ContextConfiguration(locations = {
-	"classpath:spring/junit.xml"
-})
+@ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class SampleTest extends AbstractTest {
@@ -31,8 +29,8 @@ public class SampleTest extends AbstractTest {
 
 	// Tests ------------------------------------------------------------------
 
-	// The following are fictitious test cases that are intended to check that 
-	// JUnit works well in this project.  Just righ-click this class and run 
+	// The following are fictitious test cases that are intended to check that
+	// JUnit works well in this project. Just righ-click this class and run
 	// it using JUnit.
 
 	@Test
@@ -47,17 +45,8 @@ public class SampleTest extends AbstractTest {
 
 	@Test
 	public void sampleDriver() {
-		final Object testingData[][] = {
-			{
-				"userAccount1", 4, null
-			}, {
-				"userAccount2", 5, null
-			}, {
-				"userAccount3", 6, null
-			}, {
-				"non-existent", 0, AssertionError.class
-			}
-		};
+		final Object testingData[][] = { { "userAccount1", 4, null }, { "userAccount2", 5, null },
+				{ "userAccount3", 6, null }, { "non-existent", 0, AssertionError.class } };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.sampleTemplate((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);

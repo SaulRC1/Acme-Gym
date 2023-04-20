@@ -28,7 +28,7 @@ public class WelcomeController extends AbstractController {
 		super();
 	}
 
-	// Index ------------------------------------------------------------------		
+	// Index ------------------------------------------------------------------
 
 	@RequestMapping(value = "/index")
 	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {

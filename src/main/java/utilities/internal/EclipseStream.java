@@ -23,12 +23,10 @@ public class EclipseStream extends OutputStream {
 		this.target = originalStream;
 	}
 
-
 	// Internal state ---------------------------------------------------------
 
-	private final OutputStream	target;
-	private static OutputStream	lastStream;
-
+	private final OutputStream target;
+	private static OutputStream lastStream;
 
 	// OutputStream interface -------------------------------------------------
 
