@@ -43,5 +43,275 @@
 	</bean>
 	
 	<!-- Other domain beans come here -->	
+	<bean id="manager1" class="domain.Manager">
+		<property name="firstName" value="Julio" />
+		<property name="lastName" value="Jurado" />
+		<property name="email" value="julio.jurado-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="677 84 84 78" />
+		<property name="postalCode" value="23008" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin1" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager2" class="domain.Manager">
+		<property name="firstName" value="Helena" />
+		<property name="lastName" value="Domínguez" />
+		<property name="email" value="helena.dominguez-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="677 84 69 77" />
+		<property name="postalCode" value="23135" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="true" />
+		<property name="admin">
+			<ref bean="admin1" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager3" class="domain.Manager">
+		<property name="firstName" value="Almudena" />
+		<property name="lastName" value="Navarro" />
+		<property name="email" value="almudena.navarro-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="613 45 84 78" />
+		<property name="postalCode" value="25789" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin1" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager4" class="domain.Manager">
+		<property name="firstName" value="Marco" />
+		<property name="lastName" value="Bolívar" />
+		<property name="email" value="marco.bolivar-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="677 23 48 78" />
+		<property name="postalCode" value="25001" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="true" />
+		<property name="admin">
+			<ref bean="admin2" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager5" class="domain.Manager">
+		<property name="firstName" value="José Carlos" />
+		<property name="lastName" value="Verdugo" />
+		<property name="email" value="josecarlos.verdugo-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="677 31 84 99" />
+		<property name="postalCode" value="23091" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin2" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager6" class="domain.Manager">
+		<property name="firstName" value="Ines" />
+		<property name="lastName" value="Albacete" />
+		<property name="email" value="ines.albacete-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="612 77 56 78" />
+		<property name="postalCode" value="23012" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin2" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager7" class="domain.Manager">
+		<property name="firstName" value="Julia" />
+		<property name="lastName" value="Merino" />
+		<property name="email" value="julia.merino-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="611 93 84 78" />
+		<property name="postalCode" value="29008" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin3" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager8" class="domain.Manager">
+		<property name="firstName" value="Abogail" />
+		<property name="lastName" value="Lora" />
+		<property name="email" value="abogail.lora-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="746 19 84 78" />
+		<property name="postalCode" value="23776" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin3" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager9" class="domain.Manager">
+		<property name="firstName" value="Juan Alberto" />
+		<property name="lastName" value="Andorrano" />
+		<property name="email" value="juanalberto.andorrano-manager@hyper-mass.es"/>
+		<property name="phoneNumber" value="655 65 84 78" />
+		<property name="postalCode" value="31009" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="banned" value="false" />
+		<property name="admin">
+			<ref bean="admin3" />
+		</property>
+		<property name="gyms">
+			<list>
+				<ref bean="gym1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="admin1" class="domain.Admin">
+		<property name="firstName" value="Omar" />
+		<property name="lastName" value="Piedrabuena" />
+		<property name="email" value="omar.piedrabuena-admin@hyper-mass.es"/>
+		<property name="phoneNumber" value="617 74 64 87" />
+		<property name="postalCode" value="24008" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="managers">
+			<list>
+				<ref bean="manager1"/>
+				<ref bean="manager2"/>
+				<ref bean="manager3"/>
+			</list>
+		</property>
+		<property name="gym">
+			<ref bean="gym1"/>
+		</property>
+	</bean>
+	
+	<bean id="admin2" class="domain.Admin">
+		<property name="firstName" value="Ivan" />
+		<property name="lastName" value="Soriano" />
+		<property name="email" value="ivan.soriano-admin@hyper-mass.es"/>
+		<property name="phoneNumber" value="618 47 64 47" />
+		<property name="postalCode" value="24010" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="managers">
+			<list>
+				<ref bean="manager4"/>
+				<ref bean="manager5"/>
+				<ref bean="manager6"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="admin3" class="domain.Admin">
+		<property name="firstName" value="Antonio" />
+		<property name="lastName" value="Rabellino" />
+		<property name="email" value="antonio.rabellino-admin@hyper-mass.es"/>
+		<property name="phoneNumber" value="667 54 43 87" />
+		<property name="postalCode" value="26447" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="managers">
+			<list>
+				<ref bean="manager7"/>
+				<ref bean="manager8"/>
+				<ref bean="manager9"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="gym1" class="domain.Gym">
+		<property name="logo" value="https://static.vecteezy.com/system/resources/previews/000/595/164/original/vector-object-and-icons-for-sport-label-gym-badge-fitness-logo-design.jpg" />
+		<property name="address" value="La Fontanilla 59, Pozoblanco, Córdoba" />
+		<property name="name" value="Hyper Mass"/>
+		<property name="fee" value="49.99" />
+		<property name="active" value="true" />
+		<property name="manager">
+			<ref bean="manager1" />
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="trainer1" />
+				<ref bean="trainer2" />
+				<ref bean="trainer3" />
+			</list>
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="activity1" />
+				<ref bean="activity2" />
+				<ref bean="activity3" />
+			</list>
+		</property>
+		<property name="inscriptions">
+			<list>
+				<ref bean="inscription1" />
+				<ref bean="inscription2" />
+				<ref bean="inscription3" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation1" />
+				<ref bean="annotation2" />
+				<ref bean="annotation3" />
+			</list>
+		</property>
+		<property name="trainings">
+			<list>
+				<ref bean="training1" />
+				<ref bean="training2" />
+				<ref bean="training3" />
+			</list>
+		</property>
+	</bean>
 	
 </beans>
