@@ -32,7 +32,6 @@ public class Gym extends DomainEntity {
     private Collection<Inscription> inscriptions;
     private Collection<Annotation> annotations;
     private Collection<Training> trainings;
-    private Collection<Admin> administrators;
 
     public Gym(final String logo, final String address, final String name, final Double fee, final boolean active) {
 	super();
@@ -140,15 +139,6 @@ public class Gym extends DomainEntity {
 
     public void setTrainings(final List<Training> trainings) {
 	this.trainings = trainings;
-    }
-
-    @OneToMany(mappedBy = "gym")
-    public Collection<Admin> getAdministrators() {
-	return this.administrators;
-    }
-
-    public void setAdministrators(final Collection<Admin> administrators) {
-	this.administrators = administrators;
     }
 
 }
