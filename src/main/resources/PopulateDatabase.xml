@@ -268,6 +268,112 @@
 		</property>
 	</bean>
 	
+	<bean id="trainer1" class="domain.Trainer">
+		<property name="firstName" value="Desiree" />
+		<property name="lastName" value="Morata" />
+		<property name="email" value="desiree.morata-trainer@hyper-mass.es"/>
+		<property name="phoneNumber" value="634 44 43 87" />
+		<property name="postalCode" value="26489" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="curriculum">
+			<ref bean="curriculumDesiree" />
+		</property>
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="activity1" />
+				<ref bean="activity2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trainer2" class="domain.Trainer">
+		<property name="firstName" value="Daniel" />
+		<property name="lastName" value="Villalobos" />
+		<property name="email" value="daniel.villalobos-trainer@hyper-mass.es"/>
+		<property name="phoneNumber" value="789 67 31 87" />
+		<property name="postalCode" value="27896" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="curriculum">
+			<ref bean="curriculumDaniel" />
+		</property>
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="activity1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trainer3" class="domain.Trainer">
+		<property name="firstName" value="Santiago" />
+		<property name="lastName" value="Gómez" />
+		<property name="email" value="santiago.gomez-trainer@hyper-mass.es"/>
+		<property name="phoneNumber" value="634 11 34 49" />
+		<property name="postalCode" value="26490" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="curriculum">
+			<ref bean="curriculumSantiago" />
+		</property>
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="activity1" />
+				<ref bean="activity2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="activity1" class="domain.Activity">
+		<property name="title" value="Musculación de alto rendimiento" />
+		<property name="photos">
+			<list>
+				<value>https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/strong-man-is-doing-cross-training-exercise-royalty-free-image-1588763496.jpg?crop=0.88847xw:1xh;center,top&resize=1200:*</value>
+			</list>
+		</property>
+		<property name="description" value="En esta sesión de musculación de alto 
+			rendimiento, se daran pautas para conseguir enfocar el entrenamiento a
+			contextos de alta intensidad y profesionalidad deportiva." />
+		<property name="daysOfWeek">
+			<list>
+				<value type="java.time.DayOfWeek">DayOfWeek.MONDAY</value>
+				<value type="java.time.DayOfWeek">DayOfWeek.TUESDAY</value>
+			</list>
+		</property>
+		<property name="startHour" value="" />
+		<property name="endHour" value="" />
+		<property name="availablePlaces" value="15" />
+		<property name="gym">
+			<ref bean="gym1"/>
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="trainer1" />
+				<ref bean="trainer2" />
+				<ref bean="trainer3" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				
+			</list>
+		</property>	
+		<property name="clients">
+			<list>
+			
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="gym1" class="domain.Gym">
 		<property name="logo" value="https://static.vecteezy.com/system/resources/previews/000/595/164/original/vector-object-and-icons-for-sport-label-gym-badge-fitness-logo-design.jpg" />
 		<property name="address" value="La Fontanilla 59, Pozoblanco, Córdoba" />
@@ -288,7 +394,6 @@
 			<list>
 				<ref bean="activity1" />
 				<ref bean="activity2" />
-				<ref bean="activity3" />
 			</list>
 		</property>
 		<property name="inscriptions">
