@@ -337,7 +337,7 @@
 		<property name="title" value="Musculación de alto rendimiento" />
 		<property name="photos">
 			<list>
-				<value>https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/strong-man-is-doing-cross-training-exercise-royalty-free-image-1588763496.jpg?crop=0.88847xw:1xh;center,top&resize=1200:*</value>
+				<value>https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/strong-man-is-doing-cross-training-exercise-royalty-free-image-1588763496.jpg?crop=0.88847xw:1xh;center,top&amp;resize=1200:*</value>
 			</list>
 		</property>
 		<property name="description" value="En esta sesión de musculación de alto 
@@ -349,8 +349,8 @@
 				<value type="java.time.DayOfWeek">DayOfWeek.TUESDAY</value>
 			</list>
 		</property>
-		<property name="startHour" value="" />
-		<property name="endHour" value="" />
+		<property name="startHour" value="10:30:00" />
+		<property name="endHour" value="12:30:00" />
 		<property name="availablePlaces" value="15" />
 		<property name="gym">
 			<ref bean="gym1"/>
@@ -368,6 +368,29 @@
 			</list>
 		</property>	
 		<property name="clients">
+			<list>
+			
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="client1" class="domain.Client">
+		<property name="firstName" value="Hector" />
+		<property name="lastName" value="Cardenal" />
+		<property name="email" value="hector.cardenal@gmail.com"/>
+		<property name="phoneNumber" value="655 24 56 49" />
+		<property name="postalCode" value="26410" />
+		<property name="city" value="Córdoba" />
+		<property name="country" value="España" />
+		<property name="creditCard">
+			<ref bean="creditCardHector"/>
+		</property>
+		<property name="activities">
+			<list>
+			
+			</list>
+		</property>
+		<property name="inscriptions">
 			<list>
 			
 			</list>
