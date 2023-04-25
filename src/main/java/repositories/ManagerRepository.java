@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import domain.Manager;
 
 @Repository
-public interface ManagerRepository extends JpaRepository<Manager, String> {
+public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
 	/*
 	 * List of managers by email

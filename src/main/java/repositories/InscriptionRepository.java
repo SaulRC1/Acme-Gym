@@ -13,7 +13,7 @@ import domain.Gym;
 import domain.Inscription;
 
 @Repository
-public interface InscriptionRepository extends JpaRepository<Inscription, LocalDate> {
+public interface InscriptionRepository extends JpaRepository<Inscription, Integer> {
 
 	/*
 	 * To find the inscriptions by a sing up date
@@ -23,6 +23,4 @@ public interface InscriptionRepository extends JpaRepository<Inscription, LocalD
 
 	@Query("SELECT * FROM Inscription i WHERE i.gym_id = ?1 AND i.client_id = ?2")
 	Collection<Inscription> findByGymAndClient(Gym gym, Client client);
-
-	Object findById(Long inscriptionId);
 }
