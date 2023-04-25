@@ -1,21 +1,25 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Admin extends Actor {
 
-    // Relationships
+    // An admin administrates some managers, there may be some cases
+    // where an admin does not administrate any. Cardinality of this
+    // relationship would be 0..*
     private Collection<Manager> managers;
 
-    @OneToMany(mappedBy = "admin")
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Collection<Manager> getManagers() {
 	return this.managers;
     }
@@ -29,6 +33,29 @@ public class Admin extends Actor {
 	    final Collection<Annotation> annotations, final Collection<Manager> managers) {
 	super(firstName, lastName, address, email, phoneNumber, postalCode, city, country, annotations);
 	this.managers = managers;
+    }
+
+    /**
+     * Will add a manager to this admin list of administrated managers.<br>
+     * <br>
+     *
+     * NOTE THAT USING THIS METHOD WILL ALSO ADD THIS ADMIN IN THE MANAGER<br>
+     * INSTANCE. DO NOT CALL MANAGER'S {@link Manager#addAdministrator(Admin)}<br>
+     * METHOD AFTER CALLING THIS METHOD.
+     *
+     * @param manager The manager to be administrated by this admin
+     */
+    public void addManager(Manager manager) {
+
+	if (manager != null) {
+
+	    if (this.managers == null)
+		this.managers = new ArrayList<Manager>();
+
+	    this.managers.add(manager);
+	    manager.addAdministrator(this);
+	}
+
     }
 
 }

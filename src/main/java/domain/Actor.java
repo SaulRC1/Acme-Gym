@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Access(AccessType.PROPERTY)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Actor {
+public abstract class Actor extends DomainEntity {
 
 	private String firstName;
 	private String lastName;
