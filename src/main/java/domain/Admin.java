@@ -28,6 +28,10 @@ public class Admin extends Actor {
 	this.managers = managers;
     }
 
+    public Admin() {
+
+    }
+
     public Admin(final String firstName, final String lastName, final String address, final String email,
 	    final String phoneNumber, final String postalCode, final String city, final String country,
 	    final Collection<Annotation> annotations, final Collection<Manager> managers) {

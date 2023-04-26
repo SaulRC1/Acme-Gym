@@ -26,106 +26,110 @@ import org.hibernate.validator.constraints.NotBlank;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Actor extends DomainEntity {
 
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String email;
-	private String phoneNumber;
-	private String postalCode;
-	private String city;
-	private String country;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String email;
+    private String phoneNumber;
+    private String postalCode;
+    private String city;
+    private String country;
 
-	// Relationships
-	private Collection<Annotation> annotations;
+    // Relationships
+    private Collection<Annotation> annotations;
 
-	public Actor(String firstName, String lastName, String address, String email, String phoneNumber, String postalCode,
-			String city, String country, Collection<Annotation> annotations) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.postalCode = postalCode;
-		this.city = city;
-		this.country = country;
-		this.annotations = annotations;
-	}
+    public Actor(String firstName, String lastName, String address, String email, String phoneNumber, String postalCode,
+	    String city, String country, Collection<Annotation> annotations) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.address = address;
+	this.email = email;
+	this.phoneNumber = phoneNumber;
+	this.postalCode = postalCode;
+	this.city = city;
+	this.country = country;
+	this.annotations = annotations;
+    }
 
-	@NotBlank
-	public String getAddress() {
-		return this.address;
-	}
+    public Actor() {
 
-	@OneToMany(mappedBy = "actor")
-	public Collection<Annotation> getAnnotations() {
-		return this.annotations;
-	}
+    }
 
-	public String getCity() {
-		return this.city;
-	}
+    @NotBlank
+    public String getAddress() {
+	return this.address;
+    }
 
-	public String getCountry() {
-		return this.country;
-	}
+    @OneToMany(mappedBy = "actor")
+    public Collection<Annotation> getAnnotations() {
+	return this.annotations;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getCity() {
+	return this.city;
+    }
 
-	@NotBlank
-	public String getLastName() {
-		return this.lastName;
-	}
+    public String getCountry() {
+	return this.country;
+    }
 
-	@NotBlank
-	public String getFirstName() {
-		return this.firstName;
-	}
+    public String getEmail() {
+	return this.email;
+    }
 
-	@Pattern(regexp = "^(\\+34|0034|34)?[6,7]\\d{8}$")
-	public String getPhoneNumber() {
-		return this.phoneNumber;
-	}
+    @NotBlank
+    public String getLastName() {
+	return this.lastName;
+    }
 
-	public String getPostalCode() {
-		return this.postalCode;
-	}
+    @NotBlank
+    public String getFirstName() {
+	return this.firstName;
+    }
 
-	public void setAddress(final String address) {
-		this.address = address;
-	}
+    @Pattern(regexp = "^(\\+34|0034|34)?[6,7]\\d{8}$")
+    public String getPhoneNumber() {
+	return this.phoneNumber;
+    }
 
-	public void setAnnotations(final Collection<Annotation> annotations) {
-		this.annotations = annotations;
-	}
+    public String getPostalCode() {
+	return this.postalCode;
+    }
 
-	public void setCity(final String city) {
-		this.city = city;
-	}
+    public void setAddress(final String address) {
+	this.address = address;
+    }
 
-	public void setCountry(final String country) {
-		this.country = country;
-	}
+    public void setAnnotations(final Collection<Annotation> annotations) {
+	this.annotations = annotations;
+    }
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
+    public void setCity(final String city) {
+	this.city = city;
+    }
 
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
+    public void setCountry(final String country) {
+	this.country = country;
+    }
 
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
-	}
+    public void setEmail(final String email) {
+	this.email = email;
+    }
 
-	public void setPhoneNumber(final String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setLastName(final String lastName) {
+	this.lastName = lastName;
+    }
 
-	public void setPostalCode(final String postalCode) {
-		this.postalCode = postalCode;
-	}
+    public void setFirstName(final String firstName) {
+	this.firstName = firstName;
+    }
+
+    public void setPhoneNumber(final String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+    }
+
+    public void setPostalCode(final String postalCode) {
+	this.postalCode = postalCode;
+    }
 }
