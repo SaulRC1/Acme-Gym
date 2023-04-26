@@ -13,85 +13,85 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Annotation extends DomainEntity{
+public class Annotation extends DomainEntity {
 
-	private LocalDate date;
-	private String text;
-	private Integer mark;
+    private LocalDate date;
+    private String text;
+    private Integer mark;
 
-	// Relationships
-	private Gym gym;
-	private Activity activity;
-	private Training training;
-	private Actor actor;
+    // Relationships
+    private Gym gym;
+    private Activity activity;
+    private Training training;
+    private Actor actor;
 
-	public Annotation(final LocalDate date, final String text, final Integer mark) {
-		super();
-		this.date = date;
-		this.text = text;
-		this.mark = mark;
-	}
+    public Annotation(final LocalDate date, final String text, final Integer mark) {
+	super();
+	this.date = date;
+	this.text = text;
+	this.mark = mark;
+    }
 
-	@ManyToOne
-	public Activity getActivity() {
-		return this.activity;
-	}
+    @ManyToOne
+    public Activity getActivity() {
+	return this.activity;
+    }
 
-	@ManyToOne
-	public Actor getActor() {
-		return this.actor;
-	}
+    @ManyToOne
+    public Actor getActor() {
+	return this.actor;
+    }
 
-	public LocalDate getDate() {
-		return this.date;
-	}
+    public LocalDate getDate() {
+	return this.date;
+    }
 
-	@ManyToOne
-	public Gym getGym() {
-		return this.gym;
-	}
+    @ManyToOne(optional = false)
+    public Gym getGym() {
+	return this.gym;
+    }
 
-	@Range(min = 0, max = 3)
-	public Integer getMark() {
-		return this.mark;
-	}
+    @Range(min = 0, max = 3)
+    public Integer getMark() {
+	return this.mark;
+    }
 
-	@NotBlank
-	public String getText() {
-		return this.text;
-	}
+    @NotBlank
+    public String getText() {
+	return this.text;
+    }
 
-	@ManyToOne(optional = false)
-	public Training getTraining() {
-		return this.training;
-	}
+    @ManyToOne(optional = false)
+    public Training getTraining() {
+	return this.training;
+    }
 
-	public void setActivity(final Activity activity) {
-		this.activity = activity;
-	}
+    public void setActivity(final Activity activity) {
+	this.activity = activity;
+    }
 
-	public void setActor(final Actor actor) {
-		this.actor = actor;
-	}
+    public void setActor(final Actor actor) {
+	this.actor = actor;
+    }
 
-	public void setDate(final LocalDate date) {
-		this.date = date;
-	}
+    public void setDate(final LocalDate date) {
+	this.date = date;
+    }
 
-	public void setGym(final Gym gym) {
-		this.gym = gym;
-	}
+    public void setGym(final Gym gym) {
+	this.gym = gym;
+    }
 
-	public void setMark(final Integer mark) {
-		this.mark = mark;
-	}
+    public void setMark(final Integer mark) {
+	this.mark = mark;
+    }
 
-	public void setText(final String text) {
-		this.text = text;
-	}
+    public void setText(final String text) {
+	this.text = text;
+    }
 
-	public void setTraining(final Training training) {
-		this.training = training;
-	}
+    public void setTraining(final Training training) {
+	this.training = training;
+    }
 
 }

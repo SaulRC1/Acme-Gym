@@ -1,59 +1,131 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Client extends Actor {
 
-	private CreditCard creditCard;
+    private CreditCard creditCard;
 
-	// Relationships
-	private Collection<Activity> activities;
-	private Collection<Inscription> inscriptions;
+    // Relationships
+    private Collection<Activity> activities;
+    private Collection<Inscription> inscriptions;
 
-	public Client(String firstName, String lastName, String address, String email, String phoneNumber,
-			String postalCode, String city, String country, Collection<Annotation> annotations, CreditCard creditCard,
-			Collection<Activity> activities, Collection<Inscription> inscriptions) {
-		super(firstName, lastName, address, email, phoneNumber, postalCode, city, country, annotations);
-		this.creditCard = creditCard;
-		this.activities = activities;
-		this.inscriptions = inscriptions;
+    public Client(String firstName, String lastName, String address, String email, String phoneNumber,
+	    String postalCode, String city, String country, Collection<Annotation> annotations, CreditCard creditCard,
+	    Collection<Activity> activities, Collection<Inscription> inscriptions) {
+	super(firstName, lastName, address, email, phoneNumber, postalCode, city, country, annotations);
+	this.creditCard = creditCard;
+	this.activities = activities;
+	this.inscriptions = inscriptions;
+    }
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    public Collection<Activity> getActivities() {
+	return this.activities;
+    }
+
+    @Embedded
+    @AttributeOverrides({ @AttributeOverride(name = "owner", column = @Column(name = "creditCardOwner")),
+	    @AttributeOverride(name = "brand", column = @Column(name = "creditCardBrand")),
+	    @AttributeOverride(name = "number", column = @Column(name = "creditCardNumber")),
+	    @AttributeOverride(name = "expirationMonth", column = @Column(name = "creditCardExpirationMonth")),
+	    @AttributeOverride(name = "expirationYear", column = @Column(name = "creditCardExpirationYear")),
+	    @AttributeOverride(name = "CVV", column = @Column(name = "creditCardCVV")), })
+    public CreditCard getCreditCard() {
+	return this.creditCard;
+    }
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Collection<Inscription> getInscriptions() {
+	return this.inscriptions;
+    }
+
+    public void setActivities(final Collection<Activity> activities) {
+	this.activities = activities;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+	this.creditCard = creditCard;
+    }
+
+    public void setInscriptions(final Collection<Inscription> inscriptions) {
+	this.inscriptions = inscriptions;
+    }
+
+    /**
+     * Adds an activity to this client. It is like a subscription to an
+     * activity.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO ADD THIS CLIENT TO THE ACTIVITY PASSED BY
+     * PARAMETER. DO NOT USE {@link Activity#addClient(Client)} WHEN CALLING THIS
+     * METHOD.
+     *
+     * @param activity The activity to be added.
+     */
+    public void addActivity(Activity activity) {
+
+	if (activity != null) {
+
+	    if (this.activities == null)
+		this.activities = new ArrayList<Activity>();
+
+	    this.activities.add(activity);
+	    activity.addClient(this);
 	}
+    }
 
-	@ManyToMany
-	public Collection<Activity> getActivities() {
-		return this.activities;
-	}
+    /**
+     * Will add an inscription to this client.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO ADD THIS CLIENT TO THE INSCRIPTION PASSED BY
+     * PARAMETER.
+     *
+     * @param inscription The inscription to be added.
+     */
+    public void addInscription(Inscription inscription) {
 
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
+	if (inscription != null) {
 
-	@OneToMany(mappedBy = "client")
-	@NotEmpty
-	public Collection<Inscription> getInscriptions() {
-		return this.inscriptions;
-	}
+	    if (this.inscriptions == null)
+		this.inscriptions = new ArrayList<Inscription>();
 
-	public void setActivities(final Collection<Activity> activities) {
-		this.activities = activities;
+	    this.inscriptions.add(inscription);
+	    inscription.setClient(this);
 	}
+    }
 
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
+    /**
+     * Will remove an inscription from this client.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO REMOVE THIS CLIENT FROM THE INSCRIPTION
+     * PASSED BY PARAMETER
+     *
+     * @param inscription
+     */
+    public void removeInscription(Inscription inscription) {
 
-	public void setInscriptions(final Collection<Inscription> inscriptions) {
-		this.inscriptions = inscriptions;
+	if (inscription != null && this.inscriptions != null) {
+
+	    this.inscriptions.remove(inscription);
+	    inscription.setClient(null);
 	}
+    }
 }

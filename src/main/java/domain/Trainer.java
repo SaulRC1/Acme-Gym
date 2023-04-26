@@ -39,13 +39,23 @@ public class Trainer extends Actor {
 	this.activities = activities;
     }
 
+    /**
+     * Adds an activity to be trained by this trainer.<br>
+     * <br>
+     *
+     * NOTE THAT USING THIS METHOD WILL ALSO ADD THIS TRAINER TO THE ACTIVITY PASSED
+     * BY PARAMETER. DO NOT CALL {@linkplain Activity#addTrainer(Trainer)} WHEN
+     * USING THIS METHOD.
+     *
+     * @param activity The activity to be added
+     */
     public void addActivity(Activity activity) {
 
 	if (this.activities == null)
 	    this.activities = new ArrayList<Activity>();
 
 	this.activities.add(activity);
-	activity.getTrainers().add(this);
+	activity.addTrainer(this);
     }
 
     @OneToOne(optional = false)

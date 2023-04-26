@@ -6,8 +6,8 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -45,7 +45,8 @@ public class Curriculum extends DomainEntity {
 	return this.name;
     }
 
-    @OneToMany(mappedBy = "curriculum")
+    @Embedded
+    @ElementCollection
     @NotEmpty
     public Collection<SocialIdentity> getSocialIdentities() {
 	return this.socialIdentities;
@@ -57,7 +58,7 @@ public class Curriculum extends DomainEntity {
 	return this.specialities;
     }
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, mappedBy = "curriculum")
     public Trainer getTrainer() {
 	return this.trainer;
     }

@@ -3,6 +3,7 @@ package domain;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -62,7 +63,7 @@ public class Activity extends DomainEntity {
 	return this.availablePlaces;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "activities")
     public Collection<Client> getClients() {
 	return this.clients;
     }
@@ -152,6 +153,46 @@ public class Activity extends DomainEntity {
 
     public void setDaysOfWeek(final Set<DayOfWeek> daysOfWeek) {
 	this.daysOfWeek = daysOfWeek;
+    }
+
+    /**
+     * Will add a trainer to train this activity.<br>
+     * <br>
+     *
+     * DO NOT CALL THIS METHOD. TO PROPERLY ADD A TRAINER TO AN ACTIVITY, USE METHOD
+     * {@linkplain Trainer#addActivity(Activity)}}.
+     *
+     * @param trainer The trainer to be added.
+     */
+    public void addTrainer(Trainer trainer) {
+
+	if (trainer != null) {
+
+	    if (this.trainers == null)
+		this.trainers = new ArrayList<Trainer>();
+
+	    this.trainers.add(trainer);
+	}
+    }
+
+    /**
+     * Will add a client to this activity.<br>
+     * <br>
+     *
+     * DO NOT CALL THIS METHOD. TO PROPERLY ADD A CLIENT TO AN ACTIVITY, USE METHOD
+     * {@linkplain Client#addActivity(Activity)}}.
+     *
+     * @param client The client to be added.
+     */
+    public void addClient(Client client) {
+
+	if (client != null) {
+
+	    if (this.clients == null)
+		this.clients = new ArrayList<Client>();
+
+	    this.clients.add(client);
+	}
     }
 
 }

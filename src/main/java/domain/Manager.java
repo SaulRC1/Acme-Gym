@@ -8,7 +8,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -41,8 +40,7 @@ public class Manager extends Actor {
 	this.administrators = administrators;
     }
 
-    @OneToMany(mappedBy = "manager")
-    @NotEmpty
+    @ManyToMany(mappedBy = "managers")
     public Collection<Gym> getGyms() {
 	return this.gyms;
     }
@@ -75,6 +73,27 @@ public class Manager extends Actor {
 
 	    this.administrators.add(admin);
 	}
+    }
+
+    /**
+     * Will add a gym to this manager.<br>
+     * <br>
+     *
+     * YOU MUST NOT USE THIS METHOD IF YOU HAVE CALLED
+     * {@link Gym#addManager(Manager)} PREVIOUSLY.
+     *
+     * @param gym The gym to be added to this manager.
+     */
+    public void addGym(Gym gym) {
+
+	if (gym != null) {
+
+	    if (this.gyms == null)
+		this.gyms = new ArrayList<Gym>();
+
+	    this.gyms.add(gym);
+	}
+
     }
 
 }
