@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -21,7 +22,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Activity {
+public class Activity extends DomainEntity {
 
     private String title;
     private Collection<String> photos;
@@ -82,6 +83,7 @@ public class Activity {
     }
 
     @URL
+    @ElementCollection
     public Collection<String> getPhotos() {
 	return this.photos;
     }
@@ -103,6 +105,7 @@ public class Activity {
     }
 
     @NotEmpty
+    @ElementCollection
     public Set<DayOfWeek> getDaysOfWeek() {
 	return this.daysOfWeek;
     }

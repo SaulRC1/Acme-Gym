@@ -1,8 +1,8 @@
 /*
  * DatabaseUtil.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -38,219 +38,219 @@ import org.hibernate.internal.util.ReflectHelper;
 import org.hibernate.jdbc.Work;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
+import domain.DomainEntity;
 import utilities.DatabaseConfig;
 
 public class DatabaseUtil {
 
-	// Constructor ------------------------------------------------------------
+    // Constructor ------------------------------------------------------------
 
-	public DatabaseUtil() {
-	}
+    public DatabaseUtil() {
+    }
 
-	// Internal state ---------------------------------------------------------
+    // Internal state ---------------------------------------------------------
 
-	// private PersistenceProviderResolver resolver;
-	// private List<PersistenceProvider> providers;
-	private PersistenceProvider persistenceProvider;
-	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
-	private Map<String, Object> properties;
-	private String databaseUrl;
-	private String databaseName;
-	private String databaseDialectName;
-	private Dialect databaseDialect;
-	private Configuration configuration;
-	private EntityTransaction entityTransaction;
+    // private PersistenceProviderResolver resolver;
+    // private List<PersistenceProvider> providers;
+    private PersistenceProvider persistenceProvider;
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
+    private Map<String, Object> properties;
+    private String databaseUrl;
+    private String databaseName;
+    private String databaseDialectName;
+    private Dialect databaseDialect;
+    private Configuration configuration;
+    private EntityTransaction entityTransaction;
 
-	// Internal state ---------------------------------------------------------
+    // Internal state ---------------------------------------------------------
 
-	public String getDatabaseName() {
-		return this.databaseName;
-	}
+    public String getDatabaseName() {
+	return this.databaseName;
+    }
 
-	public String getDatabaseDialectName() {
-		return this.databaseDialectName;
-	}
+    public String getDatabaseDialectName() {
+	return this.databaseDialectName;
+    }
 
-	// Business methods -------------------------------------------------------
+    // Business methods -------------------------------------------------------
 
-	public void initialise() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// this.resolver =
-		// PersistenceProviderResolverHolder.getPersistenceProviderResolver();
-		// this.providers = this.resolver.getPersistenceProviders();
+    public void initialise() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	// this.resolver =
+	// PersistenceProviderResolverHolder.getPersistenceProviderResolver();
+	// this.providers = this.resolver.getPersistenceProviders();
 
-		this.persistenceProvider = new HibernatePersistenceProvider();
-		this.entityManagerFactory = this.persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit,
-				null);
-		if (this.entityManagerFactory == null)
-			throw new RuntimeException(
-					String.format("Couldn't create an entity manager factory for persistence unit `%s'",
-							DatabaseConfig.PersistenceUnit));
+	this.persistenceProvider = new HibernatePersistenceProvider();
+	this.entityManagerFactory = this.persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit,
+		null);
+	if (this.entityManagerFactory == null)
+	    throw new RuntimeException(
+		    String.format("Couldn't create an entity manager factory for persistence unit `%s'",
+			    DatabaseConfig.PersistenceUnit));
 
-		this.entityManager = this.entityManagerFactory.createEntityManager();
-		if (this.entityManager == null)
-			throw new RuntimeException(String.format("Couldn't create an entity manager for persistence unit `%s'",
-					DatabaseConfig.PersistenceUnit));
-		this.entityManager.setFlushMode(FlushModeType.AUTO);
+	this.entityManager = this.entityManagerFactory.createEntityManager();
+	if (this.entityManager == null)
+	    throw new RuntimeException(String.format("Couldn't create an entity manager for persistence unit `%s'",
+		    DatabaseConfig.PersistenceUnit));
+	this.entityManager.setFlushMode(FlushModeType.AUTO);
 
-		this.properties = this.entityManagerFactory.getProperties();
-		// printProperties(properties);
+	this.properties = this.entityManagerFactory.getProperties();
+	// printProperties(properties);
 
-		this.databaseUrl = this.findProperty("javax.persistence.jdbc.url");
-		this.databaseName = StringUtils.substringAfterLast(this.databaseUrl, "/");
-		this.databaseDialectName = this.findProperty("hibernate.dialect");
-		this.databaseDialect = (Dialect) ReflectHelper.classForName(this.databaseDialectName).newInstance();
+	this.databaseUrl = this.findProperty("javax.persistence.jdbc.url");
+	this.databaseName = StringUtils.substringAfterLast(this.databaseUrl, "/");
+	this.databaseDialectName = this.findProperty("hibernate.dialect");
+	this.databaseDialect = (Dialect) ReflectHelper.classForName(this.databaseDialectName).newInstance();
 
-		this.configuration = this.buildConfiguration();
+	this.configuration = this.buildConfiguration();
 
-		this.entityTransaction = this.entityManager.getTransaction();
-	}
+	this.entityTransaction = this.entityManager.getTransaction();
+    }
 
-	public void shutdown() {
-		if (this.entityTransaction != null && this.entityTransaction.isActive())
-			this.entityTransaction.rollback();
-		if (this.entityManager != null && this.entityManager.isOpen())
-			this.entityManager.close();
-		if (this.entityManagerFactory != null && this.entityManagerFactory.isOpen())
-			this.entityManagerFactory.close();
-	}
+    public void shutdown() {
+	if (this.entityTransaction != null && this.entityTransaction.isActive())
+	    this.entityTransaction.rollback();
+	if (this.entityManager != null && this.entityManager.isOpen())
+	    this.entityManager.close();
+	if (this.entityManagerFactory != null && this.entityManagerFactory.isOpen())
+	    this.entityManagerFactory.close();
+    }
 
-	public void recreateDatabase() throws Throwable {
-		List<String> databaseScript;
-		List<String> schemaScript;
-		String[] statements;
+    public void recreateDatabase() throws Throwable {
+	List<String> databaseScript;
+	List<String> schemaScript;
+	String[] statements;
 
-		databaseScript = new ArrayList<String>();
-		databaseScript.add(String.format("drop database `%s`", this.databaseName));
-		databaseScript.add(String.format("create database `%s`", this.databaseName));
-		this.executeScript(databaseScript);
+	databaseScript = new ArrayList<String>();
+	databaseScript.add(String.format("drop database `%s`", this.databaseName));
+	databaseScript.add(String.format("create database `%s`", this.databaseName));
+	this.executeScript(databaseScript);
 
-		schemaScript = new ArrayList<String>();
-		schemaScript.add(String.format("use `%s`", this.databaseName));
-		statements = this.configuration.generateSchemaCreationScript(this.databaseDialect);
-		schemaScript.addAll(Arrays.asList(statements));
-		this.executeScript(schemaScript);
-	}
+	schemaScript = new ArrayList<String>();
+	schemaScript.add(String.format("use `%s`", this.databaseName));
+	statements = this.configuration.generateSchemaCreationScript(this.databaseDialect);
+	schemaScript.addAll(Arrays.asList(statements));
+	this.executeScript(schemaScript);
+    }
 
-	public void setReadUncommittedIsolationLevel() {
-		List<String> script;
+    public void setReadUncommittedIsolationLevel() {
+	List<String> script;
 
-		script = new ArrayList<String>();
-		script.add("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
+	script = new ArrayList<String>();
+	script.add("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
 
-		this.executeScript(script);
-	}
+	this.executeScript(script);
+    }
 
-	public void setReadCommittedIsolationLevel() {
-		List<String> script;
+    public void setReadCommittedIsolationLevel() {
+	List<String> script;
 
-		script = new ArrayList<String>();
-		script.add("SET TRANSACTION ISOLATION LEVEL READ COMMITTED");
+	script = new ArrayList<String>();
+	script.add("SET TRANSACTION ISOLATION LEVEL READ COMMITTED");
 
-		this.executeScript(script);
-	}
+	this.executeScript(script);
+    }
 
-	public void startTransaction() {
-		this.entityTransaction.begin();
-	}
+    public void startTransaction() {
+	this.entityTransaction.begin();
+    }
 
-	public void commitTransaction() {
-		this.entityTransaction.commit();
-	}
+    public void commitTransaction() {
+	this.entityTransaction.commit();
+    }
 
-	public void rollbackTransaction() {
-		this.entityTransaction.rollback();
-	}
+    public void rollbackTransaction() {
+	this.entityTransaction.rollback();
+    }
 
-	/*
-	 * public void persist(final DomainEntity entity) {
-	 * this.entityManager.persist(entity); }
-	 */
+    public void persist(final DomainEntity entity) {
+	this.entityManager.persist(entity);
+    }
 
-	public int executeUpdate(final String line) {
-		int result;
-		Query query;
+    public int executeUpdate(final String line) {
+	int result;
+	Query query;
 
-		this.entityManager.clear();
-		query = this.entityManager.createQuery(line);
-		result = query.executeUpdate();
+	this.entityManager.clear();
+	query = this.entityManager.createQuery(line);
+	result = query.executeUpdate();
 
-		return result;
-	}
+	return result;
+    }
 
-	public List<?> executeSelect(final String line) {
-		List<?> result;
-		Query query;
+    public List<?> executeSelect(final String line) {
+	List<?> result;
+	Query query;
 
-		this.entityManager.clear();
-		query = this.entityManager.createQuery(line);
-		result = query.getResultList();
+	this.entityManager.clear();
+	query = this.entityManager.createQuery(line);
+	result = query.getResultList();
 
-		return result;
-	}
+	return result;
+    }
 
-	public void flush() {
-		this.entityManager.flush();
-	}
+    public void flush() {
+	this.entityManager.flush();
+    }
 
-	// Ancillary methods ------------------------------------------------------
+    // Ancillary methods ------------------------------------------------------
 
-	protected Configuration buildConfiguration() {
-		Configuration result;
-		Metamodel metamodel;
-		Collection<EntityType<?>> entities;
-		Collection<EmbeddableType<?>> embeddables;
+    protected Configuration buildConfiguration() {
+	Configuration result;
+	Metamodel metamodel;
+	Collection<EntityType<?>> entities;
+	Collection<EmbeddableType<?>> embeddables;
 
-		result = new Configuration();
-		metamodel = this.entityManagerFactory.getMetamodel();
+	result = new Configuration();
+	metamodel = this.entityManagerFactory.getMetamodel();
 
-		entities = metamodel.getEntities();
-		for (final EntityType<?> entity : entities)
-			result.addAnnotatedClass(entity.getJavaType());
+	entities = metamodel.getEntities();
+	for (final EntityType<?> entity : entities)
+	    result.addAnnotatedClass(entity.getJavaType());
 
-		embeddables = metamodel.getEmbeddables();
-		for (final EmbeddableType<?> embeddable : embeddables)
-			result.addAnnotatedClass(embeddable.getJavaType());
+	embeddables = metamodel.getEmbeddables();
+	for (final EmbeddableType<?> embeddable : embeddables)
+	    result.addAnnotatedClass(embeddable.getJavaType());
 
-		return result;
-	}
+	return result;
+    }
 
-	protected void executeScript(final List<String> script) {
-		Session session;
-		session = this.entityManager.unwrap(Session.class);
-		session.doWork(new Work() {
+    protected void executeScript(final List<String> script) {
+	Session session;
+	session = this.entityManager.unwrap(Session.class);
+	session.doWork(new Work() {
 
-			@Override
-			public void execute(final Connection connection) throws SQLException {
-				Statement statement;
+	    @Override
+	    public void execute(final Connection connection) throws SQLException {
+		Statement statement;
 
-				statement = connection.createStatement();
-				for (final String line : script)
-					statement.execute(line);
-				connection.commit();
-			}
-		});
-	}
+		statement = connection.createStatement();
+		for (final String line : script)
+		    statement.execute(line);
+		connection.commit();
+	    }
+	});
+    }
 
-	protected String findProperty(final String property) {
-		String result;
-		Object value;
+    protected String findProperty(final String property) {
+	String result;
+	Object value;
 
-		value = this.properties.get(property);
-		if (value == null)
-			throw new RuntimeException(String.format("Property `%s' was not found", property));
-		if (!(value instanceof String))
-			throw new RuntimeException(String.format("Property `%s' is not a string", property));
-		result = (String) value;
-		if (StringUtils.isBlank(result))
-			throw new RuntimeException(String.format("Property `%s' is blank", property));
+	value = this.properties.get(property);
+	if (value == null)
+	    throw new RuntimeException(String.format("Property `%s' was not found", property));
+	if (!(value instanceof String))
+	    throw new RuntimeException(String.format("Property `%s' is not a string", property));
+	result = (String) value;
+	if (StringUtils.isBlank(result))
+	    throw new RuntimeException(String.format("Property `%s' is blank", property));
 
-		return result;
-	}
+	return result;
+    }
 
-	protected void printProperties(final Map<String, Object> properties) {
-		for (final Entry<String, Object> entry : properties.entrySet())
-			System.out.println(String.format("%s=`%s'", entry.getKey(), entry.getValue()));
-	}
+    protected void printProperties(final Map<String, Object> properties) {
+	for (final Entry<String, Object> entry : properties.entrySet())
+	    System.out.println(String.format("%s=`%s'", entry.getKey(), entry.getValue()));
+    }
 
 }
