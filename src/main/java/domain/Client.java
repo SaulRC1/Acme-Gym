@@ -34,13 +34,17 @@ public class Client extends Actor {
 	this.inscriptions = inscriptions;
     }
 
+    public Client() {
+
+    }
+
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Collection<Activity> getActivities() {
 	return this.activities;
     }
 
     @Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "owner", column = @Column(name = "creditCardOwner")),
+    @AttributeOverrides({ @AttributeOverride(name = "holder", column = @Column(name = "creditCardHolder")),
 	    @AttributeOverride(name = "brand", column = @Column(name = "creditCardBrand")),
 	    @AttributeOverride(name = "number", column = @Column(name = "creditCardNumber")),
 	    @AttributeOverride(name = "expirationMonth", column = @Column(name = "creditCardExpirationMonth")),
@@ -128,4 +132,42 @@ public class Client extends Actor {
 	    inscription.setClient(null);
 	}
     }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.activities == null) ? 0 : this.activities.hashCode());
+	result = prime * result + ((this.creditCard == null) ? 0 : this.creditCard.hashCode());
+	result = prime * result + ((this.inscriptions == null) ? 0 : this.inscriptions.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Client other = (Client) obj;
+	if (this.activities == null) {
+	    if (other.activities != null)
+		return false;
+	} else if (!this.activities.equals(other.activities))
+	    return false;
+	if (this.creditCard == null) {
+	    if (other.creditCard != null)
+		return false;
+	} else if (!this.creditCard.equals(other.creditCard))
+	    return false;
+	if (this.inscriptions == null) {
+	    if (other.inscriptions != null)
+		return false;
+	} else if (!this.inscriptions.equals(other.inscriptions))
+	    return false;
+	return true;
+    }
+
 }

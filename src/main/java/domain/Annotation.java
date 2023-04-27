@@ -32,12 +32,16 @@ public class Annotation extends DomainEntity {
 	this.mark = mark;
     }
 
-    @ManyToOne
+    public Annotation() {
+
+    }
+
+    @ManyToOne(optional = true)
     public Activity getActivity() {
 	return this.activity;
     }
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Actor getActor() {
 	return this.actor;
     }
@@ -46,7 +50,7 @@ public class Annotation extends DomainEntity {
 	return this.date;
     }
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     public Gym getGym() {
 	return this.gym;
     }
@@ -61,7 +65,7 @@ public class Annotation extends DomainEntity {
 	return this.text;
     }
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     public Training getTraining() {
 	return this.training;
     }
@@ -92,6 +96,67 @@ public class Annotation extends DomainEntity {
 
     public void setTraining(final Training training) {
 	this.training = training;
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.activity == null) ? 0 : this.activity.hashCode());
+	result = prime * result + ((this.actor == null) ? 0 : this.actor.hashCode());
+	result = prime * result + ((this.date == null) ? 0 : this.date.hashCode());
+	result = prime * result + ((this.gym == null) ? 0 : this.gym.hashCode());
+	result = prime * result + ((this.mark == null) ? 0 : this.mark.hashCode());
+	result = prime * result + ((this.text == null) ? 0 : this.text.hashCode());
+	result = prime * result + ((this.training == null) ? 0 : this.training.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Annotation other = (Annotation) obj;
+	if (this.activity == null) {
+	    if (other.activity != null)
+		return false;
+	} else if (!this.activity.equals(other.activity))
+	    return false;
+	if (this.actor == null) {
+	    if (other.actor != null)
+		return false;
+	} else if (!this.actor.equals(other.actor))
+	    return false;
+	if (this.date == null) {
+	    if (other.date != null)
+		return false;
+	} else if (!this.date.equals(other.date))
+	    return false;
+	if (this.gym == null) {
+	    if (other.gym != null)
+		return false;
+	} else if (!this.gym.equals(other.gym))
+	    return false;
+	if (this.mark == null) {
+	    if (other.mark != null)
+		return false;
+	} else if (!this.mark.equals(other.mark))
+	    return false;
+	if (this.text == null) {
+	    if (other.text != null)
+		return false;
+	} else if (!this.text.equals(other.text))
+	    return false;
+	if (this.training == null) {
+	    if (other.training != null)
+		return false;
+	} else if (!this.training.equals(other.training))
+	    return false;
+	return true;
     }
 
 }

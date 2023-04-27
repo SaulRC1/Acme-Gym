@@ -30,6 +30,10 @@ public class Trainer extends Actor {
 	this.activities = activities;
     }
 
+    public Trainer() {
+
+    }
+
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     public Collection<Activity> getActivities() {
 	return this.activities;
@@ -74,6 +78,43 @@ public class Trainer extends Actor {
 
     public void setGym(final Gym gym) {
 	this.gym = gym;
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.activities == null) ? 0 : this.activities.hashCode());
+	result = prime * result + ((this.curriculum == null) ? 0 : this.curriculum.hashCode());
+	result = prime * result + ((this.gym == null) ? 0 : this.gym.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Trainer other = (Trainer) obj;
+	if (this.activities == null) {
+	    if (other.activities != null)
+		return false;
+	} else if (!this.activities.equals(other.activities))
+	    return false;
+	if (this.curriculum == null) {
+	    if (other.curriculum != null)
+		return false;
+	} else if (!this.curriculum.equals(other.curriculum))
+	    return false;
+	if (this.gym == null) {
+	    if (other.gym != null)
+		return false;
+	} else if (!this.gym.equals(other.gym))
+	    return false;
+	return true;
     }
 
 }

@@ -22,6 +22,10 @@ public class SocialIdentity {
 	this.socialMedia = socialMedia;
     }
 
+    public SocialIdentity() {
+
+    }
+
     @URL
     public String getLink() {
 	return this.link;
@@ -47,6 +51,43 @@ public class SocialIdentity {
 
     public void setSocialMedia(SocialMedia socialMedia) {
 	this.socialMedia = socialMedia.getSocialMediaName();
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((this.link == null) ? 0 : this.link.hashCode());
+	result = prime * result + ((this.nick == null) ? 0 : this.nick.hashCode());
+	result = prime * result + ((this.socialMedia == null) ? 0 : this.socialMedia.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	SocialIdentity other = (SocialIdentity) obj;
+	if (this.link == null) {
+	    if (other.link != null)
+		return false;
+	} else if (!this.link.equals(other.link))
+	    return false;
+	if (this.nick == null) {
+	    if (other.nick != null)
+		return false;
+	} else if (!this.nick.equals(other.nick))
+	    return false;
+	if (this.socialMedia == null) {
+	    if (other.socialMedia != null)
+		return false;
+	} else if (!this.socialMedia.equals(other.socialMedia))
+	    return false;
+	return true;
     }
 
 }

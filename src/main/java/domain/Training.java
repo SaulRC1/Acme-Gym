@@ -1,10 +1,12 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -39,7 +41,7 @@ public class Training extends DomainEntity {
     public Training() {
     }
 
-    @OneToMany(mappedBy = "training")
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<Annotation> getAnotations() {
 	return this.annotations;
     }
@@ -133,6 +135,44 @@ public class Training extends DomainEntity {
 	} else if (!this.title.equals(other.title))
 	    return false;
 	return true;
+    }
+
+    /**
+     * Will add an annotation to this training.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO ADD THIS TRAINING TO THE ANNOTATION PASSED BY
+     * PARAMETER.
+     *
+     * @param annotation The annotation to be added.
+     */
+    public void addAnnotation(Annotation annotation) {
+
+	if (annotation != null) {
+
+	    if (this.annotations == null)
+		this.annotations = new ArrayList<Annotation>();
+
+	    this.annotations.add(annotation);
+	    annotation.setTraining(this);
+	}
+    }
+
+    /**
+     * Will remove an annotation from this training.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO REMOVE THIS TRAINING FROM THE ANNOTATION
+     * PASSED BY PARAMETER.
+     *
+     * @param annotation The annotation to be removed.
+     */
+    public void removeAnnotation(Annotation annotation) {
+
+	if (annotation != null && this.annotations != null) {
+	    this.annotations.remove(annotation);
+	    annotation.setTraining(null);
+	}
     }
 
 }

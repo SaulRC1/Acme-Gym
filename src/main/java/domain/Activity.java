@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -52,7 +53,11 @@ public class Activity extends DomainEntity {
 	this.availablePlaces = availablePlaces;
     }
 
-    @OneToMany(mappedBy = "activity")
+    public Activity() {
+
+    }
+
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<Annotation> getAnnotations() {
 	return this.annotations;
     }
@@ -155,6 +160,91 @@ public class Activity extends DomainEntity {
 	this.daysOfWeek = daysOfWeek;
     }
 
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.annotations == null) ? 0 : this.annotations.hashCode());
+	result = prime * result + ((this.availablePlaces == null) ? 0 : this.availablePlaces.hashCode());
+	result = prime * result + ((this.clients == null) ? 0 : this.clients.hashCode());
+	result = prime * result + ((this.daysOfWeek == null) ? 0 : this.daysOfWeek.hashCode());
+	result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
+	result = prime * result + ((this.endHour == null) ? 0 : this.endHour.hashCode());
+	result = prime * result + ((this.gym == null) ? 0 : this.gym.hashCode());
+	result = prime * result + ((this.photos == null) ? 0 : this.photos.hashCode());
+	result = prime * result + ((this.startHour == null) ? 0 : this.startHour.hashCode());
+	result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
+	result = prime * result + ((this.trainers == null) ? 0 : this.trainers.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Activity other = (Activity) obj;
+	if (this.annotations == null) {
+	    if (other.annotations != null)
+		return false;
+	} else if (!this.annotations.equals(other.annotations))
+	    return false;
+	if (this.availablePlaces == null) {
+	    if (other.availablePlaces != null)
+		return false;
+	} else if (!this.availablePlaces.equals(other.availablePlaces))
+	    return false;
+	if (this.clients == null) {
+	    if (other.clients != null)
+		return false;
+	} else if (!this.clients.equals(other.clients))
+	    return false;
+	if (this.daysOfWeek == null) {
+	    if (other.daysOfWeek != null)
+		return false;
+	} else if (!this.daysOfWeek.equals(other.daysOfWeek))
+	    return false;
+	if (this.description == null) {
+	    if (other.description != null)
+		return false;
+	} else if (!this.description.equals(other.description))
+	    return false;
+	if (this.endHour == null) {
+	    if (other.endHour != null)
+		return false;
+	} else if (!this.endHour.equals(other.endHour))
+	    return false;
+	if (this.gym == null) {
+	    if (other.gym != null)
+		return false;
+	} else if (!this.gym.equals(other.gym))
+	    return false;
+	if (this.photos == null) {
+	    if (other.photos != null)
+		return false;
+	} else if (!this.photos.equals(other.photos))
+	    return false;
+	if (this.startHour == null) {
+	    if (other.startHour != null)
+		return false;
+	} else if (!this.startHour.equals(other.startHour))
+	    return false;
+	if (this.title == null) {
+	    if (other.title != null)
+		return false;
+	} else if (!this.title.equals(other.title))
+	    return false;
+	if (this.trainers == null) {
+	    if (other.trainers != null)
+		return false;
+	} else if (!this.trainers.equals(other.trainers))
+	    return false;
+	return true;
+    }
+
     /**
      * Will add a trainer to train this activity.<br>
      * <br>
@@ -192,6 +282,44 @@ public class Activity extends DomainEntity {
 		this.clients = new ArrayList<Client>();
 
 	    this.clients.add(client);
+	}
+    }
+
+    /**
+     * Will add an annotation to this activity.<br>
+     * <br>
+     *
+     * NOTE THAT CALLING THIS METHOD WILL ALSO ADD THIS ACTIVITY TO THE ANNOTATION
+     * PASSED BY PARAMETER.
+     *
+     * @param annotation The annotation to be added.
+     */
+    public void addAnnotation(Annotation annotation) {
+
+	if (annotation != null) {
+
+	    if (this.annotations == null)
+		this.annotations = new ArrayList<Annotation>();
+
+	    this.annotations.add(annotation);
+	    annotation.setActivity(this);
+	}
+    }
+
+    /**
+     * Will remove an annotation from this activity.<br>
+     * <br>
+     *
+     * NOTE THAT CALLING THIS METHOD WILL ALSO REMOVE THIS ACTIVITY FROM THE
+     * ANNOTATION PASSED BY PARAMETER.
+     *
+     * @param annotation The annotation to be removed.
+     */
+    public void removeAnnotation(Annotation annotation) {
+
+	if (annotation != null && this.annotations != null) {
+	    this.annotations.remove(annotation);
+	    annotation.setActivity(null);
 	}
     }
 

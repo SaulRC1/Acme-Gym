@@ -1,10 +1,12 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -61,7 +63,7 @@ public abstract class Actor extends DomainEntity {
 	return this.address;
     }
 
-    @OneToMany(mappedBy = "actor")
+    @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL, orphanRemoval = true)
     public Collection<Annotation> getAnnotations() {
 	return this.annotations;
     }
@@ -131,5 +133,43 @@ public abstract class Actor extends DomainEntity {
 
     public void setPostalCode(final String postalCode) {
 	this.postalCode = postalCode;
+    }
+
+    /**
+     * Will add an annotation to this actor.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO ADD THIS ACTOR TO THE ANNOTATION PASSED BY
+     * PARAMETER.
+     *
+     * @param annotation The annotation to be added.
+     */
+    public void addAnnotation(Annotation annotation) {
+
+	if (annotation != null) {
+
+	    if (this.annotations == null)
+		this.annotations = new ArrayList<Annotation>();
+
+	    this.annotations.add(annotation);
+	    annotation.setActor(this);
+	}
+    }
+
+    /**
+     * Will remove an annotation from this actor.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO REMOVE THIS ACTOR FROM THE ANNOTATION PASSED
+     * BY PARAMETER.
+     *
+     * @param annotation The annotation to be removed.
+     */
+    public void removeAnnotation(Annotation annotation) {
+
+	if (annotation != null && this.annotations != null) {
+	    this.annotations.remove(annotation);
+	    annotation.setActor(null);
+	}
     }
 }

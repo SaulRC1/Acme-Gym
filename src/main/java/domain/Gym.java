@@ -321,6 +321,44 @@ public class Gym extends DomainEntity {
 	}
     }
 
+    /**
+     * Will add an annotation to this gym.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO ADD THIS GYM TO THE ANNOTATION PASSED BY
+     * PARAMETER.
+     *
+     * @param annotation The annotation to be added.
+     */
+    public void addAnnotation(Annotation annotation) {
+
+	if (annotation != null) {
+
+	    if (this.annotations == null)
+		this.annotations = new ArrayList<Annotation>();
+
+	    this.annotations.add(annotation);
+	    annotation.setGym(this);
+	}
+    }
+
+    /**
+     * Will remove an annotation from this gym.<br>
+     * <br>
+     *
+     * NOTE THAT THIS METHOD WILL ALSO REMOVE THIS GYM FROM THE ANNOTATION PASSED BY
+     * PARAMETER.
+     *
+     * @param annotation
+     */
+    public void removeAnnotation(Annotation annotation) {
+
+	if (annotation != null && this.annotations != null) {
+	    this.annotations.remove(annotation);
+	    annotation.setGym(null);
+	}
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;

@@ -30,6 +30,10 @@ public class Manager extends Actor {
 	this.administrators = administrators;
     }
 
+    public Manager() {
+
+    }
+
     @ManyToMany(mappedBy = "managers")
     @NotEmpty
     public Collection<Admin> getAdministrators() {
@@ -94,6 +98,40 @@ public class Manager extends Actor {
 	    this.gyms.add(gym);
 	}
 
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.administrators == null) ? 0 : this.administrators.hashCode());
+	result = prime * result + (this.banned ? 1231 : 1237);
+	result = prime * result + ((this.gyms == null) ? 0 : this.gyms.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Manager other = (Manager) obj;
+	if (this.administrators == null) {
+	    if (other.administrators != null)
+		return false;
+	} else if (!this.administrators.equals(other.administrators))
+	    return false;
+	if (this.banned != other.banned)
+	    return false;
+	if (this.gyms == null) {
+	    if (other.gyms != null)
+		return false;
+	} else if (!this.gyms.equals(other.gyms))
+	    return false;
+	return true;
     }
 
 }

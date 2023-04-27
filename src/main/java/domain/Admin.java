@@ -62,4 +62,29 @@ public class Admin extends Actor {
 
     }
 
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = super.hashCode();
+	result = prime * result + ((this.managers == null) ? 0 : this.managers.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (!super.equals(obj))
+	    return false;
+	if (this.getClass() != obj.getClass())
+	    return false;
+	Admin other = (Admin) obj;
+	if (this.managers == null) {
+	    if (other.managers != null)
+		return false;
+	} else if (!this.managers.equals(other.managers))
+	    return false;
+	return true;
+    }
+
 }
