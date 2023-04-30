@@ -172,4 +172,11 @@ public abstract class Actor extends DomainEntity {
 	    annotation.setActor(null);
 	}
     }
+
+    @Override
+    public String toString() {
+	return "Actor [firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address
+		+ ", email=" + this.email + ", phoneNumber=" + this.phoneNumber + ", postalCode=" + this.postalCode
+		+ ", city=" + this.city + ", country=" + this.country + ", annotations=" + this.annotations + "]";
+    }
 }

@@ -87,4 +87,15 @@ public class Admin extends Actor {
 	return true;
     }
 
+    @Override
+    public String toString() {
+	return "Admin [managers=" + this.managers + ", getManagers()=" + this.getManagers() + ", hashCode()="
+		+ this.hashCode() + ", getAddress()=" + this.getAddress() + ", getAnnotations()="
+		+ this.getAnnotations() + ", getCity()=" + this.getCity() + ", getCountry()=" + this.getCountry()
+		+ ", getEmail()=" + this.getEmail() + ", getLastName()=" + this.getLastName() + ", getFirstName()="
+		+ this.getFirstName() + ", getPhoneNumber()=" + this.getPhoneNumber() + ", getPostalCode()="
+		+ this.getPostalCode() + ", toString()=" + super.toString() + ", getId()=" + this.getId()
+		+ ", getVersion()=" + this.getVersion() + ", getClass()=" + this.getClass() + "]";
+    }
+
 }
