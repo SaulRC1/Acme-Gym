@@ -8,34 +8,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Trainer;
-import services.TrainerService;
+import domain.Manager;
+import services.ManagerService;
 
 @Controller
-@RequestMapping("/trainer")
-public class TrainerController extends AbstractController {
+@RequestMapping("/manager")
+public class ManagerController extends AbstractController {
 
     @Autowired
-    private TrainerService trainerService;
+    private ManagerService managerService;
 
     // Constructors -----------------------------------------------------------
 
-    public TrainerController() {
+    public ManagerController() {
 	super();
     }
 
-    // Action1-List ---------------------------------------------------------------
+    // action1-List ---------------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView action1() {
 	ModelAndView result;
-	Collection<Trainer> trainers;
+	Collection<Manager> managers;
 
-	trainers = this.trainerService.findAll();
+	managers = this.managerService.findAll();
 
-	result = new ModelAndView("trainer/list");
-	result.addObject("trainers", trainers);
-	result.addObject("requestURI", "trainer/list.do");
+	result = new ModelAndView("manager/list");
+	result.addObject("managers", managers);
+	result.addObject("requestURI", "manager/list.do");
 
 	return result;
     }
