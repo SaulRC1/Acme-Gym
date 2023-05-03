@@ -19,8 +19,16 @@ public class ActivityService {
 	private ActivityRepository activityRepository;
 
 
-	public Collection<Activity> getAllActivities() {
+	public Activity create() {
+		return new Activity();
+	}
+
+	public Collection<Activity> findAll() {
 		return this.activityRepository.findAll();
+	}
+
+	public Activity findOne(int activityId) {
+		return this.activityRepository.findOne(activityId);
 	}
 
 	public Activity saveActivity(Activity activity) {

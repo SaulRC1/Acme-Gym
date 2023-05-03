@@ -20,6 +20,10 @@ public class TrainerService {
 	private TrainerRepository trainerRepository;
 
 
+	public Trainer create() {
+		return new Trainer();
+	}
+
 	public Trainer save(Trainer trainer) {
 		return this.trainerRepository.save(trainer);
 	}

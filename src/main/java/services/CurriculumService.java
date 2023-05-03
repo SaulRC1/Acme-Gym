@@ -16,18 +16,22 @@ import repositories.CurriculumRepository;
 public class CurriculumService {
 
 	@Autowired
-	private final CurriculumRepository curriculumRepository;
+	private CurriculumRepository curriculumRepository;
 
 
-	public CurriculumService(final CurriculumRepository curriculumRepository) {
-		this.curriculumRepository = curriculumRepository;
+	public Curriculum create() {
+		return new Curriculum();
 	}
 
-	public Curriculum save(final Curriculum curriculum) {
+	public Curriculum findOne(int curriculumId) {
+		return this.curriculumRepository.findOne(curriculumId);
+	}
+
+	public Curriculum save(Curriculum curriculum) {
 		return this.curriculumRepository.save(curriculum);
 	}
 
-	public void delete(final Curriculum curriculum) {
+	public void delete(Curriculum curriculum) {
 		this.curriculumRepository.delete(curriculum);
 	}
 

@@ -24,6 +24,14 @@ public class AnnotationService {
 	private AnnotationRepository annotationRepository;
 
 
+	public Annotation create() {
+		return new Annotation();
+	}
+
+	public Annotation findOne(int annotationId) {
+		return this.annotationRepository.findOne(annotationId);
+	}
+
 	public Collection<Annotation> findAll() {
 		return this.annotationRepository.findAll();
 	}

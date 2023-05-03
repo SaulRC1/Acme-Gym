@@ -20,11 +20,11 @@ public class TrainingService {
 	private TrainingRepository trainingRepository;
 
 
-	public Training createTraining(Training training) {
+	public Training create(Training training) {
 		return this.trainingRepository.save(training);
 	}
 
-	public void deleteTraining(Training training) {
+	public void delete(Training training) {
 		this.trainingRepository.delete(training);
 	}
 	/*
@@ -35,6 +35,10 @@ public class TrainingService {
 	 * return null;
 	 * }
 	 */
+
+	public Training findOne(int trainingId) {
+		return this.trainingRepository.findOne(trainingId);
+	}
 
 	public Collection<Training> findTrainingsByTitle(String title) {
 		return this.trainingRepository.findByTitle(title);
@@ -52,7 +56,7 @@ public class TrainingService {
 		return this.trainingRepository.findAll();
 	}
 
-	public Training saveTraining(final Training training) {
+	public Training save(final Training training) {
 		return this.trainingRepository.save(training);
 	}
 }
