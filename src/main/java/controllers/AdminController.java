@@ -34,7 +34,11 @@ public class AdminController extends AbstractController {
 	}
 
 	// action1-List ---------------------------------------------------------------
-
+	/**
+	 * Listado de admins
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -152,14 +156,14 @@ public class AdminController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
 		ModelAndView result;
 		Collection<Manager> managers;
-		
-		managers=managerService.findAll();
-		if(admin.getFirstName()!=null) {
-			managers=admin.getManagers();
+
+		managers = managerService.findAll();
+		if (admin.getFirstName() != null) {
+			managers = admin.getManagers();
 		}
-		result=new ModelAndView("admin/edit");
+		result = new ModelAndView("admin/edit");
 		result.addObject(admin);
-		result.addObject("managers",managers);
+		result.addObject("managers", managers);
 		result.addObject("message", messageCode);
 		return result;
 	}

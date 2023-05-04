@@ -36,7 +36,6 @@ public class TrainerController extends AbstractController {
 	}
 
 	// action1-List ---------------------------------------------------------------
-
 	/**
 	 * Metodo para listar trainers
 	 * 
