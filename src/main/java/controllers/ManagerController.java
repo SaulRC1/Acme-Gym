@@ -15,28 +15,28 @@ import services.ManagerService;
 @RequestMapping("/manager")
 public class ManagerController extends AbstractController {
 
-    @Autowired
-    private ManagerService managerService;
+	@Autowired
+	private ManagerService managerService;
 
-    // Constructors -----------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-    public ManagerController() {
-	super();
-    }
+	public ManagerController() {
+		super();
+	}
 
-    // action1-List ---------------------------------------------------------------
+	// action1-List ---------------------------------------------------------------
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView action1() {
-	ModelAndView result;
-	Collection<Manager> managers;
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView action1() {
+		ModelAndView result;
+		Collection<Manager> managers;
 
-	managers = this.managerService.findAll();
+		managers = this.managerService.findAll();
 
-	result = new ModelAndView("manager/list");
-	result.addObject("managers", managers);
-	result.addObject("requestURI", "manager/list.do");
+		result = new ModelAndView("manager/list");
+		result.addObject("managers", managers);
+		result.addObject("requestURI", "manager/list.do");
 
-	return result;
-    }
+		return result;
+	}
 }

@@ -13,23 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Admin;
-import domain.Client;
-import domain.Manager;
-import services.AdminService;
-import services.ManagerService;
+import domain.Activity;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController extends AbstractController {
+@RequestMapping("/activity")
+public class ActivityController extends AbstractController {
 
 	@Autowired
-	private AdminService adminService;
-	private ManagerService managerService;
+	private ActivityController activityService;
 
 	// Constructors -----------------------------------------------------------
 
-	public AdminController() {
+	public ActivityController() {
 		super();
 	}
 
@@ -38,13 +33,13 @@ public class AdminController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Admin> admins;
+		Collection<Activity> activities;
 
-		admins = this.adminService.findAll();
+		activities = this.activityService.findAll();
 
-		result = new ModelAndView("admin/list");
-		result.addObject("admins", admins);
-		result.addObject("requestURI", "admin/list.do");
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
 
 		return result;
 	}
@@ -52,56 +47,55 @@ public class AdminController extends AbstractController {
 	// Action2-Create
 	// ---------------------------------------------------------------
 	/**
-	 * Metodo para la creacion de un admin vacio
+	 * Metodo para la creacion de una actividad vacia
 	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.create();
-		result = this.createEditModelAndView(admin);
+		Activity activity;
+		activity = this.activityService.create();
+		result = this.createEditModelAndView(activity);
 		return result;
 	}
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un admin existente pasando admin del cliente a
-	 * crear
+	 * Metodo para la edicion de una actividad existente
 	 *
-	 * @param adminID
+	 * @param activityID
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int adminID) {
+	public ModelAndView edit(@RequestParam final int activityID) {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.findOne(adminID);
-		Assert.notNull(admin);
-		result = this.createEditModelAndView(admin);
+		Activity activity;
+		activity = this.activityService.findOne(activityID);
+		Assert.notNull(activity);
+		result = this.createEditModelAndView(activity);
 		return result;
 	}
 
 	// Action4-Save ---------------------------------------------------------------
 	/**
-	 * Metodo para la insercion de un admin en la base de datos
+	 * Metodo para la insercion de una actividad en la base de datos
 	 *
-	 * @param admin
+	 * @param activity
 	 * @param binding
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
+	public ModelAndView save(@Valid final Activity activity, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(admin);
+			result = this.createEditModelAndView(activity);
 		else
 			try {
-				this.adminService.save(admin);
+				this.activityService.save(activity);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(admin, "admin.commit.error");
+				result = this.createEditModelAndView(activity, "activity.commit.error");
 			}
 		return result;
 	}
@@ -112,17 +106,17 @@ public class AdminController extends AbstractController {
 	/**
 	 * Metodo para la eliminacion de un admin existente
 	 *
-	 * @param admin
+	 * @param activity
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Admin admin) {
+	public ModelAndView delete(final Activity activity) {
 		ModelAndView result;
 		try {
-			this.adminService.delete(admin);
+			this.activityService.delete(activity);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(admin, "admin.commit.error");
+			result = this.createEditModelAndView(activity, "activity.commit.error");
 		}
 		return result;
 	}
@@ -135,9 +129,9 @@ public class AdminController extends AbstractController {
 	 * @param admin
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin) {
+	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
-		result = this.createEditModelAndView(admin, null);
+		result = this.createEditModelAndView(activity, null);
 		return result;
 	}
 
@@ -149,19 +143,9 @@ public class AdminController extends AbstractController {
 	 * @param messageCode
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
-		ModelAndView result;
-		Collection<Manager> managers;
-		
-		managers=managerService.findAll();
-		if(admin.getFirstName()!=null) {
-			managers=admin.getManagers();
-		}
-		result=new ModelAndView("admin/edit");
-		result.addObject(admin);
-		result.addObject("managers",managers);
-		result.addObject("message", messageCode);
-		return result;
+	protected ModelAndView createEditModelAndView(final Activity activity, final String messageCode) {
+		// Por hacer
+		return null;
 	}
 
 }
