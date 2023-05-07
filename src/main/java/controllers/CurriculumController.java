@@ -15,40 +15,43 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Admin;
 import domain.Client;
+import domain.Curriculum;
 import domain.Manager;
+import domain.SocialIdentity;
+import domain.Trainer;
 import services.AdminService;
+import services.CurriculumService;
 import services.ManagerService;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController extends AbstractController {
+@RequestMapping("/curriculum")
+public class CurriculumController extends AbstractController {
 
 	@Autowired
-	private AdminService adminService;
-	private ManagerService managerService;
+	private CurriculumService curriculumService;
 
 	// Constructors -----------------------------------------------------------
 
-	public AdminController() {
+	public CurriculumController() {
 		super();
 	}
 
 	// action1-List ---------------------------------------------------------------
 	/**
-	 * Listado de admins
+	 * Listado de curriculums
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Admin> admins;
+		Collection<Curriculum> curriculums;
 
-		admins = this.adminService.findAll();
+		curriculums = this.curriculumService.findAll();
 
-		result = new ModelAndView("admin/list");
-		result.addObject("admins", admins);
-		result.addObject("requestURI", "admin/list.do");
+		result = new ModelAndView("curriculum/list");
+		result.addObject("curriculums", curriculums);
+		result.addObject("requestURI", "curriculum/list.do");
 
 		return result;
 	}
@@ -56,56 +59,55 @@ public class AdminController extends AbstractController {
 	// Action2-Create
 	// ---------------------------------------------------------------
 	/**
-	 * Metodo para la creacion de un admin vacio
+	 * Metodo para la creacion de un curriculum vacio
 	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.create();
-		result = this.createEditModelAndView(admin);
+		Curriculum curriculum;
+		curriculum = this.curriculumService.create();
+		result = this.createEditModelAndView(curriculum);
 		return result;
 	}
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un admin existente pasando admin del cliente a
-	 * crear
+	 * Metodo para la edicion de un curriculumn existente 
 	 *
-	 * @param adminID
+	 * @param curriculumID
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int adminID) {
+	public ModelAndView edit(@RequestParam final int curriculumID) {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.findOne(adminID);
-		Assert.notNull(admin);
-		result = this.createEditModelAndView(admin);
+		Curriculum curriculum;
+		curriculum = this.curriculumService.findOne(curriculumID);
+		Assert.notNull(curriculum);
+		result = this.createEditModelAndView(curriculum);
 		return result;
 	}
 
 	// Action4-Save ---------------------------------------------------------------
 	/**
-	 * Metodo para la insercion de un admin en la base de datos
+	 * Metodo para la insercion de un curriculum en la base de datos
 	 *
-	 * @param admin
+	 * @param curriculum
 	 * @param binding
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
+	public ModelAndView save(@Valid final Curriculum curriculum, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(admin);
+			result = this.createEditModelAndView(curriculum);
 		else
 			try {
-				this.adminService.save(admin);
+				this.curriculumService.save(curriculum);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(admin, "admin.commit.error");
+				result = this.createEditModelAndView(curriculum, "admin.commit.error");
 			}
 		return result;
 	}
@@ -114,19 +116,19 @@ public class AdminController extends AbstractController {
 	// ---------------------------------------------------------------
 
 	/**
-	 * Metodo para la eliminacion de un admin existente
+	 * Metodo para la eliminacion de un curriculum existente
 	 *
-	 * @param admin
+	 * @param curriculum
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Admin admin) {
+	public ModelAndView delete(final Curriculum curriculum) {
 		ModelAndView result;
 		try {
-			this.adminService.delete(admin);
+			this.curriculumService.delete(curriculum);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(admin, "admin.commit.error");
+			result = this.createEditModelAndView(curriculum, "curriculum.commit.error");
 		}
 		return result;
 	}
@@ -136,12 +138,12 @@ public class AdminController extends AbstractController {
 	/**
 	 * Metodo para la actualizacion de modelos y vistas
 	 *
-	 * @param admin
+	 * @param curriculum
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin) {
+	protected ModelAndView createEditModelAndView(final Curriculum curriculum) {
 		ModelAndView result;
-		result = this.createEditModelAndView(admin, null);
+		result = this.createEditModelAndView(curriculum, null);
 		return result;
 	}
 
@@ -149,23 +151,12 @@ public class AdminController extends AbstractController {
 	/**
 	 * Core de la forma en como actualizar modelos y vistas
 	 *
-	 * @param admin
+	 * @param curriculum
 	 * @param messageCode
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
-		ModelAndView result;
-		Collection<Manager> managers;
-
-		managers = managerService.findAll();
-		if (admin.getFirstName() != null) {
-			managers = admin.getManagers();
-		}
-		result = new ModelAndView("admin/edit");
-		result.addObject("admin",admin);
-		result.addObject("managers", managers);
-		result.addObject("message", messageCode);
-		return result;
+	protected ModelAndView createEditModelAndView(final Curriculum curriculum, final String messageCode) {
+		//Dudas con el servicio de socialIdentity
 	}
 
 }

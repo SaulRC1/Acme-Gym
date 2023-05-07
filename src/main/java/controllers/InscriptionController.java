@@ -15,40 +15,44 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Admin;
 import domain.Client;
+import domain.Gym;
+import domain.Inscription;
 import domain.Manager;
 import services.AdminService;
+import services.InscriptionService;
 import services.ManagerService;
+import services.gym.GymService;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController extends AbstractController {
+@RequestMapping("/inscription")
+public class InscriptionController extends AbstractController {
 
 	@Autowired
-	private AdminService adminService;
-	private ManagerService managerService;
+	private InscriptionService inscriptionService;
+	private GymService gymService;
 
 	// Constructors -----------------------------------------------------------
 
-	public AdminController() {
+	public InscriptionController() {
 		super();
 	}
 
 	// action1-List ---------------------------------------------------------------
 	/**
-	 * Listado de admins
+	 * Listado de inscriptions
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Admin> admins;
+		Collection<Inscription> inscriptions;
 
-		admins = this.adminService.findAll();
+		inscriptions = this.inscriptionService.findAll();
 
-		result = new ModelAndView("admin/list");
-		result.addObject("admins", admins);
-		result.addObject("requestURI", "admin/list.do");
+		result = new ModelAndView("inscription/list");
+		result.addObject("inscriptions", inscriptions);
+		result.addObject("requestURI", "inscription/list.do");
 
 		return result;
 	}
@@ -56,56 +60,55 @@ public class AdminController extends AbstractController {
 	// Action2-Create
 	// ---------------------------------------------------------------
 	/**
-	 * Metodo para la creacion de un admin vacio
+	 * Metodo para la creacion de un inscription vacio
 	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.create();
-		result = this.createEditModelAndView(admin);
+		Inscription inscription;
+		inscription = this.inscriptionService.create();
+		result = this.createEditModelAndView(inscription);
 		return result;
 	}
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un admin existente pasando admin del cliente a
-	 * crear
+	 * Metodo para la edicion de un inscription existente 
 	 *
-	 * @param adminID
+	 * @param inscriptionID
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int adminID) {
+	public ModelAndView edit(@RequestParam final int inscriptionID) {
 		ModelAndView result;
-		Admin admin;
-		admin = this.adminService.findOne(adminID);
-		Assert.notNull(admin);
-		result = this.createEditModelAndView(admin);
+		Inscription inscription;
+		inscription = this.inscriptionService.findOne(inscriptionID);
+		Assert.notNull(inscription);
+		result = this.createEditModelAndView(inscription);
 		return result;
 	}
 
 	// Action4-Save ---------------------------------------------------------------
 	/**
-	 * Metodo para la insercion de un admin en la base de datos
+	 * Metodo para la insercion de una inscription en la base de datos
 	 *
-	 * @param admin
+	 * @param inscription
 	 * @param binding
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
+	public ModelAndView save(@Valid final Admin inscription, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(admin);
+			result = this.createEditModelAndView(inscription);
 		else
 			try {
-				this.adminService.save(admin);
+				this.inscriptionService.save(inscription);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(admin, "admin.commit.error");
+				result = this.createEditModelAndView(inscription, "inscription.commit.error");
 			}
 		return result;
 	}
@@ -114,19 +117,19 @@ public class AdminController extends AbstractController {
 	// ---------------------------------------------------------------
 
 	/**
-	 * Metodo para la eliminacion de un admin existente
+	 * Metodo para la eliminacion de una inscription existente
 	 *
-	 * @param admin
+	 * @param inscription
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Admin admin) {
+	public ModelAndView delete(final Inscription inscription) {
 		ModelAndView result;
 		try {
-			this.adminService.delete(admin);
+			this.inscriptionService.delete(inscription);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(admin, "admin.commit.error");
+			result = this.createEditModelAndView(inscription, "inscription.commit.error");
 		}
 		return result;
 	}
@@ -136,12 +139,12 @@ public class AdminController extends AbstractController {
 	/**
 	 * Metodo para la actualizacion de modelos y vistas
 	 *
-	 * @param admin
+	 * @param inscription
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin) {
+	protected ModelAndView createEditModelAndView(final Inscription inscription) {
 		ModelAndView result;
-		result = this.createEditModelAndView(admin, null);
+		result = this.createEditModelAndView(inscription, null);
 		return result;
 	}
 
@@ -149,21 +152,19 @@ public class AdminController extends AbstractController {
 	/**
 	 * Core de la forma en como actualizar modelos y vistas
 	 *
-	 * @param admin
+	 * @param inscription
 	 * @param messageCode
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Inscription inscription, final String messageCode) {
 		ModelAndView result;
-		Collection<Manager> managers;
-
-		managers = managerService.findAll();
-		if (admin.getFirstName() != null) {
-			managers = admin.getManagers();
-		}
-		result = new ModelAndView("admin/edit");
-		result.addObject("admin",admin);
-		result.addObject("managers", managers);
+		
+		Collection<Gym> gyms;
+		gyms=gymService.findAll();
+		
+		result = new ModelAndView("inscription/edit");
+		result.addObject("inscription", inscription);
+		result.addObject("gyms", gyms);
 		result.addObject("message", messageCode);
 		return result;
 	}

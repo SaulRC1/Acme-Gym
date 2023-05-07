@@ -14,13 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
+import domain.Client;
+import domain.Gym;
+import domain.Manager;
+import domain.Trainer;
+import services.ActivityService;
+import services.ClientService;
+import services.TrainerService;
 
 @Controller
 @RequestMapping("/activity")
 public class ActivityController extends AbstractController {
 
 	@Autowired
-	private ActivityController activityService;
+	private ActivityService activityService;
+	private TrainerService trainerService;
+	private ClientService clientService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -139,13 +148,33 @@ public class ActivityController extends AbstractController {
 	/**
 	 * Core de la forma en como actualizar modelos y vistas
 	 *
-	 * @param admin
+	 * @param activity
 	 * @param messageCode
 	 * @return
 	 */
 	protected ModelAndView createEditModelAndView(final Activity activity, final String messageCode) {
-		// Por hacer
-		return null;
+		ModelAndView result;
+		Collection<Trainer> trainers;
+		Gym gym;
+		Collection<Client> clients;
+
+		trainers = trainerService.findAll();
+		clients= clientService.findAll();
+		if (activity.getTitle() == null) {
+			gym=null;
+		}else {
+			trainers = activity.getTrainers();
+			gym=activity.getGym();
+			clients=activity.getClients();
+		}
+		
+		result = new ModelAndView("activity/edit");
+		result.addObject("activity",activity);
+		result.addObject("trainers", trainers);
+		result.addObject("clients", clients);
+		result.addObject("gym", gym);
+		result.addObject("message", messageCode);
+		return result;
 	}
 
 }
