@@ -27,15 +27,15 @@ public class ActivityService {
 		return this.activityRepository.findAll();
 	}
 
-	public Activity findOne(int activityId) {
+	public Activity findOne(final int activityId) {
 		return this.activityRepository.findOne(activityId);
 	}
 
-	public Activity saveActivity(Activity activity) {
+	public Activity save(final Activity activity) {
 		return this.activityRepository.save(activity);
 	}
 
-	public void deleteActivity(Activity activity) {
+	public void delete(final Activity activity) {
 		this.activityRepository.delete(activity);
 	}
 }

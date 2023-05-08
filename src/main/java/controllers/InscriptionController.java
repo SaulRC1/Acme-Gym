@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -13,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Admin;
-import domain.Client;
 import domain.Gym;
 import domain.Inscription;
-import domain.Manager;
-import services.AdminService;
 import services.InscriptionService;
-import services.ManagerService;
 import services.gym.GymService;
 
 @Controller
@@ -28,8 +24,9 @@ import services.gym.GymService;
 public class InscriptionController extends AbstractController {
 
 	@Autowired
-	private InscriptionService inscriptionService;
-	private GymService gymService;
+	private InscriptionService	inscriptionService;
+	private GymService			gymService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -40,7 +37,7 @@ public class InscriptionController extends AbstractController {
 	// action1-List ---------------------------------------------------------------
 	/**
 	 * Listado de inscriptions
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -75,7 +72,7 @@ public class InscriptionController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un inscription existente 
+	 * Metodo para la edicion de un inscription existente
 	 *
 	 * @param inscriptionID
 	 * @return
@@ -99,7 +96,7 @@ public class InscriptionController extends AbstractController {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Admin inscription, final BindingResult binding) {
+	public ModelAndView save(@Valid final Inscription inscription, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(inscription);
@@ -158,10 +155,10 @@ public class InscriptionController extends AbstractController {
 	 */
 	protected ModelAndView createEditModelAndView(final Inscription inscription, final String messageCode) {
 		ModelAndView result;
-		
+
 		Collection<Gym> gyms;
-		gyms=gymService.findAll();
-		
+		gyms = this.gymService.findAll();
+
 		result = new ModelAndView("inscription/edit");
 		result.addObject("inscription", inscription);
 		result.addObject("gyms", gyms);

@@ -21,6 +21,6 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Intege
 	@Query("SELECT i FROM Inscription i WHERE i.singUpDate = ?1")
 	Collection<Inscription> findBySingUpDate(LocalDate date);
 
-	@Query("SELECT * FROM Inscription i WHERE i.gym_id = ?1 AND i.client_id = ?2")
+	@Query("SELECT i FROM Inscription i WHERE i.gym = ?1 AND i.client = ?2")
 	Collection<Inscription> findByGymAndClient(Gym gym, Client client);
 }
