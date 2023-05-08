@@ -18,14 +18,16 @@
 	">
 
 	<util:list id="messages">
-		<value>/views/master-page/messages</value>
-		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
-		<value>/views/welcome/messages</value>
-		
-		<value>/views/administrator/messages</value>
-		<value>/views/customer/messages</value>
-		<value>/views/profile/messages</value>
-	</util:list>
+        <value>/views/master-page/messages</value>
+        <value>/views/misc/messages</value>
+        <value>/views/security/messages</value>
+        <value>/views/welcome/messages</value>
+
+        <value>/views/actor/messages</value>
+        <value>/views/admin/messages</value>
+        <value>/views/client/messages</value>
+        <value>/views/manager/messages</value>
+        <value>/views/trainer/messages</value>
+    </util:list>
 
 </beans>
