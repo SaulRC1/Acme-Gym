@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Admin;
+import domain.Gym;
 import domain.Manager;
+import services.AdminService;
 import services.ManagerService;
+import services.gym.GymService;
 
 @Controller
 @RequestMapping("/manager")
@@ -23,6 +26,8 @@ public class ManagerController extends AbstractController {
 
 	@Autowired
 	private ManagerService managerService;
+	private GymService gymService;
+	private AdminService adminService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -32,20 +37,20 @@ public class ManagerController extends AbstractController {
 
 	// action1-List ---------------------------------------------------------------
 		/**
-		 * Listado de admins
+		 * Listado de managers
 		 * 
 		 * @return
 		 */
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
 		public ModelAndView list() {
 			ModelAndView result;
-			Collection<Admin> admins;
+			Collection<Manager> managers;
 
-			admins = this.adminService.findAll();
+			managers = this.managerService.findAll();
 
-			result = new ModelAndView("admin/list");
-			result.addObject("admins", admins);
-			result.addObject("requestURI", "admin/list.do");
+			result = new ModelAndView("manager/list");
+			result.addObject("managers", managers);
+			result.addObject("requestURI", "manager/list.do");
 
 			return result;
 		}
@@ -53,56 +58,55 @@ public class ManagerController extends AbstractController {
 		// Action2-Create
 		// ---------------------------------------------------------------
 		/**
-		 * Metodo para la creacion de un admin vacio
+		 * Metodo para la creacion de un manager vacio
 		 *
 		 * @return
 		 */
 		@RequestMapping(value = "/create", method = RequestMethod.GET)
 		public ModelAndView create() {
 			ModelAndView result;
-			Admin admin;
-			admin = this.adminService.create();
-			result = this.createEditModelAndView(admin);
+			Manager manager;
+			manager = this.managerService.create();
+			result = this.createEditModelAndView(manager);
 			return result;
 		}
 
 		// Action3-Edit ---------------------------------------------------------------
 		/**
-		 * Metodo para la edicion de un admin existente pasando admin del cliente a
-		 * crear
+		 * Metodo para la edicion de un manager existente 
 		 *
-		 * @param adminID
+		 * @param managerID
 		 * @return
 		 */
 		@RequestMapping(value = "/edit", method = RequestMethod.GET)
-		public ModelAndView edit(@RequestParam final int adminID) {
+		public ModelAndView edit(@RequestParam final int managerID) {
 			ModelAndView result;
-			Admin admin;
-			admin = this.adminService.findOne(adminID);
-			Assert.notNull(admin);
-			result = this.createEditModelAndView(admin);
+			Manager manager;
+			manager = this.managerService.findOne(managerID);
+			Assert.notNull(manager);
+			result = this.createEditModelAndView(manager);
 			return result;
 		}
 
 		// Action4-Save ---------------------------------------------------------------
 		/**
-		 * Metodo para la insercion de un admin en la base de datos
+		 * Metodo para la insercion de un manager en la base de datos
 		 *
-		 * @param admin
+		 * @param manager
 		 * @param binding
 		 * @return
 		 */
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
+		public ModelAndView save(@Valid final Manager manager, final BindingResult binding) {
 			ModelAndView result;
 			if (binding.hasErrors())
-				result = this.createEditModelAndView(admin);
+				result = this.createEditModelAndView(manager);
 			else
 				try {
-					this.adminService.save(admin);
+					this.managerService.save(manager);
 					result = new ModelAndView("redirect:list.do");
 				} catch (final Throwable oops) {
-					result = this.createEditModelAndView(admin, "admin.commit.error");
+					result = this.createEditModelAndView(manager, "manager.commit.error");
 				}
 			return result;
 		}
@@ -111,19 +115,19 @@ public class ManagerController extends AbstractController {
 		// ---------------------------------------------------------------
 
 		/**
-		 * Metodo para la eliminacion de un admin existente
+		 * Metodo para la eliminacion de un manager existente
 		 *
-		 * @param admin
+		 * @param manager
 		 * @return
 		 */
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-		public ModelAndView delete(final Admin admin) {
+		public ModelAndView delete(final Manager manager) {
 			ModelAndView result;
 			try {
-				this.adminService.delete(admin);
+				this.managerService.delete(manager);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(admin, "admin.commit.error");
+				result = this.createEditModelAndView(manager, "manager.commit.error");
 			}
 			return result;
 		}
@@ -136,9 +140,9 @@ public class ManagerController extends AbstractController {
 		 * @param admin
 		 * @return
 		 */
-		protected ModelAndView createEditModelAndView(final Admin admin) {
+		protected ModelAndView createEditModelAndView(final Manager manager) {
 			ModelAndView result;
-			result = this.createEditModelAndView(admin, null);
+			result = this.createEditModelAndView(manager, null);
 			return result;
 		}
 
@@ -146,21 +150,25 @@ public class ManagerController extends AbstractController {
 		/**
 		 * Core de la forma en como actualizar modelos y vistas
 		 *
-		 * @param admin
+		 * @param gym
 		 * @param messageCode
 		 * @return
 		 */
-		protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
+		protected ModelAndView createEditModelAndView(final Manager manager, final String messageCode) {
 			ModelAndView result;
-			Collection<Manager> managers;
+			Collection<Gym> gyms;
+			Collection<Admin> admins;
 
-			managers = managerService.findAll();
-			if (admin.getFirstName() != null) {
-				managers = admin.getManagers();
+			gyms = gymService.findAll();
+			admins=adminService.findAll();
+			if (manager.getFirstName() != null) {
+				gyms=manager.getGyms();
+				admins=manager.getAdministrators();
 			}
-			result = new ModelAndView("admin/edit");
-			result.addObject(admin);
-			result.addObject("managers", managers);
+			result = new ModelAndView("manager/edit");
+			result.addObject("manager",manager);
+			result.addObject("gyms",gyms);
+			result.addObject("admins", admins);
 			result.addObject("message", messageCode);
 			return result;
 		}
