@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Client;
 import domain.Gym;
 import domain.Inscription;
+import services.ClientService;
 import services.InscriptionService;
 import services.gym.GymService;
 
@@ -24,9 +26,11 @@ import services.gym.GymService;
 public class InscriptionController extends AbstractController {
 
 	@Autowired
-	private InscriptionService	inscriptionService;
-	private GymService			gymService;
-
+	private InscriptionService inscriptionService;
+	@Autowired
+	private GymService gymService;
+	@Autowired
+	private ClientService clientService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -157,11 +161,15 @@ public class InscriptionController extends AbstractController {
 		ModelAndView result;
 
 		Collection<Gym> gyms;
+		Collection<Client> clients;
+		
 		gyms = this.gymService.findAll();
+		clients=this.clientService.findAll();
 
 		result = new ModelAndView("inscription/edit");
 		result.addObject("inscription", inscription);
 		result.addObject("gyms", gyms);
+		result.addObject("clients",clients);
 		result.addObject("message", messageCode);
 		return result;
 	}

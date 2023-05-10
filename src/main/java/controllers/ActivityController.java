@@ -21,6 +21,7 @@ import domain.Trainer;
 import services.ActivityService;
 import services.ClientService;
 import services.TrainerService;
+import services.gym.GymService;
 
 @Controller
 @RequestMapping("/activity")
@@ -28,7 +29,11 @@ public class ActivityController extends AbstractController {
 
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
 	private TrainerService trainerService;
+	@Autowired
+	private GymService gymService;
+	@Autowired
 	private ClientService clientService;
 
 	// Constructors -----------------------------------------------------------
@@ -155,24 +160,18 @@ public class ActivityController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Activity activity, final String messageCode) {
 		ModelAndView result;
 		Collection<Trainer> trainers;
-		Gym gym;
+		Collection<Gym> gyms;
 		Collection<Client> clients;
 
 		trainers = trainerService.findAll();
-		clients= clientService.findAll();
-		if (activity.getTitle() == null) {
-			gym=null;
-		}else {
-			trainers = activity.getTrainers();
-			gym=activity.getGym();
-			clients=activity.getClients();
-		}
-		
+		gyms = gymService.findAll();
+		clients = clientService.findAll();
+
 		result = new ModelAndView("activity/edit");
-		result.addObject("activity",activity);
+		result.addObject("activity", activity);
 		result.addObject("trainers", trainers);
 		result.addObject("clients", clients);
-		result.addObject("gym", gym);
+		result.addObject("gyms", gyms);
 		result.addObject("message", messageCode);
 		return result;
 	}

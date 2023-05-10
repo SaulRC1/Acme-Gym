@@ -29,11 +29,13 @@ import services.gym.GymService;
 public class AnnotationController extends AbstractController {
 
 	@Autowired
-	private AnnotationService	annotationService;
-	private ActivityService		activityService;
-	private GymService			gymService;
-	private TrainingService		trainingService;
-
+	private AnnotationService annotationService;
+	@Autowired
+	private ActivityService activityService;
+	@Autowired
+	private GymService gymService;
+	@Autowired
+	private TrainingService trainingService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -163,11 +165,6 @@ public class AnnotationController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Annotation annotation, final String messageCode) {
 		ModelAndView result;
 
-		Actor actor = null;
-		Training training = null;
-		Gym gym = null;
-		final Activity activity = null;
-
 		Collection<Training> trainings;
 		Collection<Gym> gyms;
 		Collection<Activity> activities;
@@ -176,15 +173,8 @@ public class AnnotationController extends AbstractController {
 		gyms = this.gymService.findAll();
 		activities = this.activityService.findAll();
 
-		if (annotation.getText() != null) {
-			actor = annotation.getActor();
-			training = annotation.getTraining();
-			gym = annotation.getGym();
-		}
-
 		result = new ModelAndView("annotation/edit");
 		result.addObject("annotation", annotation);
-		result.addObject("actor", actor);
 		result.addObject("trainings", trainings);
 		result.addObject("gyms", gyms);
 		result.addObject("activities", activities);

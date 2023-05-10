@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Admin;
 import domain.Client;
 import domain.Curriculum;
+import domain.Gym;
 import domain.Manager;
 import domain.SocialIdentity;
 import domain.Trainer;
@@ -74,7 +75,7 @@ public class CurriculumController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un curriculumn existente 
+	 * Metodo para la edicion de un curriculumn existente
 	 *
 	 * @param curriculumID
 	 * @return
@@ -156,7 +157,12 @@ public class CurriculumController extends AbstractController {
 	 * @return
 	 */
 	protected ModelAndView createEditModelAndView(final Curriculum curriculum, final String messageCode) {
-		//Dudas con el servicio de socialIdentity
+		ModelAndView result;
+		
+		result = new ModelAndView("curriculum/edit");
+		result.addObject("curriculum", curriculum);
+		result.addObject("message", messageCode);
+		return result;
 	}
 
 }

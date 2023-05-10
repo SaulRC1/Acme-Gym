@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Activity;
 import domain.Admin;
 import domain.Client;
+import domain.Gym;
 import domain.Inscription;
 import domain.Manager;
 import services.ActivityService;
 import services.ClientService;
+import services.gym.GymService;
 
 @Controller
 @RequestMapping("/client")
@@ -27,7 +29,10 @@ public class ClientController extends AbstractController {
 
 	@Autowired
 	private ClientService clientService;
+	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private GymService gymService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -73,20 +78,20 @@ public class ClientController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-     * Metodo para la edicion de un cliente existente pasando id del cliente a crear
-     *
-     * @param clientID
-     * @return
-     */
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam final int clientID) {
-	ModelAndView result;
-	Client client;
-	client = this.clientService.findOne(clientID);
-	Assert.notNull(client);
-	result = this.createEditModelAndView(client);
-	return result;
-    }
+	 * Metodo para la edicion de un cliente existente pasando id del cliente a crear
+	 *
+	 * @param clientID
+	 * @return
+	 */
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int clientID) {
+		ModelAndView result;
+		Client client;
+		client = this.clientService.findOne(clientID);
+		Assert.notNull(client);
+		result = this.createEditModelAndView(client);
+		return result;
+	}
 
 	// Action4-Save ---------------------------------------------------------------
 	/**
@@ -157,20 +162,16 @@ public class ClientController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Client client, final String messageCode) {
 		ModelAndView result;
 		Collection<Activity> activities;
-		Collection<Inscription> inscriptions;
+		Collection<Gym> gyms;
+
+		activities = activityService.findAll();
+		gyms=gymService.findAll();
 		
-		activities=activityService.findAll();
-		if(client.getFirstName()!=null) {
-			inscriptions=null;
-		}else {
-			activities=client.getActivities();
-			inscriptions=client.getInscriptions();
-		}
-		
-		result=new ModelAndView("client/edit");
-		result.addObject("client",client);
-		result.addObject("activities",activities);
-		result.addObject("inscriptions",inscriptions);
+		result = new ModelAndView("client/edit");
+		result.addObject("client", client);
+		result.addObject("activities", activities);
+		result.addObject("gyms", gyms);
+
 		result.addObject("message", messageCode);
 		return result;
 	}

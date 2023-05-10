@@ -37,12 +37,17 @@ public class GymController extends AbstractController {
 
 	@Autowired
 	private GymService gymService;
-	
+	@Autowired
 	private ManagerService managerService;
+	@Autowired
 	private TrainerService trainerService;
+	@Autowired
 	private ActivityService activityService;
+	@Autowired
 	private InscriptionService inscriptionService;
+	@Autowired
 	private AnnotationService annotattionService;
+	@Autowired
 	private TrainingService trainingService;
 
 	// Constructors -----------------------------------------------------------
@@ -89,7 +94,7 @@ public class GymController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un gym existente 
+	 * Metodo para la edicion de un gym existente
 	 *
 	 * @param gymID
 	 * @return
@@ -178,33 +183,24 @@ public class GymController extends AbstractController {
 		Collection<Inscription> inscriptions;
 		Collection<Annotation> annotations;
 		Collection<Training> trainings;
-		
-		managers=managerService.findAll();
-		trainers=trainerService.findAll();
-		activities=activityService.findAll();
-		inscriptions=inscriptionService.findAll();
-		annotations=annotattionService.findAll();
-		trainings=trainingService.findAll();
-		
-		if (gym.getName() != null) {
-			managers=gym.getManagers();
-			trainers=gym.getTrainers();
-			activities=gym.getActivities();
-			inscriptions=gym.getInscriptions();
-			annotations=gym.getAnnotations();
-			trainings=gym.getTrainings();
-		}
-		
+
+		managers = managerService.findAll();
+		trainers = trainerService.findAll();
+		activities = activityService.findAll();
+		inscriptions = inscriptionService.findAll();
+		annotations = annotattionService.findAll();
+		trainings = trainingService.findAll();
+
 		result = new ModelAndView("gym/edit");
-		result.addObject("gym",gym);
-		
+		result.addObject("gym", gym);
+
 		result.addObject("managers", managers);
 		result.addObject("trainers", trainers);
 		result.addObject("activities", activities);
 		result.addObject("inscriptions", inscriptions);
 		result.addObject("annotations", annotations);
 		result.addObject("trainings", trainings);
-		
+
 		result.addObject("message", messageCode);
 		return result;
 	}

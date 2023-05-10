@@ -25,7 +25,6 @@ public class AdminController extends AbstractController {
 
 	@Autowired
 	private AdminService adminService;
-	private ManagerService managerService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -155,15 +154,9 @@ public class AdminController extends AbstractController {
 	 */
 	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
 		ModelAndView result;
-		Collection<Manager> managers;
 
-		managers = managerService.findAll();
-		if (admin.getFirstName() != null) {
-			managers = admin.getManagers();
-		}
 		result = new ModelAndView("admin/edit");
-		result.addObject("admin",admin);
-		result.addObject("managers", managers);
+		result.addObject("admin", admin);
 		result.addObject("message", messageCode);
 		return result;
 	}
