@@ -21,11 +21,15 @@ public class ManagerService {
 	private ManagerRepository managerRepository;
 
 
-	public Manager save(Manager manager) {
+	public Manager create() {
+		return new Manager();
+	}
+
+	public Manager save(final Manager manager) {
 		return this.managerRepository.save(manager);
 	}
 
-	public void delete(Manager manager) {
+	public void delete(final Manager manager) {
 		this.managerRepository.delete(manager);
 	}
 
@@ -33,38 +37,42 @@ public class ManagerService {
 		return this.managerRepository.findAll();
 	}
 
-	public void addAdministrator(Manager manager, Admin admin) {
+	public void addAdministrator(final Manager manager, final Admin admin) {
 		if (manager != null && admin != null) {
 			manager.addAdministrator(admin);
 			this.save(manager);
 		}
 	}
 
-	public void removeAdministrator(Manager manager, Admin admin) {
+	public void removeAdministrator(final Manager manager, final Admin admin) {
 		if (manager != null && admin != null) {
 			manager.getAdministrators().remove(admin);
 			this.save(manager);
 		}
 	}
 
-	public Collection<Gym> getGyms(Manager manager) {
+	public Collection<Gym> getGyms(final Manager manager) {
 		if (manager != null)
 			return manager.getGyms();
 		return null;
 	}
 
-	public void addGym(Manager manager, Gym gym) {
+	public void addGym(final Manager manager, final Gym gym) {
 		if (manager != null && gym != null) {
 			manager.getGyms().add(gym);
 			this.save(manager);
 		}
 	}
 
-	public void removeGym(Manager manager, Gym gym) {
+	public void removeGym(final Manager manager, final Gym gym) {
 		if (manager != null && gym != null) {
 			manager.getGyms().remove(gym);
 			this.save(manager);
 		}
+	}
+
+	public Manager findOne(final int managerId) {
+		return this.managerRepository.findOne(managerId);
 	}
 
 }

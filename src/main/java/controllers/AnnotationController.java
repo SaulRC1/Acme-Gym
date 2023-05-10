@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -15,17 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
 import domain.Actor;
-import domain.Admin;
 import domain.Annotation;
-import domain.Client;
 import domain.Gym;
-import domain.Manager;
-import domain.Trainer;
 import domain.Training;
 import services.ActivityService;
-import services.AdminService;
 import services.AnnotationService;
-import services.ManagerService;
 import services.TrainingService;
 import services.gym.GymService;
 
@@ -34,10 +29,11 @@ import services.gym.GymService;
 public class AnnotationController extends AbstractController {
 
 	@Autowired
-	private AnnotationService annotationService;
-	private ActivityService activityService;
-	private GymService gymService;
-	private TrainingService trainingService;
+	private AnnotationService	annotationService;
+	private ActivityService		activityService;
+	private GymService			gymService;
+	private TrainingService		trainingService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -48,7 +44,7 @@ public class AnnotationController extends AbstractController {
 	// action1-List ---------------------------------------------------------------
 	/**
 	 * Listado de annotations
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -83,7 +79,7 @@ public class AnnotationController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de una annotation existente 
+	 * Metodo para la edicion de una annotation existente
 	 *
 	 * @param annotationID
 	 * @return
@@ -166,26 +162,26 @@ public class AnnotationController extends AbstractController {
 	 */
 	protected ModelAndView createEditModelAndView(final Annotation annotation, final String messageCode) {
 		ModelAndView result;
-		
-		Actor actor=null;
-		Training training=null;
-		Gym gym=null;
-		Activity activity=null;
-		
+
+		Actor actor = null;
+		Training training = null;
+		Gym gym = null;
+		final Activity activity = null;
+
 		Collection<Training> trainings;
 		Collection<Gym> gyms;
 		Collection<Activity> activities;
 
+		trainings = this.trainingService.findAll();
+		gyms = this.gymService.findAll();
+		activities = this.activityService.findAll();
+
 		if (annotation.getText() != null) {
-			actor=annotation.getActor();
-			training=annotation.getTraining();
-			gym=annotation.getGym();
-		}else {
-			trainings=trainingService.findAll();
-			gyms=gymService.findAll();
-			activities=activityService.findAll();	
+			actor = annotation.getActor();
+			training = annotation.getTraining();
+			gym = annotation.getGym();
 		}
-		
+
 		result = new ModelAndView("annotation/edit");
 		result.addObject("annotation", annotation);
 		result.addObject("actor", actor);
