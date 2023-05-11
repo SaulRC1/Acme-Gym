@@ -13,32 +13,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Activity;
-import domain.Client;
+import domain.Annotation;
 import domain.Gym;
-import domain.Manager;
-import domain.Trainer;
-import services.ActivityService;
-import services.ClientService;
-import services.TrainerService;
+import domain.Step;
+import domain.Training;
+import services.TrainingService;
 import services.gym.GymService;
 
 @Controller
-@RequestMapping("/activity")
-public class ActivityController extends AbstractController {
+@RequestMapping("/training")
+public class TrainingController extends AbstractController {
 
 	@Autowired
-	private ActivityService activityService;
-	@Autowired
-	private TrainerService trainerService;
+	private TrainingService trainingService;
 	@Autowired
 	private GymService gymService;
-	@Autowired
-	private ClientService clientService;
 
 	// Constructors -----------------------------------------------------------
 
-	public ActivityController() {
+	public TrainingController() {
 		super();
 	}
 
@@ -47,13 +40,13 @@ public class ActivityController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Activity> activities;
+		Collection<Training> trainings;
 
-		activities = this.activityService.findAll();
+		trainings = this.trainingService.findAll();
 
-		result = new ModelAndView("activity/list");
-		result.addObject("activities", activities);
-		result.addObject("requestURI", "activity/list.do");
+		result = new ModelAndView("training/list");
+		result.addObject("trainings", trainings);
+		result.addObject("requestURI", "training/list.do");
 
 		return result;
 	}
@@ -61,55 +54,55 @@ public class ActivityController extends AbstractController {
 	// Action2-Create
 	// ---------------------------------------------------------------
 	/**
-	 * Metodo para la creacion de una actividad vacia
+	 * Metodo para la creacion de un training vacia
 	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Activity activity;
-		activity = this.activityService.create();
-		result = this.createEditModelAndView(activity);
+		Training training;
+		training = this.trainingService.create();
+		result = this.createEditModelAndView(training);
 		return result;
 	}
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de una actividad existente
+	 * Metodo para la edicion de un training existente
 	 *
-	 * @param activityID
+	 * @param trainingID
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int activityID) {
+	public ModelAndView edit(@RequestParam final int trainingID) {
 		ModelAndView result;
-		Activity activity;
-		activity = this.activityService.findOne(activityID);
-		Assert.notNull(activity);
-		result = this.createEditModelAndView(activity);
+		Training training;
+		training = this.trainingService.findOne(trainingID);
+		Assert.notNull(training);
+		result = this.createEditModelAndView(training);
 		return result;
 	}
 
 	// Action4-Save ---------------------------------------------------------------
 	/**
-	 * Metodo para la insercion de una actividad en la base de datos
+	 * Metodo para la insercion de un training en la base de datos
 	 *
-	 * @param activity
+	 * @param training
 	 * @param binding
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Activity activity, final BindingResult binding) {
+	public ModelAndView save(@Valid final Training training, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(activity);
+			result = this.createEditModelAndView(training);
 		else
 			try {
-				this.activityService.save(activity);
+				this.trainingService.save(training);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(activity, "activity.commit.error");
+				result = this.createEditModelAndView(training, "training.commit.error");
 			}
 		return result;
 	}
@@ -118,19 +111,19 @@ public class ActivityController extends AbstractController {
 	// ---------------------------------------------------------------
 
 	/**
-	 * Metodo para la eliminacion de una activity existente
+	 * Metodo para la eliminacion de un training existente
 	 *
-	 * @param activity
+	 * @param training
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Activity activity) {
+	public ModelAndView delete(final Training training) {
 		ModelAndView result;
 		try {
-			this.activityService.delete(activity);
+			this.trainingService.delete(training);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(activity, "activity.commit.error");
+			result = this.createEditModelAndView(training, "training.commit.error");
 		}
 		return result;
 	}
@@ -140,12 +133,12 @@ public class ActivityController extends AbstractController {
 	/**
 	 * Metodo para la actualizacion de modelos y vistas
 	 *
-	 * @param activity
+	 * @param training
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Activity activity) {
+	protected ModelAndView createEditModelAndView(final Training training) {
 		ModelAndView result;
-		result = this.createEditModelAndView(activity, null);
+		result = this.createEditModelAndView(training, null);
 		return result;
 	}
 
@@ -153,24 +146,17 @@ public class ActivityController extends AbstractController {
 	/**
 	 * Core de la forma en como actualizar modelos y vistas
 	 *
-	 * @param activity
+	 * @param training
 	 * @param messageCode
 	 * @return
 	 */
-	protected ModelAndView createEditModelAndView(final Activity activity, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Training training, final String messageCode) {
 		ModelAndView result;
-		Collection<Trainer> trainers;
 		Collection<Gym> gyms;
-		Collection<Client> clients;
 
-		trainers = trainerService.findAll();
 		gyms = gymService.findAll();
-		clients = clientService.findAll();
 
-		result = new ModelAndView("activity/edit");
-		result.addObject("activity", activity);
-		result.addObject("trainers", trainers);
-		result.addObject("clients", clients);
+		result = new ModelAndView("training/edit");
 		result.addObject("gyms", gyms);
 		result.addObject("message", messageCode);
 		return result;
