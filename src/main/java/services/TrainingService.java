@@ -20,8 +20,8 @@ public class TrainingService {
 	private TrainingRepository trainingRepository;
 
 
-	public Training create(Training training) {
-		return this.trainingRepository.save(training);
+	public Training create() {
+		return new Training();
 	}
 
 	public void delete(Training training) {
