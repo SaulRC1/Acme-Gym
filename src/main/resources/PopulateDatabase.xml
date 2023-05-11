@@ -24,7 +24,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="Admin" />
+					<property name="authority" value="ADMIN" />
 				</bean>
 			</list>
 		</property>
@@ -36,13 +36,13 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="Client" />
+					<property name="authority" value="CLIENT" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<!-- Other domain beans come here -->
 	<bean id="admin1" class="domain.Admin">
 		<property name="firstName" value="Omar" />
 		<property name="lastName" value="Piedrabuena" />

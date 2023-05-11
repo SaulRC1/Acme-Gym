@@ -35,17 +35,17 @@ public class Authority implements GrantedAuthority {
 
     // Values -----------------------------------------------------------------
 
-    public static final String Admin = "Admin";
-    public static final String Client = "Client";
-    public static final String Manager = "Manager";
-    public static final String Trainer = "Trainer";
+    public static final String ADMIN = "ADMIN";
+    public static final String CLIENT = "CLIENT";
+    public static final String MANAGER = "MANAGER";
+    public static final String TRAINER = "TRAINER";
 
     // Attributes -------------------------------------------------------------
 
     private String authority;
 
     @NotBlank
-    @Pattern(regexp = "^" + Authority.Admin + "|" + Authority.Client + "|" + Authority.Manager + "|" + Authority.Trainer + "$")
+    @Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.CLIENT + "|" + Authority.MANAGER + "|" + Authority.TRAINER + "$")
     @Override
     public String getAuthority() {
 	return this.authority;
@@ -62,19 +62,19 @@ public class Authority implements GrantedAuthority {
 	result = new ArrayList<Authority>();
 
 	authority = new Authority();
-	authority.setAuthority(Authority.Admin);
+	authority.setAuthority(Authority.ADMIN);
 	result.add(authority);
 
 	authority = new Authority();
-	authority.setAuthority(Authority.Client);
+	authority.setAuthority(Authority.CLIENT);
 	result.add(authority);
 	
 	authority = new Authority();
-	authority.setAuthority(Authority.Manager);
+	authority.setAuthority(Authority.MANAGER);
 	result.add(authority);
 	
 	authority = new Authority();
-	authority.setAuthority(Authority.Trainer);
+	authority.setAuthority(Authority.TRAINER);
 	result.add(authority);
 
 	return result;
