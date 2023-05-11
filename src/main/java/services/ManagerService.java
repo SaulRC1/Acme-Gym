@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.Admin;
 import domain.Gym;
 import domain.Manager;
 import repositories.ManagerRepository;
@@ -35,20 +34,6 @@ public class ManagerService {
 
 	public Collection<Manager> findAll() {
 		return this.managerRepository.findAll();
-	}
-
-	public void addAdministrator(final Manager manager, final Admin admin) {
-		if (manager != null && admin != null) {
-			manager.addAdministrator(admin);
-			this.save(manager);
-		}
-	}
-
-	public void removeAdministrator(final Manager manager, final Admin admin) {
-		if (manager != null && admin != null) {
-			manager.getAdministrators().remove(admin);
-			this.save(manager);
-		}
 	}
 
 	public Collection<Gym> getGyms(final Manager manager) {
