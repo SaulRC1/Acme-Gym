@@ -18,17 +18,36 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p>
-	<form:form action="trainer/edit.do"
-		modelAttribute="trainer">
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:label path="title">
-			<spring:message code="trainer.title" />: </form:label>
-		<form:input path="title" />
-		<form:errors cssClass="error" path="title" />
-		<br />
-		<input type="submit" name="save"
-			value="<spring:message code="trainer.save" />" />
-	</form:form>
-</p>
+<form:form action="trainer/edit.do" modelAttribute="trainer">
+
+	<!-- Actors generic inputs -->
+	<jsp:include page="../actor/edit.jsp" />
+
+
+	<!-- Trainers inputs -->
+	<form:label path="gym">
+		<spring:message code="trainer.gym" />:
+		</form:label>
+	<form:select id="gyms" path="gyms">
+		<form:option value="0" label="----" />
+		<form:options items="${gyms}" itemValue="id" itemLabel="name" />
+	</form:select>
+
+
+	<!-- Generic buttons -->
+	<input type="submit" name="save"
+		value="<spring:message code="actor.save" />" />&nbsp; 
+	
+	<jstl:if test="${actor.id != 0}">
+		<input type="submit" name="delete"
+			value="<spring:message code="actor.delete" />"
+			onclick="return confirm('<spring:message code="actor.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+
+	<input type="button" name="cancel"
+		value="<spring:message code="actor.cancel" />"
+		onclick="javascript: relativeRedir('actor/administrator/list.do');" />
+	<br />
+
+</form:form>
+

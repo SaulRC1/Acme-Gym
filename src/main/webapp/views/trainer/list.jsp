@@ -18,15 +18,30 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="trainers" id="row"
-	requestURI="trainer/list.do" pagesize="5"
-	class="displaytag">
-	<display:column property="firstName" titleKey="trainer.firstName" />
-	<display:column property="lastName" titleKey="trainer.lastName" />
-	<display:column property="address" titleKey="trainer.address" />
-	<display:column property="email" titleKey="trainer.email" />
-	<display:column property="phoneNumber" titleKey="trainer.phoneNumber" />
-	<display:column property="postalCode" titleKey="trainer.postalCode" />
-	<display:column property="city" titleKey="trainer.city" />
-	<display:column property="country" titleKey="trainer.country" />
+<display:table name="trainers" id="row" requestURI="trainer/list.do"
+	pagesize="5" class="displaytag">
+	
+	<!-- Edit column -->
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="admin/edit.do?adminId=${row.id}"> <spring:message
+					code="admin.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+
+	<!-- Actors generic columns -->
+	<display:column property="firstName" titleKey="actor.firstName" />
+	<display:column property="lastName" titleKey="actor.lastName" />
+	<display:column property="address" titleKey="actor.address" />
+	<display:column property="email" titleKey="actor.email" />
+	<display:column property="phoneNumber" titleKey="actor.phoneNumber" />
+	<display:column property="postalCode" titleKey="actor.postalCode" />
+	<display:column property="city" titleKey="actor.city" />
+	<display:column property="country" titleKey="actor.country" />
+
+
+	<!-- Trainer Gym column -->
+	<display:column property="gym" titleKey="actor.gym" />
+
 </display:table>

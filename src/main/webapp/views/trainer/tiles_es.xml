@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
- * The use of this project is hereby constrained to the conditions of the 
+ * The use of this project is hereby constrainerd to the conditions of the 
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  -->
@@ -16,19 +16,19 @@
       
 <tiles-definitions>
 
+	<definition name="trainer/list" extends="master.page">	
+		<put-attribute name="title" value="Listar trainers" />
+		<put-attribute name="body" value="/views/trainer/list.jsp" />
+	</definition>
+	
 	<definition name="trainer/create" extends="master.page">	
-		<put-attribute name="title" value="Crear entrenador" />
+		<put-attribute name="title" value="Crear trainers" />
 		<put-attribute name="body" value="/views/trainer/edit.jsp" />
 	</definition>
 	
 	<definition name="trainer/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar entrenador" />
+		<put-attribute name="title" value="Editar trainers" />
 		<put-attribute name="body" value="/views/trainer/edit.jsp" />
-	</definition>
-	
-	<definition name="trainer/list" extends="master.page">	
-		<put-attribute name="title" value="Listar entrenador" />
-		<put-attribute name="body" value="/views/trainer/list.jsp" />
 	</definition>
 	
 </tiles-definitions>
