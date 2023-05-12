@@ -77,14 +77,14 @@ public class ManagerController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un manager existente
 	 *
-	 * @param managerID
+	 * @param managerId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int managerID) {
+	public ModelAndView edit(@RequestParam final int managerId) {
 		ModelAndView result;
 		Manager manager;
-		manager = this.managerService.findOne(managerID);
+		manager = this.managerService.findOne(managerId);
 		Assert.notNull(manager);
 		result = this.createEditModelAndView(manager);
 		return result;

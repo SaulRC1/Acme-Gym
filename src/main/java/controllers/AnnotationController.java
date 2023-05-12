@@ -83,14 +83,14 @@ public class AnnotationController extends AbstractController {
 	/**
 	 * Metodo para la edicion de una annotation existente
 	 *
-	 * @param annotationID
+	 * @param annotationId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int annotationID) {
+	public ModelAndView edit(@RequestParam final int annotationId) {
 		ModelAndView result;
 		Annotation annotation;
-		annotation = this.annotationService.findOne(annotationID);
+		annotation = this.annotationService.findOne(annotationId);
 		Assert.notNull(annotation);
 		result = this.createEditModelAndView(annotation);
 		return result;

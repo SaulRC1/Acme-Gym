@@ -73,14 +73,14 @@ public class AdminController extends AbstractController {
 	 * Metodo para la edicion de un admin existente pasando admin del cliente a
 	 * crear
 	 *
-	 * @param adminID
+	 * @param adminId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int adminID) {
+	public ModelAndView edit(@RequestParam final int adminId) {
 		ModelAndView result;
 		Admin admin;
-		admin = this.adminService.findOne(adminID);
+		admin = this.adminService.findOne(adminId);
 		Assert.notNull(admin);
 		result = this.createEditModelAndView(admin);
 		return result;

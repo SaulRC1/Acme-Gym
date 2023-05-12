@@ -78,14 +78,14 @@ public class InscriptionController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un inscription existente
 	 *
-	 * @param inscriptionID
+	 * @param inscriptionId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int inscriptionID) {
+	public ModelAndView edit(@RequestParam final int inscriptionId) {
 		ModelAndView result;
 		Inscription inscription;
-		inscription = this.inscriptionService.findOne(inscriptionID);
+		inscription = this.inscriptionService.findOne(inscriptionId);
 		Assert.notNull(inscription);
 		result = this.createEditModelAndView(inscription);
 		return result;

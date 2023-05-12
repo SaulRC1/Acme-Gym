@@ -96,14 +96,14 @@ public class GymController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un gym existente
 	 *
-	 * @param gymID
+	 * @param gymId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int gymID) {
+	public ModelAndView edit(@RequestParam final int gymId) {
 		ModelAndView result;
 		Gym gym;
-		gym = this.gymService.findOne(gymID);
+		gym = this.gymService.findOne(gymId);
 		Assert.notNull(gym);
 		result = this.createEditModelAndView(gym);
 		return result;

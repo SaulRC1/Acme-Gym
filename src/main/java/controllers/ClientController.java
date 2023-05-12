@@ -80,14 +80,14 @@ public class ClientController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un cliente existente pasando id del cliente a crear
 	 *
-	 * @param clientID
+	 * @param clientId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int clientID) {
+	public ModelAndView edit(@RequestParam final int clientId) {
 		ModelAndView result;
 		Client client;
-		client = this.clientService.findOne(clientID);
+		client = this.clientService.findOne(clientId);
 		Assert.notNull(client);
 		result = this.createEditModelAndView(client);
 		return result;

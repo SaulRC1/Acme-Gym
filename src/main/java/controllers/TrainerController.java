@@ -79,14 +79,14 @@ public class TrainerController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un trainer existente
 	 * 
-	 * @param trainerID
+	 * @param trainerId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int trainerID) {
+	public ModelAndView edit(@RequestParam final int trainerId) {
 		ModelAndView result;
 		Trainer trainer;
-		trainer = this.trainerService.findOne(trainerID);
+		trainer = this.trainerService.findOne(trainerId);
 		Assert.notNull(trainer);
 		result = this.createEditModelAndView(trainer);
 		return result;
@@ -96,7 +96,7 @@ public class TrainerController extends AbstractController {
 	/**
 	 * Metodo para la insercion de un trainer en la base de datos
 	 *
-	 * @param admin
+	 * @param trainer
 	 * @param binding
 	 * @return
 	 */

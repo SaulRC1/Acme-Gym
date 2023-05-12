@@ -71,14 +71,14 @@ public class TrainingController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un training existente
 	 *
-	 * @param trainingID
+	 * @param trainingId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int trainingID) {
+	public ModelAndView edit(@RequestParam final int trainingId) {
 		ModelAndView result;
 		Training training;
-		training = this.trainingService.findOne(trainingID);
+		training = this.trainingService.findOne(trainingId);
 		Assert.notNull(training);
 		result = this.createEditModelAndView(training);
 		return result;

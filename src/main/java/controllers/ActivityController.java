@@ -78,14 +78,14 @@ public class ActivityController extends AbstractController {
 	/**
 	 * Metodo para la edicion de una actividad existente
 	 *
-	 * @param activityID
+	 * @param activityId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int activityID) {
+	public ModelAndView edit(@RequestParam final int activityId) {
 		ModelAndView result;
 		Activity activity;
-		activity = this.activityService.findOne(activityID);
+		activity = this.activityService.findOne(activityId);
 		Assert.notNull(activity);
 		result = this.createEditModelAndView(activity);
 		return result;

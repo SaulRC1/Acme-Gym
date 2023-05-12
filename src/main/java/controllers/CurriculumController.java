@@ -77,14 +77,14 @@ public class CurriculumController extends AbstractController {
 	/**
 	 * Metodo para la edicion de un curriculumn existente
 	 *
-	 * @param curriculumID
+	 * @param curriculumId
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int curriculumID) {
+	public ModelAndView edit(@RequestParam final int curriculumId) {
 		ModelAndView result;
 		Curriculum curriculum;
-		curriculum = this.curriculumService.findOne(curriculumID);
+		curriculum = this.curriculumService.findOne(curriculumId);
 		Assert.notNull(curriculum);
 		result = this.createEditModelAndView(curriculum);
 		return result;
