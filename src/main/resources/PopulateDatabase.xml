@@ -42,8 +42,23 @@
 		</property>
 	</bean>
 	
+	<bean id="omarUserAccount" class="security.UserAccount">
+		<property name="username" value="omar-admin" />
+		<property name="password" value="d4466cce49457cfea18222f5a7cd3573" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->
 	<bean id="admin1" class="domain.Admin">
+		<property name="userAccount">
+			<ref bean="omarUserAccount" />
+		</property>
 		<property name="firstName" value="Omar" />
 		<property name="lastName" value="Piedrabuena" />
 		<property name="email" value="omar.piedrabuena-admin@hyper-mass.es"/>

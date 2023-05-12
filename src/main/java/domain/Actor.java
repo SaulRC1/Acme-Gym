@@ -10,10 +10,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import security.UserAccount;
 
 /**
  * An Actor represents any kind of user related to the domain model.
@@ -39,6 +43,7 @@ public abstract class Actor extends DomainEntity {
 
     // Relationships
     private Collection<Annotation> annotations;
+    private UserAccount userAccount;
 
     public Actor(String firstName, String lastName, String address, String email, String phoneNumber, String postalCode,
 	    String city, String country, Collection<Annotation> annotations) {
@@ -251,5 +256,15 @@ public abstract class Actor extends DomainEntity {
 	return "Actor [firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address
 		+ ", email=" + this.email + ", phoneNumber=" + this.phoneNumber + ", postalCode=" + this.postalCode
 		+ ", city=" + this.city + ", country=" + this.country + ", annotations=" + this.annotations + "]";
+    }
+
+    @OneToOne
+    @JoinColumn(name = "useraccount_id")
+    public UserAccount getUserAccount() {
+	return this.userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+	this.userAccount = userAccount;
     }
 }
