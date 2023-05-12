@@ -24,8 +24,8 @@
 	<!-- Edit column -->
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<a href="admin/edit.do?adminId=${row.id}"> <spring:message
-					code="admin.edit" /></a>
+			<a href="manager/edit.do?managerId=${row.id}"> <spring:message
+					code="manager.edit" /></a>
 		</display:column>
 	</security:authorize>
 
