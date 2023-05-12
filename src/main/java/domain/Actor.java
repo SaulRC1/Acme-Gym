@@ -182,15 +182,7 @@ public abstract class Actor extends DomainEntity {
     public int hashCode() {
 	final int prime = 31;
 	int result = super.hashCode();
-	result = prime * result + ((this.address == null) ? 0 : this.address.hashCode());
-	result = prime * result + ((this.annotations == null) ? 0 : this.annotations.hashCode());
-	result = prime * result + ((this.city == null) ? 0 : this.city.hashCode());
-	result = prime * result + ((this.country == null) ? 0 : this.country.hashCode());
 	result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-	result = prime * result + ((this.firstName == null) ? 0 : this.firstName.hashCode());
-	result = prime * result + ((this.lastName == null) ? 0 : this.lastName.hashCode());
-	result = prime * result + ((this.phoneNumber == null) ? 0 : this.phoneNumber.hashCode());
-	result = prime * result + ((this.postalCode == null) ? 0 : this.postalCode.hashCode());
 	return result;
     }
 
@@ -198,55 +190,13 @@ public abstract class Actor extends DomainEntity {
     public boolean equals(Object obj) {
 	if (this == obj)
 	    return true;
-	if (!super.equals(obj))
-	    return false;
 	if (this.getClass() != obj.getClass())
 	    return false;
 	Actor other = (Actor) obj;
-	if (this.address == null) {
-	    if (other.address != null)
-		return false;
-	} else if (!this.address.equals(other.address))
-	    return false;
-	if (this.annotations == null) {
-	    if (other.annotations != null)
-		return false;
-	} else if (!this.annotations.equals(other.annotations))
-	    return false;
-	if (this.city == null) {
-	    if (other.city != null)
-		return false;
-	} else if (!this.city.equals(other.city))
-	    return false;
-	if (this.country == null) {
-	    if (other.country != null)
-		return false;
-	} else if (!this.country.equals(other.country))
-	    return false;
 	if (this.email == null) {
 	    if (other.email != null)
 		return false;
 	} else if (!this.email.equals(other.email))
-	    return false;
-	if (this.firstName == null) {
-	    if (other.firstName != null)
-		return false;
-	} else if (!this.firstName.equals(other.firstName))
-	    return false;
-	if (this.lastName == null) {
-	    if (other.lastName != null)
-		return false;
-	} else if (!this.lastName.equals(other.lastName))
-	    return false;
-	if (this.phoneNumber == null) {
-	    if (other.phoneNumber != null)
-		return false;
-	} else if (!this.phoneNumber.equals(other.phoneNumber))
-	    return false;
-	if (this.postalCode == null) {
-	    if (other.postalCode != null)
-		return false;
-	} else if (!this.postalCode.equals(other.postalCode))
 	    return false;
 	return true;
     }
