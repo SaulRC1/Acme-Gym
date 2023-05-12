@@ -62,7 +62,6 @@ public class AdminService {
      * @return The saved admin
      */
     public Admin save(Admin admin) throws Exception {
-
 	if (admin == null)
 	    throw new NullArgumentException("admin");
 
