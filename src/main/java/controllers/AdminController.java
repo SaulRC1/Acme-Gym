@@ -70,9 +70,8 @@ public class AdminController extends AbstractController {
 
 	// Action3-Edit ---------------------------------------------------------------
 	/**
-	 * Metodo para la edicion de un admin existente pasando admin del cliente a
-	 * crear
-	 *
+	 * Metodo para la edicion de un admin existente
+	 * 
 	 * @param adminId
 	 * @return
 	 */
