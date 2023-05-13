@@ -1,5 +1,5 @@
 <%--
- * list.jsp
+ * edit.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -18,17 +18,24 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="gyms" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
-
-	<!-- Edit column -->
-	<security:authorize access="hasRole('MANAGER')">
-		<display:column>
-			<a href="gym/edit.do?gymId=${row.id}"> <spring:message
-					code="gym.edit" /></a>
-		</display:column>
-	</security:authorize>
+<form:form action="training/edit.do" modelAttribute="training">
 
 	<!-- TODO -->
 
-</display:table>
+	<!-- Generic buttons -->
+	<input type="submit" name="save"
+		value="<spring:message code="form.save" />" />&nbsp; 
+	
+	<input type="submit" name="save"
+		value="<spring:message code="form.save" />" />&nbsp; 
+	
+	<jstl:if test="${training.id != 0}">
+		<input type="submit" name="delete"
+			value="<spring:message code="form.delete" />" onclick="return confirm('<spring:message code="form.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+
+	<input type="button" name="cancel"
+		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
+	<br />
+
+</form:form>

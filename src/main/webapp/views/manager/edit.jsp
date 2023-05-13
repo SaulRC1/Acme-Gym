@@ -96,15 +96,15 @@
 
 	<!-- Generic buttons -->
 	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" />&nbsp; 
+		value="<spring:message code="form.save" />" />&nbsp; 
 	
 	<jstl:if test="${actor.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="actor.delete" />" <%-- onclick="return confirm('<spring:message code="actor.confirm.delete" />')" --%> />&nbsp;
+			value="<spring:message code="form.delete" />" onclick="return confirm('<spring:message code="form.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 
 	<input type="button" name="cancel"
-		value="<spring:message code="actor.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
+		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
 	<br />
 
 </form:form>

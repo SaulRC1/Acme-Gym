@@ -34,7 +34,7 @@
 		</security:authorize>
 
 		<!-- Client dropdown -->
-		<security:authorize access="">
+		<security:authorize access="hasRole('NONE')">
 			<li><a class="fNiv"><spring:message
 						code="master.page.client" /></a>
 				<ul>
@@ -47,7 +47,7 @@
 		</security:authorize>
 
 		<!-- Manager dropdown -->
-		<security:authorize access="">
+		<security:authorize access="hasRole('NONE')">
 			<li><a class="fNiv"><spring:message
 						code="master.page.manager" /></a>
 				<ul>
@@ -59,24 +59,72 @@
 				</ul></li>
 		</security:authorize>
 
-		<!-- Manager dropdown -->
-		<security:authorize access="">
+		<!-- Trainer dropdown -->
+		<security:authorize access="hasRole('MANAGER')">
 			<li><a class="fNiv"><spring:message
-						code="master.page.manager" /></a>
+						code="master.page.trainer" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="manager/list.do"><spring:message
-								code="master.page.manager.list" /></a></li>
-					<li><a href="manager/create.do"><spring:message
-								code="master.page.manager.create" /></a></li>
+					<li><a href="trainer/list.do"><spring:message
+								code="master.page.trainer.list" /></a></li>
+					<li><a href="trainer/create.do"><spring:message
+								code="master.page.trainer.create" /></a></li>
 				</ul></li>
 		</security:authorize>
 
+		<!-- Gym dropdown -->
+		<security:authorize access="permitAll">
+			<li><a class="fNiv"><spring:message code="master.page.gym" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="gym/list.do"><spring:message
+								code="master.page.gym.list" /></a></li>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="manager/create.do"><spring:message
+									code="master.page.gym.create" /></a></li>
+					</security:authorize>
+				</ul></li>
+		</security:authorize>
+
+		<!-- Activity dropdown -->
+		<security:authorize access="permitAll">
+			<li><a class="fNiv"><spring:message
+						code="master.page.activity" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="activity/list.do"><spring:message
+								code="master.page.activity.list" /></a></li>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="activity/create.do"><spring:message
+									code="master.page.activity.create" /></a></li>
+					</security:authorize>
+				</ul></li>
+		</security:authorize>
+
+		<!-- Training dropdown -->
+		<security:authorize access="permitAll">
+			<li><a class="fNiv"><spring:message
+						code="master.page.training" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="training/list.do"><spring:message
+								code="master.page.training.list" /></a></li>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="training/create.do"><spring:message
+									code="master.page.training.create" /></a></li>
+					</security:authorize>
+				</ul></li>
+		</security:authorize>
+
+		<!-- Login option -->
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/signup.do"><spring:message
+						code="master.page.signup" /></a></li>
 		</security:authorize>
 
+		<!-- Profile dropdown -->
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication

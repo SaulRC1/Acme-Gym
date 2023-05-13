@@ -20,7 +20,7 @@
 
 <form:form action="gym/edit.do" modelAttribute="gym">
 
-	<!-- Actors generic inputs -->
+	<!-- Gym inputs -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
@@ -92,18 +92,18 @@
 
 	<!-- Generic buttons -->
 	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" />&nbsp; 
+		value="<spring:message code="form.save" />" />&nbsp; 
 	
 	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" ${gym.activate = false} />&nbsp; 
+		value="<spring:message code="form.save" />" ${gym.activate = false} />&nbsp; 
 	
 	<jstl:if test="${gym.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="actor.delete" />" <%-- onclick="return confirm('<spring:message code="actor.confirm.delete" />')" --%>/>&nbsp;
+			value="<spring:message code="form.delete" />" onclick="return confirm('<spring:message code="form.confirm.delete" />')" >/>&nbsp;
 	</jstl:if>
 
 	<input type="button" name="cancel"
-		value="<spring:message code="actor.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
+		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
 	<br />
 
 </form:form>

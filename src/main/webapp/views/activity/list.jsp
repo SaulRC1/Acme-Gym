@@ -18,14 +18,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="gyms" id="row" requestURI="${requestURI}"
+<display:table name="activity" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
 	<!-- Edit column -->
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
-			<a href="gym/edit.do?gymId=${row.id}"> <spring:message
-					code="gym.edit" /></a>
+			<a href="activity/edit.do?activityId=${row.id}"> <spring:message
+					code="activity.edit" /></a>
 		</display:column>
 	</security:authorize>
 
