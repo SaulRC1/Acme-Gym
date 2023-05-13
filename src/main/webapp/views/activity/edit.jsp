@@ -27,7 +27,7 @@
 	
 	<jstl:if test="${activity.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="form.delete" />" <%-- onclick="return confirm('<spring:message code="actor.confirm.delete" />')" --%>/>&nbsp;
+			value="<spring:message code="form.delete" />" <%-- onclick="return confirm('<spring:message code="form.confirm.delete" />')" --%>/>&nbsp;
 	</jstl:if>
 
 	<input type="button" name="cancel"
