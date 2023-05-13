@@ -33,11 +33,7 @@ public class AdminController extends AbstractController {
 	}
 
 	// action1-List ---------------------------------------------------------------
-	/**
-	 * Listado de admins
-	 * 
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -52,47 +48,36 @@ public class AdminController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un admin vacio
-	 *
-	 * @return
-	 */
+	// Action2-Create ---------------------------------------------------------------
+	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
 		Admin admin;
+		
 		admin = this.adminService.create();
-		result = this.createEditModelAndView(admin);
+		
+		result = new ModelAndView("admin/create");
+		result.addObject("admin", admin);
 		return result;
 	}
 
 	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de un admin existente
-	 * 
-	 * @param adminId
-	 * @return
-	 */
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int adminId) {
 		ModelAndView result;
 		Admin admin;
+		
 		admin = this.adminService.findOne(adminId);
 		Assert.notNull(admin);
+		
 		result = this.createEditModelAndView(admin);
 		return result;
 	}
 
 	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de un admin en la base de datos
-	 *
-	 * @param admin
-	 * @param binding
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
 		ModelAndView result;
@@ -100,6 +85,7 @@ public class AdminController extends AbstractController {
 			result = this.createEditModelAndView(admin);
 		else
 			try {
+			    	System.out.print(admin.getEmail());
 				this.adminService.save(admin);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -111,12 +97,6 @@ public class AdminController extends AbstractController {
 	// Action5-Delete
 	// ---------------------------------------------------------------
 
-	/**
-	 * Metodo para la eliminacion de un admin existente
-	 *
-	 * @param admin
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Admin admin) {
 		ModelAndView result;
@@ -131,12 +111,7 @@ public class AdminController extends AbstractController {
 
 	// Ancillary
 	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param admin
-	 * @return
-	 */
+
 	protected ModelAndView createEditModelAndView(final Admin admin) {
 		ModelAndView result;
 		result = this.createEditModelAndView(admin, null);
@@ -144,13 +119,7 @@ public class AdminController extends AbstractController {
 	}
 
 	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param admin
-	 * @param messageCode
-	 * @return
-	 */
+	
 	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
 		ModelAndView result;
 

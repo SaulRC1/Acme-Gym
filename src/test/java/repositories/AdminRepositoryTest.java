@@ -72,4 +72,13 @@ public class AdminRepositoryTest extends AbstractTest {
 
 	Assert.isTrue(!admins.contains(retrievedFromDB));
     }
+
+    @Test
+    public void testUserAccount() {
+
+	Admin admin = this.adminRepository.getByEmail("omar.piedrabuena-admin@hyper-mass.es");
+
+	System.out.println(admin.getUserAccount().getUsername());
+
+    }
 }

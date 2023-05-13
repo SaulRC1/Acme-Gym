@@ -116,8 +116,6 @@ public class Annotation extends DomainEntity {
     public boolean equals(Object obj) {
 	if (this == obj)
 	    return true;
-	if (!super.equals(obj))
-	    return false;
 	if (this.getClass() != obj.getClass())
 	    return false;
 	Annotation other = (Annotation) obj;

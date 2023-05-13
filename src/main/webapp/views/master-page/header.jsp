@@ -21,11 +21,12 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.admin" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="admin/list.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="admin/edit.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="admin/list.do"><spring:message code="master.page.admin.list" /></a></li>
+					<li><a href="admin/create.do"><spring:message code="master.page.admin.create" /></a></li>	
+					<li><a href="admin/edit.do?${adminId}"><spring:message code="master.page.admin.edit" /></a></li>				
 				</ul>
 			</li>
 		</security:authorize>

@@ -26,6 +26,9 @@ public class AdminService {
     @Autowired
     private ManagerService managerService;
 
+    @Autowired
+    private ClientService clientService;
+
     /**
      * Will create an Admin with no data.
      *
@@ -55,21 +58,26 @@ public class AdminService {
     }
 
     /**
-     * This method will save an admin inside database if it does not previously
-     * exists.
+     * This method will find an admin by his email.
+     *
+     * @param email The email related to the admin
+     * @return The Admin object, or null in case this email is not registered.
+     */
+    public Admin findByEmail(String email) {
+	return this.adminRepository.getByEmail(email);
+    }
+
+    /**
+     * This method will save an admin inside database
      *
      * @param admin The admin to be saved
      * @return The saved admin
      */
     public Admin save(Admin admin) throws Exception {
-
 	if (admin == null)
 	    throw new NullArgumentException("admin");
 
-	if (!this.adminRepository.findAll().contains(admin))
-	    return this.adminRepository.save(admin);
-	else
-	    throw new Exception("The admin already exists inside database");
+	return this.adminRepository.save(admin);
     }
 
     /**
@@ -222,7 +230,38 @@ public class AdminService {
     }
 
     public int getMinimumNumberOfGymsPerClient() {
-	return 0;
+
+	Collection<Client> clients = this.clientService.findAll();
+
+	if (clients == null)
+	    return 0;
+
+	// Get an iterator to iterate over this collection of clients
+	Iterator<Client> it = clients.iterator();
+
+	// Because the minimum number of gyms is wanted, we first initialize
+	// our minimum to the maximum possible integer value. Hence, when
+	// the first client is checked, no matter how low the value is, it
+	// will establish itself as the minimum value.
+	int minimumNumberOfGyms = Integer.MAX_VALUE;
+
+	while (it.hasNext()) {
+
+	    Client client = it.next();
+
+	    // Because the client does not have any straighforward relationship with Gym
+	    // inscriptions are used instead.
+	    //
+	    // Since the inscription always must be related to a gym, by the number of
+	    // inscriptions
+	    // we can get how many gyms has this client attended to
+	    int numberOfGymsInscripted = this.clientService.getNumberOfGymsInscripted(client);
+
+	    if (numberOfGymsInscripted < minimumNumberOfGyms)
+		minimumNumberOfGyms = numberOfGymsInscripted;
+	}
+
+	return minimumNumberOfGyms;
     }
 
     public int getMaximumNumberOfGymsPerClient() {

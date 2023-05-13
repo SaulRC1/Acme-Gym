@@ -363,17 +363,8 @@ public class Gym extends DomainEntity {
     public int hashCode() {
 	final int prime = 31;
 	int result = super.hashCode();
-	result = prime * result + (this.active ? 1231 : 1237);
-	result = prime * result + ((this.activities == null) ? 0 : this.activities.hashCode());
-	result = prime * result + ((this.address == null) ? 0 : this.address.hashCode());
-	result = prime * result + ((this.annotations == null) ? 0 : this.annotations.hashCode());
-	result = prime * result + ((this.fee == null) ? 0 : this.fee.hashCode());
-	result = prime * result + ((this.inscriptions == null) ? 0 : this.inscriptions.hashCode());
 	result = prime * result + ((this.logo == null) ? 0 : this.logo.hashCode());
-	result = prime * result + ((this.managers == null) ? 0 : this.managers.hashCode());
 	result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-	result = prime * result + ((this.trainers == null) ? 0 : this.trainers.hashCode());
-	result = prime * result + ((this.trainings == null) ? 0 : this.trainings.hashCode());
 	return result;
     }
 
@@ -381,62 +372,18 @@ public class Gym extends DomainEntity {
     public boolean equals(Object obj) {
 	if (this == obj)
 	    return true;
-	if (!super.equals(obj))
-	    return false;
 	if (this.getClass() != obj.getClass())
 	    return false;
 	Gym other = (Gym) obj;
-	if (this.active != other.active)
-	    return false;
-	if (this.activities == null) {
-	    if (other.activities != null)
-		return false;
-	} else if (!this.activities.equals(other.activities))
-	    return false;
-	if (this.address == null) {
-	    if (other.address != null)
-		return false;
-	} else if (!this.address.equals(other.address))
-	    return false;
-	if (this.annotations == null) {
-	    if (other.annotations != null)
-		return false;
-	} else if (!this.annotations.equals(other.annotations))
-	    return false;
-	if (this.fee == null) {
-	    if (other.fee != null)
-		return false;
-	} else if (!this.fee.equals(other.fee))
-	    return false;
-	if (this.inscriptions == null) {
-	    if (other.inscriptions != null)
-		return false;
-	} else if (!this.inscriptions.equals(other.inscriptions))
-	    return false;
 	if (this.logo == null) {
 	    if (other.logo != null)
 		return false;
 	} else if (!this.logo.equals(other.logo))
 	    return false;
-	if (this.managers == null) {
-	    if (other.managers != null)
-		return false;
-	} else if (!this.managers.equals(other.managers))
-	    return false;
 	if (this.name == null) {
 	    if (other.name != null)
 		return false;
 	} else if (!this.name.equals(other.name))
-	    return false;
-	if (this.trainers == null) {
-	    if (other.trainers != null)
-		return false;
-	} else if (!this.trainers.equals(other.trainers))
-	    return false;
-	if (this.trainings == null) {
-	    if (other.trainings != null)
-		return false;
-	} else if (!this.trainings.equals(other.trainings))
 	    return false;
 	return true;
     }

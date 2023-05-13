@@ -21,7 +21,64 @@
 <form:form action="trainer/edit.do" modelAttribute="trainer">
 
 	<!-- Actors generic inputs -->
-	<jsp:include page="../actor/edit.jsp" />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+	<form:label path="firstName">
+		<spring:message code="actor.firstName" />:
+	</form:label>
+	<form:input path="firstName" />
+	<form:errors cssClass="error" path="firstName" />
+	<br />
+
+	<form:label path="lastName">
+		<spring:message code="actor.lastName" />:
+	</form:label>
+	<form:input path="lastName" />
+	<form:errors cssClass="error" path="lastName" />
+	<br />
+
+	<form:label path="address">
+		<spring:message code="actor.address" />:
+	</form:label>
+	<form:input path="address" />
+	<form:errors cssClass="error" path="address" />
+	<br />
+
+	<form:label path="email">
+		<spring:message code="actor.email" />:
+	</form:label>
+	<form:input path="email" />
+	<form:errors cssClass="error" path="email" />
+	<br />
+
+	<form:label path="phoneNumber">
+		<spring:message code="actor.phoneNumber" />:
+	</form:label>
+	<form:input path="phoneNumber" />
+	<form:errors cssClass="error" path="phoneNumber" />
+	<br />
+
+	<form:label path="postalCode">
+		<spring:message code="actor.postalCode" />:
+	</form:label>
+	<form:input path="postalCode" />
+	<form:errors cssClass="error" path="postalCode" />
+	<br />
+
+	<form:label path="city">
+		<spring:message code="actor.city" />:
+	</form:label>
+	<form:input path="city" />
+	<form:errors cssClass="error" path="city" />
+	<br />
+
+	<form:label path="country">
+		<spring:message code="actor.country" />:
+	</form:label>
+	<form:input path="country" />
+	<form:errors cssClass="error" path="country" />
+	<br />
 
 
 	<!-- Trainers inputs -->

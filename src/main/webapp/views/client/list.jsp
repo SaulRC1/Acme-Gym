@@ -18,9 +18,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="clients" id="row"
-	requestURI="client/list.do" pagesize="5"
-	class="displaytag">
+<display:table name="clients" id="row" requestURI="client/list.do"
+	pagesize="5" class="displaytag">
 
 	<!-- Edit column -->
 	<security:authorize access="hasRole('ADMIN')">
@@ -32,7 +31,14 @@
 
 
 	<!-- Actors generic columns -->
-	<jsp:include page="../actor/list.jsp" />
+	<display:column property="firstName" titleKey="actor.firstName" />
+	<display:column property="lastName" titleKey="actor.lastName" />
+	<display:column property="address" titleKey="actor.address" />
+	<display:column property="email" titleKey="actor.email" />
+	<display:column property="phoneNumber" titleKey="actor.phoneNumber" />
+	<display:column property="postalCode" titleKey="actor.postalCode" />
+	<display:column property="city" titleKey="actor.city" />
+	<display:column property="country" titleKey="actor.country" />
 
 
 	<!-- Clients Card Number column -->
