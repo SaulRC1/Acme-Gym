@@ -29,13 +29,9 @@ public class TrainingController extends AbstractController {
 	@Autowired
 	private GymService gymService;
 
-	// Constructors -----------------------------------------------------------
-
 	public TrainingController() {
 		super();
 	}
-
-	// action1-List ---------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -51,13 +47,6 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un training vacia
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -67,13 +56,6 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de un training existente
-	 *
-	 * @param trainingId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int trainingId) {
 		ModelAndView result;
@@ -84,14 +66,6 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de un training en la base de datos
-	 *
-	 * @param training
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Training training, final BindingResult binding) {
 		ModelAndView result;
@@ -107,15 +81,6 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de un training existente
-	 *
-	 * @param training
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Training training) {
 		ModelAndView result;
@@ -128,28 +93,12 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param training
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Training training) {
 		ModelAndView result;
 		result = this.createEditModelAndView(training, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param training
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Training training, final String messageCode) {
 		ModelAndView result;
 		Collection<Gym> gyms;

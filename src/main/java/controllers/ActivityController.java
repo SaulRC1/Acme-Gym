@@ -36,13 +36,9 @@ public class ActivityController extends AbstractController {
 	@Autowired
 	private ClientService clientService;
 
-	// Constructors -----------------------------------------------------------
-
 	public ActivityController() {
 		super();
 	}
-
-	// action1-List ---------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -58,13 +54,6 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de una actividad vacia
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -74,13 +63,6 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de una actividad existente
-	 *
-	 * @param activityId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int activityId) {
 		ModelAndView result;
@@ -91,14 +73,6 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de una actividad en la base de datos
-	 *
-	 * @param activity
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Activity activity, final BindingResult binding) {
 		ModelAndView result;
@@ -114,15 +88,6 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de una activity existente
-	 *
-	 * @param activity
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Activity activity) {
 		ModelAndView result;
@@ -135,28 +100,12 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param activity
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
 		result = this.createEditModelAndView(activity, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param activity
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Activity activity, final String messageCode) {
 		ModelAndView result;
 		Collection<Trainer> trainers;

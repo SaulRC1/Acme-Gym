@@ -50,18 +50,10 @@ public class GymController extends AbstractController {
 	@Autowired
 	private TrainingService trainingService;
 
-	// Constructors -----------------------------------------------------------
-
 	public GymController() {
 		super();
 	}
 
-	// action1-List ---------------------------------------------------------------
-	/**
-	 * Listado de gyms
-	 * 
-	 * @return
-	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -76,13 +68,6 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un gym vacio
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -92,13 +77,6 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de un gym existente
-	 *
-	 * @param gymId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int gymId) {
 		ModelAndView result;
@@ -106,17 +84,10 @@ public class GymController extends AbstractController {
 		gym = this.gymService.findOne(gymId);
 		Assert.notNull(gym);
 		result = this.createEditModelAndView(gym);
+		result.addObject("cancelUrl", "'gym/list.do'");
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de un gym en la base de datos
-	 *
-	 * @param gym
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Gym gym, final BindingResult binding) {
 		ModelAndView result;
@@ -132,15 +103,6 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de un gym existente
-	 *
-	 * @param gym
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Gym gym) {
 		ModelAndView result;
@@ -153,28 +115,12 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param gym
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Gym gym) {
 		ModelAndView result;
 		result = this.createEditModelAndView(gym, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param gym
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Gym gym, final String messageCode) {
 		ModelAndView result;
 		Collection<Manager> managers;

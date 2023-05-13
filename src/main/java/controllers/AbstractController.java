@@ -19,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AbstractController {
 
-	// Panic handler ----------------------------------------------------------
-
 	@ExceptionHandler(Throwable.class)
 	public ModelAndView panic(final Throwable oops) {
 		ModelAndView result;

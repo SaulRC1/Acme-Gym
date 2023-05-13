@@ -43,12 +43,6 @@ public class AnnotationController extends AbstractController {
 		super();
 	}
 
-	// action1-List ---------------------------------------------------------------
-	/**
-	 * Listado de annotations
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -63,13 +57,6 @@ public class AnnotationController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un annotation vacio
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -79,13 +66,6 @@ public class AnnotationController extends AbstractController {
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de una annotation existente
-	 *
-	 * @param annotationId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int annotationId) {
 		ModelAndView result;
@@ -96,14 +76,6 @@ public class AnnotationController extends AbstractController {
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de una annotation en la base de datos
-	 *
-	 * @param annotation
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Annotation annotation, final BindingResult binding) {
 		ModelAndView result;
@@ -119,15 +91,6 @@ public class AnnotationController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de una annotation existente
-	 *
-	 * @param annotation
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Annotation annotation) {
 		ModelAndView result;
@@ -140,28 +103,12 @@ public class AnnotationController extends AbstractController {
 		return result;
 	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param annotation
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Annotation annotation) {
 		ModelAndView result;
 		result = this.createEditModelAndView(annotation, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param annotation
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Annotation annotation, final String messageCode) {
 		ModelAndView result;
 

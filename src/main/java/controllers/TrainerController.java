@@ -17,6 +17,7 @@ import domain.Activity;
 import domain.Admin;
 import domain.Curriculum;
 import domain.Gym;
+import domain.Manager;
 import domain.Trainer;
 import services.ActivityService;
 import services.TrainerService;
@@ -33,18 +34,10 @@ public class TrainerController extends AbstractController {
 	@Autowired
 	private GymService gymService;
 
-	// Constructors -----------------------------------------------------------
-
 	public TrainerController() {
 		super();
 	}
 
-	// action1-List ---------------------------------------------------------------
-	/**
-	 * Metodo para listar trainers
-	 * 
-	 * @return
-	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -59,29 +52,16 @@ public class TrainerController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un trainer vacio
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
 		Trainer trainer;
 		trainer = this.trainerService.create();
 		result = this.createEditModelAndView(trainer);
+		result.addObject("cancelUrl", "'welcome/index.do'");
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de un trainer existente
-	 * 
-	 * @param trainerId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int trainerId) {
 		ModelAndView result;
@@ -89,17 +69,10 @@ public class TrainerController extends AbstractController {
 		trainer = this.trainerService.findOne(trainerId);
 		Assert.notNull(trainer);
 		result = this.createEditModelAndView(trainer);
+		result.addObject("cancelUrl", "'trainer/list.do'");
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de un trainer en la base de datos
-	 *
-	 * @param trainer
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Trainer trainer, final BindingResult binding) {
 		ModelAndView result;
@@ -115,15 +88,6 @@ public class TrainerController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de un trainer existente
-	 *
-	 * @param trainer
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Trainer trainer) {
 		ModelAndView result;
@@ -135,29 +99,26 @@ public class TrainerController extends AbstractController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public ModelAndView editProfile(@RequestParam final int userAccountId) {
+		ModelAndView result;
+		Trainer trainer;
+		
+		trainer = this.trainerService.findByUserAccountId(userAccountId);
+		Assert.notNull(trainer);
+		
+		result = this.createEditModelAndView(trainer);
+		result.addObject("cancelUrl", "'welcome/index.do'");
+		return result;
+	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param admin
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;
 		result = this.createEditModelAndView(trainer, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param gym
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Trainer trainer, final String messageCode) {
 		ModelAndView result;
 		Collection<Gym> gyms;

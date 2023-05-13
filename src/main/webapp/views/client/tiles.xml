@@ -16,12 +16,12 @@
 	</definition>
 
 	<definition name="client/create" extends="master.page">
-		<put-attribute name="title" value="Create clients" />
+		<put-attribute name="title" value="Create client" />
 		<put-attribute name="body" value="/views/client/edit.jsp" />
 	</definition>
 
 	<definition name="client/edit" extends="master.page">
-		<put-attribute name="title" value="Edit clients" />
+		<put-attribute name="title" value="Edit client" />
 		<put-attribute name="body" value="/views/client/edit.jsp" />
 	</definition>
 

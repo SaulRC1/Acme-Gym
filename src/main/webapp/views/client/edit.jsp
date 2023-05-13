@@ -143,7 +143,7 @@
 	</jstl:if>
 
 	<input type="button" name="cancel"
-		value="<spring:message code="actor.cancel" />" <%-- onclick="javascript: relativeRedir('actor/administrator/list.do');" --%> />
+		value="<spring:message code="actor.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
 	<br />
 
 </form:form>

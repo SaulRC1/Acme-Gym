@@ -209,7 +209,7 @@ public abstract class Actor extends DomainEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "useraccount_id")
+    @JoinColumn(name = "userAccountId")
     public UserAccount getUserAccount() {
 	return this.userAccount;
     }

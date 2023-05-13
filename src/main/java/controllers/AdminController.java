@@ -26,14 +26,10 @@ public class AdminController extends AbstractController {
 	@Autowired
 	private AdminService adminService;
 
-	// Constructors -----------------------------------------------------------
-
 	public AdminController() {
 		super();
 	}
 
-	// action1-List ---------------------------------------------------------------
-	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -48,8 +44,6 @@ public class AdminController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create ---------------------------------------------------------------
-	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -59,11 +53,11 @@ public class AdminController extends AbstractController {
 		
 		result = new ModelAndView("admin/create");
 		result.addObject("admin", admin);
+		result.addObject("cancelUrl", "'welcome/index.do'");
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int adminId) {
 		ModelAndView result;
@@ -73,11 +67,10 @@ public class AdminController extends AbstractController {
 		Assert.notNull(admin);
 		
 		result = this.createEditModelAndView(admin);
+		result.addObject("cancelUrl", "'admin/list.do'");
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
 		ModelAndView result;
@@ -94,9 +87,6 @@ public class AdminController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Admin admin) {
 		ModelAndView result;
@@ -108,9 +98,19 @@ public class AdminController extends AbstractController {
 		}
 		return result;
 	}
-
-	// Ancillary
-	// Method---------------------------------------------------------------
+	
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public ModelAndView editProfile(@RequestParam final int userAccountId) {
+		ModelAndView result;
+		Admin admin;
+		
+		admin = this.adminService.findByUserAccountId(userAccountId);
+		Assert.notNull(admin);
+		
+		result = this.createEditModelAndView(admin);
+		result.addObject("cancelUrl", "'welcome/index.do'");
+		return result;
+	}
 
 	protected ModelAndView createEditModelAndView(final Admin admin) {
 		ModelAndView result;
@@ -118,8 +118,6 @@ public class AdminController extends AbstractController {
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	
 	protected ModelAndView createEditModelAndView(final Admin admin, final String messageCode) {
 		ModelAndView result;
 

@@ -8,10 +8,12 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <div>
 	<a href="#"><img src="images/logo.png" alt="Acme Gym Co., Inc." /></a>
@@ -19,63 +21,96 @@
 
 <div>
 	<ul id="jMenu">
-		<!-- Do not forget the "fNiv" class for the first level links !! -->
+		<!-- Admin dropdown -->
 		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.admin" /></a>
+			<li><a class="fNiv"><spring:message code="master.page.admin" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="admin/list.do"><spring:message code="master.page.admin.list" /></a></li>
-					<li><a href="admin/create.do"><spring:message code="master.page.admin.create" /></a></li>	
-					<li><a href="admin/edit.do?${adminId}"><spring:message code="master.page.admin.edit" /></a></li>				
-				</ul>
-			</li>
+					<li><a href="admin/list.do"><spring:message
+								code="master.page.admin.list" /></a></li>
+					<li><a href="admin/create.do"><spring:message
+								code="master.page.admin.create" /></a></li>
+				</ul></li>
 		</security:authorize>
-		
-		<security:authorize access="hasRole('CLIENT')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+
+		<!-- Client dropdown -->
+		<security:authorize access="">
+			<li><a class="fNiv"><spring:message
+						code="master.page.client" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="client/list.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="client/edit.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
+					<li><a href="client/list.do"><spring:message
+								code="master.page.client.list" /></a></li>
+					<li><a href="client/create.do"><spring:message
+								code="master.page.client.create" /></a></li>
+				</ul></li>
 		</security:authorize>
-		
-		<security:authorize access="hasRole('MANAGER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+
+		<!-- Manager dropdown -->
+		<security:authorize access="">
+			<li><a class="fNiv"><spring:message
+						code="master.page.manager" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
+					<li><a href="manager/list.do"><spring:message
+								code="master.page.manager.list" /></a></li>
+					<li><a href="manager/create.do"><spring:message
+								code="master.page.manager.create" /></a></li>
+				</ul></li>
 		</security:authorize>
-		
-		<security:authorize access="hasRole('TRAINER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+
+		<!-- Manager dropdown -->
+		<security:authorize access="">
+			<li><a class="fNiv"><spring:message
+						code="master.page.manager" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
+					<li><a href="manager/list.do"><spring:message
+								code="master.page.manager.list" /></a></li>
+					<li><a href="manager/create.do"><spring:message
+								code="master.page.manager.create" /></a></li>
+				</ul></li>
 		</security:authorize>
-		
+
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/login.do"><spring:message
+						code="master.page.login" /></a></li>
 		</security:authorize>
-		
+
 		<security:authorize access="isAuthenticated()">
-			<li>
-				<a class="fNiv"> 
-					<spring:message code="master.page.profile" /> 
-			        (<security:authentication property="principal.username" />)
-				</a>
+			<li><a class="fNiv"> <spring:message
+						code="master.page.profile" /> (<security:authentication
+						property="principal.username" />)
+			</a>
 				<ul>
-					<li class="arrow"></li>					
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-				</ul>
-			</li>
+					<li class="arrow"></li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a
+							href="admin/editProfile.do?userAccountId=<security:authentication property="principal.id" />">
+								<spring:message code="master.page.profile.edit" />
+						</a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('CLIENT')">
+						<li><a
+							href="client/editProfile.do?<security:authentication property="principal.id" />">
+								<spring:message code="master.page.profile.edit" />
+						</a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a
+							href="manager/editProfile.do?<security:authentication property="principal.id" />">
+								<spring:message code="master.page.profile.edit" />
+						</a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('TRAINER')">
+						<li><a
+							href="trainer/editProfile.do?<security:authentication property="principal.id" />">
+								<spring:message code="master.page.profile.edit" />
+						</a></li>
+					</security:authorize>
+					<li><a href="j_spring_security_logout"><spring:message
+								code="master.page.logout" /> </a></li>
+				</ul></li>
 		</security:authorize>
 	</ul>
 </div>

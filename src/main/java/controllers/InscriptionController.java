@@ -32,18 +32,10 @@ public class InscriptionController extends AbstractController {
 	@Autowired
 	private ClientService clientService;
 
-	// Constructors -----------------------------------------------------------
-
 	public InscriptionController() {
 		super();
 	}
 
-	// action1-List ---------------------------------------------------------------
-	/**
-	 * Listado de inscriptions
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -58,13 +50,6 @@ public class InscriptionController extends AbstractController {
 		return result;
 	}
 
-	// Action2-Create
-	// ---------------------------------------------------------------
-	/**
-	 * Metodo para la creacion de un inscription vacio
-	 *
-	 * @return
-	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -74,13 +59,6 @@ public class InscriptionController extends AbstractController {
 		return result;
 	}
 
-	// Action3-Edit ---------------------------------------------------------------
-	/**
-	 * Metodo para la edicion de un inscription existente
-	 *
-	 * @param inscriptionId
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int inscriptionId) {
 		ModelAndView result;
@@ -91,14 +69,6 @@ public class InscriptionController extends AbstractController {
 		return result;
 	}
 
-	// Action4-Save ---------------------------------------------------------------
-	/**
-	 * Metodo para la insercion de una inscription en la base de datos
-	 *
-	 * @param inscription
-	 * @param binding
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Inscription inscription, final BindingResult binding) {
 		ModelAndView result;
@@ -114,15 +84,6 @@ public class InscriptionController extends AbstractController {
 		return result;
 	}
 
-	// Action5-Delete
-	// ---------------------------------------------------------------
-
-	/**
-	 * Metodo para la eliminacion de una inscription existente
-	 *
-	 * @param inscription
-	 * @return
-	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Inscription inscription) {
 		ModelAndView result;
@@ -135,28 +96,12 @@ public class InscriptionController extends AbstractController {
 		return result;
 	}
 
-	// Ancillary
-	// Method---------------------------------------------------------------
-	/**
-	 * Metodo para la actualizacion de modelos y vistas
-	 *
-	 * @param inscription
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Inscription inscription) {
 		ModelAndView result;
 		result = this.createEditModelAndView(inscription, null);
 		return result;
 	}
 
-	// Core Method---------------------------------------------------------------
-	/**
-	 * Core de la forma en como actualizar modelos y vistas
-	 *
-	 * @param inscription
-	 * @param messageCode
-	 * @return
-	 */
 	protected ModelAndView createEditModelAndView(final Inscription inscription, final String messageCode) {
 		ModelAndView result;
 
