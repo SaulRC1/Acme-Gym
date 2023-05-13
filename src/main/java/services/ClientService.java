@@ -81,4 +81,8 @@ public class ClientService {
 
 	return numberOfDistinctGyms;
     }
+
+    public Client findByUserAccountId(int userAccountId) {
+	return this.clientRepository.findByUserAccountId(userAccountId);
+    }
 }

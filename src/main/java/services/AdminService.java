@@ -328,4 +328,8 @@ public class AdminService {
 	return null;
     }
 
+    public Admin findByUserAccountId(int userAccountId) {
+	return this.adminRepository.findByUserAccountId(userAccountId);
+    }
+
 }
