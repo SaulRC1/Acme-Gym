@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
-	
+
 	<bean id="omarUserAccount" class="security.UserAccount">
 		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password"
+			value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -29,21 +24,185 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<bean id="pepeUserAccount" class="security.UserAccount">
+		<property name="username" value="pepe" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="albertoUserAccount" class="security.UserAccount">
+		<property name="username" value="alberto" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="gerardoUserAccount" class="security.UserAccount">
+		<property name="username" value="gerardo" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ramiroUserAccount" class="security.UserAccount">
+		<property name="username" value="ramiro" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rafaUserAccount" class="security.UserAccount">
+		<property name="username" value="rafa" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pedroUserAccount" class="security.UserAccount">
+		<property name="username" value="pedro" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Other domain beans come here -->
-	
+
 	<bean id="admin1" class="domain.Admin">
 		<property name="userAccount">
 			<ref bean="omarUserAccount" />
 		</property>
 		<property name="firstName" value="Omar" />
 		<property name="lastName" value="Piedrabuena" />
-		<property name="email" value="omar.piedrabuena-admin@hyper-mass.es"/>
+		<property name="email"
+			value="omar.piedrabuena-admin@hyper-mass.es" />
 		<property name="phoneNumber" value="+34617746487" />
-		<property name="address" value="Ruta de la piedra 19, Córdoba" />
+		<property name="address"
+			value="Ruta de la piedra 19, Córdoba" />
 		<property name="postalCode" value="24008" />
 		<property name="city" value="Córdoba" />
 		<property name="country" value="España" />
 	</bean>
-	
+
+	<bean id="client1" class="domain.Client">
+		<property name="userAccount">
+			<ref bean="pepeUserAccount" />
+		</property>
+		<property name="firstName" value="Pepe" />
+		<property name="lastName" value="Rodriguez" />
+		<property name="email"
+			value="pepe.rodriguez-client@hyper-mass.es" />
+		<property name="phoneNumber" value="+34666666666" />
+		<property name="address" value="Ruta de la sierra, Huelva" />
+		<property name="postalCode" value="21002" />
+		<property name="city" value="Huelva" />
+		<property name="country" value="España" />
+	</bean>
+
+	<bean id="client2" class="domain.Client">
+		<property name="userAccount">
+			<ref bean="albertoUserAccount" />
+		</property>
+		<property name="firstName" value="Alberto" />
+		<property name="lastName" value="Guinea" />
+		<property name="email"
+			value="alberto.guinea-client@hyper-mass.es" />
+		<property name="phoneNumber" value="+34666666667" />
+		<property name="address" value="Calle Victoria, Huelva" />
+		<property name="postalCode" value="21001" />
+		<property name="city" value="Huelva" />
+		<property name="country" value="España" />
+	</bean>
+
+	<bean id="client3" class="domain.Client">
+		<property name="userAccount">
+			<ref bean="gerardoUserAccount" />
+		</property>
+		<property name="firstName" value="Gerardo" />
+		<property name="lastName" value="Montes" />
+		<property name="email"
+			value="gerardo.montes-client@hyper-mass.es" />
+		<property name="phoneNumber" value="+34678678678" />
+		<property name="address" value="Plaza España, Madrid" />
+		<property name="postalCode" value="28001" />
+		<property name="city" value="Madrid" />
+		<property name="country" value="España" />
+	</bean>
+
+	<bean id="trainer1" class="domain.Trainer">
+		<property name="userAccount">
+			<ref bean="ramiroUserAccount" />
+		</property>
+		<property name="firstName" value="Ramiro" />
+		<property name="lastName" value="Fernandez" />
+		<property name="email"
+			value="ramiro.fernandez-trainer@hyper-mass.es" />
+		<property name="phoneNumber" value="+34679679679" />
+		<property name="address" value="Plaza de la merced, Valencia" />
+		<property name="postalCode" value="22002" />
+		<property name="city" value="Valencia" />
+		<property name="country" value="España" />
+	</bean>
+
+	<bean id="trainer2" class="domain.Trainer">
+		<property name="userAccount">
+			<ref bean="rafaUserAccount" />
+		</property>
+		<property name="firstName" value="Rafa" />
+		<property name="lastName" value="Torres" />
+		<property name="email"
+			value="rafa.torres-trainer@hyper-mass.es" />
+		<property name="phoneNumber" value="+34677777777" />
+		<property name="address" value="Calle Gines, Sevilla" />
+		<property name="postalCode" value="24002" />
+		<property name="city" value="Sevilla" />
+		<property name="country" value="España" />
+	</bean>
+
+	<bean id="trainer3" class="domain.Trainer">
+		<property name="userAccount">
+			<ref bean="pedroUserAccount" />
+		</property>
+		<property name="firstName" value="Pedro" />
+		<property name="lastName" value="Soria" />
+		<property name="email"
+			value="pedro.soria-trainer@hyper-mass.es" />
+		<property name="phoneNumber" value="+34699999999" />
+		<property name="address" value="Cuesta del Álamo, Málaga" />
+		<property name="postalCode" value="29551" />
+		<property name="city" value="Málaga" />
+		<property name="country" value="España" />
+	</bean>
+
 </beans>
