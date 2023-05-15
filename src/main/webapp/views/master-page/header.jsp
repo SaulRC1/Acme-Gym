@@ -60,7 +60,8 @@
 		</security:authorize>
 
 		<!-- Trainer dropdown -->
-		<security:authorize access="hasRole('MANAGER')">
+		<security:authorize access="permitAll">
+		
 			<li><a class="fNiv"><spring:message
 						code="master.page.trainer" /></a>
 				<ul>

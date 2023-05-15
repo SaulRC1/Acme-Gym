@@ -20,7 +20,54 @@
 
 <form:form action="activity/edit.do" modelAttribute="activity">
 
-	<!-- TODO -->
+	<form:label path="title">
+		<spring:message code="activity.title" />:
+	</form:label>
+	<form:input path="title" />
+	<form:errors cssClass="error" path="title" />
+	<br />
+	
+	<form:label path="photo">
+		<spring:message code="activity.photo" />:
+	</form:label>
+	<form:input path="photo" />
+	<form:errors cssClass="error" path="photo" />
+	<br />
+	
+	<form:label path="description">
+		<spring:message code="activity.description" />:
+	</form:label>
+	<form:input path="description" />
+	<form:errors cssClass="error" path="description" />
+	<br />
+	
+	<form:label path="weekDays">
+		<spring:message code="activity.weekDays" />:
+	</form:label>
+	<form:input path="weekDays" />
+	<form:errors cssClass="error" path="weekDays" />
+	<br />
+	
+	<form:label path="startHour">
+		<spring:message code="activity.startHour" />:
+	</form:label>
+	<form:input path="startHour" />
+	<form:errors cssClass="error" path="startHour" />
+	<br />
+	
+	<form:label path="endHour">
+		<spring:message code="activity.endHour" />:
+	</form:label>
+	<form:input path="endHour" />
+	<form:errors cssClass="error" path="endHour" />
+	<br />
+	
+	<form:label path="availablePlaces">
+		<spring:message code="activity.endHour" />:
+	</form:label>
+	<form:input path="availablePlaces" />
+	<form:errors cssClass="error" path="availablePlaces" />
+	<br />
 	
 	<input type="submit" name="save"
 		value="<spring:message code="form.save" />" />&nbsp; 

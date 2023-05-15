@@ -18,14 +18,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="clients" id="row" requestURI="client/list.do"
+<display:table name="clients" id="client" requestURI="client/list.do"
 	pagesize="5" class="displaytag">
 
 	<!-- Edit column -->
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<a href="client/edit.do?clientId=${row.id}"> <spring:message
-					code="client.edit" /></a>
+			<a href="client/edit.do?clientId=${client.id}"> <spring:message
+					code="row.edit" /></a>
 		</display:column>
 	</security:authorize>
 

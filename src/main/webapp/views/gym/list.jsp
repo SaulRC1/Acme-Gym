@@ -18,17 +18,27 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="gyms" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+<display:table name="gyms" id="gym" requestURI="${requestURI}"
+	pagesize="5" class="displaytag">-->
 
-	<!-- Edit column -->
+	<!--  Edit column -->
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
-			<a href="gym/edit.do?gymId=${row.id}"> <spring:message
-					code="gym.edit" /></a>
+			<a href="gym/edit.do?gymId=${gym.id}"> <spring:message
+					code="row.edit" /></a>
 		</display:column>
 	</security:authorize>
-
-	<!-- TODO -->
-
+	
+	<display:column property="logo" titleKey="actor.firstName" />
+	<display:column property="address" titleKey="actor.firstName" />
+	<display:column property="name" titleKey="actor.firstName" />
+	<display:column property="fee" titleKey="actor.firstName" />
+	
+	<security:authorize access="hasRole('MANAGER')">
+		<display:column>
+			<a href="activities/list.do?gym=${gym}"> <spring:message
+					code="gym.activities" /></a>
+		</display:column>
+	</security:authorize>
+	
 </display:table>

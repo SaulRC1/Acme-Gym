@@ -18,14 +18,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="managers" id="row" requestURI="manager/list.do"
+<display:table name="managers" id="manager" requestURI="manager/list.do"
 	pagesize="5" class="displaytag">
 
 	<!-- Edit column -->
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<a href="manager/edit.do?managerId=${row.id}"> <spring:message
-					code="manager.edit" /></a>
+			<a href="manager/edit.do?managerId=${manager.id}"> <spring:message
+					code="row.edit" /></a>
 		</display:column>
 	</security:authorize>
 
@@ -41,8 +41,7 @@
 	<display:column property="country" titleKey="actor.country" />
 
 
-	<!-- Managers Banned and Gyms columns -->
-	<display:column property="banned" titleKey="manager.banned" />
+	<!-- Managers Gyms columns -->
 	<display:column property="gyms" titleKey="manager.gyms" />
 
 </display:table>

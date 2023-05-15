@@ -23,7 +23,10 @@
 	<!-- Gym inputs -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-
+	
+	<form:hidden path="active" />
+	<form:hidden path="activities" />
+	<form:hidden path="gym" />
 	<form:hidden path="logo" />
 
 	<form:label path="address">
@@ -47,49 +50,6 @@
 	<form:errors cssClass="error" path="fee" />
 	<br />
 
-	<form:hidden path="active" />
-
-
-	<!-- Activities -->
-	<div style="display: flex;">
-		<display:table name="addedActivities" id="row"
-			pagesize="5" class="displaytag">
-			<thead>
-				<tr>
-					<th>TITLE</th>
-					<th>REMOVE</th>
-				</tr>
-			</thead>
-			<jstl:forEach var="addedActivity" items="${gym.activities}">
-				<tr>
-					<td>${activity.title}</td>
-					<td><button onclick="removeActivity(activity);">Remove</button></td>
-				</tr>
-			</jstl:forEach>
-		</display:table>
-		<display:table name="allActivities" id="allActivities" pagesize="5"
-			class="displaytag">
-			<thead>
-				<tr>
-					<th>TITLE</th>
-					<th>ADD</th>
-				</tr>
-			</thead>
-			<jstl:forEach var="activity" items="${activities}">
-				<tr>
-					<td>${activity.title}</td>
-					<td><button onclick="addActivity(activity);">Add</button></td>
-				</tr>
-			</jstl:forEach>
-		</display:table>
-
-	</div>
-
-
-	<!-- Trainings -->
-
-
-
 	<!-- Generic buttons -->
 	<input type="submit" name="save"
 		value="<spring:message code="form.save" />" />&nbsp; 
@@ -99,11 +59,13 @@
 	
 	<jstl:if test="${gym.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="form.delete" />" onclick="return confirm('<spring:message code="form.confirm.delete" />')" >/>&nbsp;
+			value="<spring:message code="form.delete" />"
+			onclick="return confirm('<spring:message code="form.confirm.delete" />')">/>&nbsp;
 	</jstl:if>
 
 	<input type="button" name="cancel"
-		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir(${cancelUrl});" />
+		value="<spring:message code="form.cancel" />"
+		onclick="javascript: relativeRedir(${cancelUrl});" />
 	<br />
 
 </form:form>
