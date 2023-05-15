@@ -292,7 +292,82 @@
 	
 	<!-- Activity -->
 	
-	<!-- TODO -->
+	<!-- <bean id="pilatesActivity" class="domain.Activity">
+		<property name="title" value="Pilates" />
+		<property name="photo" value="exampleurl" />
+		<property name="description"
+			value="This is the description of the 'Pilates' activity..." />
+		<property name="weekDays" value="{1,4}"/>
+		<property name="startHour" value="10:30" />
+		<property name="endHour" value="11:15" />
+		<property name="availablePlaces" value="4" />
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="ramiroTrainer" />
+				<ref bean="rafaTrainer" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="yogaActivity" class="domain.Activity">
+		<property name="title" value="Yoga" />
+		<property name="photo" value="exampleurl" />
+		<property name="description"
+			value="This is the description of the 'Yoga' activity..." />
+		<property name="weekDays" value="{2,3}"/>
+		<property name="startHour" value="16:00" />
+		<property name="endHour" value="17:15" />
+		<property name="availablePlaces" value="13" />
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="pedroTrainer" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="kickboxingActivity" class="domain.Activity">
+		<property name="title" value="Kick boxing" />
+		<property name="photo" value="exampleurl" />
+		<property name="description"
+			value="This is the description of the 'Kick Boxing' activity..." />
+		<property name="weekDays" value="{1,2,6}"/>
+		<property name="startHour" value="18:00" />
+		<property name="endHour" value="20:00" />
+		<property name="availablePlaces" value="3" />
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="ramiroTrainer" />
+				<ref bean="pedroTrainer" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+	</bean> -->
 	
 	
 	<!-- Training -->
