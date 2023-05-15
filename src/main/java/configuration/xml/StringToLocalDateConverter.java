@@ -3,6 +3,7 @@ package configuration.xml;
 import java.time.LocalDate;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -13,6 +14,7 @@ import org.springframework.core.convert.converter.Converter;
  * in order to convert a string to a LocalDateObject
  *
  */
+@Component
 public class StringToLocalDateConverter implements Converter<String, LocalDate> {
 
     @Override

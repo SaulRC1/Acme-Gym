@@ -3,6 +3,7 @@ package configuration.xml;
 import java.time.LocalTime;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
  * This class converts a string to an instance of
@@ -12,6 +13,7 @@ import org.springframework.core.convert.converter.Converter;
  * The main purpose of this converter is to be used inside PopulateDatabase.xml
  * to be able to convert from a string to a LocalTime object.
  */
+@Component
 public class StringToLocalTimeConverter implements Converter<String, LocalTime> {
 
     @Override
