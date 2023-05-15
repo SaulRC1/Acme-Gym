@@ -1,3 +1,4 @@
+
 package configuration.xml;
 
 import java.time.LocalDate;
@@ -14,12 +15,13 @@ import org.springframework.stereotype.Component;
  * in order to convert a string to a LocalDateObject
  *
  */
+
 @Component
 public class StringToLocalDateConverter implements Converter<String, LocalDate> {
 
-    @Override
-    public LocalDate convert(String source) {
-	return LocalDate.parse(source);
-    }
+	@Override
+	public LocalDate convert(final String source) {
+		return LocalDate.parse(source);
+	}
 
 }

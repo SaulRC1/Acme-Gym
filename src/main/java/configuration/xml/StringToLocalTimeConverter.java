@@ -1,3 +1,4 @@
+
 package configuration.xml;
 
 import java.time.LocalTime;
@@ -16,9 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToLocalTimeConverter implements Converter<String, LocalTime> {
 
-    @Override
-    public LocalTime convert(String source) {
-	return LocalTime.parse(source);
-    }
+	@Override
+	public LocalTime convert(final String source) {
+		return LocalTime.parse(source);
+	}
 
 }

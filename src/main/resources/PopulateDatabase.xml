@@ -4,11 +4,15 @@
 	* * The use of this project is hereby constrained to the conditions of the 
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	">
+<beans xmlns="http://www.springframework.org/schema/beans"     
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"     
+		xmlns:context="http://www.springframework.org/schema/context"     
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+		        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd     ">
+		       
+	 <context:component-scan base-package="configuration"/>         
+	 <import resource="classpath:configuration/xml/ConversionConfiguration.java"/>
 
 	<!-- UserAccount -->
 
@@ -283,9 +287,9 @@
 		<property name="city" value="Barcelona" />
 		<property name="country" value="España" />
 		
-		<property name="banned" value="" />
+		<property name="banned" value="false" />
 		<property name="gyms">
-			<ref bean="" />
+			<ref bean="gym1" />
 		</property>
 	</bean>
 	
@@ -303,9 +307,9 @@
 		<property name="city" value="Madrid" />
 		<property name="country" value="España" />
 		
-		<property name="banned" value="" />
+		<property name="banned" value="false" />
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym2" />
 		</property>
 	</bean>
 	
@@ -323,9 +327,9 @@
 		<property name="city" value="Galicia" />
 		<property name="country" value="España" />
 		
-		<property name="banned" value="" />
+		<property name="banned" value="false" />
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym3" />
 		</property>
 		
 	</bean>
@@ -350,20 +354,17 @@
 		<property name="country" value="España" />
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="pilatesActivity" />
 			</list>
 		</property>
 		<property name="curriculum">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="curriculumTrainerRamiro" />
 			</list>
 		</property>
 		<property name="gym">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="gym1" />
 			</list>
 		</property>
 	</bean>
@@ -383,20 +384,17 @@
 		<property name="country" value="España" />
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="yogaActivity" />
 			</list>
 		</property>
 		<property name="curriculum">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="curriculumTrainerRafa" />
 			</list>
 		</property>
 		<property name="gym">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="gym2" />
 			</list>
 		</property>
 	</bean>
@@ -416,20 +414,17 @@
 		<property name="country" value="España" />
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="kickboxingActivity" />
 			</list>
 		</property>
 		<property name="curriculum">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="curriculumTrainerPedro" />
 			</list>
 		</property>
 		<property name="gym">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="gym3" />
 			</list>
 		</property>
 	</bean>
@@ -444,8 +439,7 @@
         <property name="active" value="true"/>
         <property name="trainers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="ramiroTrainer" />
 			</list>
 		</property>
 		<property name="annotations">
@@ -456,14 +450,12 @@
 		</property>
         <property name="managers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="MartaManager" />
 			</list>
 		</property>
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="pilatesActivity" />
 			</list>
 		</property>
 		<property name="inscriptions">
@@ -487,8 +479,7 @@
         <property name="active" value="true"/>
         <property name="trainers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="rafaTrainer" />
 			</list>
 		</property>
 		<property name="annotations">
@@ -499,20 +490,17 @@
 		</property>
 		<property name="managers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="RocioManager" />
 			</list>
 		</property>
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="yogaActivity" />
 			</list>
 		</property>
 		<property name="inscriptions">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="inscription1" />
 			</list>
 		</property>
 		<property name="trainings">
@@ -531,8 +519,7 @@
         <property name="active" value="true"/>
         <property name="trainers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="pedroTrainer" />
 			</list>
 		</property>
 		<property name="annotations">
@@ -542,20 +529,17 @@
 		</property>
 		<property name="managers">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="PepaManager" />
 			</list>
 		</property>
 		<property name="activities">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="kickboxingActivity" />
 			</list>
 		</property>
 		<property name="inscriptions">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="inscription3" />
 			</list>
 		</property>
 		<property name="trainings">
@@ -571,17 +555,17 @@
 	
 	<!-- Activity -->
 	
-	<!-- <bean id="pilatesActivity" class="domain.Activity">
+	<bean id="pilatesActivity" class="domain.Activity">
 		<property name="title" value="Pilates" />
 		<property name="photo" value="exampleurl" />
 		<property name="description"
 			value="This is the description of the 'Pilates' activity..." />
 		<property name="weekDays" value="{1,4}"/>
-		<property name="startHour" value="10:30" />
-		<property name="endHour" value="11:15" />
+		<property name="startHour" value="10:30:00" />
+		<property name="endHour" value="11:15:00" />
 		<property name="availablePlaces" value="4" />
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym1" />
 		</property>
 		<property name="trainers">
 			<list>
@@ -591,8 +575,7 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation1" />
 			</list>
 		</property>
 	</bean>
@@ -603,11 +586,11 @@
 		<property name="description"
 			value="This is the description of the 'Yoga' activity..." />
 		<property name="weekDays" value="{2,3}"/>
-		<property name="startHour" value="16:00" />
-		<property name="endHour" value="17:15" />
+		<property name="startHour" value="16:00:00" />
+		<property name="endHour" value="17:15:00" />
 		<property name="availablePlaces" value="13" />
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym2" />
 		</property>
 		<property name="trainers">
 			<list>
@@ -616,8 +599,7 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation1" />
 			</list>
 		</property>
 	</bean>
@@ -628,11 +610,11 @@
 		<property name="description"
 			value="This is the description of the 'Kick Boxing' activity..." />
 		<property name="weekDays" value="{1,2,6}"/>
-		<property name="startHour" value="18:00" />
-		<property name="endHour" value="20:00" />
+		<property name="startHour" value="18:00:00" />
+		<property name="endHour" value="20:00:00" />
 		<property name="availablePlaces" value="3" />
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym3" />
 		</property>
 		<property name="trainers">
 			<list>
@@ -642,11 +624,10 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation5" />
 			</list>
 		</property>
-	</bean> -->
+	</bean>
 	
 	
 	<!-- Training -->
@@ -951,8 +932,8 @@
 		<property name="client">
 			<ref bean="pepeClient" />
 		</property>
-		<property name="singUpDate" value="2023, 1, 1"/>
-		<property name="singOutDate" value="2023, 12, 31"/>
+		<property name="singUpDate" value="2023-1-1"/>
+		<property name="singOutDate" value="2023-12-31"/>
 	</bean>
 	
 	<bean id="inscription2" class="domain.Inscription">
@@ -962,8 +943,8 @@
 		<property name="client">
 			<ref bean="albertoClient" />
 		</property>
-		<property name="singUpDate" value="2023, 1, 1"/>
-		<property name="singOutDate" value="2023, 12, 31"/>
+		<property name="singUpDate" value="2023-1-1"/>
+		<property name="singOutDate" value="2023-12-31"/>
 	</bean>
 	
 	<bean id="inscription3" class="domain.Inscription">
@@ -973,8 +954,8 @@
 		<property name="client">
 			<ref bean="gerardoClient" />
 		</property>
-		<property name="singUpDate" value="2023, 1, 1"/>
-		<property name="singOutDate" value="2023, 12, 31"/>
+		<property name="singUpDate" value="2023-1-1"/>
+		<property name="singOutDate" value="2023-12-31"/>
 	</bean>
 	
 	<!-- TODO -->

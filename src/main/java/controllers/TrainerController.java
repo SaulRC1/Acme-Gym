@@ -112,7 +112,7 @@ public class TrainerController extends AbstractController {
 		result.addObject("cancelUrl", "'welcome/index.do'");
 		return result;
 	}
-
+	/*
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listbyActivity(@RequestParam Activity activity) {
 		ModelAndView result;
@@ -126,7 +126,7 @@ public class TrainerController extends AbstractController {
 		result.addObject("requestURI", "trainer/list.do");
 
 		return result;
-	}
+	}*/
 	
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;
