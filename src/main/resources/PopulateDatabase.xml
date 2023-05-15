@@ -87,8 +87,6 @@
 		</property>
 	</bean>
 
-	<!--  
-
 	<bean id="ramiroTrainerUserAccount" class="security.UserAccount">
 		<property name="username" value="ramirotrainer" />
 		<property name="password" value="3f1a81f9ced38b9c2c0d4a657c4c6962" />
@@ -125,7 +123,43 @@
 		</property>
 	</bean>
 	
-	-->
+	<bean id="martaManagerUserAccount" class="security.UserAccount">
+		<property name="username" value="martamanager" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="rocioManagerUserAccount" class="security.UserAccount">
+		<property name="username" value="rociomanager" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="pepaManagerUserAccount" class="security.UserAccount">
+		<property name="username" value="pepamanager" />
+		<property name="password" value="" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Admin -->
 
@@ -235,12 +269,73 @@
 	
 	<!-- Manager -->
 	
+	<bean id="MartaManager" class="domain.Manager">
+		<property name="userAccount">
+			<ref bean="martaManagerUserAccount" />
+		</property>
+		<property name="firstName" value="Marta" />
+		<property name="lastName" value="Montero" />
+		<property name="email"
+			value="marta.montero@gmail.com" />
+		<property name="phoneNumber" value="+34678800000" />
+		<property name="address" value="Calle San Sebastian, Barcelona" />
+		<property name="postalCode" value="22002" />
+		<property name="city" value="Barcelona" />
+		<property name="country" value="España" />
+		
+		<property name="banned" value="" />
+		<property name="gyms">
+			<ref bean="" />
+		</property>
+	</bean>
+	
+	<bean id="RocioManager" class="domain.Manager">
+		<property name="userAccount">
+			<ref bean="rocioManagerUserAccount" />
+		</property>
+		<property name="firstName" value="Rocio" />
+		<property name="lastName" value="Davila" />
+		<property name="email"
+			value="rocio.davila@gmail.com" />
+		<property name="phoneNumber" value="+34672222222" />
+		<property name="address" value="Calle Mariscada, Madrid" />
+		<property name="postalCode" value="20002" />
+		<property name="city" value="Madrid" />
+		<property name="country" value="España" />
+		
+		<property name="banned" value="" />
+		<property name="gym">
+			<ref bean="" />
+		</property>
+	</bean>
+	
+	<bean id="PepaManager" class="domain.Manager">
+		<property name="userAccount">
+			<ref bean="pepaManagerUserAccount" />
+		</property>
+		<property name="firstName" value="Pepa" />
+		<property name="lastName" value="Fernandez" />
+		<property name="email"
+			value="pepa.fernandez@gmail.com" />
+		<property name="phoneNumber" value="+34674444444" />
+		<property name="address" value="Calle Americas, Galicia" />
+		<property name="postalCode" value="20202" />
+		<property name="city" value="Galicia" />
+		<property name="country" value="España" />
+		
+		<property name="banned" value="" />
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		
+	</bean>
+	
 	<!-- TODO -->
 	
 	
 	<!-- Trainer -->
 
-	<!--<bean id="ramiroTrainer" class="domain.Trainer">
+	<bean id="ramiroTrainer" class="domain.Trainer">
 		<property name="userAccount">
 			<ref bean="ramiroTrainerUserAccount" />
 		</property>
@@ -283,7 +378,7 @@
 		<property name="postalCode" value="29551" />
 		<property name="city" value="Málaga" />
 		<property name="country" value="España" />
-	</bean>-->
+	</bean>
 	
 	<!-- Gym -->
 	
@@ -386,11 +481,76 @@
 	
 	
 	<!-- Curriculum -->
+	<bean id="curriculumTrainerRamiro" class="domain.Curriculum">
+		<property name="name" value="CurriculumRamiro" />
+		<property name="specialities" value="{crossfit, calistenia, cardio}" />
+		<property name="education" value="Grado medio de FP" />
+		<property name="workExperience" value="{Entrenador Personal, Monitor bodycombat}"/>
+
+		<property name="Trainer">
+			<ref bean="ramiroTrainer" />
+		</property>
+		<property name="SocialIdentities">
+			<list>
+				<ref bean="socialIdentityRamiro1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="curriculumTrainerRafa" class="domain.Curriculum">
+		<property name="name" value="CurriculumRafa" />
+		<property name="specialities" value="{crossfit, bici, hipertrofia}" />
+		<property name="education" value="Título Técnico Deportivo Superior" />
+		<property name="workExperience" value="{Monitor Gimnasio, Profesor EF}"/>
+
+		<property name="Trainer">
+			<ref bean="rafaTrainer" />
+		</property>
+		<property name="SocialIdentities">
+			<list>
+				<ref bean="socialIdentityRafa1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="curriculumTrainerPedro" class="domain.Curriculum">
+		<property name="name" value="CurriculumPedro" />
+		<property name="specialities" value="{cardio, hit}" />
+		<property name="education" value="Ciencias de la actividad física y del deporte" />
+		<property name="workExperience" value="{Entrenador fútbol, Monitor hit}"/>
+
+		<property name="Trainer">
+			<ref bean="pedroTrainer" />
+		</property>
+		<property name="SocialIdentities">
+			<list>
+				<ref bean="socialIdentityPedro1" />
+			</list>
+		</property>
+	</bean>
 	
 	<!-- TODO -->
 	
 	
 	<!-- SocialIdentity -->
+	
+	<bean id="socialIdentityRamiro1" class="domain.SocialIdentity">
+		<property name="nick" value="ramiro77" />
+		<property name="link" value="https://www.instagram.com/ramiro77/" />
+		<property name="socialMedia" value="Instagram" />
+	</bean>
+	
+	<bean id="socialIdentityRafa1" class="domain.SocialIdentity">
+		<property name="nick" value="rafiña99" />
+		<property name="link" value="https://www.instagram.com/rafiña99/" />
+		<property name="socialMedia" value="Instagram" />
+	</bean>
+	
+	<bean id="socialIdentityPedro1" class="domain.SocialIdentity">
+		<property name="nick" value="pedrito_00" />
+		<property name="link" value="https://www.instagram.com/pedrito_00/" />
+		<property name="socialMedia" value="Instagram" />
+	</bean>
 	
 	<!-- TODO -->
 	
