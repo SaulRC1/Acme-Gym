@@ -1,4 +1,14 @@
 #./src/main/resources/Entities.map
-#Sat May 13 15:03:42 CEST 2023
-admin1=4
-omarUserAccount=3
+#Mon May 15 13:35:06 CEST 2023
+paulaAdminUserAccount=15
+rosaAdmin=20
+paulaAdmin=21
+albertoClientUserAccount=17
+rosaAdminUserAccount=14
+albertoClient=23
+gerardoClientUserAccount=18
+omarAdmin=19
+omarAdminUserAccount=13
+pepeClient=22
+pepeClientUserAccount=16
+gerardoClient=24

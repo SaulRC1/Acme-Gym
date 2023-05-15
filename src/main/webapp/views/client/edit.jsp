@@ -82,54 +82,56 @@
 
 
 	<!-- Clients inputs -->
-	<form:label path="cardNumber">
-		<spring:message code="client.card.number" />:
+	<form:label path="creditCard.number">
+		<spring:message code="client.creditCard.number" />:
 		</form:label>
-	<form:input path="cardNumber" />
-	<form:errors cssClass="error" path="cardNumber" />
+	<form:input path="creditCard.number" />
+	<form:errors cssClass="error" path="creditCard.number" />
 	<br />
 
-	<form:label path="cardBrand">
-		<spring:message code="client.card.brand" />:
+	<form:label path="creditCard.brand">
+		<spring:message code="client.creditCard.brand" />:
 		</form:label>
-	<form:input path="cardBrand" />
-	<form:errors cssClass="error" path="cardBrand" />
+	<form:input path="creditCard.brand" />
+	<form:errors cssClass="error" path="creditCard.brand" />
 	<br />
 
-	<form:label path="cardExpirationMonth">
-		<spring:message code="client.card.expirationMonth" />:
+	<form:label path="creditCard.ExpirationMonth">
+		<spring:message code="client.creditCard.expirationMonth" />:
 		</form:label>
-	<form:input path="cardExpirationMonth" />
-	<form:errors cssClass="error" path="cardExpirationMonth" />
+	<form:input path="creditCard.ExpirationMonth" />
+	<form:errors cssClass="error" path="creditCard.ExpirationMonth" />
 	<br />
 
-	<form:label path="cardExpirationYear">
-		<spring:message code="client.card.expirationYear" />:
+	<form:label path="creditCard.ExpirationYear">
+		<spring:message code="client.creditCard.expirationYear" />:
 		</form:label>
-	<form:input path="cardExpirationYear" />
-	<form:errors cssClass="error" path="cardExpirationYear" />
+	<form:input path="creditCard.ExpirationYear" />
+	<form:errors cssClass="error" path="creditCard.ExpirationYear" />
 	<br />
 
-	<form:label path="cardCVV">
-		<spring:message code="client.card.CVV" />:
+	<form:label path="creditCard.CVV">
+		<spring:message code="client.creditCard.CVV" />:
 		</form:label>
-	<form:input path="cardCVV" />
-	<form:errors cssClass="error" path="cardCVV" />
+	<form:input path="creditCard.CVV" />
+	<form:errors cssClass="error" path="creditCard.CVV" />
 	<br />
 
-	<form:label path="cardHolder">
-		<spring:message code="client.card.holder" />:
+	<form:label path="creditCard.Holder">
+		<spring:message code="client.creditCard.holder" />:
 		</form:label>
-	<form:input path="cardHolder" />
-	<form:errors cssClass="error" path="cardHolder" />
+	<form:input path="creditCard.Holder" />
+	<form:errors cssClass="error" path="creditCard.Holder" />
 	<br />
+	
+	<form:hidden path="inscriptions" />
 
-	<form:label path="gyms">
-		<spring:message code="client.gyms" />:
+	<form:label path="activities">
+		<spring:message code="client.activities" />:
 		</form:label>
-	<form:select id="gyms" path="gyms">
+	<form:select id="activities" path="activities">
 		<form:option value="0" label="----" />
-		<form:options items="${gyms}" itemValue="id" itemLabel="name" />
+		<form:options items="${activities}" itemValue="id" itemLabel="name" />
 	</form:select>
 
 

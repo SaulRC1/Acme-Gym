@@ -140,19 +140,19 @@
 					</security:authorize>
 					<security:authorize access="hasRole('CLIENT')">
 						<li><a
-							href="client/editProfile.do?<security:authentication property="principal.id" />">
+							href="client/editProfile.do?userAccountId=<security:authentication property="principal.id" />">
 								<spring:message code="master.page.profile.edit" />
 						</a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
 						<li><a
-							href="manager/editProfile.do?<security:authentication property="principal.id" />">
+							href="manager/editProfile.do?userAccountId=<security:authentication property="principal.id" />">
 								<spring:message code="master.page.profile.edit" />
 						</a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('TRAINER')">
 						<li><a
-							href="trainer/editProfile.do?<security:authentication property="principal.id" />">
+							href="trainer/editProfile.do?userAccountId=<security:authentication property="principal.id" />">
 								<spring:message code="master.page.profile.edit" />
 						</a></li>
 					</security:authorize>

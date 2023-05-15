@@ -10,12 +10,38 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 
-	<!-- User accounts -->
+	<!-- UserAccount -->
 
-	<bean id="omarUserAccount" class="security.UserAccount">
-		<property name="username" value="admin" />
+	<bean id="omarAdminUserAccount" class="security.UserAccount">
+		<property name="username" value="omaradmin" />
 		<property name="password"
-			value="21232f297a57a5a743894a0e4a801fc3" />
+			value="8412e82f9c64b5a8c8075d85f623d2ae" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="rosaAdminUserAccount" class="security.UserAccount">
+		<property name="username" value="rosaadmin" />
+		<property name="password"
+			value="40fb33b85a817cefeb15f9f74d209a30" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="paulaAdminUserAccount" class="security.UserAccount">
+		<property name="username" value="paulaadmin" />
+		<property name="password"
+			value="0f7f9b0f6ae3beee2166b01cef4ca1fa" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -25,9 +51,9 @@
 		</property>
 	</bean>
 
-	<bean id="pepeUserAccount" class="security.UserAccount">
-		<property name="username" value="pepe" />
-		<property name="password" value="" />
+	<bean id="pepeClientUserAccount" class="security.UserAccount">
+		<property name="username" value="pepeclient" />
+		<property name="password" value="3bfc59fab08729657bba860d379bf0be" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -37,9 +63,9 @@
 		</property>
 	</bean>
 
-	<bean id="albertoUserAccount" class="security.UserAccount">
-		<property name="username" value="alberto" />
-		<property name="password" value="" />
+	<bean id="albertoClientUserAccount" class="security.UserAccount">
+		<property name="username" value="albertoclient" />
+		<property name="password" value="e3eded2139fc71333a264b5bc96dfe58" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -49,9 +75,9 @@
 		</property>
 	</bean>
 
-	<bean id="gerardoUserAccount" class="security.UserAccount">
-		<property name="username" value="gerardo" />
-		<property name="password" value="" />
+	<bean id="gerardoClientUserAccount" class="security.UserAccount">
+		<property name="username" value="gerardoclient" />
+		<property name="password" value="175a272e99bd770e318b29990a224d63" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -61,9 +87,11 @@
 		</property>
 	</bean>
 
-	<bean id="ramiroUserAccount" class="security.UserAccount">
-		<property name="username" value="ramiro" />
-		<property name="password" value="" />
+	<!--  
+
+	<bean id="ramiroTrainerUserAccount" class="security.UserAccount">
+		<property name="username" value="ramirotrainer" />
+		<property name="password" value="3f1a81f9ced38b9c2c0d4a657c4c6962" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -73,9 +101,9 @@
 		</property>
 	</bean>
 
-	<bean id="rafaUserAccount" class="security.UserAccount">
-		<property name="username" value="rafa" />
-		<property name="password" value="" />
+	<bean id="rafaTrainerUserAccount" class="security.UserAccount">
+		<property name="username" value="rafatrainer" />
+		<property name="password" value="85a0dcaed05f8e4459f5a1fc4f619ade" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -85,9 +113,9 @@
 		</property>
 	</bean>
 
-	<bean id="pedroUserAccount" class="security.UserAccount">
-		<property name="username" value="pedro" />
-		<property name="password" value="" />
+	<bean id="pedroTrainerUserAccount" class="security.UserAccount">
+		<property name="username" value="pedrotrainer" />
+		<property name="password" value="16df0efd7f92346033a7d2ec39518fd7" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -96,17 +124,19 @@
 			</list>
 		</property>
 	</bean>
+	
+	-->
 
-	<!-- Other domain beans come here -->
+	<!-- Admin -->
 
-	<bean id="admin1" class="domain.Admin">
+	<bean id="omarAdmin" class="domain.Admin">
 		<property name="userAccount">
-			<ref bean="omarUserAccount" />
+			<ref bean="omarAdminUserAccount" />
 		</property>
 		<property name="firstName" value="Omar" />
 		<property name="lastName" value="Piedrabuena" />
 		<property name="email"
-			value="omar.piedrabuena-admin@hyper-mass.es" />
+			value="omar.piedrabuena@hyper-mass.es" />
 		<property name="phoneNumber" value="+34617746487" />
 		<property name="address"
 			value="Ruta de la piedra 19, Córdoba" />
@@ -114,95 +144,213 @@
 		<property name="city" value="Córdoba" />
 		<property name="country" value="España" />
 	</bean>
-
-	<bean id="client1" class="domain.Client">
+	
+	<bean id="rosaAdmin" class="domain.Admin">
 		<property name="userAccount">
-			<ref bean="pepeUserAccount" />
+			<ref bean="rosaAdminUserAccount" />
+		</property>
+		<property name="firstName" value="Rosa" />
+		<property name="lastName" value="Benitez" />
+		<property name="email"
+			value="rosa.benitez@hyper-mass.es" />
+		<property name="phoneNumber" value="+34619483094" />
+		<property name="address"
+			value="Calle la Real 1, Albacete" />
+		<property name="postalCode" value="38492" />
+		<property name="city" value="Albacete" />
+		<property name="country" value="España" />
+	</bean>
+	
+	<bean id="paulaAdmin" class="domain.Admin">
+		<property name="userAccount">
+			<ref bean="paulaAdminUserAccount" />
+		</property>
+		<property name="firstName" value="Paula" />
+		<property name="lastName" value="Saenz" />
+		<property name="email"
+			value="paula.saenz@hyper-mass.es" />
+		<property name="phoneNumber" value="+34639502848" />
+		<property name="address"
+			value="Calle Puerto 7, Pamplona" />
+		<property name="postalCode" value="38055" />
+		<property name="city" value="Pamplona" />
+		<property name="country" value="España" />
+	</bean>
+	
+	<!-- Client -->
+
+	<bean id="pepeClient" class="domain.Client">
+		<property name="userAccount">
+			<ref bean="pepeClientUserAccount" />
+		</property>
+		<property name="creditCard">
+			<ref bean="pepeCreditCard" />
 		</property>
 		<property name="firstName" value="Pepe" />
 		<property name="lastName" value="Rodriguez" />
 		<property name="email"
-			value="pepe.rodriguez-client@hyper-mass.es" />
-		<property name="phoneNumber" value="+34666666666" />
+			value="pepe.rodriguez@gmail.com" />
+		<property name="phoneNumber" value="+34677105938" />
 		<property name="address" value="Ruta de la sierra, Huelva" />
 		<property name="postalCode" value="21002" />
 		<property name="city" value="Huelva" />
 		<property name="country" value="España" />
 	</bean>
 
-	<bean id="client2" class="domain.Client">
+	<bean id="albertoClient" class="domain.Client">
 		<property name="userAccount">
-			<ref bean="albertoUserAccount" />
+			<ref bean="albertoClientUserAccount" />
+		</property>
+		<property name="creditCard">
+			<ref bean="albertoCreditCard" />
 		</property>
 		<property name="firstName" value="Alberto" />
 		<property name="lastName" value="Guinea" />
 		<property name="email"
-			value="alberto.guinea-client@hyper-mass.es" />
-		<property name="phoneNumber" value="+34666666667" />
+			value="alberto.guinea@gmail.com" />
+		<property name="phoneNumber" value="+34692482142" />
 		<property name="address" value="Calle Victoria, Huelva" />
 		<property name="postalCode" value="21001" />
 		<property name="city" value="Huelva" />
 		<property name="country" value="España" />
 	</bean>
 
-	<bean id="client3" class="domain.Client">
+	<bean id="gerardoClient" class="domain.Client">
 		<property name="userAccount">
-			<ref bean="gerardoUserAccount" />
+			<ref bean="gerardoClientUserAccount" />
+		</property>
+		<property name="creditCard">
+			<ref bean="gerardoCreditCard" />
 		</property>
 		<property name="firstName" value="Gerardo" />
 		<property name="lastName" value="Montes" />
 		<property name="email"
-			value="gerardo.montes-client@hyper-mass.es" />
-		<property name="phoneNumber" value="+34678678678" />
+			value="gerardo.montes@gmail.com" />
+		<property name="phoneNumber" value="+34678836792" />
 		<property name="address" value="Plaza España, Madrid" />
 		<property name="postalCode" value="28001" />
 		<property name="city" value="Madrid" />
 		<property name="country" value="España" />
 	</bean>
+	
+	<!-- Manager -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Trainer -->
 
-	<bean id="trainer1" class="domain.Trainer">
+	<!--<bean id="ramiroTrainer" class="domain.Trainer">
 		<property name="userAccount">
-			<ref bean="ramiroUserAccount" />
+			<ref bean="ramiroTrainerUserAccount" />
 		</property>
 		<property name="firstName" value="Ramiro" />
 		<property name="lastName" value="Fernandez" />
 		<property name="email"
-			value="ramiro.fernandez-trainer@hyper-mass.es" />
-		<property name="phoneNumber" value="+34679679679" />
+			value="ramiro.fernandez@hyper-mass.es" />
+		<property name="phoneNumber" value="+34692837100" />
 		<property name="address" value="Plaza de la merced, Valencia" />
 		<property name="postalCode" value="22002" />
 		<property name="city" value="Valencia" />
 		<property name="country" value="España" />
 	</bean>
 
-	<bean id="trainer2" class="domain.Trainer">
+	<bean id="rafaTrainer" class="domain.Trainer">
 		<property name="userAccount">
-			<ref bean="rafaUserAccount" />
+			<ref bean="rafaTrainerUserAccount" />
 		</property>
 		<property name="firstName" value="Rafa" />
 		<property name="lastName" value="Torres" />
 		<property name="email"
-			value="rafa.torres-trainer@hyper-mass.es" />
-		<property name="phoneNumber" value="+34677777777" />
+			value="rafa.torres@hyper-mass.es" />
+		<property name="phoneNumber" value="+34610499283" />
 		<property name="address" value="Calle Gines, Sevilla" />
 		<property name="postalCode" value="24002" />
 		<property name="city" value="Sevilla" />
 		<property name="country" value="España" />
 	</bean>
 
-	<bean id="trainer3" class="domain.Trainer">
+	<bean id="pedroTrainer" class="domain.Trainer">
 		<property name="userAccount">
-			<ref bean="pedroUserAccount" />
+			<ref bean="pedroTrainerUserAccount" />
 		</property>
 		<property name="firstName" value="Pedro" />
 		<property name="lastName" value="Soria" />
 		<property name="email"
-			value="pedro.soria-trainer@hyper-mass.es" />
-		<property name="phoneNumber" value="+34699999999" />
+			value="pedro.soria@hyper-mass.es" />
+		<property name="phoneNumber" value="+34614256826" />
 		<property name="address" value="Cuesta del Álamo, Málaga" />
 		<property name="postalCode" value="29551" />
 		<property name="city" value="Málaga" />
 		<property name="country" value="España" />
-	</bean>
+	</bean>-->
+	
+	<!-- Gym -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Activity -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Training -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Step -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Inscription -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Curriculum -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- SocialIdentity -->
+	
+	<!-- TODO -->
+	
+	
+	<!-- Annotation -->
+	
+	<!-- TODO -->
+	
+	<!-- CreditCard -->
+	
+	<bean id="pepeCreditCard" class="domain.CreditCard">
+        <property name="holder" value="Pepe Rodriguez"/>
+        <property name="brand" value="MASTERCARD"/>
+        <property name="number" value="2224567890123456"/>
+        <property name="expirationMonth" value="12"/>
+        <property name="expirationYear" value="2025"/>
+        <property name="CVV" value="321"/>
+    </bean>
+
+    <bean id="albertoCreditCard" class="domain.CreditCard">
+        <property name="holder" value="Alberto Guinea"/>
+        <property name="brand" value="VISA"/>
+        <property name="number" value="5391040029856192"/>
+        <property name="expirationMonth" value="11"/>
+        <property name="expirationYear" value="2026"/>
+        <property name="CVV" value="213"/>
+    </bean>
+    
+    <bean id="gerardoCreditCard" class="domain.CreditCard">
+        <property name="holder" value="Gerardo Montes"/>
+        <property name="brand" value="VISA"/>
+        <property name="number" value="4189787629856601"/>
+        <property name="expirationMonth" value="11"/>
+        <property name="expirationYear" value="2026"/>
+        <property name="CVV" value="213"/>
+    </bean>
 
 </beans>
