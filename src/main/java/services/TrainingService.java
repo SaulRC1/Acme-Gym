@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import domain.Gym;
 import domain.Training;
@@ -24,7 +25,11 @@ public class TrainingService {
 		return new Training();
 	}
 
-	public void delete(Training training) {
+	public void delete(final Training training) {
+		Assert.notNull(training);
+		Assert.isTrue(training.getId() != 0);
+		Assert.isTrue(this.trainingRepository.exists(training.getId()));
+
 		this.trainingRepository.delete(training);
 	}
 	/*
@@ -36,27 +41,49 @@ public class TrainingService {
 	 * }
 	 */
 
-	public Training findOne(int trainingId) {
-		return this.trainingRepository.findOne(trainingId);
+	public Training findOne(final int trainingId) {
+		Assert.isTrue(trainingId != 0);
+
+		Training result;
+
+		result = this.trainingRepository.findOne(trainingId);
+		Assert.notNull(result);
+
+		return result;
 	}
 
-	public Collection<Training> findTrainingsByTitle(String title) {
+	public Collection<Training> findTrainingsByTitle(final String title) {
 		return this.trainingRepository.findByTitle(title);
 	}
 
-	public Collection<Training> findTrainingsByGym(Gym gym) {
+	public Collection<Training> findTrainingsByGym(final Gym gym) {
+		Assert.isTrue(!gym.getTrainings().isEmpty());
+
 		return this.trainingRepository.findByGym(gym);
 	}
 
-	public Collection<Training> findTrainingsByStepDescriptionContaining(String keyword) {
+	public Collection<Training> findTrainingsByStepDescriptionContaining(final String keyword) {
 		return this.trainingRepository.findByStepDescriptionContaining(keyword);
 	}
 
 	public Collection<Training> findAll() {
-		return this.trainingRepository.findAll();
+		Collection<Training> result;
+
+		result = this.trainingRepository.findAll();
+		Assert.notNull(result);
+
+		return result;
 	}
 
 	public Training save(final Training training) {
-		return this.trainingRepository.save(training);
+		Assert.notNull(training);
+
+		Training result;
+
+		Assert.isTrue(!training.getGym().getTrainings().contains(training));
+
+		result = this.trainingRepository.save(training);
+
+		return result;
 	}
 }

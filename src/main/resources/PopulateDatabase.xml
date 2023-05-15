@@ -348,6 +348,24 @@
 		<property name="postalCode" value="22002" />
 		<property name="city" value="Valencia" />
 		<property name="country" value="España" />
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="curriculum">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="gym">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="rafaTrainer" class="domain.Trainer">
@@ -363,6 +381,24 @@
 		<property name="postalCode" value="24002" />
 		<property name="city" value="Sevilla" />
 		<property name="country" value="España" />
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="curriculum">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="gym">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="pedroTrainer" class="domain.Trainer">
@@ -378,9 +414,159 @@
 		<property name="postalCode" value="29551" />
 		<property name="city" value="Málaga" />
 		<property name="country" value="España" />
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="curriculum">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="gym">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Gym -->
+	
+	<bean id="gym1" class="domain.Gymº">
+        <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
+        <property name="address" value="Ruta de la piedra 19, Córdoba" />
+        <property name="name" value="Hyper-Mass"/>
+        <property name="fee" value="50.0" />
+        <property name="active" value="true"/>
+        <property name="trainers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+        <property name="managers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="inscriptions">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="trainings">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+    </bean>
+    
+    <bean id="gym2" class="domain.Gymº">
+        <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
+        <property name="address" value="Av Hispano América 4, Huelva" />
+        <property name="name" value="OkeyMas"/>
+        <property name="fee" value="37.5" />
+        <property name="active" value="true"/>
+        <property name="trainers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="managers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="inscriptions">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="trainings">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+    </bean>
+    
+    <bean id="gym3" class="domain.Gymº">
+        <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
+        <property name="address" value="Plaza de las monjas, Huelva" />
+        <property name="name" value="Basic Fit"/>
+        <property name="fee" value="20.0" />
+        <property name="active" value="true"/>
+        <property name="trainers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="managers">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="inscriptions">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+		<property name="trainings">
+			<list>
+				<ref bean="" />
+				<ref bean="" />
+			</list>
+		</property>
+    </bean>
 	
 	<!-- TODO -->
 	
@@ -476,6 +662,39 @@
 	
 	
 	<!-- Inscription -->
+	
+	<bean id="inscription1" class="domain.Inscription">
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="client">
+			<ref bean="" />
+		</property>
+		<property name="singUpDate" value="2023, 1, 1"/>
+		<property name="singOutDate" value="2023, 12, 31"/>
+	</bean>
+	
+	<bean id="inscription2" class="domain.Inscription">
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="client">
+			<ref bean="" />
+		</property>
+		<property name="singUpDate" value="2023, 1, 1"/>
+		<property name="singOutDate" value="2023, 12, 31"/>
+	</bean>
+	
+	<bean id="inscription3" class="domain.Inscription">
+		<property name="gym">
+			<ref bean="" />
+		</property>
+		<property name="client">
+			<ref bean="" />
+		</property>
+		<property name="singUpDate" value="2023, 1, 1"/>
+		<property name="singOutDate" value="2023, 12, 31"/>
+	</bean>
 	
 	<!-- TODO -->
 	

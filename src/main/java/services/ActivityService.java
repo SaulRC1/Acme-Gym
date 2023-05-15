@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import domain.Activity;
 import repositories.ActivityRepository;
@@ -24,18 +25,42 @@ public class ActivityService {
 	}
 
 	public Collection<Activity> findAll() {
-		return this.activityRepository.findAll();
+		Collection<Activity> result;
+
+		result = this.activityRepository.findAll();
+		Assert.notNull(result);
+
+		return result;
 	}
 
 	public Activity findOne(final int activityId) {
-		return this.activityRepository.findOne(activityId);
+		Assert.isTrue(activityId != 0);
+
+		Activity result;
+
+		result = this.activityRepository.findOne(activityId);
+		Assert.notNull(result);
+
+		return result;
 	}
 
 	public Activity save(final Activity activity) {
-		return this.activityRepository.save(activity);
+		Assert.notNull(activity);
+
+		Activity result;
+
+		Assert.isTrue(!activity.getGym().getActivities().contains(activity));
+
+		result = this.activityRepository.save(activity);
+
+		return result;
 	}
 
 	public void delete(final Activity activity) {
+		Assert.notNull(activity);
+		Assert.isTrue(activity.getId() != 0);
+		Assert.isTrue(this.activityRepository.exists(activity.getId()));
+
 		this.activityRepository.delete(activity);
 	}
 }
