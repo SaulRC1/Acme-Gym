@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Activity;
 import domain.Annotation;
 import domain.Gym;
 import domain.Step;
@@ -90,6 +91,21 @@ public class TrainingController extends AbstractController {
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(training, "training.commit.error");
 		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
+	public ModelAndView listbyGymId(@RequestParam Gym gym) {
+		ModelAndView result;
+		Collection<Training> trainings;
+
+		trainings = gym.getTrainings();
+
+		result = new ModelAndView("training/list");
+		result.addObject("trainings", trainings);
+		result.addObject("gym", gym);
+		result.addObject("requestURI", "training/list.do");
+
 		return result;
 	}
 
