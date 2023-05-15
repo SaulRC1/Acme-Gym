@@ -100,7 +100,7 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbyGymId", method = RequestMethod.GET)
+	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
 	public ModelAndView listbyGymId(@RequestParam Gym gym) {
 		ModelAndView result;
 		Collection<Activity> activities;

@@ -113,6 +113,21 @@ public class TrainerController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView listbyActivity(@RequestParam Activity activity) {
+		ModelAndView result;
+		Collection<Trainer> trainers;
+
+		trainers = this.trainerService.findbyActivity(activity);
+
+		result = new ModelAndView("trainer/list");
+		result.addObject("trainers", trainers);
+		result.addObject("activity", activity);
+		result.addObject("requestURI", "trainer/list.do");
+
+		return result;
+	}
+	
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;
 		result = this.createEditModelAndView(trainer, null);
