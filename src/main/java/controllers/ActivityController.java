@@ -100,6 +100,21 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listbyGymId", method = RequestMethod.GET)
+	public ModelAndView listbyGymId(@RequestParam Gym gym) {
+		ModelAndView result;
+		Collection<Activity> activities;
+
+		activities = gym.getActivities();
+
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("gym", gym);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+
 	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
 		result = this.createEditModelAndView(activity, null);
