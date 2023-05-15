@@ -108,7 +108,23 @@ public class TrainingController extends AbstractController {
 
 		return result;
 	}
+	
+	/*
+	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
+	public ModelAndView listbykeyword() {
+		ModelAndView result;
+		Collection<Training> trainings;
+		Repasar que la keyword solo tenga una palabra y no varias
+		trainings = this.trainingService.findbykeyword(String keyword);
 
+		result = new ModelAndView("training/list");
+		result.addObject("trainings", trainings);
+		result.addObject("requestURI", "training/list.do");
+
+		return result;
+	}
+	 */
+	
 	protected ModelAndView createEditModelAndView(final Training training) {
 		ModelAndView result;
 		result = this.createEditModelAndView(training, null);

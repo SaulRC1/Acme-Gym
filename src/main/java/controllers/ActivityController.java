@@ -114,6 +114,22 @@ public class ActivityController extends AbstractController {
 
 		return result;
 	}
+	
+	/*
+	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
+	public ModelAndView listbykeyword(@RequestParam String keyword) {
+		ModelAndView result;
+		Collection<Activity> activities;
+
+		activities = this.activityService.listbykeyword();
+
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+	*/
 
 	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
