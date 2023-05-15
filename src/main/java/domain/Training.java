@@ -42,7 +42,7 @@ public class Training extends DomainEntity {
     }
 
     @OneToMany(mappedBy = "training", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Collection<Annotation> getAnotations() {
+    public Collection<Annotation> getAnnotations() {
 	return this.annotations;
     }
 
@@ -68,8 +68,8 @@ public class Training extends DomainEntity {
 	return this.title;
     }
 
-    public void setAnotations(final Collection<Annotation> anotations) {
-	this.annotations = anotations;
+    public void setAnnotations(final Collection<Annotation> annotations) {
+	this.annotations = annotations;
     }
 
     public void setDescription(final String description) {

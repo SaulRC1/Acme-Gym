@@ -11,8 +11,21 @@
 		        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd     ">
 		       
-	 <context:component-scan base-package="configuration"/>         
-	 <import resource="classpath:configuration/xml/ConversionConfiguration.java"/>
+	 <!-- <context:component-scan base-package="configuration"/> -->         
+	 <!-- <import resource="classpath:configuration/xml/ConversionConfiguration.java"/> -->
+	 
+	 <bean id="localTimeEditor" class="configuration.xml.LocalTimeEditor"/>
+	 <bean id="localDateEditor" class="configuration.xml.LocalDateEditor"/>
+
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+    	<property name="customEditors">
+        	<map>
+            	<entry key="java.time.LocalTime" value="configuration.xml.LocalTimeEditor"/>
+            	<entry key="java.time.LocalDate" value="configuration.xml.LocalDateEditor"/>
+        	</map>
+    	</property>
+	</bean>
+	 
 
 	<!-- UserAccount -->
 
