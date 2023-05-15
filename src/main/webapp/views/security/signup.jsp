@@ -16,9 +16,13 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="j_spring_security_check" modelAttribute="credentials">
+<form:form action="security/signup.do" modelAttribute="userAccount">
 
-	<!--
+	<form:select id="actor" path="actor">
+		<form:option value="client" label="CLIENT" />
+		<form:option value="trainer" label="TRAINER" />
+	</form:select>
+
 	<form:label path="username">
 		<spring:message code="security.username" />
 	</form:label>
@@ -32,14 +36,13 @@
 	<form:password path="password" />	
 	<form:errors class="error" path="password" />
 	<br />
-	
-	<jstl:if test="${showError == true}">
-		<div class="error">
-			<spring:message code="security.login.failed" />
-		</div>
-	</jstl:if>
-	-->
-	
-	<input type="submit" value="<spring:message code="security.login" />" />
-	
+
+	<!-- Generic buttons -->
+	<input type="submit" name="signup"
+		value="<spring:message code="form.register" />" />&nbsp; 
+
+	<input type="button" name="cancel"
+		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir('welcome/index.do');" />
+	<br />
+
 </form:form>
