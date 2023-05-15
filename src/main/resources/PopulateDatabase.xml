@@ -436,7 +436,7 @@
 	
 	<!-- Gym -->
 	
-	<bean id="gym1" class="domain.Gymº">
+	<bean id="gym1" class="domain.Gym">
         <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
         <property name="address" value="Ruta de la piedra 19, Córdoba" />
         <property name="name" value="Hyper-Mass"/>
@@ -450,8 +450,8 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation1" />
+				<ref bean="annotation2" />
 			</list>
 		</property>
         <property name="managers">
@@ -468,19 +468,18 @@
 		</property>
 		<property name="inscriptions">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="inscription1" />
 			</list>
 		</property>
 		<property name="trainings">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="training1" />
+				<ref bean="training2" />
 			</list>
 		</property>
     </bean>
     
-    <bean id="gym2" class="domain.Gymº">
+    <bean id="gym2" class="domain.Gym">
         <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
         <property name="address" value="Av Hispano América 4, Huelva" />
         <property name="name" value="OkeyMas"/>
@@ -494,8 +493,8 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation3" />
+				<ref bean="annotation4" />
 			</list>
 		</property>
 		<property name="managers">
@@ -518,13 +517,13 @@
 		</property>
 		<property name="trainings">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="training3" />
+				<ref bean="training4" />
 			</list>
 		</property>
     </bean>
     
-    <bean id="gym3" class="domain.Gymº">
+    <bean id="gym3" class="domain.Gym">
         <property name="logo" value="/Acme-Gym/src/main/webapp/images/logo.png" />
         <property name="address" value="Plaza de las monjas, Huelva" />
         <property name="name" value="Basic Fit"/>
@@ -538,8 +537,7 @@
 		</property>
 		<property name="annotations">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="annotation5" />
 			</list>
 		</property>
 		<property name="managers">
@@ -562,8 +560,8 @@
 		</property>
 		<property name="trainings">
 			<list>
-				<ref bean="" />
-				<ref bean="" />
+				<ref bean="training5" />
+				<ref bean="training6" />
 			</list>
 		</property>
     </bean>
@@ -653,22 +651,305 @@
 	
 	<!-- Training -->
 	
-	<!-- TODO -->
+	<bean id="training1" class="domain.Training">
+		<property name="title" value="Entrenamiento Torso Principiante" />
+		<property name="description" value="Entrenamiento de los principales 
+		grupos musculares que componen el torso." />
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step1" />
+				<ref bean="step2" />
+				<ref bean="step3" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation1" />
+			</list>
+		</property>
+	</bean>
 	
+	<bean id="training2" class="domain.Training">
+		<property name="title" value="Entrenamiento Pierna Principiante" />
+		<property name="description" value="Entrenamiento de los principales grupos musculares que
+		componen las piernas" />
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step4" />
+				<ref bean="step5" />
+				<ref bean="step6" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="training3" class="domain.Training">
+		<property name="title" value="Entrenamiento Abdomen Principiante" />
+		<property name="description" value="Entrenamiento de abdomen para principiantes." />
+		<property name="gym">
+			<ref bean="gym2" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step7" />
+				<ref bean="step8" />
+				<ref bean="step9" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation3" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="training4" class="domain.Training">
+		<property name="title" value="Entrenamiento Full-Body Intermedio" />
+		<property name="description" value="Entrenamiento de cuerpo completo para atletas con nivel intermedio." />
+		<property name="gym">
+			<ref bean="gym2" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step10" />
+				<ref bean="step11" />
+				<ref bean="step12" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation4" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="training5" class="domain.Training">
+		<property name="title" value="Entrenamiento Calistenia Full-Body Principiante" />
+		<property name="description" value="Entrenamiento de cuerpo completo para principiantes en el mundo de la calistenia." />
+		<property name="gym">
+			<ref bean="gym3" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step13" />
+				<ref bean="step14" />
+				<ref bean="step15" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation5" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="training6" class="domain.Training">
+		<property name="title" value="Entrenamiento Calistenia Full-Body Intermedio" />
+		<property name="description" value="Entrenamiento de cuerpo completo para aquellos con experiencia 
+		en el mundo de la calistenia." />
+		<property name="gym">
+			<ref bean="gym3" />
+		</property>
+		<property name="steps">
+			<list>
+				<ref bean="step16" />
+				<ref bean="step17" />
+				<ref bean="step18" />
+			</list>
+		</property>
+	</bean>
 	
 	<!-- Step -->
 	
-	<!-- TODO -->
+	<bean id="step1" class="domain.Step">
+		<property name="number" value="1" />
+		<property name="description" value="Realizar dominadas, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/8mhDd9Ahl1M" />
+	</bean>
+	
+	<bean id="step2" class="domain.Step">
+		<property name="number" value="2" />
+		<property name="description" value="Realizar flexiones, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/izNxOxVrUc4" />
+	</bean>
+	
+	<bean id="step3" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar fondos de triceps en banco, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/bR9d6yRH3iA" />
+	</bean>
+	
+	<bean id="step4" class="domain.Step">
+		<property name="number" value="1" />
+		<property name="description" value="Realizar sentadilla sin peso, con apoyo en estructura, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/AO99m52vrTM" />
+	</bean>
+	
+	<bean id="step5" class="domain.Step">
+		<property name="number" value="2" />
+		<property name="description" value="Realizar zancadas sin peso, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/IG3uyG_62D4" />
+	</bean>
+	
+	<bean id="step6" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar patada de glúteo en polea, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/vHY4JUtKiFc" />
+	</bean>
+	
+	<bean id="step7" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar plancha abdominal, 3 sets de 30 segundos" />
+		<property name="tutorial" value="https://youtu.be/d0atctiI7Vw" />
+	</bean>
+	
+	<bean id="step8" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar plancha lateral, 3 sets de 30 segundos." />
+		<property name="tutorial" value="https://youtu.be/2Oko68u9PaE" />
+	</bean>
+	
+	<bean id="step9" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar alzamiento de rodillas colgado en barra, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/iC_fu-XjNPo" />
+	</bean>
+	
+	<bean id="step10" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar dominadas lastradas, 3 sets de 8 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/YmPIrEhp2wU" />
+	</bean>
+	
+	<bean id="step11" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar press banca, 3 sets de 8 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/Kpy3Lt5vPDE" />
+	</bean>
+	
+	<bean id="step12" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar press de pierna, 3 sets de 8 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/bKcV1I5rB_g" />
+	</bean>
+	
+	<bean id="step13" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar dominada australiana, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/SiFDeqGVmsA" />
+	</bean>
+	
+	<bean id="step14" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar flexiones con apoyo de rodillas, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/uWnPjvnDooE" />
+	</bean>
+	
+	<bean id="step15" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar zancada búlgara, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtube.com/shorts/N-uhG1Tih1g?feature=share" />
+	</bean>
+	
+	<bean id="step16" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar dominada, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/8mhDd9Ahl1M" />
+	</bean>
+	
+	<bean id="step17" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar flexiones, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/izNxOxVrUc4" />
+	</bean>
+	
+	<bean id="step18" class="domain.Step">
+		<property name="number" value="3" />
+		<property name="description" value="Realizar sentadilla con salto, 3 sets de 5 repeticiones." />
+		<property name="tutorial" value="https://youtu.be/PQkr_jS84-0" />
+	</bean>
+	
+	<!-- Annotations -->
+	
+	<bean id="annotation1" class="domain.Annotation">
+		<property name="date" value="2023-07-14" />
+		<property name="text" value="Muy buen entrenamiento." />
+		<property name="mark" value="3" />
+		<property name="training">
+			<ref bean="training1" />
+		</property>
+		<property name="actor">
+			<ref bean="pepeClient" />
+		</property>
+	</bean>
+	
+	<bean id="annotation2" class="domain.Annotation">
+		<property name="date" value="2023-06-10" />
+		<property name="text" value="Le falta algún ejercicio más, pero está bien." />
+		<property name="mark" value="2" />
+		<property name="training">
+			<ref bean="training2" />
+		</property>
+		<property name="actor">
+			<ref bean="pepeClient" />
+		</property>
+	</bean>
+	
+	<bean id="annotation3" class="domain.Annotation">
+		<property name="date" value="2023-08-15" />
+		<property name="text" value="Algo mediocre." />
+		<property name="mark" value="1" />
+		<property name="training">
+			<ref bean="training3" />
+		</property>
+		<property name="actor">
+			<ref bean="albertoClient" />
+		</property>
+	</bean>
+	
+	<bean id="annotation4" class="domain.Annotation">
+		<property name="date" value="2023-05-18" />
+		<property name="text" value="Bueno." />
+		<property name="mark" value="3" />
+		<property name="training">
+			<ref bean="training4" />
+		</property>
+		<property name="actor">
+			<ref bean="albertoClient" />
+		</property>
+	</bean>
+	
+	<bean id="annotation5" class="domain.Annotation">
+		<property name="date" value="2023-06-21" />
+		<property name="text" value="Normalillo." />
+		<property name="mark" value="2" />
+		<property name="training">
+			<ref bean="training5" />
+		</property>
+		<property name="actor">
+			<ref bean="gerardoClient" />
+		</property>
+	</bean>
 	
 	
 	<!-- Inscription -->
 	
 	<bean id="inscription1" class="domain.Inscription">
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym1" />
 		</property>
 		<property name="client">
-			<ref bean="" />
+			<ref bean="pepeClient" />
 		</property>
 		<property name="singUpDate" value="2023, 1, 1"/>
 		<property name="singOutDate" value="2023, 12, 31"/>
@@ -676,10 +957,10 @@
 	
 	<bean id="inscription2" class="domain.Inscription">
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym2" />
 		</property>
 		<property name="client">
-			<ref bean="" />
+			<ref bean="albertoClient" />
 		</property>
 		<property name="singUpDate" value="2023, 1, 1"/>
 		<property name="singOutDate" value="2023, 12, 31"/>
@@ -687,10 +968,10 @@
 	
 	<bean id="inscription3" class="domain.Inscription">
 		<property name="gym">
-			<ref bean="" />
+			<ref bean="gym3" />
 		</property>
 		<property name="client">
-			<ref bean="" />
+			<ref bean="gerardoClient" />
 		</property>
 		<property name="singUpDate" value="2023, 1, 1"/>
 		<property name="singOutDate" value="2023, 12, 31"/>
