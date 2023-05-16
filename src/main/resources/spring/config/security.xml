@@ -68,6 +68,7 @@
 		<security:intercept-url pattern="/gym/edit.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/activity/listByGymId.do" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/edit.do" access="permitAll" />
 		

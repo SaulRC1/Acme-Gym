@@ -41,11 +41,11 @@
 	<form:errors cssClass="error" path="description" />
 	<br />
 	
-	<form:label path="weekDays">
-		<spring:message code="activity.weekDays" />:
+	<form:label path="daysOfWeek">
+		<spring:message code="activity.daysOfWeek" />:
 	</form:label>
-	<form:input path="weekDays" />
-	<form:errors cssClass="error" path="weekDays" />
+	<form:input path="daysOfWeek" />
+	<form:errors cssClass="error" path="daysOfWeek" />
 	<br />
 	
 	<form:label path="startHour">

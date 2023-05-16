@@ -29,16 +29,16 @@
 		</display:column>
 	</security:authorize>
 	
-	<display:column property="logo" titleKey="gym.logo" />
+	<display:column titleKey="gym.logo">
+		<img src="${gym.logo}" alt="Italian Trulli" width="100">
+	</display:column>
 	<display:column property="name" titleKey="gym.name" />
 	<display:column property="address" titleKey="gym.address" />
 	<display:column property="fee" titleKey="gym.fee" />
 	
-	<security:authorize access="hasRole('MANAGER')">
-		<display:column>
-			<a href="activities/list.do?gym=${gym}"> <spring:message
+	<display:column>
+			<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
 					code="activities" /></a>
-		</display:column>
-	</security:authorize>
+	</display:column>
 	
 </display:table>

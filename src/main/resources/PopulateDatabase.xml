@@ -612,7 +612,7 @@
 	<!-- GYMS -->
 	
 	<bean id="gym1" class="domain.Gym">
-		<property name="logo" value="" />
+		<property name="logo" value="https://img.freepik.com/vector-premium/fitness-center-logo-deporte-fitness-logo-design-gym-logo-icon-design-vector-stock_279597-366.jpg?w=2000" />
 		<property name="address"
 			value="Ruta de la piedra 19, Córdoba" />
 		<property name="name" value="Hyper-Mass" />
@@ -646,7 +646,7 @@
 	</bean>
 
 	<bean id="gym2" class="domain.Gym">
-		<property name="logo" value="" />
+		<property name="logo" value="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gym-fitness-center-video-logo-social-media-design-template-f9566537b0445b719d2c9ae5b4264d3c_screen.jpg?ts=1589533347" />
 		<property name="address" value="Av Hispano América 4, Huelva" />
 		<property name="name" value="OkeyMas" />
 		<property name="fee" value="37.5" />
@@ -679,7 +679,7 @@
 	</bean>
 	
 	<bean id="gym3" class="domain.Gym">
-		<property name="logo" value="" />
+		<property name="logo" value="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/gym-fitness-instagram-logo-design-template-e5f9ed44e1b01c961dc5243e901dd95a_screen.jpg?ts=1600476712" />
 		<property name="address" value="Plaza de las monjas, Huelva" />
 		<property name="name" value="Basic Fit" />
 		<property name="fee" value="20.0" />
