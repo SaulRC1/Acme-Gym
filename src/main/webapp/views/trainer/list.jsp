@@ -42,6 +42,6 @@
 
 
 	<!-- Trainer Gym column -->
-	<display:column property="gym" titleKey="actor.gym" />
+	<display:column property="gym" titleKey="gym" />
 
 </display:table>

@@ -21,6 +21,15 @@
 <display:table name="trainings" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
+	<display:column property="title" titleKey="training.title" />
+	<display:column property="description" titleKey="training.description" />
+
+	<display:column>
+		<a href="step/list.do?steps=${steps}"> <spring:message
+				code="training.steps" /></a>
+	</display:column>
+
+
 	<!-- Edit column -->
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
@@ -28,7 +37,7 @@
 					code="manager.edit" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 	<!-- TODO -->
 
 </display:table>

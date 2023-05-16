@@ -1,14 +1,17 @@
 #./src/main/resources/Entities.map
-#Mon May 15 13:35:06 CEST 2023
-paulaAdminUserAccount=15
-rosaAdmin=20
-paulaAdmin=21
-albertoClientUserAccount=17
-rosaAdminUserAccount=14
-albertoClient=23
-gerardoClientUserAccount=18
-omarAdmin=19
-omarAdminUserAccount=13
-pepeClient=22
-pepeClientUserAccount=16
-gerardoClient=24
+#Tue May 16 14:34:58 CEST 2023
+inscription1=63
+pilatesActivity=56
+curriculumTrainerRamiro=61
+rocioManagerUserAccount=50
+gym2=59
+annotation1=54
+MartaManager=51
+gym1=55
+martaManagerUserAccount=49
+training1=58
+RocioManager=52
+ramiroTrainer=57
+pepeClient=62
+pepeClientUserAccount=53
+ramiroTrainerUserAccount=60

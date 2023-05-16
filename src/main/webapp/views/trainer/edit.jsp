@@ -83,11 +83,11 @@
 
 	<!-- Trainers inputs -->
 	<form:label path="gym">
-		<spring:message code="trainer.gym" />:
+		<spring:message code="gym" />:
 		</form:label>
-	<form:select id="gyms" path="gyms">
+	<form:select id="gym" path="gym">
 		<form:option value="0" label="----" />
-		<form:options items="${gyms}" itemValue="id" itemLabel="name" />
+		<form:options items="${gym}" itemValue="id" itemLabel="name" />
 	</form:select>
 
 

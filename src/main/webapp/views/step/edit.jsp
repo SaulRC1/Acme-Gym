@@ -18,36 +18,26 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="gym/edit.do" modelAttribute="gym">
+<form:form action="step/edit.do" modelAttribute="step">
 
 	<!-- Gym inputs -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	
-	<form:hidden path="active" />
-	<form:hidden path="activities" />
-	<form:hidden path="gym" />
-	<form:hidden path="logo" />
 
-	<form:label path="address">
-		<spring:message code="gym.address" />:
+	<form:hidden path="number" />
+
+	<form:label path="description">
+		<spring:message code="step.description" />:
 	</form:label>
-	<form:input path="address" />
-	<form:errors cssClass="error" path="address" />
+	<form:input path="description" />
+	<form:errors cssClass="error" path="description" />
 	<br />
 
-	<form:label path="name">
-		<spring:message code="gym.name" />:
+	<form:label path="tutorial">
+		<spring:message code="step.tutorial" />:
 	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
-	<br />
-
-	<form:label path="fee">
-		<spring:message code="gym.fee" />:
-	</form:label>
-	<form:input path="fee" />
-	<form:errors cssClass="error" path="fee" />
+	<form:input path="tutorial" />
+	<form:errors cssClass="error" path="tutorial" />
 	<br />
 
 	<!-- Generic buttons -->
@@ -55,9 +45,9 @@
 		value="<spring:message code="form.save" />" />&nbsp; 
 	
 	<input type="submit" name="save"
-		value="<spring:message code="form.save" />" ${gym.activate = false} />&nbsp; 
+		value="<spring:message code="form.save" />" ${step.activate = false} />&nbsp; 
 	
-	<jstl:if test="${gym.id != 0}">
+	<jstl:if test="${step.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="form.delete" />"
 			onclick="return confirm('<spring:message code="form.confirm.delete" />')">&nbsp;

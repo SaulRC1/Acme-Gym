@@ -112,7 +112,7 @@ public class TrainerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	/**@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listbyActivity(@RequestParam final Activity activity) {
 		ModelAndView result;
 		Collection<Trainer> trainers;
@@ -125,7 +125,7 @@ public class TrainerController extends AbstractController {
 		result.addObject("requestURI", "trainer/list.do");
 
 		return result;
-	}
+	}**/
 
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;

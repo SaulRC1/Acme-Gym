@@ -42,6 +42,6 @@
 
 
 	<!-- Managers Gyms columns -->
-	<display:column property="gyms" titleKey="manager.gyms" />
+	<display:column property="gyms" titleKey="gyms" />
 
 </display:table>

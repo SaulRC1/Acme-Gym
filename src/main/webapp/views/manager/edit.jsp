@@ -86,7 +86,7 @@
 		</form:label>
 	<form:checkbox id="banned" path="banned" />
 	<form:label path="gyms">
-		<spring:message code="manager.gyms" />:
+		<spring:message code="gyms" />:
 		</form:label>
 	<form:select id="gyms" path="gyms">
 		<form:option value="0" label="----" />
