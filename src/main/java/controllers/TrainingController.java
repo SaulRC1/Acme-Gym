@@ -111,11 +111,11 @@ public class TrainingController extends AbstractController {
 	
 	/*
 	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
-	public ModelAndView listbykeyword() {
+	public ModelAndView listbykeyword(@RequestParam String keyword) {
 		ModelAndView result;
 		Collection<Training> trainings;
 		Repasar que la keyword solo tenga una palabra y no varias
-		trainings = this.trainingService.findbykeyword(String keyword);
+		trainings = this.trainingService.findbykeyword(keyword);
 
 		result = new ModelAndView("training/list");
 		result.addObject("trainings", trainings);

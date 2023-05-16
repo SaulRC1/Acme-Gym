@@ -114,7 +114,19 @@ public class GymController extends AbstractController {
 		}
 		return result;
 	}
-
+	
+	/*
+	@RequestMapping(value = "/list", method = RequestMethod.POST, params = "cancel")
+	public ModelAndView cancel(@RequestParam final int gymId) {
+		ModelAndView result;
+		Collection<Gym> gyms;
+		gyms = this.gymService.cancelGym(gymId);
+		result = new ModelAndView("gym/list");
+		result.addObject("gyms", gyms);
+		result.addObject("requestURI", "gym/list.do");
+	}
+	 */
+	
 	protected ModelAndView createEditModelAndView(final Gym gym) {
 		ModelAndView result;
 		result = this.createEditModelAndView(gym, null);

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.time.LocalTime;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -100,6 +101,7 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
+	/*
 	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
 	public ModelAndView listbyGymId(@RequestParam Gym gym) {
 		ModelAndView result;
@@ -115,13 +117,28 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 	
-	/*
+	
 	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
 	public ModelAndView listbykeyword(@RequestParam String keyword) {
 		ModelAndView result;
 		Collection<Activity> activities;
 
 		activities = this.activityService.listbykeyword();
+
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+	
+	Revisar el tema de pedir una hora y un dia
+	@RequestMapping(value = "/listbyhourorday", method = RequestMethod.GET)
+	public ModelAndView listbyHourOrDay(@RequestParam LocalTime time) {
+		ModelAndView result;
+		Collection<Activity> activities;
+
+		activities = this.activityService.listbyHourOrDay();
 
 		result = new ModelAndView("activity/list");
 		result.addObject("activities", activities);
