@@ -51,7 +51,7 @@ public class ActivityService {
 
 		Activity result;
 
-		Assert.isTrue(!activity.getGym().getActivities().contains(activity));
+		//Assert.isTrue(!activity.getGym().getActivities().contains(activity));
 
 		result = this.activityRepository.save(activity);
 

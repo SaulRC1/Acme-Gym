@@ -19,35 +19,34 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <display:table name="gyms" id="gym" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">-->
-
-	<!--  Edit column -->
-	<security:authorize access="hasRole('MANAGER')">
-		<display:column>
-			<a href="gym/edit.do?gymId=${gym.id}"> <spring:message
-					code="row.edit" /></a>
-		</display:column>
-		<!--  
-		<display:column>
-			<a href="gym/cancelGym?gymId=${gym.id}"> <spring:message
-					code="cancel" />
-			</a>
-		</display:column>-->
-	</security:authorize>
-
+	pagesize="5" class="displaytag">
 	<display:column titleKey="gym.logo">
 		<img src="${gym.logo}" alt="Italian Trulli" width="100">
 	</display:column>
+
 	<display:column property="name" titleKey="gym.name" />
+
 	<display:column property="address" titleKey="gym.address" />
 	<display:column property="fee" titleKey="gym.fee" />
+
 	<display:column property="active" titleKey="gym.active" />
 
-	<display:column>
+	<display:column titleKey="activities">
 		<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
 				code="activities" /></a>
 	</display:column>
 
+	<!--  Edit column -->
+	<display:column titleKey="gym.manageAcitivities">
+				<a href="gym/details.do?gymId=${gym.id}">${name}<spring:message
+				code="gym.manageAcitivities" />
+		</a>
+	</display:column>
 
+	<display:column titleKey="gym.cancel">
+		<a href="gym/cancelGym.do?gymId=${gym.id}"> <spring:message
+				code="gym.cancel" />
+		</a>
+	</display:column>
 
 </display:table>

@@ -23,7 +23,7 @@
         <value>/views/security/messages</value>
         <value>/views/welcome/messages</value>
 
-        <value>/views/actor/messages</value>
+        <value>/views/generic/messages</value>
         
         <value>/views/admin/messages</value>
         <value>/views/client/messages</value>
