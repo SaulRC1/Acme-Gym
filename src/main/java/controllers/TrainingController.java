@@ -23,123 +23,122 @@ import services.gym.GymService;
 @RequestMapping("/training")
 public class TrainingController extends AbstractController {
 
-	@Autowired
-	private TrainingService	trainingService;
-	@Autowired
-	private GymService		gymService;
+    @Autowired
+    private TrainingService trainingService;
+    @Autowired
+    private GymService gymService;
 
+    public TrainingController() {
+	super();
+    }
 
-	public TrainingController() {
-		super();
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+	ModelAndView result;
+	Collection<Training> trainings;
+
+	trainings = this.trainingService.findAll();
+
+	result = new ModelAndView("training/list");
+	result.addObject("trainings", trainings);
+	result.addObject("requestURI", "training/list.do");
+
+	return result;
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView create() {
+	ModelAndView result;
+	Training training;
+	training = this.trainingService.create();
+	result = this.createEditModelAndView(training);
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam final int trainingId) {
+	ModelAndView result;
+	Training training;
+	training = this.trainingService.findOne(trainingId);
+	Assert.notNull(training);
+	result = this.createEditModelAndView(training);
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView save(@Valid final Training training, final BindingResult binding) {
+	ModelAndView result;
+	if (binding.hasErrors())
+	    result = this.createEditModelAndView(training);
+	else
+	    try {
+		this.trainingService.save(training);
+		result = new ModelAndView("redirect:list.do");
+	    } catch (final Throwable oops) {
+		result = this.createEditModelAndView(training, "training.commit.error");
+	    }
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+    public ModelAndView delete(final Training training) {
+	ModelAndView result;
+	try {
+	    this.trainingService.delete(training);
+	    result = new ModelAndView("redirect:list.do");
+	} catch (final Throwable oops) {
+	    result = this.createEditModelAndView(training, "training.commit.error");
 	}
+	return result;
+    }
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView result;
-		Collection<Training> trainings;
+    @RequestMapping(value = "/listByGymId", method = RequestMethod.GET)
+    public ModelAndView listbyGymId(@RequestParam final int gymId) {
+	ModelAndView result;
+	Collection<Training> trainings;
+	Gym gym;
+	gym = this.gymService.findOne(gymId);
 
-		trainings = this.trainingService.findAll();
+	trainings = gym.getTrainings();
 
-		result = new ModelAndView("training/list");
-		result.addObject("trainings", trainings);
-		result.addObject("requestURI", "training/list.do");
+	result = new ModelAndView("training/list");
+	result.addObject("trainings", trainings);
+	result.addObject("gym", gym);
+	result.addObject("requestURI", "training/list.do");
 
-		return result;
-	}
+	return result;
+    }
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		Training training;
-		training = this.trainingService.create();
-		result = this.createEditModelAndView(training);
-		return result;
-	}
+    @RequestMapping(value = "/listBykeyword", method = RequestMethod.GET)
+    public ModelAndView listbykeyword(@RequestParam final String keyword) {
+	ModelAndView result;
+	Collection<Training> trainings;
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int trainingId) {
-		ModelAndView result;
-		Training training;
-		training = this.trainingService.findOne(trainingId);
-		Assert.notNull(training);
-		result = this.createEditModelAndView(training);
-		return result;
-	}
+	trainings = this.trainingService.findTrainingsByKeyword(keyword);
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Training training, final BindingResult binding) {
-		ModelAndView result;
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(training);
-		else
-			try {
-				this.trainingService.save(training);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(training, "training.commit.error");
-			}
-		return result;
-	}
+	result = new ModelAndView("training/list");
+	result.addObject("trainings", trainings);
+	result.addObject("requestURI", "training/list.do");
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Training training) {
-		ModelAndView result;
-		try {
-			this.trainingService.delete(training);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(training, "training.commit.error");
-		}
-		return result;
-	}
+	return result;
+    }
 
-	@RequestMapping(value = "/listByGymId", method = RequestMethod.GET)
-	public ModelAndView listbyGymId(@RequestParam final int gymId) {
-		ModelAndView result;
-		Collection<Training> trainings;
-		Gym gym;
-		gym = this.gymService.findOne(gymId);
+    protected ModelAndView createEditModelAndView(final Training training) {
+	ModelAndView result;
+	result = this.createEditModelAndView(training, null);
+	return result;
+    }
 
-		trainings = gym.getTrainings();
+    protected ModelAndView createEditModelAndView(final Training training, final String messageCode) {
+	ModelAndView result;
+	Collection<Gym> gyms;
 
-		result = new ModelAndView("training/list");
-		result.addObject("trainings", trainings);
-		result.addObject("gym", gym);
-		result.addObject("requestURI", "training/list.do");
+	gyms = this.gymService.findAll();
 
-		return result;
-	}
-
-	@RequestMapping(value = "/listBykeyword", method = RequestMethod.GET)
-	public ModelAndView listbykeyword(@RequestParam final String keyword) {
-		ModelAndView result;
-		Collection<Training> trainings;
-
-		trainings = this.trainingService.findTrainingsByKeyword(keyword);
-
-		result = new ModelAndView("training/list");
-		result.addObject("trainings", trainings);
-		result.addObject("requestURI", "training/list.do");
-
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Training training) {
-		ModelAndView result;
-		result = this.createEditModelAndView(training, null);
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Training training, final String messageCode) {
-		ModelAndView result;
-		Collection<Gym> gyms;
-
-		gyms = this.gymService.findAll();
-
-		result = new ModelAndView("training/edit");
-		result.addObject("gyms", gyms);
-		result.addObject("message", messageCode);
-		return result;
-	}
+	result = new ModelAndView("training/edit");
+	result.addObject("gyms", gyms);
+	result.addObject("message", messageCode);
+	return result;
+    }
 
 }

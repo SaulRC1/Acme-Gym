@@ -25,98 +25,98 @@ import services.gym.GymService;
 @RequestMapping("/inscription")
 public class InscriptionController extends AbstractController {
 
-	@Autowired
-	private InscriptionService inscriptionService;
-	@Autowired
-	private GymService gymService;
-	@Autowired
-	private ClientService clientService;
+    @Autowired
+    private InscriptionService inscriptionService;
+    @Autowired
+    private GymService gymService;
+    @Autowired
+    private ClientService clientService;
 
-	public InscriptionController() {
-		super();
+    public InscriptionController() {
+	super();
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+	ModelAndView result;
+	Collection<Inscription> inscriptions;
+
+	inscriptions = this.inscriptionService.findAll();
+
+	result = new ModelAndView("inscription/list");
+	result.addObject("inscriptions", inscriptions);
+	result.addObject("requestURI", "inscription/list.do");
+
+	return result;
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView create() {
+	ModelAndView result;
+	Inscription inscription;
+	inscription = this.inscriptionService.create();
+	result = this.createEditModelAndView(inscription);
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam final int inscriptionId) {
+	ModelAndView result;
+	Inscription inscription;
+	inscription = this.inscriptionService.findOne(inscriptionId);
+	Assert.notNull(inscription);
+	result = this.createEditModelAndView(inscription);
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView save(@Valid final Inscription inscription, final BindingResult binding) {
+	ModelAndView result;
+	if (binding.hasErrors())
+	    result = this.createEditModelAndView(inscription);
+	else
+	    try {
+		this.inscriptionService.save(inscription);
+		result = new ModelAndView("redirect:list.do");
+	    } catch (final Throwable oops) {
+		result = this.createEditModelAndView(inscription, "inscription.commit.error");
+	    }
+	return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+    public ModelAndView delete(final Inscription inscription) {
+	ModelAndView result;
+	try {
+	    this.inscriptionService.delete(inscription);
+	    result = new ModelAndView("redirect:list.do");
+	} catch (final Throwable oops) {
+	    result = this.createEditModelAndView(inscription, "inscription.commit.error");
 	}
+	return result;
+    }
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView result;
-		Collection<Inscription> inscriptions;
+    protected ModelAndView createEditModelAndView(final Inscription inscription) {
+	ModelAndView result;
+	result = this.createEditModelAndView(inscription, null);
+	return result;
+    }
 
-		inscriptions = this.inscriptionService.findAll();
+    protected ModelAndView createEditModelAndView(final Inscription inscription, final String messageCode) {
+	ModelAndView result;
 
-		result = new ModelAndView("inscription/list");
-		result.addObject("inscriptions", inscriptions);
-		result.addObject("requestURI", "inscription/list.do");
+	Collection<Gym> gyms;
+	Collection<Client> clients;
 
-		return result;
-	}
+	gyms = this.gymService.findAll();
+	clients = this.clientService.findAll();
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		Inscription inscription;
-		inscription = this.inscriptionService.create();
-		result = this.createEditModelAndView(inscription);
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int inscriptionId) {
-		ModelAndView result;
-		Inscription inscription;
-		inscription = this.inscriptionService.findOne(inscriptionId);
-		Assert.notNull(inscription);
-		result = this.createEditModelAndView(inscription);
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Inscription inscription, final BindingResult binding) {
-		ModelAndView result;
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(inscription);
-		else
-			try {
-				this.inscriptionService.save(inscription);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(inscription, "inscription.commit.error");
-			}
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Inscription inscription) {
-		ModelAndView result;
-		try {
-			this.inscriptionService.delete(inscription);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(inscription, "inscription.commit.error");
-		}
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Inscription inscription) {
-		ModelAndView result;
-		result = this.createEditModelAndView(inscription, null);
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Inscription inscription, final String messageCode) {
-		ModelAndView result;
-
-		Collection<Gym> gyms;
-		Collection<Client> clients;
-		
-		gyms = this.gymService.findAll();
-		clients=this.clientService.findAll();
-
-		result = new ModelAndView("inscription/edit");
-		result.addObject("inscription", inscription);
-		result.addObject("gyms", gyms);
-		result.addObject("clients",clients);
-		result.addObject("message", messageCode);
-		return result;
-	}
+	result = new ModelAndView("inscription/edit");
+	result.addObject("inscription", inscription);
+	result.addObject("gyms", gyms);
+	result.addObject("clients", clients);
+	result.addObject("message", messageCode);
+	return result;
+    }
 
 }
