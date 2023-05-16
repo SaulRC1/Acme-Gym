@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/gym/list.jsp" />
 	</definition>
 	
+	<definition name="gym/listByActivityId" extends="master.page">	
+		<put-attribute name="title" value="List Gym" />
+		<put-attribute name="body" value="/views/gym/list.jsp" />
+	</definition>	
+	
 	<definition name="gym/create" extends="master.page">	
 		<put-attribute name="title" value="Crear gimnasio" />
 		<put-attribute name="body" value="/views/gym/edit.jsp" />

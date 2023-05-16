@@ -61,11 +61,14 @@
 		<security:intercept-url pattern="/trainer/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/trainer/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/trainer/edit.do" access="permitAll" />
+		<security:intercept-url pattern="/trainer/listByActivityId.do" access="permitAll" />
 		<security:intercept-url pattern="/trainer/editProfile.do" access="hasRole('TRAINER')" />
 		
 		<security:intercept-url pattern="/gym/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/gym/listByActivityId.do" access="permitAll" /> 
 		<security:intercept-url pattern="/gym/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/gym/edit.do" access="permitAll" />
+		
 		
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/listByGymId.do" access="permitAll" /> 

@@ -27,23 +27,27 @@
 			<a href="gym/edit.do?gymId=${gym.id}"> <spring:message
 					code="row.edit" /></a>
 		</display:column>
+		<!--  
+		<display:column>
+			<a href="gym/cancelGym?gymId=${gym.id}"> <spring:message
+					code="cancel" />
+			</a>
+		</display:column>-->
 	</security:authorize>
-	
+
 	<display:column titleKey="gym.logo">
 		<img src="${gym.logo}" alt="Italian Trulli" width="100">
 	</display:column>
 	<display:column property="name" titleKey="gym.name" />
 	<display:column property="address" titleKey="gym.address" />
 	<display:column property="fee" titleKey="gym.fee" />
-	
+	<display:column property="active" titleKey="gym.active" />
+
 	<display:column>
-			<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
-					code="activities" /></a>
+		<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
+				code="activities" /></a>
 	</display:column>
-	
-	<display:column>
-			<a href="gym/cancelGym.do?gymId=${gym.id}"> <spring:message
-					code="cancel" /> </a>
-	</display:column>
-	
+
+
+
 </display:table>

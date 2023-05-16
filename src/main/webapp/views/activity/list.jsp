@@ -33,6 +33,14 @@
 	<display:column property="startHour" titleKey="activity.startHour" />
 	<display:column property="endHour" titleKey="activity.endHour" />
 	<display:column property="availablePlaces" titleKey="activity.availablePlaces" />
+	<display:column>
+		<a href="trainer/listByActivityId.do?activityId=${activity.id}"><spring:message
+				code="trainers" /></a>
+	</display:column>
+	<display:column>
+		<a href="gym/listByActivityId.do?activityId=${activity.id}"><spring:message
+				code="gyms" /></a>
+	</display:column>
 	
 	
 	<!-- Edit column -->

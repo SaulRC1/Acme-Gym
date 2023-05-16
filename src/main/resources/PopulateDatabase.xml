@@ -271,6 +271,31 @@
 		</property>
 	</bean>
 	
+	<bean id="judoActivity" class="domain.Activity">
+		<property name="title" value="Judo" />
+		<property name="photo" value="" />
+		<property name="description"
+			value="This is the description of the 'Judo' activity..." />
+		<property name="daysOfWeek">
+			<set>
+				<value>TUESDAY</value>
+				<value>THURSDAY</value>
+			</set>
+		</property>
+		<property name="startHour" value="12:30:00" />
+		<property name="endHour" value="14:00:00" />
+		<property name="availablePlaces" value="2" />
+		<property name="active" value="false" />
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="ramiroTrainer" />
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="yogaActivity" class="domain.Activity">
 		<property name="title" value="Yoga" />
 		<property name="photo" value="" />
@@ -631,6 +656,7 @@
 		<property name="activities">
 			<list>
 				<ref bean="pilatesActivity" />
+				<ref bean="judoActivity" />
 			</list>
 		</property>
 		<property name="annotations">
@@ -766,6 +792,7 @@
 		<property name="activities">
 			<list>
 				<ref bean="pilatesActivity" />
+				<ref bean="judoActivity" />
 			</list>
 		</property>
 		<property name="curriculum">
