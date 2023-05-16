@@ -103,11 +103,12 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
-	public ModelAndView listbyGym(@RequestParam final Gym gym) {
+	@RequestMapping(value = "/listbyGymId", method = RequestMethod.GET)
+	public ModelAndView listbyGym(@RequestParam final int gymId) {
 		ModelAndView result;
 		Collection<Activity> activities;
-
+		Gym gym;
+		gym = this.gymService.findOne(gymId);
 		activities = gym.getActivities();
 
 		result = new ModelAndView("activity/list");
@@ -139,6 +140,20 @@ public class ActivityController extends AbstractController {
 		Collection<Activity> activities;
 
 		activities = this.activityService.findByDayRange(days, time);
+
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/listAvailableActivities", method = RequestMethod.GET)
+	public ModelAndView listAvailableActivities() {
+		ModelAndView result;
+		Collection<Activity> activities;
+
+		activities = this.activityService.findAvailableActivities();
 
 		result = new ModelAndView("activity/list");
 		result.addObject("activities", activities);

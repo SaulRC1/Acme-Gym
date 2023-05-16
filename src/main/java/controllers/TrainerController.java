@@ -112,11 +112,12 @@ public class TrainerController extends AbstractController {
 		return result;
 	}
 
-	/**@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listbyActivity(@RequestParam final Activity activity) {
+	@RequestMapping(value = "/listbyActivityId", method = RequestMethod.GET)
+	public ModelAndView listbyActivityId(@RequestParam final int activityId) {
 		ModelAndView result;
 		Collection<Trainer> trainers;
 
+		final Activity activity = this.activityService.findOne(activityId);
 		trainers = activity.getTrainers();
 
 		result = new ModelAndView("trainer/list");
@@ -125,7 +126,21 @@ public class TrainerController extends AbstractController {
 		result.addObject("requestURI", "trainer/list.do");
 
 		return result;
-	}**/
+	}
+
+	@RequestMapping(value = "/listbyNameOrSurname", method = RequestMethod.GET)
+	public ModelAndView listbyNameOrSurname(@RequestParam final String keyword) {
+		ModelAndView result;
+		Collection<Trainer> trainers;
+
+		trainers = this.trainerService.findByNameOrSurname(keyword);
+
+		result = new ModelAndView("trainer/list");
+		result.addObject("trainers", trainers);
+		result.addObject("requestURI", "trainer/list.do");
+
+		return result;
+	}
 
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;
