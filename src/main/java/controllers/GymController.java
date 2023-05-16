@@ -67,6 +67,20 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listActives", method = RequestMethod.GET)
+	public ModelAndView listActives() {
+		ModelAndView result;
+		Collection<Gym> gyms;
+
+		gyms = this.gymService.findAvailableGyms();
+
+		result = new ModelAndView("gym/list");
+		result.addObject("gyms", gyms);
+		result.addObject("requestURI", "gym/list.do");
+
+		return result;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -138,6 +152,54 @@ public class GymController extends AbstractController {
 
 		result = new ModelAndView("gym/list");
 		result.addObject("gyms", gyms);
+		result.addObject("gym", gym);
+		result.addObject("requestURI", "gym/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/activateGym", method = RequestMethod.POST, params = "activate")
+	public ModelAndView activatelGym(@RequestParam final int gymId) {
+		ModelAndView result;
+		Collection<Gym> gyms;
+		Gym gym;
+		Collection<Activity> activities;
+
+		gym = this.gymService.findOne(gymId);
+
+		gym.setActive(true);
+
+		this.gymService.save(gym);
+
+		activities = gym.getActivities();
+
+		for (final Activity activity : activities) {
+			activity.setActive(true);
+			this.activityService.save(activity);
+		}
+
+		gyms = this.gymService.findAvailableGyms();
+
+		result = new ModelAndView("gym/list");
+		result.addObject("gyms", gyms);
+		result.addObject("gym", gym);
+		result.addObject("requestURI", "gym/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam final int gymId) {
+		ModelAndView result;
+		Gym gym;
+		Collection<Activity> activities;
+		gym = this.gymService.findOne(gymId);
+		activities = this.activityService.findAll();
+
+		activities.removeAll(gym.getActivities());
+
+		result = new ModelAndView("gym/list");
+		result.addObject("activities", activities);
 		result.addObject("gym", gym);
 		result.addObject("requestURI", "gym/list.do");
 

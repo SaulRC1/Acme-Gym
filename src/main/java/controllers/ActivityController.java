@@ -162,6 +162,41 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/cancelActivity", method = RequestMethod.POST, params = "cancel")
+	public ModelAndView cancelActivity(@RequestParam final int activityId) {
+		ModelAndView result;
+		Collection<Activity> activities;
+		Activity activity;
+
+		activity = this.activityService.findOne(activityId);
+		activity.setActive(false);
+		this.activityService.save(activity);
+		activities = this.activityService.findAvailableActivities();
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/activateActivity", method = RequestMethod.POST, params = "activate")
+	public ModelAndView activateActivity(@RequestParam final int activityId) {
+		ModelAndView result;
+		Collection<Activity> activities;
+		Activity activity;
+
+		activity = this.activityService.findOne(activityId);
+		activity.setActive(true);
+		this.activityService.save(activity);
+
+		activities = this.activityService.findAvailableActivities();
+		result = new ModelAndView("activity/list");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/list.do");
+
+		return result;
+	}
+
 	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
 		result = this.createEditModelAndView(activity, null);
