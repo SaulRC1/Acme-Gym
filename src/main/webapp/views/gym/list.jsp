@@ -41,4 +41,9 @@
 					code="activities" /></a>
 	</display:column>
 	
+	<display:column>
+			<a href="gym/cancelGym.do?gymId=${gym.id}"> <spring:message
+					code="cancel" /> </a>
+	</display:column>
+	
 </display:table>

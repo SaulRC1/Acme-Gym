@@ -114,9 +114,10 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.POST, params = "cancel")
-	public ModelAndView cancel(@RequestParam final int gymId) {
+	@RequestMapping(value = "/cancelGym", method = RequestMethod.POST, params = "cancel")
+	public ModelAndView cancelGym(@RequestParam final int gymId) {
 		ModelAndView result;
+		Collection<Gym> gyms;
 		Gym gym;
 		Collection<Activity> activities;
 
@@ -133,7 +134,10 @@ public class GymController extends AbstractController {
 			this.activityService.save(activity);
 		}
 
+		gyms = this.gymService.findAvailableGyms();
+
 		result = new ModelAndView("gym/list");
+		result.addObject("gyms", gyms);
 		result.addObject("gym", gym);
 		result.addObject("requestURI", "gym/list.do");
 

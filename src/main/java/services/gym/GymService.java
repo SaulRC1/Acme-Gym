@@ -38,4 +38,8 @@ public class GymService {
 	public void delete(final Gym gym) {
 		this.gymRepository.delete(gym);
 	}
+
+	public Collection<Gym> findAvailableGyms() {
+		return this.gymRepository.findAvailableGyms();
+	}
 }
