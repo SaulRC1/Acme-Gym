@@ -83,7 +83,7 @@ public class TrainerService {
 		return this.trainerRepository.findByUserAccountId(userAccountId);
 	}
 
-	public Trainer findByNameOrSurname(final String keyword) {
+	public Collection<Trainer> findByNameOrSurname(final String keyword) {
 		return this.trainerRepository.findByNameOrSurname(keyword);
 	}
 }
