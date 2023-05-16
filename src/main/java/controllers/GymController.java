@@ -198,10 +198,10 @@ public class GymController extends AbstractController {
 
 		activities.removeAll(gym.getActivities());
 
-		result = new ModelAndView("gym/list");
+		result = new ModelAndView("gym/details");
 		result.addObject("activities", activities);
 		result.addObject("gym", gym);
-		result.addObject("requestURI", "gym/list.do");
+		result.addObject("requestURI", "gym/details");
 
 		return result;
 	}
