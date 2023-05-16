@@ -33,213 +33,213 @@ import services.gym.GymService;
 @RequestMapping("/gym")
 public class GymController extends AbstractController {
 
-	@Autowired
-	private GymService			gymService;
-	@Autowired
-	private ManagerService		managerService;
-	@Autowired
-	private TrainerService		trainerService;
-	@Autowired
-	private ActivityService		activityService;
-	@Autowired
-	private InscriptionService	inscriptionService;
-	@Autowired
-	private AnnotationService	annotattionService;
-	@Autowired
-	private TrainingService		trainingService;
+    @Autowired
+    private GymService gymService;
+    @Autowired
+    private ManagerService managerService;
+    @Autowired
+    private TrainerService trainerService;
+    @Autowired
+    private ActivityService activityService;
+    @Autowired
+    private InscriptionService inscriptionService;
+    @Autowired
+    private AnnotationService annotattionService;
+    @Autowired
+    private TrainingService trainingService;
 
+    public GymController() {
+	super();
+    }
 
-	public GymController() {
-		super();
-	}
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+	ModelAndView result;
+	Collection<Gym> gyms;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		ModelAndView result;
-		Collection<Gym> gyms;
+	gyms = this.gymService.findAll();
 
-		gyms = this.gymService.findAll();
+	result = new ModelAndView("gym/list");
+	result.addObject("gyms", gyms);
+	result.addObject("requestURI", "gym/list.do");
 
-		result = new ModelAndView("gym/list");
-		result.addObject("gyms", gyms);
-		result.addObject("requestURI", "gym/list.do");
+	return result;
+    }
 
-		return result;
-	}
+    @RequestMapping(value = "/listActives", method = RequestMethod.GET)
+    public ModelAndView listActives() {
+	ModelAndView result;
+	Collection<Gym> gyms;
 
-	@RequestMapping(value = "/listActives", method = RequestMethod.GET)
-	public ModelAndView listActives() {
-		ModelAndView result;
-		Collection<Gym> gyms;
+	gyms = this.gymService.findAvailableGyms();
 
-		gyms = this.gymService.findAvailableGyms();
+	result = new ModelAndView("gym/list");
+	result.addObject("gyms", gyms);
+	result.addObject("requestURI", "gym/list.do");
 
-		result = new ModelAndView("gym/list");
-		result.addObject("gyms", gyms);
-		result.addObject("requestURI", "gym/list.do");
+	return result;
+    }
 
-		return result;
-	}
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView create() {
+	ModelAndView result;
+	Gym gyms;
+	gyms = this.gymService.create();
+	result = this.createEditModelAndView(gyms);
+	return result;
+    }
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		Gym gyms;
-		gyms = this.gymService.create();
-		result = this.createEditModelAndView(gyms);
-		return result;
-	}
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam final int gymId) {
+	ModelAndView result;
+	Gym gym;
+	gym = this.gymService.findOne(gymId);
+	Assert.notNull(gym);
+	result = this.createEditModelAndView(gym);
+	result.addObject("cancelUrl", "'gym/list.do'");
+	return result;
+    }
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int gymId) {
-		ModelAndView result;
-		Gym gym;
-		gym = this.gymService.findOne(gymId);
-		Assert.notNull(gym);
-		result = this.createEditModelAndView(gym);
-		result.addObject("cancelUrl", "'gym/list.do'");
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Gym gym, final BindingResult binding) {
-		ModelAndView result;
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(gym);
-		else
-			try {
-				this.gymService.save(gym);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(gym, "gym.commit.error");
-			}
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Gym gym) {
-		ModelAndView result;
-		try {
-			this.gymService.delete(gym);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(gym, "gym.commit.error");
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "/cancelGym", method = RequestMethod.POST, params = "cancel")
-	public ModelAndView cancelGym(@RequestParam final int gymId) {
-		ModelAndView result;
-		Collection<Gym> gyms;
-		Gym gym;
-		Collection<Activity> activities;
-
-		gym = this.gymService.findOne(gymId);
-
-		gym.setActive(false);
-
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    public ModelAndView save(@Valid final Gym gym, final BindingResult binding) {
+	ModelAndView result;
+	if (binding.hasErrors())
+	    result = this.createEditModelAndView(gym);
+	else
+	    try {
 		this.gymService.save(gym);
+		result = new ModelAndView("redirect:list.do");
+	    } catch (final Throwable oops) {
+		result = this.createEditModelAndView(gym, "gym.commit.error");
+	    }
+	return result;
+    }
 
-		activities = gym.getActivities();
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+    public ModelAndView delete(final Gym gym) {
+	ModelAndView result;
+	try {
+	    this.gymService.delete(gym);
+	    result = new ModelAndView("redirect:list.do");
+	} catch (final Throwable oops) {
+	    result = this.createEditModelAndView(gym, "gym.commit.error");
+	}
+	return result;
+    }
 
-		for (final Activity activity : activities) {
-			activity.setActive(false);
-			this.activityService.save(activity);
-		}
+    @RequestMapping(value = "/cancelGym", method = RequestMethod.GET)
+    public ModelAndView cancelGym(@RequestParam final int gymId) {
+	ModelAndView result;
+	Collection<Gym> gyms;
+	Gym gym;
+	Collection<Activity> activities;
 
-		gyms = this.gymService.findAvailableGyms();
+	gym = this.gymService.findOne(gymId);
 
-		result = new ModelAndView("gym/list");
-		result.addObject("gyms", gyms);
-		result.addObject("gym", gym);
-		result.addObject("requestURI", "gym/list.do");
+	gym.setActive(false);
 
-		return result;
+	this.gymService.save(gym);
+
+	activities = gym.getActivities();
+
+	for (final Activity activity : activities) {
+	    activity.setActive(false);
+	    this.activityService.save(activity);
 	}
 
-	@RequestMapping(value = "/activateGym", method = RequestMethod.POST, params = "activate")
-	public ModelAndView activatelGym(@RequestParam final int gymId) {
-		ModelAndView result;
-		Collection<Gym> gyms;
-		Gym gym;
-		Collection<Activity> activities;
+	gyms = this.gymService.findAvailableGyms();
 
-		gym = this.gymService.findOne(gymId);
+	result = new ModelAndView("gym/list");
+	result.addObject("gyms", gyms);
+	result.addObject("gym", gym);
+	result.addObject("requestURI", "gym/list.do");
 
-		gym.setActive(true);
+	return result;
+    }
 
-		this.gymService.save(gym);
+    @RequestMapping(value = "/activateGym", method = RequestMethod.POST, params = "activate")
+    public ModelAndView activatelGym(@RequestParam final int gymId) {
+	ModelAndView result;
+	Collection<Gym> gyms;
+	Gym gym;
+	Collection<Activity> activities;
 
-		activities = gym.getActivities();
+	gym = this.gymService.findOne(gymId);
 
-		for (final Activity activity : activities) {
-			activity.setActive(true);
-			this.activityService.save(activity);
-		}
+	gym.setActive(true);
 
-		gyms = this.gymService.findAvailableGyms();
+	this.gymService.save(gym);
 
-		result = new ModelAndView("gym/list");
-		result.addObject("gyms", gyms);
-		result.addObject("gym", gym);
-		result.addObject("requestURI", "gym/list.do");
+	activities = gym.getActivities();
 
-		return result;
+	for (final Activity activity : activities) {
+	    activity.setActive(true);
+	    this.activityService.save(activity);
 	}
 
-	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public ModelAndView details(@RequestParam final int gymId) {
-		ModelAndView result;
-		Gym gym;
-		Collection<Activity> activities;
-		gym = this.gymService.findOne(gymId);
-		activities = this.activityService.findAll();
+	gyms = this.gymService.findAvailableGyms();
 
-		activities.removeAll(gym.getActivities());
+	result = new ModelAndView("gym/list");
+	result.addObject("gyms", gyms);
+	result.addObject("gym", gym);
+	result.addObject("requestURI", "gym/list.do");
 
-		result = new ModelAndView("gym/details");
-		result.addObject("activities", activities);
-		result.addObject("gym", gym);
-		result.addObject("requestURI", "gym/details");
+	return result;
+    }
 
-		return result;
-	}
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public ModelAndView details(@RequestParam final int gymId) {
+	ModelAndView result;
+	Gym gym;
+	Collection<Activity> activities;
+	
+	gym = this.gymService.findOne(gymId);
+	activities = this.activityService.findAll();
 
-	protected ModelAndView createEditModelAndView(final Gym gym) {
-		ModelAndView result;
-		result = this.createEditModelAndView(gym, null);
-		return result;
-	}
+	activities.removeAll(gym.getActivities());
 
-	protected ModelAndView createEditModelAndView(final Gym gym, final String messageCode) {
-		ModelAndView result;
-		Collection<Manager> managers;
-		Collection<Trainer> trainers;
-		Collection<Activity> activities;
-		Collection<Inscription> inscriptions;
-		Collection<Annotation> annotations;
-		Collection<Training> trainings;
+	result = new ModelAndView("gym/details");
+	result.addObject("activities", activities);
+	result.addObject("gymActivities", gym.getActivities());
+	result.addObject("gymId", gym.getId());
 
-		managers = this.managerService.findAll();
-		trainers = this.trainerService.findAll();
-		activities = this.activityService.findAll();
-		inscriptions = this.inscriptionService.findAll();
-		annotations = this.annotattionService.findAll();
-		trainings = this.trainingService.findAll();
+	return result;
+    }
 
-		result = new ModelAndView("gym/edit");
-		result.addObject("gym", gym);
+    protected ModelAndView createEditModelAndView(final Gym gym) {
+	ModelAndView result;
+	result = this.createEditModelAndView(gym, null);
+	return result;
+    }
 
-		result.addObject("managers", managers);
-		result.addObject("trainers", trainers);
-		result.addObject("activities", activities);
-		result.addObject("inscriptions", inscriptions);
-		result.addObject("annotations", annotations);
-		result.addObject("trainings", trainings);
+    protected ModelAndView createEditModelAndView(final Gym gym, final String messageCode) {
+	ModelAndView result;
+	Collection<Manager> managers;
+	Collection<Trainer> trainers;
+	Collection<Activity> activities;
+	Collection<Inscription> inscriptions;
+	Collection<Annotation> annotations;
+	Collection<Training> trainings;
 
-		result.addObject("message", messageCode);
-		return result;
-	}
+	managers = this.managerService.findAll();
+	trainers = this.trainerService.findAll();
+	activities = this.activityService.findAll();
+	inscriptions = this.inscriptionService.findAll();
+	annotations = this.annotattionService.findAll();
+	trainings = this.trainingService.findAll();
+
+	result = new ModelAndView("gym/edit");
+	result.addObject("gym", gym);
+
+	result.addObject("managers", managers);
+	result.addObject("trainers", trainers);
+	result.addObject("activities", activities);
+	result.addObject("inscriptions", inscriptions);
+	result.addObject("annotations", annotations);
+	result.addObject("trainings", trainings);
+
+	result.addObject("message", messageCode);
+	return result;
+    }
 
 }
