@@ -9,11 +9,8 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 		        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd     ">
-
-	<!-- <context:component-scan base-package="configuration"/> -->
-	<!-- <import resource="classpath:configuration/xml/ConversionConfiguration.java"/> -->
-
+		        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd     ">	
+		     
 	<bean id="localTimeEditor"
 		class="configuration.xml.LocalTimeEditor" />
 	<bean id="localDateEditor"
@@ -29,128 +26,9 @@
 					value="configuration.xml.LocalDateEditor" />
 			</map>
 		</property>
-	</bean>
-
-
-	<!-- UserAccount -->
-
-	<bean id="omarAdminUserAccount" class="security.UserAccount">
-		<property name="username" value="omaradmin" />
-		<property name="password"
-			value="8412e82f9c64b5a8c8075d85f623d2ae" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="rosaAdminUserAccount" class="security.UserAccount">
-		<property name="username" value="rosaadmin" />
-		<property name="password"
-			value="40fb33b85a817cefeb15f9f74d209a30" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="paulaAdminUserAccount" class="security.UserAccount">
-		<property name="username" value="paulaadmin" />
-		<property name="password"
-			value="0f7f9b0f6ae3beee2166b01cef4ca1fa" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="pepeClientUserAccount" class="security.UserAccount">
-		<property name="username" value="pepeclient" />
-		<property name="password"
-			value="3bfc59fab08729657bba860d379bf0be" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CLIENT" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="albertoClientUserAccount" class="security.UserAccount">
-		<property name="username" value="albertoclient" />
-		<property name="password"
-			value="e3eded2139fc71333a264b5bc96dfe58" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CLIENT" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="gerardoClientUserAccount" class="security.UserAccount">
-		<property name="username" value="gerardoclient" />
-		<property name="password"
-			value="175a272e99bd770e318b29990a224d63" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CLIENT" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="ramiroTrainerUserAccount" class="security.UserAccount">
-		<property name="username" value="ramirotrainer" />
-		<property name="password"
-			value="3f1a81f9ced38b9c2c0d4a657c4c6962" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="rafaTrainerUserAccount" class="security.UserAccount">
-		<property name="username" value="rafatrainer" />
-		<property name="password"
-			value="85a0dcaed05f8e4459f5a1fc4f619ade" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="pedroTrainerUserAccount" class="security.UserAccount">
-		<property name="username" value="pedrotrainer" />
-		<property name="password"
-			value="72e68609d5b9c81b8a0fe855f6091a53" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
+	</bean>	     
+		     
+		        
 	<bean id="martaManagerUserAccount" class="security.UserAccount">
 		<property name="username" value="martamanager" />
 		<property name="password"
@@ -163,8 +41,7 @@
 			</list>
 		</property>
 	</bean>
-
-
+	
 	<bean id="rocioManagerUserAccount" class="security.UserAccount">
 		<property name="username" value="rociomanager" />
 		<property name="password"
@@ -177,121 +54,8 @@
 			</list>
 		</property>
 	</bean>
-
-
-	<bean id="pepaManagerUserAccount" class="security.UserAccount">
-		<property name="username" value="pepamanager" />
-		<property name="password"
-			value="140d2e15c87ede2501b3a7fdeebc1294" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="MANAGER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<!-- Admin -->
-
-	<bean id="omarAdmin" class="domain.Admin">
-		<property name="userAccount">
-			<ref bean="omarAdminUserAccount" />
-		</property>
-		<property name="firstName" value="Omar" />
-		<property name="lastName" value="Piedrabuena" />
-		<property name="email" value="omar.piedrabuena@hyper-mass.es" />
-		<property name="phoneNumber" value="+34617746487" />
-		<property name="address"
-			value="Ruta de la piedra 19, Córdoba" />
-		<property name="postalCode" value="24008" />
-		<property name="city" value="Córdoba" />
-		<property name="country" value="España" />
-	</bean>
-
-	<bean id="rosaAdmin" class="domain.Admin">
-		<property name="userAccount">
-			<ref bean="rosaAdminUserAccount" />
-		</property>
-		<property name="firstName" value="Rosa" />
-		<property name="lastName" value="Benitez" />
-		<property name="email" value="rosa.benitez@hyper-mass.es" />
-		<property name="phoneNumber" value="+34619483094" />
-		<property name="address" value="Calle la Real 1, Albacete" />
-		<property name="postalCode" value="38492" />
-		<property name="city" value="Albacete" />
-		<property name="country" value="España" />
-	</bean>
-
-	<bean id="paulaAdmin" class="domain.Admin">
-		<property name="userAccount">
-			<ref bean="paulaAdminUserAccount" />
-		</property>
-		<property name="firstName" value="Paula" />
-		<property name="lastName" value="Saenz" />
-		<property name="email" value="paula.saenz@hyper-mass.es" />
-		<property name="phoneNumber" value="+34639502848" />
-		<property name="address" value="Calle Puerto 7, Pamplona" />
-		<property name="postalCode" value="38055" />
-		<property name="city" value="Pamplona" />
-		<property name="country" value="España" />
-	</bean>
-
-	<!-- Client -->
-
-	<bean id="pepeClient" class="domain.Client">
-		<property name="userAccount">
-			<ref bean="pepeClientUserAccount" />
-		</property>
-		<property name="creditCard">
-			<ref bean="pepeCreditCard" />
-		</property>
-		<property name="firstName" value="Pepe" />
-		<property name="lastName" value="Rodriguez" />
-		<property name="email" value="pepe.rodriguez@gmail.com" />
-		<property name="phoneNumber" value="+34677105938" />
-		<property name="address" value="Ruta de la sierra, Huelva" />
-		<property name="postalCode" value="21002" />
-		<property name="city" value="Huelva" />
-		<property name="country" value="España" />
-	</bean>
-
-	<bean id="albertoClient" class="domain.Client">
-		<property name="userAccount">
-			<ref bean="albertoClientUserAccount" />
-		</property>
-		<property name="creditCard">
-			<ref bean="albertoCreditCard" />
-		</property>
-		<property name="firstName" value="Alberto" />
-		<property name="lastName" value="Guinea" />
-		<property name="email" value="alberto.guinea@gmail.com" />
-		<property name="phoneNumber" value="+34692482142" />
-		<property name="address" value="Calle Victoria, Huelva" />
-		<property name="postalCode" value="21001" />
-		<property name="city" value="Huelva" />
-		<property name="country" value="España" />
-	</bean>
-
-	<bean id="gerardoClient" class="domain.Client">
-		<property name="userAccount">
-			<ref bean="gerardoClientUserAccount" />
-		</property>
-		<property name="creditCard">
-			<ref bean="gerardoCreditCard" />
-		</property>
-		<property name="firstName" value="Gerardo" />
-		<property name="lastName" value="Montes" />
-		<property name="email" value="gerardo.montes@gmail.com" />
-		<property name="phoneNumber" value="+34678836792" />
-		<property name="address" value="Plaza España, Madrid" />
-		<property name="postalCode" value="28001" />
-		<property name="city" value="Madrid" />
-		<property name="country" value="España" />
-	</bean>
-
-	<!-- Manager -->
-
+	
+	
 	<bean id="MartaManager" class="domain.Manager">
 		<property name="userAccount">
 			<ref bean="martaManagerUserAccount" />
@@ -310,7 +74,7 @@
 			<ref bean="gym1" />
 		</property>
 	</bean>
-
+	
 	<bean id="RocioManager" class="domain.Manager">
 		<property name="userAccount">
 			<ref bean="rocioManagerUserAccount" />
@@ -329,237 +93,23 @@
 			<ref bean="gym2" />
 		</property>
 	</bean>
-
-	<bean id="PepaManager" class="domain.Manager">
-		<property name="userAccount">
-			<ref bean="pepaManagerUserAccount" />
-		</property>
-		<property name="firstName" value="Pepa" />
-		<property name="lastName" value="Fernandez" />
-		<property name="email" value="pepa.fernandez@gmail.com" />
-		<property name="phoneNumber" value="+34674444444" />
-		<property name="address" value="Calle Americas, Galicia" />
-		<property name="postalCode" value="20202" />
-		<property name="city" value="Galicia" />
-		<property name="country" value="España" />
-
-		<property name="banned" value="false" />
-		<property name="gyms">
-			<ref bean="gym3" />
-		</property>
-
-	</bean>
-
-	<!-- TODO -->
-
-
-	<!-- Trainer -->
-
-	<bean id="ramiroTrainer" class="domain.Trainer">
-		<property name="userAccount">
-			<ref bean="ramiroTrainerUserAccount" />
-		</property>
-		<property name="firstName" value="Ramiro" />
-		<property name="lastName" value="Fernandez" />
-		<property name="email" value="ramiro.fernandez@hyper-mass.es" />
-		<property name="phoneNumber" value="+34692837100" />
-		<property name="address" value="Plaza de la merced, Valencia" />
-		<property name="postalCode" value="22002" />
-		<property name="city" value="Valencia" />
-		<property name="country" value="España" />
-		<property name="activities">
+	
+	<bean id="pepeClientUserAccount" class="security.UserAccount">
+		<property name="username" value="pepeclient" />
+		<property name="password"
+			value="3bfc59fab08729657bba860d379bf0be" />
+		<property name="authorities">
 			<list>
-				<ref bean="pilatesActivity" />
-			</list>
-		</property>
-		<property name="curriculum">
-			<ref bean="curriculumTrainerRamiro" />
-		</property>
-		<property name="gym">
-			<ref bean="gym1" />
-		</property>
-	</bean>
-
-	<bean id="rafaTrainer" class="domain.Trainer">
-		<property name="userAccount">
-			<ref bean="rafaTrainerUserAccount" />
-		</property>
-		<property name="firstName" value="Rafa" />
-		<property name="lastName" value="Torres" />
-		<property name="email" value="rafa.torres@hyper-mass.es" />
-		<property name="phoneNumber" value="+34610499283" />
-		<property name="address" value="Calle Gines, Sevilla" />
-		<property name="postalCode" value="24002" />
-		<property name="city" value="Sevilla" />
-		<property name="country" value="España" />
-		<property name="activities">
-			<list>
-				<ref bean="yogaActivity" />
-			</list>
-		</property>
-		<property name="curriculum">
-			<ref bean="curriculumTrainerRafa" />
-		</property>
-		<property name="gym">
-			<ref bean="gym2" />
-		</property>
-	</bean>
-
-	<bean id="pedroTrainer" class="domain.Trainer">
-		<property name="userAccount">
-			<ref bean="pedroTrainerUserAccount" />
-		</property>
-		<property name="firstName" value="Pedro" />
-		<property name="lastName" value="Soria" />
-		<property name="email" value="pedro.soria@hyper-mass.es" />
-		<property name="phoneNumber" value="+34614256826" />
-		<property name="address" value="Cuesta del Álamo, Málaga" />
-		<property name="postalCode" value="29551" />
-		<property name="city" value="Málaga" />
-		<property name="country" value="España" />
-		<property name="activities">
-			<list>
-				<ref bean="kickboxingActivity" />
-			</list>
-		</property>
-		<property name="curriculum">
-			<ref bean="curriculumTrainerPedro" />
-		</property>
-		<property name="gym">
-			<ref bean="gym3" />
-		</property>
-	</bean>
-
-	<!-- Gym -->
-
-	<bean id="gym1" class="domain.Gym">
-		<property name="logo" value="" />
-		<property name="address"
-			value="Ruta de la piedra 19, Córdoba" />
-		<property name="name" value="Hyper-Mass" />
-		<property name="fee" value="50.0" />
-		<property name="active" value="true" />
-		<property name="trainers">
-			<list>
-				<ref bean="ramiroTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation1" />
-				<ref bean="annotation2" />
-			</list>
-		</property>
-		<property name="managers">
-			<list>
-				<ref bean="MartaManager" />
-			</list>
-		</property>
-		<property name="activities">
-			<list>
-				<ref bean="pilatesActivity" />
-			</list>
-		</property>
-		<property name="inscriptions">
-			<list>
-				<ref bean="inscription1" />
-			</list>
-		</property>
-		<property name="trainings">
-			<list>
-				<ref bean="training1" />
-				<ref bean="training2" />
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
 			</list>
 		</property>
 	</bean>
-
-	<bean id="gym2" class="domain.Gym">
-		<property name="logo" value="" />
-		<property name="address" value="Av Hispano América 4, Huelva" />
-		<property name="name" value="OkeyMas" />
-		<property name="fee" value="37.5" />
-		<property name="active" value="true" />
-		<property name="trainers">
-			<list>
-				<ref bean="rafaTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation3" />
-				<ref bean="annotation4" />
-			</list>
-		</property>
-		<property name="managers">
-			<list>
-				<ref bean="RocioManager" />
-			</list>
-		</property>
-		<property name="activities">
-			<list>
-				<ref bean="yogaActivity" />
-			</list>
-		</property>
-		<property name="inscriptions">
-			<list>
-				<ref bean="inscription1" />
-			</list>
-		</property>
-		<property name="trainings">
-			<list>
-				<ref bean="training3" />
-				<ref bean="training4" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="gym3" class="domain.Gym">
-		<property name="logo" value="" />
-		<property name="address" value="Plaza de las monjas, Huelva" />
-		<property name="name" value="Basic Fit" />
-		<property name="fee" value="20.0" />
-		<property name="active" value="true" />
-		<property name="trainers">
-			<list>
-				<ref bean="pedroTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation5" />
-			</list>
-		</property>
-		<property name="managers">
-			<list>
-				<ref bean="PepaManager" />
-			</list>
-		</property>
-		<property name="activities">
-			<list>
-				<ref bean="kickboxingActivity" />
-			</list>
-		</property>
-		<property name="inscriptions">
-			<list>
-				<ref bean="inscription3" />
-			</list>
-		</property>
-		<property name="trainings">
-			<list>
-				<ref bean="training5" />
-				<ref bean="training6" />
-			</list>
-		</property>
-	</bean>
-
-	<!-- TODO -->
-
-
-	<!-- Activity -->
-
+	
 	<bean id="pilatesActivity" class="domain.Activity">
 		<property name="title" value="Pilates" />
-		<property name="photo" value="exampleurl" />
+		<property name="photo" value="" />
 		<property name="description"
 			value="This is the description of the 'Pilates' activity..." />
 		<property name="daysOfWeek">
@@ -571,85 +121,17 @@
 		<property name="startHour" value="10:30:00" />
 		<property name="endHour" value="11:15:00" />
 		<property name="availablePlaces" value="4" />
+		<property name="active" value="true" />
 		<property name="gym">
 			<ref bean="gym1" />
 		</property>
 		<property name="trainers">
 			<list>
 				<ref bean="ramiroTrainer" />
-				<ref bean="rafaTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation1" />
 			</list>
 		</property>
 	</bean>
-
-	<bean id="yogaActivity" class="domain.Activity">
-		<property name="title" value="Yoga" />
-		<property name="photo" value="exampleurl" />
-		<property name="description"
-			value="This is the description of the 'Yoga' activity..." />
-		<property name="daysOfWeek">
-			<set>
-				<value>TUESDAY</value>
-				<value>WEDNESDAY</value>
-			</set>
-		</property>
-		<property name="startHour" value="16:00:00" />
-		<property name="endHour" value="17:15:00" />
-		<property name="availablePlaces" value="13" />
-		<property name="gym">
-			<ref bean="gym2" />
-		</property>
-		<property name="trainers">
-			<list>
-				<ref bean="pedroTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation1" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="kickboxingActivity" class="domain.Activity">
-		<property name="title" value="Kick boxing" />
-		<property name="photo" value="exampleurl" />
-		<property name="description"
-			value="This is the description of the 'Kick Boxing' activity..." />
-		<property name="daysOfWeek">
-			<set>
-				<value>MONDAY</value>
-				<value>TUESDAY</value>
-				<value>SATURDAY</value>
-			</set>
-		</property>
-		<property name="startHour" value="18:00:00" />
-		<property name="endHour" value="20:00:00" />
-		<property name="availablePlaces" value="3" />
-		<property name="gym">
-			<ref bean="gym3" />
-		</property>
-		<property name="trainers">
-			<list>
-				<ref bean="ramiroTrainer" />
-				<ref bean="pedroTrainer" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation5" />
-			</list>
-		</property>
-	</bean>
-
-
-	<!-- Training -->
-
+	
 	<bean id="training1" class="domain.Training">
 		<property name="title"
 			value="Entrenamiento Torso Principiante" />
@@ -672,116 +154,7 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="training2" class="domain.Training">
-		<property name="title"
-			value="Entrenamiento Pierna Principiante" />
-		<property name="description"
-			value="Entrenamiento de los principales grupos musculares que
-		componen las piernas" />
-		<property name="gym">
-			<ref bean="gym1" />
-		</property>
-		<property name="steps">
-			<list>
-				<ref bean="step4" />
-				<ref bean="step5" />
-				<ref bean="step6" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation2" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="training3" class="domain.Training">
-		<property name="title"
-			value="Entrenamiento Abdomen Principiante" />
-		<property name="description"
-			value="Entrenamiento de abdomen para principiantes." />
-		<property name="gym">
-			<ref bean="gym2" />
-		</property>
-		<property name="steps">
-			<list>
-				<ref bean="step7" />
-				<ref bean="step8" />
-				<ref bean="step9" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation3" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="training4" class="domain.Training">
-		<property name="title"
-			value="Entrenamiento Full-Body Intermedio" />
-		<property name="description"
-			value="Entrenamiento de cuerpo completo para atletas con nivel intermedio." />
-		<property name="gym">
-			<ref bean="gym2" />
-		</property>
-		<property name="steps">
-			<list>
-				<ref bean="step10" />
-				<ref bean="step11" />
-				<ref bean="step12" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation4" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="training5" class="domain.Training">
-		<property name="title"
-			value="Entrenamiento Calistenia Full-Body Principiante" />
-		<property name="description"
-			value="Entrenamiento de cuerpo completo para principiantes en el mundo de la calistenia." />
-		<property name="gym">
-			<ref bean="gym3" />
-		</property>
-		<property name="steps">
-			<list>
-				<ref bean="step13" />
-				<ref bean="step14" />
-				<ref bean="step15" />
-			</list>
-		</property>
-		<property name="annotations">
-			<list>
-				<ref bean="annotation5" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="training6" class="domain.Training">
-		<property name="title"
-			value="Entrenamiento Calistenia Full-Body Intermedio" />
-		<property name="description"
-			value="Entrenamiento de cuerpo completo para aquellos con experiencia 
-		en el mundo de la calistenia." />
-		<property name="gym">
-			<ref bean="gym3" />
-		</property>
-		<property name="steps">
-			<list>
-				<ref bean="step16" />
-				<ref bean="step17" />
-				<ref bean="step18" />
-			</list>
-		</property>
-	</bean>
-
-	<!-- Step -->
-
+	
 	<bean id="step1" class="domain.Step">
 		<property name="number" value="1" />
 		<property name="description"
@@ -805,129 +178,7 @@
 		<property name="tutorial"
 			value="https://youtu.be/bR9d6yRH3iA" />
 	</bean>
-
-	<bean id="step4" class="domain.Step">
-		<property name="number" value="1" />
-		<property name="description"
-			value="Realizar sentadilla sin peso, con apoyo en estructura, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/AO99m52vrTM" />
-	</bean>
-
-	<bean id="step5" class="domain.Step">
-		<property name="number" value="2" />
-		<property name="description"
-			value="Realizar zancadas sin peso, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/IG3uyG_62D4" />
-	</bean>
-
-	<bean id="step6" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar patada de glúteo en polea, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/vHY4JUtKiFc" />
-	</bean>
-
-	<bean id="step7" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar plancha abdominal, 3 sets de 30 segundos" />
-		<property name="tutorial"
-			value="https://youtu.be/d0atctiI7Vw" />
-	</bean>
-
-	<bean id="step8" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar plancha lateral, 3 sets de 30 segundos." />
-		<property name="tutorial"
-			value="https://youtu.be/2Oko68u9PaE" />
-	</bean>
-
-	<bean id="step9" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar alzamiento de rodillas colgado en barra, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/iC_fu-XjNPo" />
-	</bean>
-
-	<bean id="step10" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar dominadas lastradas, 3 sets de 8 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/YmPIrEhp2wU" />
-	</bean>
-
-	<bean id="step11" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar press banca, 3 sets de 8 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/Kpy3Lt5vPDE" />
-	</bean>
-
-	<bean id="step12" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar press de pierna, 3 sets de 8 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/bKcV1I5rB_g" />
-	</bean>
-
-	<bean id="step13" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar dominada australiana, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/SiFDeqGVmsA" />
-	</bean>
-
-	<bean id="step14" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar flexiones con apoyo de rodillas, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/uWnPjvnDooE" />
-	</bean>
-
-	<bean id="step15" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar zancada búlgara, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtube.com/shorts/N-uhG1Tih1g?feature=share" />
-	</bean>
-
-	<bean id="step16" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar dominada, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/8mhDd9Ahl1M" />
-	</bean>
-
-	<bean id="step17" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar flexiones, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/izNxOxVrUc4" />
-	</bean>
-
-	<bean id="step18" class="domain.Step">
-		<property name="number" value="3" />
-		<property name="description"
-			value="Realizar sentadilla con salto, 3 sets de 5 repeticiones." />
-		<property name="tutorial"
-			value="https://youtu.be/PQkr_jS84-0" />
-	</bean>
-
-	<!-- Annotations -->
-
+	
 	<bean id="annotation1" class="domain.Annotation">
 		<property name="date" value="2023-07-14" />
 		<property name="text" value="Muy buen entrenamiento." />
@@ -936,189 +187,35 @@
 			<ref bean="training1" />
 		</property>
 		<property name="actor">
-			<ref bean="pepeClient" />
+			<ref bean="MartaManager" />
 		</property>
-	</bean>
-
-	<bean id="annotation2" class="domain.Annotation">
-		<property name="date" value="2023-06-10" />
-		<property name="text"
-			value="Le falta algún ejercicio más, pero está bien." />
-		<property name="mark" value="2" />
-		<property name="training">
-			<ref bean="training2" />
-		</property>
-		<property name="actor">
-			<ref bean="pepeClient" />
-		</property>
-	</bean>
-
-	<bean id="annotation3" class="domain.Annotation">
-		<property name="date" value="2023-08-15" />
-		<property name="text" value="Algo mediocre." />
-		<property name="mark" value="1" />
-		<property name="training">
-			<ref bean="training3" />
-		</property>
-		<property name="actor">
-			<ref bean="albertoClient" />
-		</property>
-	</bean>
-
-	<bean id="annotation4" class="domain.Annotation">
-		<property name="date" value="2023-05-18" />
-		<property name="text" value="Bueno." />
-		<property name="mark" value="3" />
-		<property name="training">
-			<ref bean="training4" />
-		</property>
-		<property name="actor">
-			<ref bean="albertoClient" />
-		</property>
-	</bean>
-
-	<bean id="annotation5" class="domain.Annotation">
-		<property name="date" value="2023-06-21" />
-		<property name="text" value="Normalillo." />
-		<property name="mark" value="2" />
-		<property name="training">
-			<ref bean="training5" />
-		</property>
-		<property name="actor">
-			<ref bean="gerardoClient" />
-		</property>
-	</bean>
-
-
-	<!-- Inscription -->
-
-	<bean id="inscription1" class="domain.Inscription">
 		<property name="gym">
 			<ref bean="gym1" />
 		</property>
-		<property name="client">
-			<ref bean="pepeClient" />
-		</property>
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
 	</bean>
-
-	<bean id="inscription2" class="domain.Inscription">
-		<property name="gym">
-			<ref bean="gym2" />
+	
+	<bean id="pepeClient" class="domain.Client">		
+		<property name="firstName" value="Pepe" />
+		<property name="lastName" value="Rodriguez" />
+		<property name="email" value="pepe.rodriguez@gmail.com" />
+		<property name="phoneNumber" value="+34677105938" />
+		<property name="address" value="Ruta de la sierra, Huelva" />
+		<property name="postalCode" value="21002" />
+		<property name="city" value="Huelva" />
+		<property name="country" value="España" />
+		<property name="userAccount">
+			<ref bean="pepeClientUserAccount" />
 		</property>
-		<property name="client">
-			<ref bean="albertoClient" />
+		<property name="creditCard">
+			<ref bean="pepeCreditCard" />
 		</property>
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
-	</bean>
-
-	<bean id="inscription3" class="domain.Inscription">
-		<property name="gym">
-			<ref bean="gym3" />
-		</property>
-		<property name="client">
-			<ref bean="gerardoClient" />
-		</property>
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
-	</bean>
-
-	<!-- TODO -->
-
-
-	<!-- Curriculum -->
-	<bean id="curriculumTrainerRamiro" class="domain.Curriculum">
-		<property name="name" value="CurriculumRamiro" />
-		<property name="specialities"
-			value="{crossfit, calistenia, cardio}" />
-		<property name="education" value="Grado medio de FP" />
-		<property name="workExperience"
-			value="{Entrenador Personal, Monitor bodycombat}" />
-
-		<property name="Trainer">
-			<ref bean="ramiroTrainer" />
-		</property>
-		<property name="SocialIdentities">
+		<property name="activities">
 			<list>
-				<ref bean="socialIdentityRamiro1" />
+				<ref bean="pilatesActivity" />
 			</list>
 		</property>
 	</bean>
-
-	<bean id="curriculumTrainerRafa" class="domain.Curriculum">
-		<property name="name" value="CurriculumRafa" />
-		<property name="specialities"
-			value="{crossfit, bici, hipertrofia}" />
-		<property name="education"
-			value="Título Técnico Deportivo Superior" />
-		<property name="workExperience"
-			value="{Monitor Gimnasio, Profesor EF}" />
-
-		<property name="Trainer">
-			<ref bean="rafaTrainer" />
-		</property>
-		<property name="SocialIdentities">
-			<list>
-				<ref bean="socialIdentityRafa1" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="curriculumTrainerPedro" class="domain.Curriculum">
-		<property name="name" value="CurriculumPedro" />
-		<property name="specialities" value="{cardio, hit}" />
-		<property name="education"
-			value="Ciencias de la actividad física y del deporte" />
-		<property name="workExperience"
-			value="{Entrenador fútbol, Monitor hit}" />
-
-		<property name="Trainer">
-			<ref bean="pedroTrainer" />
-		</property>
-		<property name="SocialIdentities">
-			<list>
-				<ref bean="socialIdentityPedro1" />
-			</list>
-		</property>
-	</bean>
-
-	<!-- TODO -->
-
-
-	<!-- SocialIdentity -->
-
-	<bean id="socialIdentityRamiro1" class="domain.SocialIdentity">
-		<property name="nick" value="ramiro77" />
-		<property name="link"
-			value="https://www.instagram.com/ramiro77/" />
-		<property name="socialMedia" value="Instagram" />
-	</bean>
-
-	<bean id="socialIdentityRafa1" class="domain.SocialIdentity">
-		<property name="nick" value="rafiña99" />
-		<property name="link"
-			value="https://www.instagram.com/rafiña99/" />
-		<property name="socialMedia" value="Instagram" />
-	</bean>
-
-	<bean id="socialIdentityPedro1" class="domain.SocialIdentity">
-		<property name="nick" value="pedrito_00" />
-		<property name="link"
-			value="https://www.instagram.com/pedrito_00/" />
-		<property name="socialMedia" value="Instagram" />
-	</bean>
-
-	<!-- TODO -->
-
-
-	<!-- Annotation -->
-
-	<!-- TODO -->
-
-	<!-- CreditCard -->
-
+	
 	<bean id="pepeCreditCard" class="domain.CreditCard">
 		<property name="holder" value="Pepe Rodriguez" />
 		<property name="brand" value="MASTERCARD" />
@@ -1127,23 +224,122 @@
 		<property name="expirationYear" value="2025" />
 		<property name="CVV" value="321" />
 	</bean>
-
-	<bean id="albertoCreditCard" class="domain.CreditCard">
-		<property name="holder" value="Alberto Guinea" />
-		<property name="brand" value="VISA" />
-		<property name="number" value="5391040029856192" />
-		<property name="expirationMonth" value="11" />
-		<property name="expirationYear" value="2026" />
-		<property name="CVV" value="213" />
+	
+	<bean id="gym1" class="domain.Gym">
+		<property name="logo" value="" />
+		<property name="address"
+			value="Ruta de la piedra 19, Córdoba" />
+		<property name="name" value="Hyper-Mass" />
+		<property name="fee" value="50.0" />
+		<property name="active" value="true" />
+		<property name="managers">
+			<list>
+				<ref bean="MartaManager" />
+			</list>
+		</property>
+		<property name="trainers">
+			<list>
+				<ref bean="ramiroTrainer" />
+			</list>
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="pilatesActivity" />
+			</list>
+		</property>
+		<property name="annotations">
+			<list>
+				<ref bean="annotation1" />
+			</list>
+		</property>
+		<property name="trainings">
+			<list>
+				<ref bean="training1" />
+			</list>
+		</property>		
 	</bean>
 
-	<bean id="gerardoCreditCard" class="domain.CreditCard">
-		<property name="holder" value="Gerardo Montes" />
-		<property name="brand" value="VISA" />
-		<property name="number" value="4189787629856601" />
-		<property name="expirationMonth" value="11" />
-		<property name="expirationYear" value="2026" />
-		<property name="CVV" value="213" />
+	<bean id="gym2" class="domain.Gym">
+		<property name="logo" value="" />
+		<property name="address" value="Av Hispano América 4, Huelva" />
+		<property name="name" value="OkeyMas" />
+		<property name="fee" value="37.5" />
+		<property name="active" value="true" />
+		<property name="managers">
+			<list>
+				<ref bean="RocioManager" />
+			</list>
+		</property>
 	</bean>
 
-</beans>
+	<bean id="inscription1" class="domain.Inscription">		
+		<property name="singUpDate" value="2023-01-01" />
+		<property name="singOutDate" value="2023-12-31" />
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="client">
+			<ref bean="pepeClient" />
+		</property>
+	</bean>
+
+	<bean id="ramiroTrainerUserAccount" class="security.UserAccount">
+		<property name="username" value="ramirotrainer" />
+		<property name="password"
+			value="3f1a81f9ced38b9c2c0d4a657c4c6962" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ramiroTrainer" class="domain.Trainer">
+		<property name="userAccount">
+			<ref bean="ramiroTrainerUserAccount" />
+		</property>
+		<property name="firstName" value="Ramiro" />
+		<property name="lastName" value="Fernandez" />
+		<property name="email" value="ramiro.fernandez@hyper-mass.es" />
+		<property name="phoneNumber" value="+34692837100" />
+		<property name="address" value="Plaza de la merced, Valencia" />
+		<property name="postalCode" value="22002" />
+		<property name="city" value="Valencia" />
+		<property name="country" value="España" />
+		<property name="gym">
+			<ref bean="gym1" />
+		</property>
+		<property name="activities">
+			<list>
+				<ref bean="pilatesActivity" />
+			</list>
+		</property>
+		<property name="curriculum">
+			<ref bean="curriculumTrainerRamiro"/>
+		</property>
+	</bean>
+	
+	<bean id="curriculumTrainerRamiro" class="domain.Curriculum">
+		<property name="name" value="CurriculumRamiro" />
+		<property name="specialities"
+			value="{crossfit, calistenia, cardio}" />
+		<property name="education" value="Grado medio de FP" />
+		<property name="workExperience"
+			value="{Entrenador Personal, Monitor bodycombat}" />
+		<property name="SocialIdentities">
+			<list>
+				<ref bean="socialIdentityRamiro1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="socialIdentityRamiro1" class="domain.SocialIdentity">
+		<property name="nick" value="ramiro77" />
+		<property name="link"
+			value="https://www.instagram.com/ramiro77/" />
+		<property name="socialMedia" value="Instagram" />
+	</bean>
+		        
+</beans>		        

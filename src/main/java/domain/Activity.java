@@ -33,6 +33,7 @@ public class Activity extends DomainEntity {
 	private LocalTime				startHour;
 	private LocalTime				endHour;
 	private Integer					availablePlaces;
+	private boolean					active;
 
 	// Relationships
 	private Gym						gym;
@@ -112,6 +113,14 @@ public class Activity extends DomainEntity {
 	@ElementCollection
 	public Set<DayOfWeek> getDaysOfWeek() {
 		return this.daysOfWeek;
+	}
+
+	public boolean isActive() {
+		return this.active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 	public void setAnnotations(final Collection<Annotation> annotations) {

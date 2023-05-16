@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -13,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Activity;
-import domain.Annotation;
 import domain.Gym;
-import domain.Step;
 import domain.Training;
 import services.TrainingService;
 import services.gym.GymService;
@@ -26,9 +24,10 @@ import services.gym.GymService;
 public class TrainingController extends AbstractController {
 
 	@Autowired
-	private TrainingService trainingService;
+	private TrainingService	trainingService;
 	@Autowired
-	private GymService gymService;
+	private GymService		gymService;
+
 
 	public TrainingController() {
 		super();
@@ -93,9 +92,9 @@ public class TrainingController extends AbstractController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
-	public ModelAndView listbyGymId(@RequestParam Gym gym) {
+	public ModelAndView listbyGymId(@RequestParam final Gym gym) {
 		ModelAndView result;
 		Collection<Training> trainings;
 
@@ -108,14 +107,13 @@ public class TrainingController extends AbstractController {
 
 		return result;
 	}
-	
-	/*
+
 	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
-	public ModelAndView listbykeyword(@RequestParam String keyword) {
+	public ModelAndView listbykeyword(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Training> trainings;
-		Repasar que la keyword solo tenga una palabra y no varias
-		trainings = this.trainingService.findbykeyword(keyword);
+
+		trainings = this.trainingService.findTrainingsByKeyword(keyword);
 
 		result = new ModelAndView("training/list");
 		result.addObject("trainings", trainings);
@@ -123,8 +121,7 @@ public class TrainingController extends AbstractController {
 
 		return result;
 	}
-	 */
-	
+
 	protected ModelAndView createEditModelAndView(final Training training) {
 		ModelAndView result;
 		result = this.createEditModelAndView(training, null);
@@ -135,7 +132,7 @@ public class TrainingController extends AbstractController {
 		ModelAndView result;
 		Collection<Gym> gyms;
 
-		gyms = gymService.findAll();
+		gyms = this.gymService.findAll();
 
 		result = new ModelAndView("training/edit");
 		result.addObject("gyms", gyms);

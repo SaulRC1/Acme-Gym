@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -14,16 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
-import domain.Admin;
 import domain.Annotation;
-import domain.Client;
 import domain.Gym;
 import domain.Inscription;
 import domain.Manager;
 import domain.Trainer;
 import domain.Training;
 import services.ActivityService;
-import services.AdminService;
 import services.AnnotationService;
 import services.InscriptionService;
 import services.ManagerService;
@@ -36,19 +34,20 @@ import services.gym.GymService;
 public class GymController extends AbstractController {
 
 	@Autowired
-	private GymService gymService;
+	private GymService			gymService;
 	@Autowired
-	private ManagerService managerService;
+	private ManagerService		managerService;
 	@Autowired
-	private TrainerService trainerService;
+	private TrainerService		trainerService;
 	@Autowired
-	private ActivityService activityService;
+	private ActivityService		activityService;
 	@Autowired
-	private InscriptionService inscriptionService;
+	private InscriptionService	inscriptionService;
 	@Autowired
-	private AnnotationService annotattionService;
+	private AnnotationService	annotattionService;
 	@Autowired
-	private TrainingService trainingService;
+	private TrainingService		trainingService;
+
 
 	public GymController() {
 		super();
@@ -114,19 +113,33 @@ public class GymController extends AbstractController {
 		}
 		return result;
 	}
-	
-	/*
+
 	@RequestMapping(value = "/list", method = RequestMethod.POST, params = "cancel")
 	public ModelAndView cancel(@RequestParam final int gymId) {
 		ModelAndView result;
-		Collection<Gym> gyms;
-		gyms = this.gymService.cancelGym(gymId);
+		Gym gym;
+		Collection<Activity> activities;
+
+		gym = this.gymService.findOne(gymId);
+
+		gym.setActive(false);
+
+		this.gymService.save(gym);
+
+		activities = gym.getActivities();
+
+		for (final Activity activity : activities) {
+			activity.setActive(false);
+			this.activityService.save(activity);
+		}
+
 		result = new ModelAndView("gym/list");
-		result.addObject("gyms", gyms);
+		result.addObject("gym", gym);
 		result.addObject("requestURI", "gym/list.do");
+
+		return result;
 	}
-	 */
-	
+
 	protected ModelAndView createEditModelAndView(final Gym gym) {
 		ModelAndView result;
 		result = this.createEditModelAndView(gym, null);
@@ -142,12 +155,12 @@ public class GymController extends AbstractController {
 		Collection<Annotation> annotations;
 		Collection<Training> trainings;
 
-		managers = managerService.findAll();
-		trainers = trainerService.findAll();
-		activities = activityService.findAll();
-		inscriptions = inscriptionService.findAll();
-		annotations = annotattionService.findAll();
-		trainings = trainingService.findAll();
+		managers = this.managerService.findAll();
+		trainers = this.trainerService.findAll();
+		activities = this.activityService.findAll();
+		inscriptions = this.inscriptionService.findAll();
+		annotations = this.annotattionService.findAll();
+		trainings = this.trainingService.findAll();
 
 		result = new ModelAndView("gym/edit");
 		result.addObject("gym", gym);

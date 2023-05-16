@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -14,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
-import domain.Admin;
-import domain.Curriculum;
 import domain.Gym;
-import domain.Manager;
 import domain.Trainer;
 import services.ActivityService;
 import services.TrainerService;
@@ -28,11 +26,12 @@ import services.gym.GymService;
 public class TrainerController extends AbstractController {
 
 	@Autowired
-	private TrainerService trainerService;
+	private TrainerService	trainerService;
 	@Autowired
-	private ActivityService activityService;
+	private ActivityService	activityService;
 	@Autowired
-	private GymService gymService;
+	private GymService		gymService;
+
 
 	public TrainerController() {
 		super();
@@ -99,26 +98,26 @@ public class TrainerController extends AbstractController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
 	public ModelAndView editProfile(@RequestParam final int userAccountId) {
 		ModelAndView result;
 		Trainer trainer;
-		
+
 		trainer = this.trainerService.findByUserAccountId(userAccountId);
 		Assert.notNull(trainer);
-		
+
 		result = this.createEditModelAndView(trainer);
 		result.addObject("cancelUrl", "'welcome/index.do'");
 		return result;
 	}
-	/*
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listbyActivity(@RequestParam Activity activity) {
+	public ModelAndView listbyActivity(@RequestParam final Activity activity) {
 		ModelAndView result;
 		Collection<Trainer> trainers;
 
-		trainers = this.trainerService.findbyActivity(activity);
+		trainers = activity.getTrainers();
 
 		result = new ModelAndView("trainer/list");
 		result.addObject("trainers", trainers);
@@ -126,8 +125,8 @@ public class TrainerController extends AbstractController {
 		result.addObject("requestURI", "trainer/list.do");
 
 		return result;
-	}*/
-	
+	}
+
 	protected ModelAndView createEditModelAndView(final Trainer trainer) {
 		ModelAndView result;
 		result = this.createEditModelAndView(trainer, null);
@@ -139,9 +138,9 @@ public class TrainerController extends AbstractController {
 		Collection<Gym> gyms;
 		Collection<Activity> activities;
 
-		gyms=gymService.findAll();
-		activities = activityService.findAll();
-		
+		gyms = this.gymService.findAll();
+		activities = this.activityService.findAll();
+
 		result = new ModelAndView("trainer/edit");
 		result.addObject("trainer", trainer);
 		result.addObject("gyms", gyms);

@@ -1,5 +1,7 @@
+
 package controllers;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Collection;
 
@@ -17,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Activity;
 import domain.Client;
 import domain.Gym;
-import domain.Manager;
 import domain.Trainer;
 import services.ActivityService;
 import services.ClientService;
@@ -29,13 +30,14 @@ import services.gym.GymService;
 public class ActivityController extends AbstractController {
 
 	@Autowired
-	private ActivityService activityService;
+	private ActivityService	activityService;
 	@Autowired
-	private TrainerService trainerService;
+	private TrainerService	trainerService;
 	@Autowired
-	private GymService gymService;
+	private GymService		gymService;
 	@Autowired
-	private ClientService clientService;
+	private ClientService	clientService;
+
 
 	public ActivityController() {
 		super();
@@ -101,9 +103,8 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	/*
 	@RequestMapping(value = "/listbyGym", method = RequestMethod.GET)
-	public ModelAndView listbyGymId(@RequestParam Gym gym) {
+	public ModelAndView listbyGym(@RequestParam final Gym gym) {
 		ModelAndView result;
 		Collection<Activity> activities;
 
@@ -116,14 +117,13 @@ public class ActivityController extends AbstractController {
 
 		return result;
 	}
-	
-	
+
 	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
-	public ModelAndView listbykeyword(@RequestParam String keyword) {
+	public ModelAndView listbykeyword(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Activity> activities;
 
-		activities = this.activityService.listbykeyword();
+		activities = this.activityService.findByKeyword(keyword);
 
 		result = new ModelAndView("activity/list");
 		result.addObject("activities", activities);
@@ -131,14 +131,14 @@ public class ActivityController extends AbstractController {
 
 		return result;
 	}
-	
-	Revisar el tema de pedir una hora y un dia
+
+	//Revisar	el tema de pedir una hora y un dia
 	@RequestMapping(value = "/listbyhourorday", method = RequestMethod.GET)
-	public ModelAndView listbyHourOrDay(@RequestParam LocalTime time) {
+	public ModelAndView listbyHourOrDay(@RequestParam final Collection<DayOfWeek> days, final LocalTime time) {
 		ModelAndView result;
 		Collection<Activity> activities;
 
-		activities = this.activityService.listbyHourOrDay();
+		activities = this.activityService.findByDayRange(days, time);
 
 		result = new ModelAndView("activity/list");
 		result.addObject("activities", activities);
@@ -146,7 +146,6 @@ public class ActivityController extends AbstractController {
 
 		return result;
 	}
-	*/
 
 	protected ModelAndView createEditModelAndView(final Activity activity) {
 		ModelAndView result;
@@ -160,9 +159,9 @@ public class ActivityController extends AbstractController {
 		Collection<Gym> gyms;
 		Collection<Client> clients;
 
-		trainers = trainerService.findAll();
-		gyms = gymService.findAll();
-		clients = clientService.findAll();
+		trainers = this.trainerService.findAll();
+		gyms = this.gymService.findAll();
+		clients = this.clientService.findAll();
 
 		result = new ModelAndView("activity/edit");
 		result.addObject("activity", activity);

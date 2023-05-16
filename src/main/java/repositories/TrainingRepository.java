@@ -19,7 +19,7 @@ public interface TrainingRepository extends JpaRepository<Training, Integer> {
 	@Query("SELECT t FROM Training t WHERE t.gym = ?1")
 	public Collection<Training> findByGym(Gym gym);
 
-	@Query("SELECT t FROM Training t JOIN t.steps s WHERE s.description = ?1")
-	public Collection<Training> findByStepDescriptionContaining(String keyword);
+	@Query("SELECT t FROM Training t WHERE t.description = ?1 OR t.title = ?1")
+	public Collection<Training> findByKeyword(String keyword);
 
 }

@@ -62,8 +62,9 @@ public class TrainingService {
 		return this.trainingRepository.findByGym(gym);
 	}
 
-	public Collection<Training> findTrainingsByStepDescriptionContaining(final String keyword) {
-		return this.trainingRepository.findByStepDescriptionContaining(keyword);
+	public Collection<Training> findTrainingsByKeyword(final String keyword) {
+		Assert.isTrue(!keyword.contains(" "));
+		return this.trainingRepository.findByKeyword(keyword);
 	}
 
 	public Collection<Training> findAll() {

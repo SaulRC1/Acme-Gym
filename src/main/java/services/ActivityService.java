@@ -1,6 +1,8 @@
 
 package services;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -63,4 +65,20 @@ public class ActivityService {
 
 		this.activityRepository.delete(activity);
 	}
+
+	public Collection<Activity> findByDayRange(final Collection<DayOfWeek> days, final LocalTime time) {
+
+		return this.activityRepository.findByDayRange(days, time);
+
+	}
+
+	public Collection<Activity> findByKeyword(final String keyword) {
+
+		return this.activityRepository.findByKeyword(keyword);
+	}
+
+	public Collection<Activity> findAvailableActivities() {
+		return this.activityRepository.findAvailableActivities();
+	}
+
 }
