@@ -93,7 +93,7 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbyGymId", method = RequestMethod.GET)
+	@RequestMapping(value = "/listByGymId", method = RequestMethod.GET)
 	public ModelAndView listbyGymId(@RequestParam final int gymId) {
 		ModelAndView result;
 		Collection<Training> trainings;
@@ -110,7 +110,7 @@ public class TrainingController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
+	@RequestMapping(value = "/listBykeyword", method = RequestMethod.GET)
 	public ModelAndView listbykeyword(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Training> trainings;

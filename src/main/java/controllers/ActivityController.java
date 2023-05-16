@@ -103,7 +103,7 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbyGymId", method = RequestMethod.GET)
+	@RequestMapping(value = "/listByGymId", method = RequestMethod.GET)
 	public ModelAndView listbyGym(@RequestParam final int gymId) {
 		ModelAndView result;
 		Collection<Activity> activities;
@@ -119,7 +119,7 @@ public class ActivityController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/listbykeyword", method = RequestMethod.GET)
+	@RequestMapping(value = "/listBykeyword", method = RequestMethod.GET)
 	public ModelAndView listbykeyword(@RequestParam final String keyword) {
 		ModelAndView result;
 		Collection<Activity> activities;
@@ -134,7 +134,7 @@ public class ActivityController extends AbstractController {
 	}
 
 	//Revisar	el tema de pedir una hora y un dia
-	@RequestMapping(value = "/listbyhourorday", method = RequestMethod.GET)
+	@RequestMapping(value = "/listByHourOrDay", method = RequestMethod.GET)
 	public ModelAndView listbyHourOrDay(@RequestParam final Collection<DayOfWeek> days, final LocalTime time) {
 		ModelAndView result;
 		Collection<Activity> activities;
