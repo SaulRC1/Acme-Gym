@@ -142,27 +142,17 @@ public class AdminController extends AbstractController {
 	model.addObject("standardDeviationNumberOfGymsPerManager",
 		this.adminService.getStandarDeviationOfGymsPerManager());
 
-	/*
-	 * model.addObject("minimumNumberOfGymsPerClient",
-	 * this.adminService.getMinimumNumberOfGymsPerClient());
-	 * model.addObject("maximumNumberOfGymsPerClient",
-	 * this.adminService.getMaximumNumberOfGymsPerClient());
-	 * model.addObject("averageNumberOfGymsPerClient",
-	 * this.adminService.getAverageNumberOfGymsPerClient());
-	 * model.addObject("standardDeviationNumberOfGymsPerClient",
-	 * this.adminService.getStandardDeviationOfGymsPerClient());
-	 */
+	model.addObject("minimumNumberOfGymsPerClient", this.adminService.getMinimumNumberOfGymsPerClient());
+	model.addObject("maximumNumberOfGymsPerClient", this.adminService.getMaximumNumberOfGymsPerClient());
+	model.addObject("averageNumberOfGymsPerClient", this.adminService.getAverageNumberOfGymsPerClient());
+	model.addObject("standardDeviationNumberOfGymsPerClient",
+		this.adminService.getStandardDeviationOfGymsPerClient());
 
-	/*
-	 * model.addObject("minimumNumberOfClientsPerGym",
-	 * this.adminService.getMinimumNumberOfClientsPerGym());
-	 * model.addObject("maximumNumberOfClientsPerGym",
-	 * this.adminService.getMaximumNumberOfClientsPerGym());
-	 * model.addObject("averageNumberOfClientsPerGym",
-	 * this.adminService.getAverageNumberOfClientsPerGym());
-	 * model.addObject("standardDeviationNumberOfClientsPerGym",
-	 * this.adminService.getStandardDeviationOfClientsPerGym());
-	 */
+	model.addObject("minimumNumberOfClientsPerGym", this.adminService.getMinimumNumberOfClientsPerGym());
+	model.addObject("maximumNumberOfClientsPerGym", this.adminService.getMaximumNumberOfClientsPerGym());
+	model.addObject("averageNumberOfClientsPerGym", this.adminService.getAverageNumberOfClientsPerGym());
+	model.addObject("standardDeviationNumberOfClientsPerGym",
+		this.adminService.getStandardDeviationOfClientsPerGym());
 
 	model.addObject("gymWithMostNumberOfActivities", this.adminService.getGymWithMostNumberOfActivities());
 	model.addObject("clientsWithMostActivities", this.adminService.getClientsWithMostActivities());

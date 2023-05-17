@@ -32,7 +32,7 @@
     <td>${standardDeviationNumberOfGymsPerManager}</td>
   </tr>
 </table>
-<!-- 
+
  <table>
   <tr>
     <th><spring:message code="information.panel.minimumNumberOfGymsPerClient" /></th>
@@ -61,13 +61,13 @@
     <td>${standardDeviationNumberOfClientsPerGym}</td>
   </tr>
 </table>
--->
+
 <table>
   <tr>
     <th><spring:message code="information.panel.gymWithMostNumberOfActivities" /></th>
   </tr>
   <tr>
-    <td>${gymWithMostNumberOfActivities}</td>
+    <td>${gymWithMostNumberOfActivities.name}</td>
   </tr>
 </table>
 
