@@ -107,7 +107,7 @@ public class ActivityController extends AbstractController {
 	ModelAndView result;
 	Collection<Activity> activities;
 	Gym gym;
-	
+
 	gym = this.gymService.findOne(gymId);
 	activities = gym.getActivities();
 
@@ -124,7 +124,11 @@ public class ActivityController extends AbstractController {
 	ModelAndView result;
 	Collection<Activity> activities;
 
-	activities = this.activityService.findByKeyword(keyword);
+	if (keyword == "") {
+	    activities = this.activityService.findAll();
+	} else {
+	    activities = this.activityService.findByKeyword(keyword);
+	}
 
 	result = new ModelAndView("activity/list");
 	result.addObject("activities", activities);
@@ -138,8 +142,13 @@ public class ActivityController extends AbstractController {
 	ModelAndView result;
 	Collection<Activity> activities;
 
-	activities = this.activityService.findByGymIdAndKeyword(gymId, keyword);
-	
+	if (keyword == "") {
+	    Gym gym = this.gymService.findOne(gymId);
+	    activities = gym.getActivities();
+	} else {
+	    activities = this.activityService.findByGymIdAndKeyword(gymId, keyword);
+	}
+
 	result = new ModelAndView("activity/list");
 	result.addObject("activities", activities);
 	result.addObject("gymId", gymId);
