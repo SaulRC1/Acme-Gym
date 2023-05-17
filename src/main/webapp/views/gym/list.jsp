@@ -35,22 +35,32 @@
 		<a href="activity/listByGymId.do?gymId=${activedGym.id}"> <spring:message
 				code="activities" /></a>
 	</display:column>
-	
-	<!-- ROLES -->
+
 	<security:authorize access="hasRole('CLIENT')">
-		<display:column titleKey="client.signUpGym">
-			<a href="client/details.do?gymId=${activedGym.id}">${name}<spring:message
-					code="client.signUpGym" />
-			</a>
+		<display:column titleKey="gym.enroll">
+			<jstl:choose>
+				<jstl:when test="${isEnrolled}">
+					<jstl:if test="${enrolledGym.id == activedGym.id}">
+						<a
+							href="gym/unsubscribe.do?userAccountId=<security:authentication property="principal.id" />">
+							<spring:message code="gym.unsubscribe" />
+						</a>
+					</jstl:if>
+				</jstl:when>
+				<jstl:otherwise>
+					<a
+						href="gym/enroll.do?userAccountId=<security:authentication property="principal.id" />&gymId=${activedGym.id}">
+						<spring:message code="gym.enroll" />
+					</a>
+				</jstl:otherwise>
+			</jstl:choose>
 		</display:column>
 	</security:authorize>
-	
-	
-		
+
 	<security:authorize access="hasRole('MANAGER')">
 		<!--  Edit column -->
 		<display:column titleKey="gym.manageAcitivities">
-			<a href="gym/details.do?gymId=${activedGym.id}">${name}<spring:message
+			<a href="gym/manageActivities.do?gymId=${activedGym.id}">${name}<spring:message
 					code="gym.manageAcitivities" />
 			</a>
 		</display:column>
@@ -96,9 +106,9 @@
 					code="activities" /></a>
 		</display:column>
 
-		<!--  Edit column -->
+		<!--  Manage activities column -->
 		<display:column titleKey="gym.manageAcitivities">
-			<a href="gym/details.do?gymId=${unactivedGym.id}">${name}<spring:message
+			<a href="gym/manageActivities.do?gymId=${unactivedGym.id}">${name}<spring:message
 					code="gym.manageAcitivities" />
 			</a>
 		</display:column>
@@ -108,9 +118,10 @@
 					code="gym.manageTrainers" /></a>						
 		</display:column>	
 
+		<!--  Activate activities column -->
 		<display:column titleKey="gym.active">
 			<a href="gym/activateGym.do?gymId=${unactivedGym.id}"> <spring:message
-					code="gym.active" />
+					code="gym.activate" />
 			</a>
 		</display:column>
 

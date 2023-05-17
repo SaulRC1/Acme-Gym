@@ -14,4 +14,7 @@ public interface GymRepository extends JpaRepository<Gym, Integer> {
 
 	@Query("SELECT g FROM Gym g WHERE g.active = true")
 	public Collection<Gym> findActivesGyms();
+
+	@Query("SELECT g FROM Gym g WHERE g.name = ?1")
+	public Gym findByName(String name);
 }

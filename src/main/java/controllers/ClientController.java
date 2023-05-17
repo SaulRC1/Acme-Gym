@@ -1,13 +1,12 @@
+
 package controllers;
 
 import java.util.Collection;
-
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
 import domain.Client;
+import domain.CreditCard;
 import domain.Gym;
-import domain.Inscription;
-import domain.Manager;
 import services.ActivityService;
 import services.ClientService;
 import services.gym.GymService;
@@ -73,17 +71,54 @@ public class ClientController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid final Client client, final BindingResult binding) {
+    public ModelAndView save(@RequestParam("id") final int clientId, @RequestParam("firstName") final String firstName,
+	    @RequestParam("lastName") final String lastName, @RequestParam("address") final String address,
+	    @RequestParam("email") final String email, @RequestParam("phoneNumber") final String phoneNumber,
+	    @RequestParam("postalCode") final String postalCode, @RequestParam("city") final String city,
+	    @RequestParam("country") final String country,
+	    @RequestParam("creditCard.holder") final String creditCardHolder,
+	    @RequestParam("creditCard.brand") final String creditCardBrand,
+	    @RequestParam("creditCard.number") final String creditCardNumber,
+	    @RequestParam("creditCard.expirationMonth") final String creditCardExpirationMonth,
+	    @RequestParam("creditCard.expirationYear") final String creditCardExpirationYear,
+	    @RequestParam("creditCard.CVV") final String creditCardCVV,
+	    @RequestParam("activities") final List<String> activities) {
 	ModelAndView result;
-	if (binding.hasErrors())
-	    result = this.createEditModelAndView(client);
-	else
-	    try {
-		this.clientService.save(client);
-		result = new ModelAndView("redirect:list.do");
-	    } catch (final Throwable oops) {
-		result = this.createEditModelAndView(client, "client.commit.error");
-	    }
+	Client client;
+	Activity activity;
+
+	client = this.clientService.findOne(clientId);
+	client.setFirstName(firstName);
+	client.setLastName(lastName);
+	client.setAddress(address);
+	client.setEmail(email);
+	client.setPhoneNumber(phoneNumber);
+	client.setPostalCode(postalCode);
+	client.setCity(city);
+	client.setCountry(country);
+
+	CreditCard creditCard = new CreditCard();
+
+	creditCard.setHolder(creditCardHolder);
+	creditCard.setBrand(creditCardBrand);
+	creditCard.setNumber(creditCardNumber);
+	creditCard.setExpirationMonth(Integer.parseInt(creditCardExpirationMonth));
+	creditCard.setExpirationYear(Integer.parseInt(creditCardExpirationYear));
+	creditCard.setCVV(Integer.parseInt(creditCardCVV));
+
+	client.setCreditCard(creditCard);
+
+	client.getActivities().clear();
+
+	for (String activitiesaux : activities) {
+	    activity = this.activityService.findByName(activitiesaux);
+	    client.addActivity(activity);
+	}
+
+	this.clientService.save(client);
+
+	result = new ModelAndView("redirect:../welcome/index.do");
+
 	return result;
     }
 
@@ -123,8 +158,8 @@ public class ClientController extends AbstractController {
 	Collection<Activity> activities;
 	Collection<Gym> gyms;
 
-	activities = activityService.findAll();
-	gyms = gymService.findAll();
+	activities = this.activityService.findAll();
+	gyms = this.gymService.findAll();
 
 	result = new ModelAndView("client/edit");
 	result.addObject("client", client);

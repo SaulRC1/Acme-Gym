@@ -12,17 +12,17 @@ import javax.persistence.ManyToOne;
 @Access(AccessType.PROPERTY)
 public class Inscription extends DomainEntity {
 
-    private LocalDate singUpDate;
-    private LocalDate singOutDate;
+    private LocalDate signUpDate;
+    private LocalDate signOutDate;
 
     // Relationships
     private Gym gym;
     private Client client;
 
-    public Inscription(final LocalDate singUpDate, final LocalDate singOutDate) {
+    public Inscription(final LocalDate signUpDate, final LocalDate signOutDate) {
 	super();
-	this.singUpDate = singUpDate;
-	this.singOutDate = singOutDate;
+	this.signUpDate = signUpDate;
+	this.signOutDate = signOutDate;
     }
 
     public Inscription() {
@@ -39,12 +39,12 @@ public class Inscription extends DomainEntity {
 	return this.gym;
     }
 
-    public LocalDate getSingOutDate() {
-	return this.singOutDate;
+    public LocalDate getSignOutDate() {
+	return this.signOutDate;
     }
 
-    public LocalDate getSingUpDate() {
-	return this.singUpDate;
+    public LocalDate getSignUpDate() {
+	return this.signUpDate;
     }
 
     public void setClient(final Client client) {
@@ -55,12 +55,12 @@ public class Inscription extends DomainEntity {
 	this.gym = gym;
     }
 
-    public void setSingOutDate(final LocalDate singOutDate) {
-	this.singOutDate = singOutDate;
+    public void setSignOutDate(final LocalDate signOutDate) {
+	this.signOutDate = signOutDate;
     }
 
-    public void setSingUpDate(final LocalDate singUpDate) {
-	this.singUpDate = singUpDate;
+    public void setSignUpDate(final LocalDate signUpDate) {
+	this.signUpDate = signUpDate;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class Inscription extends DomainEntity {
 	int result = super.hashCode();
 	result = prime * result + ((this.client == null) ? 0 : this.client.hashCode());
 	result = prime * result + ((this.gym == null) ? 0 : this.gym.hashCode());
-	result = prime * result + ((this.singOutDate == null) ? 0 : this.singOutDate.hashCode());
-	result = prime * result + ((this.singUpDate == null) ? 0 : this.singUpDate.hashCode());
+	result = prime * result + ((this.signOutDate == null) ? 0 : this.signOutDate.hashCode());
+	result = prime * result + ((this.signUpDate == null) ? 0 : this.signUpDate.hashCode());
 	return result;
     }
 
@@ -91,15 +91,15 @@ public class Inscription extends DomainEntity {
 		return false;
 	} else if (!this.gym.equals(other.gym))
 	    return false;
-	if (this.singOutDate == null) {
-	    if (other.singOutDate != null)
+	if (this.signOutDate == null) {
+	    if (other.signOutDate != null)
 		return false;
-	} else if (!this.singOutDate.equals(other.singOutDate))
+	} else if (!this.signOutDate.equals(other.signOutDate))
 	    return false;
-	if (this.singUpDate == null) {
-	    if (other.singUpDate != null)
+	if (this.signUpDate == null) {
+	    if (other.signUpDate != null)
 		return false;
-	} else if (!this.singUpDate.equals(other.singUpDate))
+	} else if (!this.signUpDate.equals(other.signUpDate))
 	    return false;
 	return true;
     }

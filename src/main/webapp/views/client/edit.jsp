@@ -96,17 +96,17 @@
 	<form:errors cssClass="error" path="creditCard.brand" />
 	<br />
 
-	<form:label path="creditCard.ExpirationMonth">
+	<form:label path="creditCard.expirationMonth">
 		<spring:message code="client.creditCard.expirationMonth" />:
 		</form:label>
-	<form:input path="creditCard.ExpirationMonth" />
+	<form:input path="creditCard.expirationMonth" />
 	<form:errors cssClass="error" path="creditCard.ExpirationMonth" />
 	<br />
 
-	<form:label path="creditCard.ExpirationYear">
+	<form:label path="creditCard.expirationYear">
 		<spring:message code="client.creditCard.expirationYear" />:
 		</form:label>
-	<form:input path="creditCard.ExpirationYear" />
+	<form:input path="creditCard.expirationYear" />
 	<form:errors cssClass="error" path="creditCard.ExpirationYear" />
 	<br />
 
@@ -117,10 +117,10 @@
 	<form:errors cssClass="error" path="creditCard.CVV" />
 	<br />
 
-	<form:label path="creditCard.Holder">
+	<form:label path="creditCard.holder">
 		<spring:message code="client.creditCard.holder" />:
 		</form:label>
-	<form:input path="creditCard.Holder" />
+	<form:input path="creditCard.holder" />
 	<form:errors cssClass="error" path="creditCard.Holder" />
 	<br />
 	
@@ -131,7 +131,7 @@
 		</form:label>
 	<form:select id="activities" path="activities">
 		<form:option value="0" label="----" />
-		<form:options items="${activities}" itemValue="id" itemLabel="name" />
+		<form:options items="${activities}" itemValue="id" itemLabel="title" />
 	</form:select>
 
 

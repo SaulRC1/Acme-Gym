@@ -107,7 +107,7 @@ public class Gym extends DomainEntity {
 	this.active = active;
     }
 
-    public void setActivities(final List<Activity> activities) {
+    public void setActivities(final Collection<Activity> activities) {
 	this.activities = activities;
     }
 
@@ -115,7 +115,7 @@ public class Gym extends DomainEntity {
 	this.address = address;
     }
 
-    public void setAnnotations(final List<Annotation> annotations) {
+    public void setAnnotations(final Collection<Annotation> annotations) {
 	this.annotations = annotations;
     }
 
@@ -123,7 +123,7 @@ public class Gym extends DomainEntity {
 	this.fee = fee;
     }
 
-    public void setInscriptions(final List<Inscription> inscriptions) {
+    public void setInscriptions(final Collection<Inscription> inscriptions) {
 	this.inscriptions = inscriptions;
     }
 
@@ -139,11 +139,11 @@ public class Gym extends DomainEntity {
 	this.name = name;
     }
 
-    public void setTrainers(final List<Trainer> trainers) {
+    public void setTrainers(final Collection<Trainer> trainers) {
 	this.trainers = trainers;
     }
 
-    public void setTrainings(final List<Training> trainings) {
+    public void setTrainings(final Collection<Training> trainings) {
 	this.trainings = trainings;
     }
 

@@ -28,7 +28,7 @@
 	<display:column property="description" titleKey="training.description" />
 
 	<display:column>
-		<a href="step/list.do?steps=${steps}"> <spring:message
+		<a href="step/list.do?trainingId=${manageTraining.id}"> <spring:message
 				code="training.steps" /></a>
 	</display:column>
 

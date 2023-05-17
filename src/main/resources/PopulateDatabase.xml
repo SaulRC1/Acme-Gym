@@ -762,8 +762,8 @@
 	<!-- INSCRIPTIONS -->
 
 	<bean id="inscription1" class="domain.Inscription">		
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
+		<property name="signUpDate" value="2023-01-01" />
+		<property name="signOutDate" value="2023-12-31" />
 		<property name="gym">
 			<ref bean="gym1" />
 		</property>
@@ -773,8 +773,8 @@
 	</bean>
 	
 	<bean id="inscription2" class="domain.Inscription">
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
+		<property name="signUpDate" value="2023-01-01" />
+		<property name="signOutDate" value="2023-12-31" />
 		<property name="gym">
 			<ref bean="gym2" />
 		</property>
@@ -784,8 +784,8 @@
 	</bean>
 
 	<bean id="inscription3" class="domain.Inscription">
-		<property name="singUpDate" value="2023-01-01" />
-		<property name="singOutDate" value="2023-12-31" />
+		<property name="signUpDate" value="2023-01-01" />
+		<property name="signOutDate" value="2023-12-31" />
 		<property name="gym">
 			<ref bean="gym3" />
 		</property>

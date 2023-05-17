@@ -19,7 +19,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
 	@Query("SELECT a FROM Activity a WHERE a.description = ?1 OR a.title = ?1")
 	public Collection<Activity> findByKeyword(String keyword);
-	
+
 	@Query("SELECT a FROM Activity a WHERE a.description = ?2 OR a.title = ?2 AND a.gym.id = ?1")
 	public Collection<Activity> findByGymIdAndKeyword(int gymId, String keyword);
 
@@ -28,5 +28,8 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
 	@Query("SELECT a FROM Activity a WHERE a.availablePlaces > 0 AND a.active = true")
 	public Collection<Activity> findAvailableActivities();
+
+	@Query("SELECT a FROM Activity a WHERE a.title = ?1")
+	public Activity findByName(String title);
 
 }

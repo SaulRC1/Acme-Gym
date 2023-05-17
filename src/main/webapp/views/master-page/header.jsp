@@ -12,7 +12,8 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <div>
 	<a href="#"><img src="images/logo.png" alt="Acme Gym Co., Inc." /></a>
@@ -62,7 +63,7 @@
 
 		<!-- Trainer dropdown -->
 		<security:authorize access="permitAll">
-		
+
 			<li><a class="fNiv"><spring:message
 						code="master.page.trainer" /></a>
 				<ul>
@@ -80,9 +81,21 @@
 			<li><a class="fNiv"><spring:message code="master.page.gym" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="gym/listActivesUnactives.do"><spring:message
-								code="master.page.gym.list" /></a></li>
+					<security:authorize access="!hasRole('CLIENT')">
+						<li><a
+							href="gym/list.do"><spring:message
+									code="master.page.gym.list" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('CLIENT')">
+						<li><a
+							href="gym/enrollmentList.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
+									code="master.page.gym.list" /></a></li>
+
+					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="gym/listActivesUnactives.do"><spring:message
+									code="master.page.gym.list" /></a></li>
+
 						<li><a href="manager/create.do"><spring:message
 									code="master.page.gym.create" /></a></li>
 					</security:authorize>

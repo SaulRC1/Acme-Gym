@@ -30,8 +30,6 @@ public class ManagerService {
 
 		Manager result;
 
-		Assert.isTrue(!manager.getGyms().contains(manager));
-
 		result = this.managerRepository.save(manager);
 
 		return result;
