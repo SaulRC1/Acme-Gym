@@ -80,15 +80,24 @@ public class TrainingController extends AbstractController {
 	return result;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-    public ModelAndView delete(final Training training) {
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView delete(@RequestParam final int gymId, @RequestParam final int trainingId) {
 	ModelAndView result;
-	try {
-	    this.trainingService.delete(training);
-	    result = new ModelAndView("redirect:list.do");
-	} catch (final Throwable oops) {
-	    result = this.createEditModelAndView(training, "training.commit.error");
-	}
+	Training training;
+	Gym gym;
+	Collection<Training> trainings;
+
+	gym = this.gymService.findOne(gymId);
+
+	training = this.trainingService.findOne(trainingId);
+	this.trainingService.delete(training);
+
+	trainings = gym.getTrainings();
+
+	result = new ModelAndView("gym/manageTrainings");
+	result.addObject("trainings", trainings);
+	result.addObject("gym", gym);
+	result.addObject("gymId", gym.getId());
 	return result;
     }
 
