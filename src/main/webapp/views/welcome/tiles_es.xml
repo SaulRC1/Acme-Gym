@@ -21,4 +21,11 @@
 		<put-attribute name="body" value="/views/welcome/index.jsp" />
 	</definition>
 	
+	<definition name="welcome/bannedManager" template="/views/master-page/layoutBannedManager.jsp">
+		<put-attribute name="title" value="Acceso prohibido" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="/views/welcome/bannedManager.jsp" />
+		<put-attribute name="footer" value="/views/master-page/footer.jsp" />
+	</definition>
+	
 </tiles-definitions>

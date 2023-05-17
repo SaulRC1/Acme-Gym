@@ -341,6 +341,8 @@ public class SignUpController extends AbstractController {
 	    Gym gym = this.gymService.findOne(gymId);
 
 	    manager.addGym(gym);
+
+	    this.gymService.save(gym);
 	}
 
 	this.managerService.save(manager);

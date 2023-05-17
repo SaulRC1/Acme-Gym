@@ -51,6 +51,8 @@ public class LoginController extends AbstractController {
 	result.addObject("credentials", credentials);
 	result.addObject("showError", showError);
 
+	System.out.println("username: " + credentials.getUsername());
+
 	return result;
     }
 
@@ -69,22 +71,22 @@ public class LoginController extends AbstractController {
     /*
      * @RequestMapping("/signup") public ModelAndView signup() { ModelAndView
      * result;
-     * 
+     *
      * UserAccount userAccount = new UserAccount();
-     * 
+     *
      * result = new ModelAndView("security/signup"); result.addObject("userAccount",
      * userAccount);
-     * 
+     *
      * return result; }
-     * 
+     *
      * @RequestMapping(value = "/signup", method = RequestMethod.POST, params =
      * "signup") public ModelAndView signup(@Valid final UserAccount userAccount,
      * final BindingResult binding) { ModelAndView result = new ModelAndView();
-     * 
+     *
      * // Redireccionar a /client/edit o /manager/edit pasandole el UserAccount
-     * 
+     *
      * return result;
-     * 
+     *
      * }
      */
 }
