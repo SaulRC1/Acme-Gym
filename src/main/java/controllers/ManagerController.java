@@ -1,13 +1,12 @@
+
 package controllers;
 
 import java.util.Collection;
-
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,161 +23,178 @@ import services.gym.GymService;
 @RequestMapping("/manager")
 public class ManagerController extends AbstractController {
 
-    @Autowired
-    private ManagerService managerService;
-    @Autowired
-    private GymService gymService;
-    @Autowired
-    private AdminService adminService;
+	@Autowired
+	private ManagerService	managerService;
+	@Autowired
+	private GymService		gymService;
+	@Autowired
+	private AdminService	adminService;
 
-    public ManagerController() {
-	super();
-    }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
-	ModelAndView result;
-	Collection<Manager> bannedmanagers;
-	Collection<Manager> unbannedmanagers;
+	public ManagerController() {
+		super();
+	}
 
-	bannedmanagers = this.managerService.findAll();
-	unbannedmanagers = this.managerService.findByBannedFalse();
-	bannedmanagers.removeAll(unbannedmanagers);
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Manager> bannedmanagers;
+		Collection<Manager> unbannedmanagers;
 
-	result = new ModelAndView("manager/list");
-	result.addObject("bannedManagers", bannedmanagers);
-	result.addObject("unbannedManagers", unbannedmanagers);
-	result.addObject("requestURI", "manager/list.do");
+		bannedmanagers = this.managerService.findAll();
+		unbannedmanagers = this.managerService.findByBannedFalse();
+		bannedmanagers.removeAll(unbannedmanagers);
 
-	return result;
-    }
+		result = new ModelAndView("manager/list");
+		result.addObject("bannedManagers", bannedmanagers);
+		result.addObject("unbannedManagers", unbannedmanagers);
+		result.addObject("requestURI", "manager/list.do");
 
-    @RequestMapping(value = "/banned", method = RequestMethod.GET)
-    public ModelAndView banned(@RequestParam final int managerId) {
-	ModelAndView result;
-	Manager manager;
-	Collection<Manager> bannedmanagers;
-	Collection<Manager> unbannedmanagers;
+		return result;
+	}
 
-	manager = this.managerService.findOne(managerId);
-	manager.setBanned(true);
-	this.managerService.save(manager);
+	@RequestMapping(value = "/banned", method = RequestMethod.GET)
+	public ModelAndView banned(@RequestParam final int managerId) {
+		ModelAndView result;
+		Manager manager;
+		Collection<Manager> bannedmanagers;
+		Collection<Manager> unbannedmanagers;
 
-	bannedmanagers = this.managerService.findAll();
-	unbannedmanagers = this.managerService.findByBannedFalse();
-	bannedmanagers.removeAll(unbannedmanagers);
+		manager = this.managerService.findOne(managerId);
+		manager.setBanned(true);
+		this.managerService.save(manager);
 
-	result = new ModelAndView("manager/list");
-	result.addObject("bannedManagers", bannedmanagers);
-	result.addObject("unbannedManagers", unbannedmanagers);
-	result.addObject("requestURI", "manager/list.do");
+		bannedmanagers = this.managerService.findAll();
+		unbannedmanagers = this.managerService.findByBannedFalse();
+		bannedmanagers.removeAll(unbannedmanagers);
 
-	return result;
-    }
+		result = new ModelAndView("manager/list");
+		result.addObject("bannedManagers", bannedmanagers);
+		result.addObject("unbannedManagers", unbannedmanagers);
+		result.addObject("requestURI", "manager/list.do");
 
-    @RequestMapping(value = "/unbanned", method = RequestMethod.GET)
-    public ModelAndView unbanned(@RequestParam final int managerId) {
-	ModelAndView result;
-	Manager manager;
-	Collection<Manager> bannedmanagers;
-	Collection<Manager> unbannedmanagers;
+		return result;
+	}
 
-	manager = this.managerService.findOne(managerId);
-	manager.setBanned(false);
-	this.managerService.save(manager);
+	@RequestMapping(value = "/unbanned", method = RequestMethod.GET)
+	public ModelAndView unbanned(@RequestParam final int managerId) {
+		ModelAndView result;
+		Manager manager;
+		Collection<Manager> bannedmanagers;
+		Collection<Manager> unbannedmanagers;
 
-	bannedmanagers = this.managerService.findAll();
-	unbannedmanagers = this.managerService.findByBannedFalse();
-	bannedmanagers.removeAll(unbannedmanagers);
+		manager = this.managerService.findOne(managerId);
+		manager.setBanned(false);
+		this.managerService.save(manager);
 
-	result = new ModelAndView("manager/list");
-	result.addObject("bannedManagers", bannedmanagers);
-	result.addObject("unbannedManagers", unbannedmanagers);
-	result.addObject("requestURI", "manager/list.do");
+		bannedmanagers = this.managerService.findAll();
+		unbannedmanagers = this.managerService.findByBannedFalse();
+		bannedmanagers.removeAll(unbannedmanagers);
 
-	return result;
-    }
+		result = new ModelAndView("manager/list");
+		result.addObject("bannedManagers", bannedmanagers);
+		result.addObject("unbannedManagers", unbannedmanagers);
+		result.addObject("requestURI", "manager/list.do");
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() {
-	ModelAndView result;
-	Manager manager;
-	manager = this.managerService.create();
-	result = this.createEditModelAndView(manager);
-	result.addObject("cancelUrl", "'welcome/index.do'");
-	return result;
-    }
+		return result;
+	}
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam final int managerId) {
-	ModelAndView result;
-	Manager manager;
-	manager = this.managerService.findOne(managerId);
-	Assert.notNull(manager);
-	result = this.createEditModelAndView(manager);
-	result.addObject("cancelUrl", "'manager/list.do'");
-	return result;
-    }
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Manager manager;
+		manager = this.managerService.create();
+		result = this.createEditModelAndView(manager);
+		result.addObject("cancelUrl", "'welcome/index.do'");
+		return result;
+	}
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid final Manager manager, final BindingResult binding) {
-	ModelAndView result;
-	if (binding.hasErrors())
-	    result = this.createEditModelAndView(manager);
-	else
-	    try {
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int managerId) {
+		ModelAndView result;
+		Manager manager;
+		manager = this.managerService.findOne(managerId);
+		Assert.notNull(manager);
+		result = this.createEditModelAndView(manager);
+		result.addObject("cancelUrl", "'manager/list.do'");
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@RequestParam("id") final int managerId, @RequestParam("gyms") final List<String> gyms, @RequestParam("firstName") final String firstName, @RequestParam("lastName") final String lastName,
+		@RequestParam("address") final String address, @RequestParam("email") final String email, @RequestParam("phoneNumber") final String phoneNumber, @RequestParam("postalCode") final String postalCode, @RequestParam("city") final String city,
+		@RequestParam("country") final String country) {
+		ModelAndView result;
+		Manager manager;
+		Gym gym;
+
+		manager = this.managerService.findOne(managerId);
+		manager.setFirstName(firstName);
+		manager.setLastName(lastName);
+		manager.setAddress(address);
+		manager.setEmail(email);
+		manager.setPhoneNumber(phoneNumber);
+		manager.setPostalCode(postalCode);
+		manager.setCity(city);
+		manager.setCountry(country);
+
+		manager.getGyms().clear();
+
+		for (final String gymaux : gyms) {
+			gym = this.gymService.findByName(gymaux);
+			manager.addGym(gym);
+		}
+
 		this.managerService.save(manager);
 		result = new ModelAndView("redirect:list.do");
-	    } catch (final Throwable oops) {
-		result = this.createEditModelAndView(manager, "manager.commit.error");
-	    }
-	return result;
-    }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-    public ModelAndView delete(final Manager manager) {
-	ModelAndView result;
-	try {
-	    this.managerService.delete(manager);
-	    result = new ModelAndView("redirect:list.do");
-	} catch (final Throwable oops) {
-	    result = this.createEditModelAndView(manager, "manager.commit.error");
+		return result;
 	}
-	return result;
-    }
 
-    @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
-    public ModelAndView editProfile(@RequestParam final int userAccountId) {
-	ModelAndView result;
-	Manager manager;
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Manager manager) {
+		ModelAndView result;
+		try {
+			this.managerService.delete(manager);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(manager, "manager.commit.error");
+		}
+		return result;
+	}
 
-	manager = this.managerService.findByUserAccountId(userAccountId);
-	Assert.notNull(manager);
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public ModelAndView editProfile(@RequestParam final int userAccountId) {
+		ModelAndView result;
+		Manager manager;
 
-	result = this.createEditModelAndView(manager);
-	result.addObject("cancelUrl", "'welcome/index.do'");
-	return result;
-    }
+		manager = this.managerService.findByUserAccountId(userAccountId);
+		Assert.notNull(manager);
 
-    protected ModelAndView createEditModelAndView(final Manager manager) {
-	ModelAndView result;
-	result = this.createEditModelAndView(manager, null);
-	return result;
-    }
+		result = this.createEditModelAndView(manager);
+		result.addObject("cancelUrl", "'welcome/index.do'");
+		return result;
+	}
 
-    protected ModelAndView createEditModelAndView(final Manager manager, final String messageCode) {
-	ModelAndView result;
-	Collection<Gym> gyms;
-	Collection<Admin> admins;
+	protected ModelAndView createEditModelAndView(final Manager manager) {
+		ModelAndView result;
+		result = this.createEditModelAndView(manager, null);
+		return result;
+	}
 
-	gyms = this.gymService.findAll();
-	admins = this.adminService.findAll();
+	protected ModelAndView createEditModelAndView(final Manager manager, final String messageCode) {
+		ModelAndView result;
+		Collection<Gym> gyms;
+		Collection<Admin> admins;
 
-	result = new ModelAndView("manager/edit");
-	result.addObject("manager", manager);
-	result.addObject("gyms", gyms);
-	result.addObject("admins", admins);
-	result.addObject("message", messageCode);
-	return result;
-    }
+		gyms = this.gymService.findAll();
+		admins = this.adminService.findAll();
+
+		result = new ModelAndView("manager/edit");
+		result.addObject("manager", manager);
+		result.addObject("gyms", gyms);
+		result.addObject("admins", admins);
+		result.addObject("message", messageCode);
+		return result;
+	}
 }
