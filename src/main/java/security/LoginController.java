@@ -1,8 +1,8 @@
 /*
  * LoginController.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -17,12 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
-import domain.Admin;
 
 @Controller
 @RequestMapping("/security")
@@ -68,27 +66,25 @@ public class LoginController extends AbstractController {
     }
 
     // LoginFailure -----------------------------------------------------------
-
-    @RequestMapping("/signup")
-    public ModelAndView signup() {
-	ModelAndView result;
-
-	UserAccount userAccount = new UserAccount();
-
-	result = new ModelAndView("security/signup");
-	result.addObject("userAccount", userAccount);
-
-	return result;
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.POST, params = "signup")
-    public ModelAndView signup(@Valid final UserAccount userAccount, final BindingResult binding) {
-	ModelAndView result = new ModelAndView();
-	
-	// Redireccionar a /client/edit o /manager/edit pasandole el UserAccount
-	
-	return result;
-
-    }
-
+    /*
+     * @RequestMapping("/signup") public ModelAndView signup() { ModelAndView
+     * result;
+     * 
+     * UserAccount userAccount = new UserAccount();
+     * 
+     * result = new ModelAndView("security/signup"); result.addObject("userAccount",
+     * userAccount);
+     * 
+     * return result; }
+     * 
+     * @RequestMapping(value = "/signup", method = RequestMethod.POST, params =
+     * "signup") public ModelAndView signup(@Valid final UserAccount userAccount,
+     * final BindingResult binding) { ModelAndView result = new ModelAndView();
+     * 
+     * // Redireccionar a /client/edit o /manager/edit pasandole el UserAccount
+     * 
+     * return result;
+     * 
+     * }
+     */
 }
