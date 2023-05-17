@@ -444,7 +444,7 @@
 		<property name="description"
 			value="Realizar dominadas, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/8mhDd9Ahl1M" />
+			value="https://www.youtube.com/embed/8mhDd9Ahl1M" />
 	</bean>
 
 	<bean id="step2" class="domain.Step">
@@ -452,7 +452,7 @@
 		<property name="description"
 			value="Realizar flexiones, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/izNxOxVrUc4" />
+			value="https://www.youtube.com/embed/izNxOxVrUc4" />
 	</bean>
 
 	<bean id="step3" class="domain.Step">
@@ -460,7 +460,7 @@
 		<property name="description"
 			value="Realizar fondos de triceps en banco, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/bR9d6yRH3iA" />
+			value="https://www.youtube.com/embed/bR9d6yRH3iA" />
 	</bean>
 	
 	<bean id="step4" class="domain.Step">
@@ -468,7 +468,7 @@
 		<property name="description"
 			value="Realizar sentadilla sin peso, con apoyo en estructura, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/AO99m52vrTM" />
+			value="https://www.youtube.com/embed/AO99m52vrTM" />
 	</bean>
 
 	<bean id="step5" class="domain.Step">
@@ -476,7 +476,7 @@
 		<property name="description"
 			value="Realizar zancadas sin peso, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/IG3uyG_62D4" />
+			value="https://www.youtube.com/embed/IG3uyG_62D4" />
 	</bean>
 
 	<bean id="step6" class="domain.Step">
@@ -484,7 +484,7 @@
 		<property name="description"
 			value="Realizar patada de glúteo en polea, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/vHY4JUtKiFc" />
+			value="https://www.youtube.com/embed/vHY4JUtKiFc" />
 	</bean>
 
 	<bean id="step7" class="domain.Step">
@@ -492,7 +492,7 @@
 		<property name="description"
 			value="Realizar plancha abdominal, 3 sets de 30 segundos" />
 		<property name="tutorial"
-			value="https://youtu.be/d0atctiI7Vw" />
+			value="https://www.youtube.com/embed/d0atctiI7Vw" />
 	</bean>
 
 	<bean id="step8" class="domain.Step">
@@ -500,7 +500,7 @@
 		<property name="description"
 			value="Realizar plancha lateral, 3 sets de 30 segundos." />
 		<property name="tutorial"
-			value="https://youtu.be/2Oko68u9PaE" />
+			value="https://www.youtube.com/embed/2Oko68u9PaE" />
 	</bean>
 
 	<bean id="step9" class="domain.Step">
@@ -508,7 +508,7 @@
 		<property name="description"
 			value="Realizar alzamiento de rodillas colgado en barra, 3 sets de 5 repeticiones." />
 		<property name="tutorial"
-			value="https://youtu.be/iC_fu-XjNPo" />
+			value="https://www.youtube.com/embed/iC_fu-XjNPo" />
 	</bean>
 	
 	<!-- ANNOTATIONS -->
