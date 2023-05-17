@@ -97,8 +97,7 @@ public class TrainerController extends AbstractController {
 	    result = new ModelAndView("redirect:list.do");
 	} catch (final Throwable oops) {
 	    result = this.createEditModelAndView(trainer, "trainer.commit.error");
-	}
-	return result;
+	}return result;
     }
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)

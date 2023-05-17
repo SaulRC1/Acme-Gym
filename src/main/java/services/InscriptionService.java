@@ -50,8 +50,6 @@ public class InscriptionService {
 
 		Inscription result;
 
-		Assert.isTrue(inscription.getGym().getInscriptions().contains(inscription) && inscription.getClient().getInscriptions().contains(inscription));
-
 		result = this.inscriptionRepository.save(inscription);
 
 		return result;
@@ -70,6 +68,14 @@ public class InscriptionService {
 
 		result = this.inscriptionRepository.findAll();
 		Assert.notNull(result);
+
+		return result;
+	}
+	
+	public Inscription findLastInscription(Client client) {
+	    	Inscription result;
+
+	    	result = this.inscriptionRepository.findCurrentInscriptionByClient(client);
 
 		return result;
 	}
