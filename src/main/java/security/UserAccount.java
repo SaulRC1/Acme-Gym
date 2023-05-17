@@ -1,8 +1,8 @@
 /*
  * UserAccount.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -121,6 +121,12 @@ public class UserAccount extends DomainEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
 	return true;
+    }
+
+    @Override
+    public String toString() {
+	return "UserAccount [username=" + this.username + ", password=" + this.password + ", authorities="
+		+ this.authorities + "]";
     }
 
 }

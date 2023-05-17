@@ -18,31 +18,49 @@
 
 <form:form action="security/signup.do" modelAttribute="userAccount">
 
-	<form:select id="actor" path="actor">
-		<form:option value="client" label="CLIENT" />
-		<form:option value="trainer" label="TRAINER" />
-	</form:select>
+	<spring:message var="clientRadioButtonLabel" code="form.clientRadioButton"/>
+	<spring:message var="managerRadioButtonLabel" code="form.managerRadioButton"/>
+	
+	<form:radiobutton id="client-radio-button" path="authorities" value="CLIENT" label="${clientRadioButtonLabel}"/>
+  	<form:radiobutton id="manager-radio-button" path="authorities" value="MANAGER" label="${managerRadioButtonLabel}"/>
+  	<jstl:if test="${not empty authorityError}">
+		<p style="color: red;">${authorityError}</p>
+	</jstl:if>
+  	<br/>
 
 	<form:label path="username">
 		<spring:message code="security.username" />
 	</form:label>
-	<form:input path="username" />	
-	<form:errors class="error" path="username" />
+	<form:input name="username" path="username" />	
+	
+	<jstl:if test="${not empty usernameError}">
+		<p style="color: red;">${usernameError}</p>
+	</jstl:if>
+	
 	<br />
 
-	<form:label path="password">
+	<form:label  path="password">
 		<spring:message code="security.password" />
 	</form:label>
-	<form:password path="password" />	
+	<form:password name="password" path="password"/>	
 	<form:errors class="error" path="password" />
+	
+	<jstl:if test="${not empty passwordError}">
+		<p style="color: red;">${passwordError}</p>
+	</jstl:if>
+	
 	<br />
 
 	<!-- Generic buttons -->
 	<input type="submit" name="signup"
-		value="<spring:message code="form.register" />" />&nbsp; 
+		value="<spring:message code="form.signUp" />" />&nbsp; 
 
 	<input type="button" name="cancel"
 		value="<spring:message code="form.cancel" />" onclick="javascript: relativeRedir('welcome/index.do');" />
 	<br />
 
 </form:form>
+
+<script>
+	
+</script>

@@ -25,5 +25,15 @@
 		<put-attribute name="title" value="Entrada en el sistema" />
 		<put-attribute name="body" value="/views/security/signup.jsp" />
 	</definition>
+	
+	<definition name="security/signup_client" extends="master.page">
+		<put-attribute name="title" value="Entrada en el sistema" />
+		<put-attribute name="body" value="/views/security/signup_client.jsp" />
+	</definition>
+	
+	<definition name="security/signup_manager" extends="master.page">
+		<put-attribute name="title" value="Registrándote como gerente" />
+		<put-attribute name="body" value="/views/security/signup_manager.jsp" />
+	</definition>
 		
 </tiles-definitions>
