@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <div>
-	<input><button>Search</button>
+	<input id="keywordInput" value="${keyword}"><input onclick="javascript: filter();" id="filterButton" type="button" value="<spring:message code="form.filter" />" />
 </div>
 
 <display:table name="activities" id="activity" requestURI="${requestURI}"
@@ -43,3 +43,17 @@
 	</display:column>
 
 </display:table>
+
+<script>
+function filter() {
+	var keyword = document.getElementById("keywordInput").value;
+	var gymId = ${gymId != null ? gymId : -1};
+	if (gymId != -1) {
+		window.location.href = "activity/listByGymAndKeyword.do?gymId=" + gymId + "&keyword=" + keyword;
+	} else {
+		window.location.href = "activity/listByKeyword.do?keyword=" + keyword;
+	}
+}
+	
+
+</script>

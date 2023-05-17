@@ -18,6 +18,7 @@ import domain.Activity;
 import domain.Gym;
 import domain.Trainer;
 import services.ActivityService;
+import services.ManagerService;
 import services.TrainerService;
 import services.gym.GymService;
 
@@ -31,6 +32,8 @@ public class TrainerController extends AbstractController {
     private ActivityService activityService;
     @Autowired
     private GymService gymService;
+    @Autowired
+    private ManagerService managerService;
 
     public TrainerController() {
 	super();

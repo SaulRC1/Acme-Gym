@@ -316,6 +316,81 @@ public class GymController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/manageTrainers", method = RequestMethod.GET)
+	public ModelAndView manageTrainers(@RequestParam final int gymId) {
+		ModelAndView result;
+		final Collection<Trainer> linkTrainers;
+		Collection<Trainer> unlinkTrainers;
+		Gym gym;
+
+		gym = this.gymService.findOne(gymId);
+		linkTrainers = gym.getTrainers();
+		unlinkTrainers = this.trainerService.findTrainerByNoGymAssigned();
+
+		result = new ModelAndView("gym/manageTrainers");
+		result.addObject("linkTrainers", linkTrainers);
+		result.addObject("unlickTrainers", unlinkTrainers);
+		result.addObject("gym", gym);
+		result.addObject("gymId", gym.getId());
+		return result;
+	}
+
+	@RequestMapping(value = "/link", method = RequestMethod.GET)
+	public ModelAndView link(@RequestParam final int gymId, @RequestParam final int trainerId) {
+		ModelAndView result;
+		final Collection<Trainer> linkTrainers;
+		final Collection<Trainer> unlinkTrainers;
+		Gym gym;
+		Trainer trainer;
+
+		gym = this.gymService.findOne(gymId);
+		trainer = this.trainerService.findOne(trainerId);
+
+		trainer.setGym(gym);
+		this.trainerService.save(trainer);
+		gym.addTrainer(trainer);
+
+		this.gymService.save(gym);
+
+		linkTrainers = gym.getTrainers();
+		unlinkTrainers = this.trainerService.findTrainerByNoGymAssigned();
+
+		result = new ModelAndView("gym/manageTrainers");
+		result.addObject("linkTrainers", linkTrainers);
+		result.addObject("unlinkTrainers", unlinkTrainers);
+		result.addObject("gym", gym);
+		result.addObject("gymId", gym.getId());
+		return result;
+	}
+
+	@RequestMapping(value = "/unlink", method = RequestMethod.GET)
+	public ModelAndView unlink(@RequestParam final int gymId, @RequestParam final int trainerId) {
+		ModelAndView result;
+		final Collection<Trainer> linkTrainers;
+		final Collection<Trainer> unlinkTrainers;
+		Gym gym;
+		Trainer trainer;
+
+		gym = this.gymService.findOne(gymId);
+		trainer = this.trainerService.findOne(trainerId);
+
+		gym.removeTrainer(trainer);
+		trainer.setGym(null);
+
+		this.trainerService.save(trainer);
+		this.gymService.save(gym);
+
+		linkTrainers = gym.getTrainers();
+		unlinkTrainers = this.trainerService.findTrainerByNoGymAssigned();
+
+		result = new ModelAndView("gym/manageTrainers");
+		result.addObject("linkTrainers", linkTrainers);
+		result.addObject("unlinkTrainers", unlinkTrainers);
+		result.addObject("gym", gym);
+		result.addObject("gymId", gym.getId());
+		return result;
+	}
+
 	protected ModelAndView createEditModelAndView(final Gym gym) {
 		ModelAndView result;
 		result = this.createEditModelAndView(gym, null);

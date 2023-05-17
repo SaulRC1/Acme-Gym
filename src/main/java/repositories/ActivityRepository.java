@@ -19,6 +19,9 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
 	@Query("SELECT a FROM Activity a WHERE a.description = ?1 OR a.title = ?1")
 	public Collection<Activity> findByKeyword(String keyword);
+	
+	@Query("SELECT a FROM Activity a WHERE a.description = ?2 OR a.title = ?2 AND a.gym.id = ?1")
+	public Collection<Activity> findByGymIdAndKeyword(int gymId, String keyword);
 
 	@Query("SELECT a FROM Activity a WHERE a.daysOfWeek = ?1 AND a.startHour = ?2")
 	public Collection<Activity> findByDayRange(Collection<DayOfWeek> days, LocalTime time);

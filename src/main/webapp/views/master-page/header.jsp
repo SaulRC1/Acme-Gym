@@ -69,8 +69,9 @@
 					<li class="arrow"></li>
 					<li><a href="trainer/list.do"><spring:message
 								code="master.page.trainer.list" /></a></li>
+								
 					<li><a href="trainer/create.do"><spring:message
-								code="master.page.trainer.create" /></a></li>
+								code="master.page.trainer.create" /></a></li>			
 				</ul></li>
 		</security:authorize>
 
