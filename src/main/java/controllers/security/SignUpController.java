@@ -293,9 +293,9 @@ public class SignUpController extends AbstractController {
 	    @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber,
 	    @RequestParam("postalCode") String postalCode, @RequestParam("city") String city,
 	    @RequestParam("country") String country, HttpSession httpSession,
-	    @RequestParam(value = "gyms", required = false) List<Integer> gymIds) {
+	    @RequestParam(value = "gyms", required = false) String[] gymIds) {
 
-	if (gymIds == null || gymIds.isEmpty()) {
+	if (gymIds == null || gymIds.length == 0) {
 
 	    Locale locale = LocaleContextHolder.getLocale();
 
@@ -336,16 +336,21 @@ public class SignUpController extends AbstractController {
 
 	manager.setUserAccount(userAccount);
 
-	for (int gymId : gymIds) {
+	List<Gym> listOfGyms = new ArrayList<Gym>();
 
-	    Gym gym = this.gymService.findOne(gymId);
+	for (String gymId : gymIds) {
 
-	    manager.addGym(gym);
+	    Gym gym = this.gymService.findOne(Integer.parseInt(gymId));
 
-	    this.gymService.save(gym);
+	    listOfGyms.add(gym);
+
+	    gym.addManager(manager);
 	}
 
 	this.managerService.save(manager);
+
+	for (Gym gym : listOfGyms)
+	    this.gymService.save(gym);
 
 	ModelAndView model = new ModelAndView("redirect:login.do");
 
