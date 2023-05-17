@@ -91,8 +91,8 @@ public class GymService {
 	return 0;
     }
 
-    public Collection<Gym> findAvailableGyms() {
-	return this.gymRepository.findAvailableGyms();
+    public Collection<Gym> findActivesGyms() {
+	return this.gymRepository.findActivesGyms();
     }
 
 }

@@ -18,10 +18,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="activesGyms" id="activesGym" requestURI="${requestURI}"
+<display:table name="activedGyms" id="activedGym" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 	<display:column titleKey="gym.logo">
-		<img src="${gym.logo}" alt="Italian Trulli" width="100">
+		<img src="${activedGym.logo}" alt="Italian Trulli" width="100">
 	</display:column>
 
 	<display:column property="name" titleKey="gym.name" />
@@ -32,19 +32,19 @@
 	<display:column property="active" titleKey="gym.active" />
 
 	<display:column titleKey="activities">
-		<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
+		<a href="activity/listByGymId.do?gymId=${activedGym.id}"> <spring:message
 				code="activities" /></a>
 	</display:column>
 
 	<!--  Edit column -->
 	<display:column titleKey="gym.manageAcitivities">
-				<a href="gym/details.do?gymId=${gym.id}">${name}<spring:message
+				<a href="gym/details.do?gymId=${activedGym.id}">${name}<spring:message
 				code="gym.manageAcitivities" />
 		</a>
 	</display:column>
 
 	<display:column titleKey="gym.cancel">
-		<a href="gym/cancelGym.do?gymId=${gym.id}"> <spring:message
+		<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
 				code="gym.cancel" />
 		</a>
 	</display:column>
@@ -52,10 +52,10 @@
 </display:table>
 
 
-<display:table name="unactivesGyms" id="unactivesGym" requestURI="${requestURI}"
+<display:table name="unactivedGyms" id="unactivedGym" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 	<display:column titleKey="gym.logo">
-		<img src="${gym.logo}" alt="Italian Trulli" width="100">
+		<img src="${unactivedGym.logo}" alt="Italian Trulli" width="100">
 	</display:column>
 
 	<display:column property="name" titleKey="gym.name" />
@@ -66,19 +66,19 @@
 	<display:column property="active" titleKey="gym.active" />
 
 	<display:column titleKey="activities">
-		<a href="activity/listByGymId.do?gymId=${gym.id}"> <spring:message
+		<a href="activity/listByGymId.do?gymId=${unactivedGym.id}"> <spring:message
 				code="activities" /></a>
 	</display:column>
 
 	<!--  Edit column -->
 	<display:column titleKey="gym.manageAcitivities">
-				<a href="gym/details.do?gymId=${gym.id}">${name}<spring:message
+				<a href="gym/details.do?gymId=${unactivedGym.id}">${name}<spring:message
 				code="gym.manageAcitivities" />
 		</a>
 	</display:column>
 
 	<display:column titleKey="gym.active">
-		<a href="gym/activateGym.do?gymId=${gym.id}"> <spring:message
+		<a href="gym/activateGym.do?gymId=${unactivedGym.id}"> <spring:message
 				code="gym.active" />
 		</a>
 	</display:column>

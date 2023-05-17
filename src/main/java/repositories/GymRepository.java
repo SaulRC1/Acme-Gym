@@ -13,5 +13,5 @@ import domain.Gym;
 public interface GymRepository extends JpaRepository<Gym, Integer> {
 
 	@Query("SELECT g FROM Gym g WHERE g.active = true")
-	public Collection<Gym> findAvailableGyms();
+	public Collection<Gym> findActivesGyms();
 }

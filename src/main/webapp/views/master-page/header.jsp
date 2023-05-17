@@ -77,7 +77,7 @@
 			<li><a class="fNiv"><spring:message code="master.page.gym" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="gym/list.do"><spring:message
+					<li><a href="gym/listActivesUnactives.do"><spring:message
 								code="master.page.gym.list" /></a></li>
 					<security:authorize access="hasRole('MANAGER')">
 						<li><a href="manager/create.do"><spring:message

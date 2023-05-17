@@ -29,6 +29,28 @@
 	</bean>	     
 		     
 	<!-- USER ACCOUNTS -->
+	
+	<bean id="superUserAccount" class="security.UserAccount">
+		<property name="username" value="superUser" />
+		<property name="password"
+			value="7d35bf544ac09df9e6138670ac40abc0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 		        
 	<bean id="martaManagerUserAccount" class="security.UserAccount">
 		<property name="username" value="martamanager" />

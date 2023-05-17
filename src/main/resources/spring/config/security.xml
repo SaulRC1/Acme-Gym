@@ -72,6 +72,8 @@
 		<security:intercept-url pattern="/gym/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/gym/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/gym/cancelGym.do" access="permitAll" />
+		<security:intercept-url pattern="/gym/activateGym.do" access="permitAll" />
+		<security:intercept-url pattern="/gym/listActivesUnactives.do" access="permitAll" /> 
 		
 		
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
