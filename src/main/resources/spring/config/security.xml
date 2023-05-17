@@ -89,6 +89,9 @@
 		
 		
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/activity/enrollmentList.do" access="hasRole('CLIENT')" /> 
+		<security:intercept-url pattern="/activity/enroll.do" access="hasRole('CLIENT')" /> 
+		<security:intercept-url pattern="/activity/unsubscribe.do" access="hasRole('CLIENT')" /> 
 		<security:intercept-url pattern="/activity/listByKeyword.do" access="permitAll" />
 		<security:intercept-url pattern="/activity/listByGymAndKeyword.do" access="permitAll" />
 		<security:intercept-url pattern="/activity/listByGymId.do" access="permitAll" /> 

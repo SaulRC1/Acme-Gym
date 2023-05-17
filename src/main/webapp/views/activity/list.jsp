@@ -19,11 +19,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <div>
-	<input id="keywordInput" value="${keyword}"><input onclick="javascript: filter();" id="filterButton" type="button" value="<spring:message code="form.filter" />" />
+	<input id="keywordInput" value="${keyword}"><input
+		onclick="javascript: filter();" id="filterButton" type="button"
+		value="<spring:message code="form.filter" />" />
 </div>
 
-<display:table name="activities" id="activity" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+<display:table name="activities" id="activity"
+	requestURI="${requestURI}" pagesize="5" class="displaytag">
 
 	<!-- Activity columns -->
 	<display:column property="title" titleKey="activity.title" />
@@ -32,7 +34,8 @@
 	<display:column property="daysOfWeek" titleKey="activity.daysOfWeek" />
 	<display:column property="startHour" titleKey="activity.startHour" />
 	<display:column property="endHour" titleKey="activity.endHour" />
-	<display:column property="availablePlaces" titleKey="activity.availablePlaces" />
+	<display:column property="availablePlaces"
+		titleKey="activity.availablePlaces" />
 	<display:column>
 		<a href="trainer/listByActivityId.do?activityId=${activity.id}"><spring:message
 				code="trainers" /></a>
@@ -42,18 +45,41 @@
 				code="gyms" /></a>
 	</display:column>
 
+	<security:authorize access="hasRole('CLIENT')">
+		<jstl:choose>
+			<jstl:when test="${enrolledActivities.contains(activity)}">
+				<display:column>
+					<a
+						href="activity/unsubscribe.do?activityId=${activity.id}&userAccountId=<security:authentication property="principal.id" />"><spring:message
+							code="activity.unsubscribe" /></a>
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<display:column>
+					<a
+						href="activity/enroll.do?activityId=${activity.id}&userAccountId=<security:authentication property="principal.id" />"><spring:message
+							code="activity.enroll" /></a>
+				</display:column>
+			</jstl:otherwise>
+		</jstl:choose>
+	</security:authorize>
+
 </display:table>
 
 <script>
-function filter() {
-	var keyword = document.getElementById("keywordInput").value;
-	var gymId = ${gymId != null ? gymId : -1};
-	if (gymId != -1) {
-		window.location.href = "activity/listByGymAndKeyword.do?gymId=" + gymId + "&keyword=" + keyword;
-	} else {
-		window.location.href = "activity/listByKeyword.do?keyword=" + keyword;
+	function filter() {
+		var keyword = document.getElementById("keywordInput").value;
+		var gymId = $
+		{
+			gymId != null ? gymId : -1
+		}
+		;
+		if (gymId != -1) {
+			window.location.href = "activity/listByGymAndKeyword.do?gymId="
+					+ gymId + "&keyword=" + keyword;
+		} else {
+			window.location.href = "activity/listByKeyword.do?keyword="
+					+ keyword;
+		}
 	}
-}
-	
-
 </script>

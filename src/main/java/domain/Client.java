@@ -170,4 +170,9 @@ public class Client extends Actor {
 	return true;
     }
 
+    public void removeActivity(final Activity activity) {
+	if (activity != null && this.activities != null) {
+	    this.activities.remove(activity);
+	}
+    }
 }

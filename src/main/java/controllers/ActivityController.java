@@ -3,6 +3,7 @@ package controllers;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -19,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Activity;
 import domain.Client;
 import domain.Gym;
+import domain.Inscription;
 import domain.Trainer;
 import services.ActivityService;
+import services.InscriptionService;
 import services.ClientService;
 import services.TrainerService;
 import services.gym.GymService;
@@ -31,6 +34,8 @@ public class ActivityController extends AbstractController {
 
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private InscriptionService inscriptionService;
     @Autowired
     private TrainerService trainerService;
     @Autowired
@@ -216,6 +221,101 @@ public class ActivityController extends AbstractController {
 	activities = this.activityService.findAvailableActivities();
 	result = new ModelAndView("activity/list");
 	result.addObject("activities", activities);
+	result.addObject("requestURI", "activity/list.do");
+
+	return result;
+    }
+    
+    @RequestMapping(value = "/enrollmentList", method = RequestMethod.GET)
+    public ModelAndView enrollmentList(@RequestParam final int userAccountId) {
+	ModelAndView result;
+	Collection<Activity> availableActivities, enrolledActivities;
+
+	Client client = this.clientService.findByUserAccountId(userAccountId);
+	Inscription lastInscription = this.inscriptionService.findLastInscription(client);
+
+	if (lastInscription != null && lastInscription.getSignOutDate() != null) {
+	    Gym gym = lastInscription.getGym();
+	    availableActivities = this.activityService.findAvailableActivitiesByGym(gym.getId());
+	} else {
+	    //availableActivities = new ArrayList<>();
+	    availableActivities = this.activityService.findAll();
+	}
+	
+	enrolledActivities = client.getActivities();
+
+	result = new ModelAndView("activity/list");
+	result.addObject("activities", availableActivities);
+	result.addObject("enrolledActivities", enrolledActivities);
+	result.addObject("requestURI", "activity/list.do");
+
+	return result;
+    }
+
+    @RequestMapping(value = "/enroll", method = RequestMethod.GET)
+    public ModelAndView enroll(@RequestParam final int activityId, final int userAccountId) {
+	ModelAndView result;
+	Collection<Activity> availableActivities, enrolledActivities;
+
+	Activity activity = this.activityService.findOne(activityId);
+	Client client = this.clientService.findByUserAccountId(userAccountId);
+
+	activity.addClient(client);
+	activity.setAvailablePlaces(activity.getAvailablePlaces()-1);
+	
+
+	activity = this.activityService.save(activity);
+	client.addActivity(activity);
+	this.clientService.save(client);
+
+	Inscription lastInscription = this.inscriptionService.findLastInscription(client);
+
+	if (lastInscription != null && lastInscription.getSignOutDate() != null) {
+	    Gym gym = lastInscription.getGym();
+	    availableActivities = this.activityService.findAvailableActivitiesByGym(gym.getId());
+	} else {
+	    availableActivities = new ArrayList<>();
+	}
+
+	enrolledActivities = client.getActivities();
+
+	result = new ModelAndView("activity/list");
+	result.addObject("activities", availableActivities);
+	result.addObject("enrolledActivities", enrolledActivities);
+	result.addObject("requestURI", "activity/list.do");
+
+	return result;
+    }
+
+    @RequestMapping(value = "/unsubscribe", method = RequestMethod.GET)
+    public ModelAndView unsubscribe(@RequestParam final int activityId, final int userAccountId) {
+	ModelAndView result;
+	Collection<Activity> availableActivities, enrolledActivities;
+
+	Activity activity = this.activityService.findOne(activityId);
+	Client client = this.clientService.findByUserAccountId(userAccountId);
+
+	activity.removeClient(client);
+	activity.setAvailablePlaces(activity.getAvailablePlaces()+1);
+
+	activity = this.activityService.save(activity);
+	client.removeActivity(activity);
+	this.clientService.save(client);
+
+	Inscription lastInscription = this.inscriptionService.findLastInscription(client);
+
+	if (lastInscription != null && lastInscription.getSignOutDate() != null) {
+	    Gym gym = lastInscription.getGym();
+	    availableActivities = this.activityService.findAvailableActivitiesByGym(gym.getId());
+	} else {
+	    availableActivities = new ArrayList<>();
+	}
+
+	enrolledActivities = client.getActivities();
+
+	result = new ModelAndView("activity/list");
+	result.addObject("activities", availableActivities);
+	result.addObject("enrolledActivities", enrolledActivities);
 	result.addObject("requestURI", "activity/list.do");
 
 	return result;
