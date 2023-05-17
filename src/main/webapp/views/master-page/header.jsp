@@ -29,6 +29,8 @@
 								code="master.page.admin.list" /></a></li>
 					<li><a href="admin/create.do"><spring:message
 								code="master.page.admin.create" /></a></li>
+					<li><a href="manager/list.do"><spring:message
+								code="master.page.manager.list" /></a></li>
 				</ul></li>
 		</security:authorize>
 

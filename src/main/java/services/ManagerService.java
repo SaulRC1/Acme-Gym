@@ -85,6 +85,10 @@ public class ManagerService {
 		return result;
 	}
 
+	public Collection<Manager> findByBannedFalse() {
+		return this.managerRepository.findByBannedFalse();
+	}
+
 	public Manager findByUserAccountId(final int userAccountId) {
 		return this.managerRepository.findByUserAccountId(userAccountId);
 	}

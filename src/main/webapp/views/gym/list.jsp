@@ -42,6 +42,12 @@
 				code="gym.manageAcitivities" />
 		</a>
 	</display:column>
+	
+	<display:column titleKey="gym.manageTrainings">
+				<a href="gym/manageTrainings.do?gymId=${activedGym.id}">${name}<spring:message
+				code="gym.manageTrainings" />
+		</a>
+	</display:column>
 
 	<display:column titleKey="gym.cancel">
 		<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message

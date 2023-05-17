@@ -41,14 +41,5 @@
 		<a href="gym/listByActivityId.do?activityId=${activity.id}"><spring:message
 				code="gyms" /></a>
 	</display:column>
-	
-	
-	<!-- Edit column -->
-	<security:authorize access="hasRole('MANAGER')">
-		<display:column>
-			<a href="activity/edit.do?activityId=${activity.id}"> <spring:message
-					code="row.edit" /></a>
-		</display:column>
-	</security:authorize>
 
 </display:table>

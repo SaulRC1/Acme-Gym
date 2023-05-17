@@ -56,4 +56,9 @@
 		<put-attribute name="body" value="/views/gym/list.jsp" />
 	</definition>
 	
+	<definition name="gym/manageTrainings" extends="master.page">	
+		<put-attribute name="title" value="List trainings" />
+		<put-attribute name="body" value="/views/gym/manageTrainings.jsp" />
+	</definition>
+	
 </tiles-definitions>
