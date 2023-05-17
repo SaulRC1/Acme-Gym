@@ -183,17 +183,8 @@ public class GymController extends AbstractController {
 
 	manager = this.managerService.findByUserAccountId(userAccountId);
 
-	unactivedGyms = this.gymService.findAll();
-	activedGyms = this.gymService.findActivesGyms();
-	unactivedGyms.removeAll(activedGyms);
-
-	for (Gym gym : activedGyms)
-	    if (!gym.getManagers().contains(manager))
-		activedGyms.remove(gym);
-
-	for (Gym gym : unactivedGyms)
-	    if (!gym.getManagers().contains(manager))
-		unactivedGyms.remove(gym);
+	activedGyms = this.gymService.findActivesGymByManager(manager);
+	unactivedGyms = this.gymService.findInactivesGymByManager(manager);
 
 	result = new ModelAndView("gym/list");
 	result.addObject("activedGyms", activedGyms);
@@ -251,10 +242,14 @@ public class GymController extends AbstractController {
     }
 
     @RequestMapping(value = "/cancelGym", method = RequestMethod.GET)
-    public ModelAndView cancelGym(@RequestParam final int gymId) {
+    public ModelAndView cancelGym(@RequestParam final int gymId, @RequestParam int userAccountId) {
 	ModelAndView result;
 	Gym gym;
 	Collection<Activity> activities;
+
+	Manager manager;
+
+	manager = this.managerService.findByUserAccountId(userAccountId);
 
 	Collection<Gym> activedGyms;
 	Collection<Gym> unactivedGyms;
@@ -269,9 +264,8 @@ public class GymController extends AbstractController {
 	    this.activityService.save(activity);
 	}
 
-	unactivedGyms = this.gymService.findAll();
-	activedGyms = this.gymService.findActivesGyms();
-	unactivedGyms.removeAll(activedGyms);
+	activedGyms = this.gymService.findActivesGymByManager(manager);
+	unactivedGyms = this.gymService.findInactivesGymByManager(manager);
 
 	result = new ModelAndView("gym/list");
 	result.addObject("activedGyms", activedGyms);
@@ -299,10 +293,14 @@ public class GymController extends AbstractController {
     }
 
     @RequestMapping(value = "/activateGym", method = RequestMethod.GET)
-    public ModelAndView activatelGym(@RequestParam final int gymId) {
+    public ModelAndView activatelGym(@RequestParam final int gymId, @RequestParam int userAccountId) {
 	ModelAndView result;
 	Gym gym;
 	Collection<Activity> activities;
+
+	Manager manager;
+
+	manager = this.managerService.findByUserAccountId(userAccountId);
 
 	Collection<Gym> activedGyms;
 	Collection<Gym> unactivedGyms;
@@ -317,9 +315,8 @@ public class GymController extends AbstractController {
 	    this.activityService.save(activity);
 	}
 
-	unactivedGyms = this.gymService.findAll();
-	activedGyms = this.gymService.findActivesGyms();
-	unactivedGyms.removeAll(activedGyms);
+	activedGyms = this.gymService.findActivesGymByManager(manager);
+	unactivedGyms = this.gymService.findInactivesGymByManager(manager);
 
 	result = new ModelAndView("gym/list");
 	result.addObject("activedGyms", activedGyms);

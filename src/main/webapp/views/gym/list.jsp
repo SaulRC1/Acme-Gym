@@ -78,7 +78,7 @@
 						
 						
 		<display:column titleKey="gym.cancel">
-			<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
+			<a href="gym/cancelGym.do?gymId=${activedGym.id}&managerId=${activedGym.managers}"> <spring:message
 					code="gym.cancel" />
 			</a>
 		</display:column>
