@@ -332,10 +332,9 @@ public class GymController extends AbstractController {
 		trainers.add(trainerAux);
 	}
 
-
 	result = new ModelAndView("trainer/manageTrainers");
 	result.addObject("linktrainers", trainers);
-	result.addObject("unlincktrainers", trainerService.);
+	result.addObject("unlincktrainers", this.trainerService.findTrainerByNoGymAssigned());
 
 	return result;
     }
