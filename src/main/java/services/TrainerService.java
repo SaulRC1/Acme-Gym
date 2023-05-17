@@ -86,4 +86,8 @@ public class TrainerService {
 	public Collection<Trainer> findByNameOrSurname(final String keyword) {
 		return this.trainerRepository.findByNameOrSurname(keyword);
 	}
+
+	public Trainer findTrainerByNoGymAssigned() {
+		return this.trainerRepository.findTrainerByNoGymAssigned();
+	}
 }

@@ -56,6 +56,8 @@
 		<security:intercept-url pattern="/manager/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/manager/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/manager/editProfile.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/manager/banned.do" access="hasRole('ADMIN')"  />
+		<security:intercept-url pattern="/manager/unbanned.do" access="hasRole('ADMIN')" />
 		
 		
 		<security:intercept-url pattern="/trainer/list.do" access="permitAll" /> 
@@ -63,6 +65,7 @@
 		<security:intercept-url pattern="/trainer/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/trainer/listByActivityId.do" access="permitAll" />
 		<security:intercept-url pattern="/trainer/editProfile.do" access="hasRole('TRAINER')" />
+		
 		
 		<security:intercept-url pattern="/gym/details.do" access="permitAll" /> 
 		<security:intercept-url pattern="/gym/activateActivity.do" access="permitAll" />

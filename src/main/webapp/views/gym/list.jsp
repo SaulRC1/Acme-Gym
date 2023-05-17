@@ -18,8 +18,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="activedGyms" id="activedGym" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+<display:table name="activedGyms" id="activedGym"
+	requestURI="${requestURI}" pagesize="5" class="displaytag">
 	<display:column titleKey="gym.logo">
 		<img src="${activedGym.logo}" alt="Italian Trulli" width="100">
 	</display:column>
@@ -35,58 +35,73 @@
 		<a href="activity/listByGymId.do?gymId=${activedGym.id}"> <spring:message
 				code="activities" /></a>
 	</display:column>
-
-	<!--  Edit column -->
-	<display:column titleKey="gym.manageAcitivities">
-				<a href="gym/details.do?gymId=${activedGym.id}">${name}<spring:message
-				code="gym.manageAcitivities" />
-		</a>
-	</display:column>
 	
-	<display:column titleKey="gym.manageTrainings">
-				<a href="gym/manageTrainings.do?gymId=${activedGym.id}">${name}<spring:message
-				code="gym.manageTrainings" />
-		</a>
-	</display:column>
+	<!-- ROLES -->
+	<security:authorize access="hasRole('CLIENT')">
+		<display:column titleKey="client.signUpGym">
+			<a href="client/details.do?gymId=${activedGym.id}">${name}<spring:message
+					code="client.signUpGym" />
+			</a>
+		</display:column>
+	</security:authorize>
+	
+	
+		
+	<security:authorize access="hasRole('MANAGER')">
+		<!--  Edit column -->
+		<display:column titleKey="gym.manageAcitivities">
+			<a href="gym/details.do?gymId=${activedGym.id}">${name}<spring:message
+					code="gym.manageAcitivities" />
+			</a>
+		</display:column>
 
-	<display:column titleKey="gym.cancel">
-		<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
-				code="gym.cancel" />
-		</a>
-	</display:column>
+		<display:column titleKey="gym.manageTrainings">
+			<a href="gym/manageTrainings.do?gymId=${activedGym.id}">${name}<spring:message
+					code="gym.manageTrainings" />
+			</a>
+		</display:column>
 
+		<display:column titleKey="gym.cancel">
+			<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
+					code="gym.cancel" />
+			</a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
+<!-- ROL MANAGER -->
 
-<display:table name="unactivedGyms" id="unactivedGym" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
-	<display:column titleKey="gym.logo">
-		<img src="${unactivedGym.logo}" alt="Italian Trulli" width="100">
-	</display:column>
+<security:authorize access="hasRole('MANAGER')">
+	<display:table name="unactivedGyms" id="unactivedGym"
+		requestURI="${requestURI}" pagesize="5" class="displaytag">
+		<display:column titleKey="gym.logo">
+			<img src="${unactivedGym.logo}" alt="Italian Trulli" width="100">
+		</display:column>
 
-	<display:column property="name" titleKey="gym.name" />
+		<display:column property="name" titleKey="gym.name" />
 
-	<display:column property="address" titleKey="gym.address" />
-	<display:column property="fee" titleKey="gym.fee" />
+		<display:column property="address" titleKey="gym.address" />
+		<display:column property="fee" titleKey="gym.fee" />
 
-	<display:column property="active" titleKey="gym.active" />
+		<display:column property="active" titleKey="gym.active" />
 
-	<display:column titleKey="activities">
-		<a href="activity/listByGymId.do?gymId=${unactivedGym.id}"> <spring:message
-				code="activities" /></a>
-	</display:column>
+		<display:column titleKey="activities">
+			<a href="activity/listByGymId.do?gymId=${unactivedGym.id}"> <spring:message
+					code="activities" /></a>
+		</display:column>
 
-	<!--  Edit column -->
-	<display:column titleKey="gym.manageAcitivities">
-				<a href="gym/details.do?gymId=${unactivedGym.id}">${name}<spring:message
-				code="gym.manageAcitivities" />
-		</a>
-	</display:column>
+		<!--  Edit column -->
+		<display:column titleKey="gym.manageAcitivities">
+			<a href="gym/details.do?gymId=${unactivedGym.id}">${name}<spring:message
+					code="gym.manageAcitivities" />
+			</a>
+		</display:column>
 
-	<display:column titleKey="gym.active">
-		<a href="gym/activateGym.do?gymId=${unactivedGym.id}"> <spring:message
-				code="gym.active" />
-		</a>
-	</display:column>
+		<display:column titleKey="gym.active">
+			<a href="gym/activateGym.do?gymId=${unactivedGym.id}"> <spring:message
+					code="gym.active" />
+			</a>
+		</display:column>
 
-</display:table>
+	</display:table>
+</security:authorize>

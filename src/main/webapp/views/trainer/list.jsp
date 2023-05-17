@@ -20,14 +20,27 @@
 
 <display:table name="trainers" id="trainer" requestURI="trainer/list.do"
 	pagesize="5" class="displaytag">
+
+	<!-- Actors generic columns -->
+	<display:column property="firstName" titleKey="actor.firstName" />
+	<display:column property="lastName" titleKey="actor.lastName" />
+	<display:column property="address" titleKey="actor.address" />
+	<display:column property="email" titleKey="actor.email" />
+	<display:column property="phoneNumber" titleKey="actor.phoneNumber" />
+	<display:column property="postalCode" titleKey="actor.postalCode" />
+	<display:column property="city" titleKey="actor.city" />
+	<display:column property="country" titleKey="actor.country" />
+
+
+	<!-- Trainer Gym column -->
+	<display:column property="gym" titleKey="gym" />
 	
-	<!-- Edit column -->
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="manager/edit.do?managerId=${trainer.id}"> <spring:message
-					code="row.edit" /></a>
-		</display:column>
-	</security:authorize>
+	
+
+</display:table>
+
+<display:table name="trainers" id="trainer" requestURI="trainer/list.do"
+	pagesize="5" class="displaytag">
 
 
 	<!-- Actors generic columns -->
@@ -43,5 +56,7 @@
 
 	<!-- Trainer Gym column -->
 	<display:column property="gym" titleKey="gym" />
+	
+	
 
 </display:table>
