@@ -30,6 +30,7 @@
         <value>/views/gym/tiles.xml</value>
         <value>/views/activity/tiles.xml</value>
         <value>/views/training/tiles.xml</value>
+        <value>/views/step/tiles.xml</value>
     </util:list>
 
 </beans>

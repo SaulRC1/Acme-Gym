@@ -18,14 +18,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="trainings" id="row" requestURI="${requestURI}"
+<display:table name="trainings" id="training" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
 	<display:column property="title" titleKey="training.title" />
 	<display:column property="description" titleKey="training.description" />
 
 	<display:column>
-		<a href="step/list.do?steps=${steps}"> <spring:message
+		<a href="step/list.do?trainingId=${training.id}"> <spring:message
 				code="training.steps" /></a>
 	</display:column>
 
@@ -33,7 +33,7 @@
 	<!-- Edit column -->
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
-			<a href="training/edit.do?trainingId=${row.id}"> <spring:message
+			<a href="training/edit.do?trainingId=${training.id}"> <spring:message
 					code="manager.edit" /></a>
 		</display:column>
 	</security:authorize>

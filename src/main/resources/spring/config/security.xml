@@ -99,6 +99,8 @@
 		<security:intercept-url pattern="/training/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/training/edit.do" access="permitAll" />
 		<security:intercept-url pattern="/training/delete.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/step/list.do" access="permitAll" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

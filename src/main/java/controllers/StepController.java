@@ -35,7 +35,7 @@ public class StepController extends AbstractController {
 
 	result = new ModelAndView("step/list");
 	result.addObject("steps", steps);
-	result.addObject("requestURI", "manager/list.do");
+	result.addObject("requestURI", "step/list.do");
 
 	return result;
     }
