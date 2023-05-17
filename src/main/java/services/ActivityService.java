@@ -18,72 +18,75 @@ import repositories.ActivityRepository;
 @Transactional
 public class ActivityService {
 
-	@Autowired
-	private ActivityRepository activityRepository;
+    @Autowired
+    private ActivityRepository activityRepository;
 
+    public Activity create() {
+	return new Activity();
+    }
 
-	public Activity create() {
-		return new Activity();
-	}
+    public Collection<Activity> findAll() {
+	Collection<Activity> result;
 
-	public Collection<Activity> findAll() {
-		Collection<Activity> result;
+	result = this.activityRepository.findAll();
+	Assert.notNull(result);
 
-		result = this.activityRepository.findAll();
-		Assert.notNull(result);
+	return result;
+    }
 
-		return result;
-	}
+    public Activity findOne(final int activityId) {
+	Assert.isTrue(activityId != 0);
 
-	public Activity findOne(final int activityId) {
-		Assert.isTrue(activityId != 0);
+	Activity result;
 
-		Activity result;
+	result = this.activityRepository.findOne(activityId);
+	Assert.notNull(result);
 
-		result = this.activityRepository.findOne(activityId);
-		Assert.notNull(result);
+	return result;
+    }
 
-		return result;
-	}
+    public Activity save(final Activity activity) {
+	Assert.notNull(activity);
 
-	public Activity save(final Activity activity) {
-		Assert.notNull(activity);
+	Activity result;
 
-		Activity result;
+	// Assert.isTrue(!activity.getGym().getActivities().contains(activity));
 
-		// Assert.isTrue(!activity.getGym().getActivities().contains(activity));
+	result = this.activityRepository.save(activity);
 
-		result = this.activityRepository.save(activity);
+	return result;
+    }
 
-		return result;
-	}
+    public void delete(final Activity activity) {
+	Assert.notNull(activity);
+	Assert.isTrue(activity.getId() != 0);
+	Assert.isTrue(this.activityRepository.exists(activity.getId()));
 
-	public void delete(final Activity activity) {
-		Assert.notNull(activity);
-		Assert.isTrue(activity.getId() != 0);
-		Assert.isTrue(this.activityRepository.exists(activity.getId()));
+	this.activityRepository.delete(activity);
+    }
 
-		this.activityRepository.delete(activity);
-	}
+    public Collection<Activity> findByDayRange(final Collection<DayOfWeek> days, final LocalTime time) {
+	return this.activityRepository.findByDayRange(days, time);
+    }
 
-	public Collection<Activity> findByDayRange(final Collection<DayOfWeek> days, final LocalTime time) {
-		return this.activityRepository.findByDayRange(days, time);
-	}
+    public Collection<Activity> findByKeyword(final String keyword) {
+	return this.activityRepository.findByKeyword(keyword);
+    }
 
-	public Collection<Activity> findByKeyword(final String keyword) {
-		return this.activityRepository.findByKeyword(keyword);
-	}
+    public Collection<Activity> findByGymIdAndKeyword(final int gymId, final String keyword) {
+	return this.activityRepository.findByGymIdAndKeyword(gymId, keyword);
+    }
 
-	public Collection<Activity> findByGymIdAndKeyword(final int gymId, final String keyword) {
-		return this.activityRepository.findByGymIdAndKeyword(gymId, keyword);
-	}
+    public Collection<Activity> findAvailableActivities() {
+	return this.activityRepository.findAvailableActivities();
+    }
 
-	public Collection<Activity> findAvailableActivities() {
-		return this.activityRepository.findAvailableActivities();
-	}
+    public Activity findByName(final String title) {
+	return this.activityRepository.findByName(title);
+    }
 
-	public Activity findByName(final String title) {
-		return this.activityRepository.findByName(title);
-	}
+    public Collection<Activity> findAvailableActivitiesByGym(int gymId) {
+	return this.findAvailableActivitiesByGym(gymId);
+    }
 
 }

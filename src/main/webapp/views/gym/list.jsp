@@ -31,10 +31,13 @@
 
 	<display:column property="active" titleKey="gym.active" />
 
-	<display:column titleKey="activities">
-		<a href="activity/listByGymId.do?gymId=${activedGym.id}"> <spring:message
-				code="activities" /></a>
-	</display:column>
+
+	<security:authorize access="hasRole('CLIENT')">
+		<display:column titleKey="activities">
+			<a href="activity/listByGymId.do?gymId=${activedGym.id}"> <spring:message
+					code="activities" /></a>
+		</display:column>
+	</security:authorize>
 
 	<security:authorize access="hasRole('CLIENT')">
 		<display:column titleKey="gym.enroll">
@@ -70,15 +73,15 @@
 					code="gym.manageTrainings" />
 			</a>
 		</display:column>
-		
+
 		<display:column titleKey="gym.manageTrainers">
 			<a href="gym/manageTrainers.do?gymId=${activedGym.id}">${name}<spring:message
-					code="gym.manageTrainers" /></a>						
-		</display:column>				
-						
-						
+					code="gym.manageTrainers" /></a>
+		</display:column>
+
+
 		<display:column titleKey="gym.cancel">
-			<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
+			<a href="gym/cancelGym.do?gymId=${activedGym.id}&managerId=${activedGym.managers}"> <spring:message
 					code="gym.cancel" />
 			</a>
 		</display:column>
@@ -112,11 +115,12 @@
 					code="gym.manageAcitivities" />
 			</a>
 		</display:column>
-		
+
 		<display:column titleKey="gym.manageTrainers">
-			<a href="gym/manageTrainers.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
-					code="gym.manageTrainers" /></a>						
-		</display:column>	
+			<a
+				href="gym/manageTrainers.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
+					code="gym.manageTrainers" /></a>
+		</display:column>
 
 		<!--  Activate activities column -->
 		<display:column titleKey="gym.active">

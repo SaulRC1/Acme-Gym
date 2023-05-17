@@ -72,9 +72,9 @@
 					<li class="arrow"></li>
 					<li><a href="trainer/list.do"><spring:message
 								code="master.page.trainer.list" /></a></li>
-								
+
 					<li><a href="trainer/create.do"><spring:message
-								code="master.page.trainer.create" /></a></li>			
+								code="master.page.trainer.create" /></a></li>
 				</ul></li>
 		</security:authorize>
 
@@ -84,8 +84,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<security:authorize access="!hasRole('CLIENT')">
-						<li><a
-							href="gym/list.do"><spring:message
+						<li><a href="gym/list.do"> <spring:message
 									code="master.page.gym.list" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('CLIENT')">
@@ -95,9 +94,9 @@
 
 					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
-						<li><a href="gym/listActivesUnactives.do"><spring:message
+						<li><a
+							href="gym/listActivesUnactives.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
 									code="master.page.gym.list" /></a></li>
-
 						<li><a href="manager/create.do"><spring:message
 									code="master.page.gym.create" /></a></li>
 					</security:authorize>
@@ -110,8 +109,14 @@
 						code="master.page.activity" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="activity/list.do"><spring:message
-								code="master.page.activity.list" /></a></li>
+					<security:authorize access="!hasRole('CLIENT')">
+						<li><a href="activity/list.do"><spring:message
+									code="master.page.activity.list" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('CLIENT')">
+						<li><a href="activity/enrollmentList.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
+									code="master.page.activity.list" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
 						<li><a href="activity/create.do"><spring:message
 									code="master.page.activity.create" /></a></li>
