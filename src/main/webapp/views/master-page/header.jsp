@@ -12,8 +12,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 
 <div>
 	<a href="#"><img src="images/logo.png" alt="Acme Gym Co., Inc." /></a>
