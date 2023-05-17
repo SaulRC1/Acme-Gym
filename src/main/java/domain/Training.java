@@ -3,6 +3,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -12,6 +13,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -173,4 +175,35 @@ public class Training extends DomainEntity {
 	}
     }
 
+    /**
+     * This method will return the average mark of this training based on the
+     * different annotations it has received.
+     *
+     * @return the average mark
+     */
+    @Transient
+    public double getAverageMark() {
+
+	if (this.annotations == null || this.annotations.isEmpty())
+	    return 0;
+
+	int averageMark = 0;
+
+	int numberOfAnnotationsReceived = this.annotations.size();
+
+	int totalMarksSum = 0;
+
+	Iterator<Annotation> it = this.annotations.iterator();
+
+	while (it.hasNext()) {
+
+	    Annotation annotation = it.next();
+
+	    totalMarksSum += annotation.getMark();
+	}
+
+	averageMark = totalMarksSum / numberOfAnnotationsReceived;
+
+	return averageMark;
+    }
 }

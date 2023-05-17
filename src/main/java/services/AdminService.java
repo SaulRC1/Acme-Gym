@@ -1,7 +1,10 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -9,12 +12,17 @@ import org.apache.commons.lang.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import domain.Activity;
 import domain.Admin;
 import domain.Client;
 import domain.Gym;
 import domain.Manager;
+import domain.Trainer;
 import domain.Training;
+import domain.comparator.ClientComparatorByNumberOfActivities;
+import domain.comparator.TrainingComparatorByMark;
 import repositories.AdminRepository;
+import services.gym.GymService;
 
 @Service
 @Transactional
@@ -28,6 +36,12 @@ public class AdminService {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private GymService gymService;
+
+    @Autowired
+    private TrainingService trainingService;
 
     /**
      * Will create an Admin with no data.
@@ -90,7 +104,7 @@ public class AdminService {
     }
 
     /**
-     * Will ban a manager
+     * Will ban a manager. Changes will be persisted to database immediately.
      *
      * @param manager The manager to be banned
      */
@@ -105,7 +119,7 @@ public class AdminService {
     }
 
     /**
-     * Will unban a manager
+     * Will unban a manager. Changes will be persisted to database immediately.
      *
      * @param manager
      */
@@ -134,7 +148,7 @@ public class AdminService {
 
 	Collection<Manager> managers = this.managerService.findAll();
 
-	if (managers.isEmpty())
+	if (managers == null || managers.isEmpty())
 	    return 0;
 
 	// Get an iterator to iterate over this collection of managers
@@ -150,8 +164,10 @@ public class AdminService {
 
 	    Manager manager = it.next();
 
-	    if (manager.getGyms().size() < minimumNumberOfGyms)
-		minimumNumberOfGyms = manager.getGyms().size();
+	    int numberOfGyms = manager.getGyms() == null ? 0 : manager.getGyms().size();
+
+	    if (numberOfGyms < minimumNumberOfGyms)
+		minimumNumberOfGyms = numberOfGyms;
 	}
 
 	return minimumNumberOfGyms;
@@ -171,6 +187,9 @@ public class AdminService {
 
 	Collection<Manager> managers = this.managerService.findAll();
 
+	if (managers == null || managers.isEmpty())
+	    return 0;
+
 	// Get an iterator to iterate over this collection of managers
 	Iterator<Manager> it = managers.iterator();
 
@@ -180,8 +199,10 @@ public class AdminService {
 
 	    Manager manager = it.next();
 
-	    if (manager.getGyms().size() > maximumNumberOfGyms)
-		maximumNumberOfGyms = manager.getGyms().size();
+	    int numberOfGyms = manager.getGyms() == null ? 0 : manager.getGyms().size();
+
+	    if (numberOfGyms > maximumNumberOfGyms)
+		maximumNumberOfGyms = numberOfGyms;
 	}
 
 	return maximumNumberOfGyms;
@@ -197,43 +218,101 @@ public class AdminService {
      *
      * @return The average number of gyms per manager.
      */
-    public int getAverageNumberOfGymsPerManager() {
+    public double getAverageNumberOfGymsPerManager() {
 
 	Collection<Manager> managers = this.managerService.findAll();
 
-	if (managers.isEmpty())
+	if (managers == null || managers.isEmpty())
 	    return 0;
 
 	// Get an iterator to iterate over this collection of managers
 	Iterator<Manager> it = managers.iterator();
 
-	int totalNumberOfGyms = 0;
+	double totalNumberOfGyms = 0;
 
-	int totalNumberOfManagers = 0;
+	double totalNumberOfManagers = 0;
 
 	while (it.hasNext()) {
 
 	    Manager manager = it.next();
 
-	    totalNumberOfGyms += manager.getGyms().size();
+	    int numberOfGyms = manager.getGyms() == null ? 0 : manager.getGyms().size();
+
+	    totalNumberOfGyms += numberOfGyms;
 
 	    totalNumberOfManagers++;
 	}
 
-	int averageNumberOfGymsPerManager = totalNumberOfGyms / totalNumberOfManagers;
+	double averageNumberOfGymsPerManager = totalNumberOfGyms / totalNumberOfManagers;
 
 	return averageNumberOfGymsPerManager;
     }
 
+    /**
+     * Calculates the standard deviation of gyms per manager.
+     *
+     * @return The standard deviation of gyms per manager.
+     */
     public double getStandarDeviationOfGymsPerManager() {
-	return 0;
+
+	double averageNumberOfGymsPerManager = this.getAverageNumberOfGymsPerManager();
+
+	Collection<Manager> managers = this.managerService.findAll();
+
+	if (managers == null || managers.isEmpty())
+	    return 0;
+
+	Iterator<Manager> it = managers.iterator();
+
+	// The formula of standard deviation is formed by a series of member that
+	// belongs to
+	// a summatory, each member is elevated to the second power
+	List<Double> summatoryMembersCalculationResult = new ArrayList<Double>();
+
+	while (it.hasNext()) {
+
+	    Manager manager = it.next();
+
+	    int numberOfGyms = manager.getGyms() == null ? 0 : manager.getGyms().size();
+
+	    double managerGymsMinusAverage = numberOfGyms - averageNumberOfGymsPerManager;
+
+	    double summatoryMemberCalculation = Math.pow(managerGymsMinusAverage, 2);
+
+	    summatoryMembersCalculationResult.add(summatoryMemberCalculation);
+	}
+
+	double totalSummatoryResult = 0;
+
+	// Calculate the summatory
+	for (double summatoryMemberCalculation : summatoryMembersCalculationResult)
+	    totalSummatoryResult += summatoryMemberCalculation;
+
+	double standardDeviation = totalSummatoryResult / summatoryMembersCalculationResult.size();
+
+	standardDeviation = Math.sqrt(standardDeviation);
+
+	return standardDeviation;
     }
 
+    /**
+     * This method will return the minimum number of gyms per client.<br>
+     * <br>
+     *
+     * In order to calculate this minimum, all different gyms that a client has ever
+     * or is currently inscripted to, will be taken into account.<br>
+     * <br>
+     *
+     * If the client has multiple inscriptions to a gym, the gym will only be
+     * counted once.
+     *
+     * @return The minimum number of gyms per client.
+     */
     public int getMinimumNumberOfGymsPerClient() {
 
 	Collection<Client> clients = this.clientService.findAll();
 
-	if (clients == null)
+	if (clients == null || clients.isEmpty())
 	    return 0;
 
 	// Get an iterator to iterate over this collection of clients
@@ -264,68 +343,507 @@ public class AdminService {
 	return minimumNumberOfGyms;
     }
 
+    /**
+     * This method will return the maximum number of gyms per client.<br>
+     * <br>
+     *
+     * In order to calculate this maximum, all different gyms that a client has ever
+     * or is currently inscripted to, will be taken into account.<br>
+     * <br>
+     *
+     * If the client has multiple inscriptions to a gym, the gym will only be
+     * counted once.
+     *
+     * @return The maximum number of gyms per client.
+     */
     public int getMaximumNumberOfGymsPerClient() {
-	return 0;
+
+	Collection<Client> clients = this.clientService.findAll();
+
+	if (clients == null || clients.isEmpty())
+	    return 0;
+
+	// Get an iterator to iterate over this collection of clients
+	Iterator<Client> it = clients.iterator();
+
+	// Because the maximum number of gyms is wanted, we first initialize
+	// our maximum to -1, because the minimum possible value we will get is 0.
+	// Hence, when the first client is checked, no matter how low the value is, it
+	// will establish itself as the maximum value.
+	int maximumNumberOfGyms = -1;
+
+	while (it.hasNext()) {
+
+	    Client client = it.next();
+
+	    // Because the client does not have any straighforward relationship with Gym
+	    // inscriptions are used instead.
+	    //
+	    // Since the inscription always must be related to a gym, by the number of
+	    // inscriptions
+	    // we can get how many gyms has this client attended to
+	    int numberOfGymsInscripted = this.clientService.getNumberOfGymsInscripted(client);
+
+	    if (numberOfGymsInscripted > maximumNumberOfGyms)
+		maximumNumberOfGyms = numberOfGymsInscripted;
+	}
+
+	return maximumNumberOfGyms;
     }
 
+    /**
+     * Gets the average number of gyms per client.
+     *
+     * @return The average number of gyms per client.
+     */
     public double getAverageNumberOfGymsPerClient() {
-	return 0;
+
+	Collection<Client> clients = this.clientService.findAll();
+
+	if (clients == null || clients.isEmpty())
+	    return 0;
+
+	// Get an iterator to iterate over this collection of clients
+	Iterator<Client> it = clients.iterator();
+
+	double totalNumberOfGymsPerClient = 0;
+	double totalClients = clients.size();
+
+	while (it.hasNext()) {
+
+	    Client client = it.next();
+
+	    totalNumberOfGymsPerClient += this.clientService.getNumberOfGymsInscripted(client);
+	}
+
+	double averageNumberOfGymsPerClient = totalNumberOfGymsPerClient / totalClients;
+
+	return averageNumberOfGymsPerClient;
     }
 
+    /**
+     * Gets the standard deviation of gyms per client.
+     *
+     * @return The standard deviation of gyms per client.
+     */
     public double getStandardDeviationOfGymsPerClient() {
-	return 0;
+
+	double averageNumberOfGymsPerClient = this.getAverageNumberOfGymsPerClient();
+
+	Collection<Client> clients = this.clientService.findAll();
+
+	if (clients == null || clients.isEmpty())
+	    return 0;
+
+	// Get an iterator to iterate over this collection of clients
+	Iterator<Client> it = clients.iterator();
+
+	// The formula of standard deviation is formed by a series of member that
+	// belongs to
+	// a summatory, each member is elevated to the second power
+	List<Double> summatoryMembersCalculationResult = new ArrayList<Double>();
+
+	while (it.hasNext()) {
+
+	    Client client = it.next();
+
+	    double clientGymsMinusAverage = this.clientService.getNumberOfGymsInscripted(client)
+		    - averageNumberOfGymsPerClient;
+
+	    double summatoryMemberCalculation = Math.pow(clientGymsMinusAverage, 2);
+
+	    summatoryMembersCalculationResult.add(summatoryMemberCalculation);
+	}
+
+	double totalSummatoryResult = 0;
+
+	// Calculate the summatory
+	for (double summatoryMemberCalculation : summatoryMembersCalculationResult)
+	    totalSummatoryResult += summatoryMemberCalculation;
+
+	double standardDeviation = totalSummatoryResult / summatoryMembersCalculationResult.size();
+
+	standardDeviation = Math.sqrt(standardDeviation);
+
+	return standardDeviation;
     }
 
+    /**
+     * This method will return the minimum number of clients per gym.
+     *
+     * @return The minimum number of clients per gym.
+     */
     public int getMinimumNumberOfClientsPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	int minimumNumberOfClientsPerGym = Integer.MAX_VALUE;
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    int numberOfClients = this.gymService.getNumberOfClientsFromGym(gym);
+
+	    if (numberOfClients < minimumNumberOfClientsPerGym)
+		minimumNumberOfClientsPerGym = numberOfClients;
+	}
+
+	return minimumNumberOfClientsPerGym;
     }
 
+    /**
+     * This method will return the maximum number of clients per gym.
+     *
+     * @return The maximum number of clients per gym.
+     */
     public int getMaximumNumberOfClientsPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	int maximumNumberOfClientsPerGym = -1;
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    int numberOfClients = this.gymService.getNumberOfClientsFromGym(gym);
+
+	    if (numberOfClients > maximumNumberOfClientsPerGym)
+		maximumNumberOfClientsPerGym = numberOfClients;
+	}
+
+	return maximumNumberOfClientsPerGym;
     }
 
+    /**
+     * This method returns the average number of clients per gym
+     *
+     * @return The average number of clients per gym
+     */
     public double getAverageNumberOfClientsPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	double totalNumberOfClientsPerGym = 0;
+	double totalNumberOfGyms = gyms.size();
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    totalNumberOfClientsPerGym += this.gymService.getNumberOfClientsFromGym(gym);
+	}
+
+	return (totalNumberOfClientsPerGym / totalNumberOfGyms);
     }
 
+    /**
+     * This method will return the standard deviation of clients per gym
+     *
+     * @return The standard deviation of clients per gym.
+     */
     public double getStandardDeviationOfClientsPerGym() {
-	return 0;
+
+	double averageNumberOfClientsPerGym = this.getAverageNumberOfClientsPerGym();
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null)
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	// The formula of standard deviation is formed by a series of member that
+	// belongs to
+	// a summatory, each member is elevated to the second power
+	List<Double> summatoryMembersCalculationResult = new ArrayList<Double>();
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    double gymClientsMinusAverage = this.gymService.getNumberOfClientsFromGym(gym)
+		    - averageNumberOfClientsPerGym;
+
+	    double summatoryMemberCalculation = Math.pow(gymClientsMinusAverage, 2);
+
+	    summatoryMembersCalculationResult.add(summatoryMemberCalculation);
+	}
+
+	double totalSummatoryResult = 0;
+
+	// Calculate the summatory
+	for (double summatoryMemberCalculation : summatoryMembersCalculationResult)
+	    totalSummatoryResult += summatoryMemberCalculation;
+
+	double standardDeviation = totalSummatoryResult / summatoryMembersCalculationResult.size();
+
+	standardDeviation = Math.sqrt(standardDeviation);
+
+	return standardDeviation;
     }
 
+    /**
+     * This method will return the gym with the most number of activities<br>
+     * <br>
+     *
+     * In case that there are no gyms this method will return null. Also this method
+     * will only take into account activities that are active.
+     *
+     * @return The gym with the most number of activities or null.
+     */
     public Gym getGymWithMostNumberOfActivities() {
-	return null;
+
+	Gym gymWithMostNumberOfActivities = null;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return null;
+
+	int mostNumberOfActivities = -1;
+
+	for (Gym gym : gyms) {
+
+	    Collection<Activity> activities = gym.getActivities();
+
+	    int numberOfActivities = 0;
+
+	    for (Activity activity : activities)
+		if (activity.isActive())
+		    numberOfActivities++;
+
+	    if (numberOfActivities > mostNumberOfActivities) {
+
+		mostNumberOfActivities = numberOfActivities;
+		gymWithMostNumberOfActivities = gym;
+	    }
+	}
+
+	return gymWithMostNumberOfActivities;
     }
 
+    /**
+     * This method will return the top 5 clients that have the most activities.
+     *
+     * @return The top 5 clients that have the most activities.
+     */
     public Collection<Client> getClientsWithMostActivities() {
-	return null;
+
+	Collection<Client> clientCollection = this.clientService.findAll();
+
+	if (clientCollection == null || clientCollection.isEmpty())
+	    return null;
+
+	List<Client> clientList = new ArrayList<Client>(clientCollection);
+
+	Collections.sort(clientList, new ClientComparatorByNumberOfActivities());
+
+	Collection<Client> topFiveClientsWithMostActivities = new ArrayList<Client>();
+
+	for (int i = 0; i < 5; i++)
+	    if (i < clientList.size())
+		topFiveClientsWithMostActivities.add(clientList.get(i));
+
+	return topFiveClientsWithMostActivities;
     }
 
+    /**
+     * This method will return the minimum number of trainers per gym.
+     *
+     * @return The minimum number of trainers per gym.
+     */
     public int getMinimumNumberOfTrainersPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	int minimumNumberOfTrainersPerGym = Integer.MAX_VALUE;
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    Collection<Trainer> trainers = gym.getTrainers();
+
+	    int numberOfTrainers = trainers == null ? 0 : trainers.size();
+
+	    if (numberOfTrainers < minimumNumberOfTrainersPerGym)
+		minimumNumberOfTrainersPerGym = numberOfTrainers;
+	}
+
+	return minimumNumberOfTrainersPerGym;
     }
 
+    /**
+     * This method will return the maximum number of trainers per gym.
+     *
+     * @return The maximum number of trainers per gym.
+     */
     public int getMaximumNumberOfTrainersPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	int maximumNumberOfTrainersPerGym = -1;
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    Collection<Trainer> trainers = gym.getTrainers();
+
+	    int numberOfTrainers = trainers == null ? 0 : trainers.size();
+
+	    if (numberOfTrainers > maximumNumberOfTrainersPerGym)
+		maximumNumberOfTrainersPerGym = numberOfTrainers;
+	}
+
+	return maximumNumberOfTrainersPerGym;
     }
 
+    /**
+     * This method returns the average number of trainers per gym.
+     *
+     * @return the average number of trainers per gym.
+     */
     public double getAverageNumberOfTrainersPerGym() {
-	return 0;
+
+	Collection<Gym> gyms = this.gymService.findAll();
+
+	if (gyms == null || gyms.isEmpty())
+	    return 0;
+
+	Iterator<Gym> it = gyms.iterator();
+
+	double averageNumberOfTrainers = 0;
+	double totalNumberOfTrainers = 0;
+
+	while (it.hasNext()) {
+
+	    Gym gym = it.next();
+
+	    double numberOfTrainers = gym.getTrainers() == null ? 0 : gym.getTrainers().size();
+
+	    totalNumberOfTrainers += numberOfTrainers;
+	}
+
+	averageNumberOfTrainers = totalNumberOfTrainers / gyms.size();
+
+	return averageNumberOfTrainers;
     }
 
     public int getMinimumNumberOfStepsPerTraining() {
-	return 0;
+
+	Collection<Training> trainings = this.trainingService.findAll();
+
+	if (trainings == null || trainings.isEmpty())
+	    return 0;
+
+	Iterator<Training> it = trainings.iterator();
+
+	int minimumNumberOfSteps = Integer.MAX_VALUE;
+
+	while (it.hasNext()) {
+
+	    Training training = it.next();
+
+	    int numberOfSteps = training.getSteps() == null ? 0 : training.getSteps().size();
+
+	    if (numberOfSteps < minimumNumberOfSteps)
+		minimumNumberOfSteps = numberOfSteps;
+	}
+
+	return minimumNumberOfSteps;
     }
 
     public int getMaximumNumberOfStepsPerTraining() {
-	return 0;
+
+	Collection<Training> trainings = this.trainingService.findAll();
+
+	if (trainings == null || trainings.isEmpty())
+	    return 0;
+
+	Iterator<Training> it = trainings.iterator();
+
+	int maximumNumberOfSteps = -1;
+
+	while (it.hasNext()) {
+
+	    Training training = it.next();
+
+	    int numberOfSteps = training.getSteps() == null ? 0 : training.getSteps().size();
+
+	    if (numberOfSteps > maximumNumberOfSteps)
+		maximumNumberOfSteps = numberOfSteps;
+	}
+
+	return maximumNumberOfSteps;
     }
 
     public double getAverageNumberOfStepsPerTraining() {
-	return 0;
+
+	Collection<Training> trainings = this.trainingService.findAll();
+
+	if (trainings == null || trainings.isEmpty())
+	    return 0;
+
+	Iterator<Training> it = trainings.iterator();
+
+	double averageNumberOfSteps = 0;
+
+	double totalNumberOfSteps = 0;
+
+	while (it.hasNext()) {
+
+	    Training training = it.next();
+
+	    double numberOfSteps = training.getSteps() == null ? 0 : training.getSteps().size();
+
+	    totalNumberOfSteps += numberOfSteps;
+	}
+
+	averageNumberOfSteps = totalNumberOfSteps / trainings.size();
+
+	return averageNumberOfSteps;
     }
 
     public Collection<Training> getListOfTrainingsFromBestValuedToWorst() {
-	return null;
+
+	Collection<Training> trainings = this.trainingService.findAll();
+
+	if (trainings == null || trainings.isEmpty())
+	    return Collections.emptyList();
+
+	List<Training> trainingsList = new ArrayList<Training>(trainings);
+
+	Collections.sort(trainingsList, Collections.reverseOrder(new TrainingComparatorByMark()));
+
+	return trainingsList;
     }
 
     public Admin findByUserAccountId(int userAccountId) {
