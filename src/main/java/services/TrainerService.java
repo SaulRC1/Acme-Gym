@@ -30,8 +30,6 @@ public class TrainerService {
 
 		Trainer result;
 
-		Assert.isTrue(!trainer.getGym().getTrainers().contains(trainer));
-
 		result = this.trainerRepository.save(trainer);
 
 		return result;
@@ -87,7 +85,7 @@ public class TrainerService {
 		return this.trainerRepository.findByNameOrSurname(keyword);
 	}
 
-	public Trainer findTrainerByNoGymAssigned() {
+	public Collection<Trainer> findTrainerByNoGymAssigned() {
 		return this.trainerRepository.findTrainerByNoGymAssigned();
 	}
 }

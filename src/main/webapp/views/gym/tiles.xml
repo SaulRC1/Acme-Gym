@@ -61,4 +61,19 @@
 		<put-attribute name="body" value="/views/gym/manageTrainings.jsp" />
 	</definition>
 	
+	<definition name="gym/manageTrainers" extends="master.page">	
+		<put-attribute name="title" value="List trainers" />
+		<put-attribute name="body" value="/views/gym/manageTrainers.jsp" />
+	</definition>
+	
+	<definition name="gym/link" extends="master.page">	
+		<put-attribute name="title" value="List trainers" />
+		<put-attribute name="body" value="/views/gym/manageTrainers.jsp" />
+	</definition>
+	
+	<definition name="gym/unlink" extends="master.page">	
+		<put-attribute name="title" value="List trainers" />
+		<put-attribute name="body" value="/views/gym/manageTrainers.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -60,7 +60,13 @@
 					code="gym.manageTrainings" />
 			</a>
 		</display:column>
-
+		
+		<display:column titleKey="gym.manageTrainers">
+			<a href="gym/manageTrainers.do?gymId=${activedGym.id}">${name}<spring:message
+					code="gym.manageTrainers" /></a>						
+		</display:column>				
+						
+						
 		<display:column titleKey="gym.cancel">
 			<a href="gym/cancelGym.do?gymId=${activedGym.id}"> <spring:message
 					code="gym.cancel" />
@@ -96,6 +102,11 @@
 					code="gym.manageAcitivities" />
 			</a>
 		</display:column>
+		
+		<display:column titleKey="gym.manageTrainers">
+			<a href="gym/manageTrainers.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
+					code="gym.manageTrainers" /></a>						
+		</display:column>	
 
 		<display:column titleKey="gym.active">
 			<a href="gym/activateGym.do?gymId=${unactivedGym.id}"> <spring:message

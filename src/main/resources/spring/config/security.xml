@@ -77,7 +77,10 @@
 		<security:intercept-url pattern="/gym/cancelGym.do" access="permitAll" />
 		<security:intercept-url pattern="/gym/activateGym.do" access="permitAll" />
 		<security:intercept-url pattern="/gym/listActivesUnactives.do" access="permitAll" /> 
-		<security:intercept-url pattern="/gym/manageTrainings.do" access="permitAll" /> 
+		<security:intercept-url pattern="/gym/manageTrainings.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/gym/manageTrainers.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/gym/link.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/gym/unlink.do" access="hasRole('MANAGER')" /> 
 		
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/listByKeyword.do" access="permitAll" />

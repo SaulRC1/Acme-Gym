@@ -1,5 +1,5 @@
 <%--
- * list.jsp
+ * edit.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -18,19 +18,12 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="trainers" id="trainer" requestURI="trainer/list.do"
-	pagesize="5" class="displaytag">
-	
-	<!-- Edit column -->
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="manager/edit.do?managerId=${trainer.id}"> <spring:message
-					code="row.edit" /></a>
-		</display:column>
-	</security:authorize>
+<h1>ENTRENADORES DEL GIMNASIO</h1>
 
+<display:table name="linkTrainers" id="linkTrainer" pagesize="5"
+	class="displaytag">
 
-	<!-- Actors generic columns -->
+	<!-- Trainer columns -->
 	<display:column property="firstName" titleKey="actor.firstName" />
 	<display:column property="lastName" titleKey="actor.lastName" />
 	<display:column property="address" titleKey="actor.address" />
@@ -41,7 +34,33 @@
 	<display:column property="country" titleKey="actor.country" />
 
 
-	<!-- Trainer Gym column -->
-	<display:column property="gym" titleKey="gym" />
+	<!-- Remove column --> 
+	<display:column>
+		<a href="gym/unlink.do?gymId=${gymId}&trainerId=${linkTrainer.id}"> <spring:message
+				code="row.unlink" /></a>
+	</display:column>
+
+</display:table>
+
+
+<display:table name="unlinkTrainers" id="unlinkTrainer" pagesize="5"
+	class="displaytag">
+
+	<!-- Trainer columns -->
+	<display:column property="firstName" titleKey="actor.firstName" />
+	<display:column property="lastName" titleKey="actor.lastName" />
+	<display:column property="address" titleKey="actor.address" />
+	<display:column property="email" titleKey="actor.email" />
+	<display:column property="phoneNumber" titleKey="actor.phoneNumber" />
+	<display:column property="postalCode" titleKey="actor.postalCode" />
+	<display:column property="city" titleKey="actor.city" />
+	<display:column property="country" titleKey="actor.country" />
+
+
+	<!-- Remove column --> 
+	<display:column>
+		<a href="gym/link.do?gymId=${gymId}&trainerId=${unlinkTrainer.id}"> <spring:message
+				code="row.link" /></a>
+	</display:column>
 
 </display:table>

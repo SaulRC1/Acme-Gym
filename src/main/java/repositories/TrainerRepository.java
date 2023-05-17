@@ -19,5 +19,5 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 	public Collection<Trainer> findByNameOrSurname(String keyword);
 
 	@Query("SELECT t FROM Trainer t WHERE t.gym = null")
-	public Trainer findTrainerByNoGymAssigned();
+	public Collection<Trainer> findTrainerByNoGymAssigned();
 }
