@@ -53,6 +53,52 @@ public class ManagerController extends AbstractController {
 	return result;
     }
 
+    @RequestMapping(value = "/banned", method = RequestMethod.GET)
+    public ModelAndView banned(@RequestParam final int managerId) {
+	ModelAndView result;
+	Manager manager;
+	Collection<Manager> bannedmanagers;
+	Collection<Manager> unbannedmanagers;
+
+	manager = this.managerService.findOne(managerId);
+	manager.setBanned(true);
+	this.managerService.save(manager);
+
+	bannedmanagers = this.managerService.findAll();
+	unbannedmanagers = this.managerService.findByBannedFalse();
+	bannedmanagers.removeAll(unbannedmanagers);
+
+	result = new ModelAndView("manager/list");
+	result.addObject("bannedManagers", bannedmanagers);
+	result.addObject("unbannedManagers", unbannedmanagers);
+	result.addObject("requestURI", "manager/list.do");
+
+	return result;
+    }
+
+    @RequestMapping(value = "/unbanned", method = RequestMethod.GET)
+    public ModelAndView unbanned(@RequestParam final int managerId) {
+	ModelAndView result;
+	Manager manager;
+	Collection<Manager> bannedmanagers;
+	Collection<Manager> unbannedmanagers;
+
+	manager = this.managerService.findOne(managerId);
+	manager.setBanned(false);
+	this.managerService.save(manager);
+
+	bannedmanagers = this.managerService.findAll();
+	unbannedmanagers = this.managerService.findByBannedFalse();
+	bannedmanagers.removeAll(unbannedmanagers);
+
+	result = new ModelAndView("manager/list");
+	result.addObject("bannedManagers", bannedmanagers);
+	result.addObject("unbannedManagers", unbannedmanagers);
+	result.addObject("requestURI", "manager/list.do");
+
+	return result;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
 	ModelAndView result;
