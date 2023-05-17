@@ -31,4 +31,9 @@
 		<put-attribute name="body" value="/views/admin/edit.jsp" />
 	</definition>
 	
+	<definition name="admin/panel" extends="master.page">	
+		<put-attribute name="title" value="Panel de información" />
+		<put-attribute name="body" value="/views/admin/panel.jsp" />
+	</definition>
+	
 </tiles-definitions>
