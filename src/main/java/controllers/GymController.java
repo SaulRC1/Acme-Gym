@@ -315,27 +315,21 @@ public class GymController extends AbstractController {
     }
 
     @RequestMapping(value = "/manageTrainers", method = RequestMethod.GET)
-    public ModelAndView manageTrainers(@RequestParam final int managerId) {
+    public ModelAndView manageTrainers(@RequestParam final int gymId) {
 	ModelAndView result;
-	final Collection<Trainer> trainers = new ArrayList<>();
-	Collection<Trainer> trainersAux;
-	Collection<Gym> gyms;
-	Manager manager;
+	final Collection<Trainer> linkTrainers;
+	Collection<Trainer> unlinkTrainers;
+	Gym gym;
 
-	manager = this.managerService.findOne(managerId);
-	gyms = manager.getGyms();
+	gym = this.gymService.findOne(gymId);
+	linkTrainers = gym.getTrainers();
+	unlinkTrainers = this.trainerService.findTrainerByNoGymAssigned();
 
-	for (final Gym gymAux : gyms) {
-	    trainersAux = gymAux.getTrainers();
-	    for (final Trainer trainerAux : trainersAux)
-		trainers.add(trainerAux);
-	}
-
-	result = new ModelAndView("trainer/manageTrainers");
-	result.addObject("linktrainers", trainers);
-	result.addObject("gyms", gyms);
-	result.addObject("unlincktrainers", this.trainerService.findTrainerByNoGymAssigned());
-
+	result = new ModelAndView("gym/manageTrainings");
+	result.addObject("trainings", linkTrainers);
+	result.addObject("unlickTrainers", unlickTrainers);
+	result.addObject("gym", gym);
+	result.addObject("gymId", gym.getId());
 	return result;
     }
 
