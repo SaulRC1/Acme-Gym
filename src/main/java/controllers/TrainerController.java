@@ -1,7 +1,6 @@
 
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Activity;
 import domain.Gym;
-import domain.Manager;
 import domain.Trainer;
 import services.ActivityService;
 import services.ManagerService;
@@ -42,21 +40,11 @@ public class TrainerController extends AbstractController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(@RequestParam final int managerId) {
+    public ModelAndView list() {
 	ModelAndView result;
-	final Collection<Trainer> trainers = new ArrayList<>();
-	Collection<Trainer> trainersAux;
-	Collection<Gym> gyms;
-	Manager manager;
+	Collection<Trainer> trainers;
 
-	manager = this.managerService.findOne(managerId);
-	gyms = manager.getGyms();
-
-	for (final Gym gymAux : gyms) {
-	    trainersAux = gymAux.getTrainers();
-	    for (final Trainer trainerAux : trainersAux)
-		trainers.add(trainerAux);
-	}
+	trainers = this.trainerService.findAll();
 
 	result = new ModelAndView("trainer/list");
 	result.addObject("trainers", trainers);

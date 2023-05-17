@@ -13,5 +13,4 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
     @Query("SELECT a FROM Admin a WHERE a.userAccount.id = ?1")
     public Admin findByUserAccountId(int userAccountId);
-
 }
