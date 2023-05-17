@@ -93,7 +93,7 @@
 
 					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
-						<li><a href="gym/listActivesUnactives.do"><spring:message
+						<li><a href="gym/listActivesUnactives.do?userAccountId=<security:authentication property="principal.id" />"><spring:message
 									code="master.page.gym.list" /></a></li>
 
 						<li><a href="manager/create.do"><spring:message

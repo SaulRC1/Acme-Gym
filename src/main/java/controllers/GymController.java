@@ -83,23 +83,21 @@ public class GymController extends AbstractController {
 
 	Collection<Inscription> inscriptions;
 
-	if (client.getInscriptions() != null) {
+	if (client.getInscriptions() != null)
 	    inscriptions = client.getInscriptions();
-	} else {
+	else
 	    inscriptions = new ArrayList<Inscription>();
-	}
 
 	Inscription lastInscription = null;
 
 	boolean isEnrolled = false;
 
-	for (Inscription inscription : inscriptions) {
+	for (Inscription inscription : inscriptions)
 	    if (inscription.getSignOutDate() == null) {
 		lastInscription = inscription;
 		isEnrolled = true;
 		break;
 	    }
-	}
 
 	Gym enrolledGym = lastInscription != null ? lastInscription.getGym() : null;
 
@@ -176,14 +174,26 @@ public class GymController extends AbstractController {
     }
 
     @RequestMapping(value = "/listActivesUnactives", method = RequestMethod.GET)
-    public ModelAndView listActivesUnactives() {
+    public ModelAndView listActivesUnactives(@RequestParam final int userAccountId) {
 	ModelAndView result;
 	Collection<Gym> activedGyms;
 	Collection<Gym> unactivedGyms;
 
+	Manager manager;
+
+	manager = this.managerService.findByUserAccountId(userAccountId);
+
 	unactivedGyms = this.gymService.findAll();
 	activedGyms = this.gymService.findActivesGyms();
 	unactivedGyms.removeAll(activedGyms);
+
+	for (Gym gym : activedGyms)
+	    if (!gym.getManagers().contains(manager))
+		activedGyms.remove(gym);
+
+	for (Gym gym : unactivedGyms)
+	    if (!gym.getManagers().contains(manager))
+		unactivedGyms.remove(gym);
 
 	result = new ModelAndView("gym/list");
 	result.addObject("activedGyms", activedGyms);
