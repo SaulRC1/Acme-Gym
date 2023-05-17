@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Admin;
-import domain.Client;
 import domain.Gym;
 import domain.Manager;
 import services.AdminService;
@@ -39,12 +38,16 @@ public class ManagerController extends AbstractController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
 	ModelAndView result;
-	Collection<Manager> managers;
+	Collection<Manager> bannedmanagers;
+	Collection<Manager> unbannedmanagers;
 
-	managers = this.managerService.findAll();
+	bannedmanagers = this.managerService.findAll();
+	unbannedmanagers = this.managerService.findByBannedFalse();
+	bannedmanagers.removeAll(unbannedmanagers);
 
 	result = new ModelAndView("manager/list");
-	result.addObject("managers", managers);
+	result.addObject("bannedManagers", bannedmanagers);
+	result.addObject("unbannedManagers", unbannedmanagers);
 	result.addObject("requestURI", "manager/list.do");
 
 	return result;
@@ -122,8 +125,8 @@ public class ManagerController extends AbstractController {
 	Collection<Gym> gyms;
 	Collection<Admin> admins;
 
-	gyms = gymService.findAll();
-	admins = adminService.findAll();
+	gyms = this.gymService.findAll();
+	admins = this.adminService.findAll();
 
 	result = new ModelAndView("manager/edit");
 	result.addObject("manager", manager);
