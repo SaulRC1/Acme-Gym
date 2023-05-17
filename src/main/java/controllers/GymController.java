@@ -58,7 +58,7 @@ public class GymController extends AbstractController {
 	ModelAndView result;
 	Collection<Gym> gyms;
 
-	gyms = this.gymService.findAll();
+	gyms = this.gymService.findAvailableGyms();
 
 	result = new ModelAndView("gym/list");
 	result.addObject("gyms", gyms);
@@ -67,15 +67,19 @@ public class GymController extends AbstractController {
 	return result;
     }
 
-    @RequestMapping(value = "/listActives", method = RequestMethod.GET)
-    public ModelAndView listActives() {
+    @RequestMapping(value = "/listActivesUnactives", method = RequestMethod.GET)
+    public ModelAndView listActivesUnactives() {
 	ModelAndView result;
-	Collection<Gym> gyms;
+	Collection<Gym> activesGyms;
+	Collection<Gym> unactivesGyms;
 
-	gyms = this.gymService.findAvailableGyms();
+	unactivesGyms = this.gymService.findAll();
+	activesGyms = this.gymService.findAvailableGyms();
+	unactivesGyms.removeAll(activesGyms);
 
 	result = new ModelAndView("gym/list");
-	result.addObject("gyms", gyms);
+	result.addObject("activesgym", activesGyms);
+	result.addObject("unactivesGyms", unactivesGyms);
 	result.addObject("requestURI", "gym/list.do");
 
 	return result;
@@ -179,23 +183,23 @@ public class GymController extends AbstractController {
      * "activate") public ModelAndView activatelGym(@RequestParam final int gymId) {
      * ModelAndView result; Collection<Gym> gyms; Gym gym; Collection<Activity>
      * activities;
-     * 
+     *
      * gym = this.gymService.findOne(gymId);
-     * 
+     *
      * gym.setActive(true);
-     * 
+     *
      * this.gymService.save(gym);
-     * 
+     *
      * activities = gym.getActivities();
-     * 
+     *
      * for (final Activity activity : activities) { activity.setActive(true);
      * this.activityService.save(activity); }
-     * 
+     *
      * gyms = this.gymService.findAvailableGyms();
-     * 
+     *
      * result = new ModelAndView("gym/list"); result.addObject("gyms", gyms);
      * result.addObject("gym", gym); result.addObject("requestURI", "gym/list.do");
-     * 
+     *
      * return result; }
      */
 
@@ -210,12 +214,11 @@ public class GymController extends AbstractController {
 	gym = this.gymService.findOne(gymId);
 	activities = gym.getActivities();
 
-	for (final Activity activity : activities) {
+	for (final Activity activity : activities)
 	    if (activity.isActive())
 		activedActivities.add(activity);
 	    else
 		unactivedActivities.add(activity);
-	}
 
 	result = new ModelAndView("gym/details");
 	result.addObject("activedActivities", activedActivities);
@@ -242,12 +245,11 @@ public class GymController extends AbstractController {
 
 	activities = gym.getActivities();
 
-	for (final Activity activityAux : activities) {
+	for (final Activity activityAux : activities)
 	    if (activityAux.isActive())
 		activedActivities.add(activityAux);
 	    else
 		unactivedActivities.add(activityAux);
-	}
 
 	result = new ModelAndView("gym/details");
 	result.addObject("activedActivities", activedActivities);
@@ -274,12 +276,11 @@ public class GymController extends AbstractController {
 
 	activities = gym.getActivities();
 
-	for (final Activity activityAux : activities) {
+	for (final Activity activityAux : activities)
 	    if (activityAux.isActive())
 		activedActivities.add(activityAux);
 	    else
 		unactivedActivities.add(activityAux);
-	}
 
 	result = new ModelAndView("gym/details");
 	result.addObject("activedActivities", activedActivities);
